@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #213deb;
+  --secondary: #1a2596;
+  --base: #09034b;
+}
+
+/*
+* Loading
+*/
+#loading {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000;
+}
+
+#loading div {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  width: 64px;
+  height: 64px;
+  border: 8px solid gray;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 100%;
+  animation: spin infinite 1s linear;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
