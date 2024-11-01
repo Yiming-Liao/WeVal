@@ -1,6 +1,7 @@
 "use client";
 
 import { appConfig } from "@/config/appConfig";
+import { User } from "@/types/user/user_model";
 import {
   createContext,
   useContext,
@@ -12,39 +13,34 @@ import {
   useEffect,
 } from "react";
 
-// 定義 Context 的類型
-interface AuthContextType {
-  user: { email: string } | null;
-  setUser: Dispatch<SetStateAction<{ email: string } | null>>;
-}
-
-// AuthProvider 組件
-interface AuthProviderProps {
-  children: ReactNode; // 使用 ReactNode 來定義 children 的類型
-}
-
-// 創建 Context
+// Create Context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<{ email: string } | null>(null);
+// Provider
+export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Loading User Data from Local Storage
 
-  // 使用 useEffect 來從 localStorage 加載用戶資料
+  // Get User Data from local storage
   useEffect(() => {
-    const storedUser = localStorage.getItem(appConfig.STORAGE_KEY_USER_DATA);
+    setIsLoading(true);
+
+    const storedUser = localStorage.getItem(appConfig.USER_DATA_KEY);
     setUser(
       storedUser && storedUser !== "undefined" ? JSON.parse(storedUser) : null
     );
-  }, []); // 只在組件掛載時執行一次
+
+    setIsLoading(false);
+  }, []); // Run only once when mounted
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
-      {children} {/* 直接返回 children */}
+    <AuthContext.Provider value={{ user, setUser, isLoading }}>
+      {children}
     </AuthContext.Provider>
   );
 };
 
-// 自定義 hook，用於訪問 AuthContext
+// Custom Hook for AuthContext
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -52,3 +48,9 @@ export const useAuth = () => {
   }
   return context;
 };
+
+interface AuthContextType {
+  user: User | null;
+  setUser: Dispatch<SetStateAction<User | null>>;
+  isLoading: boolean;
+}

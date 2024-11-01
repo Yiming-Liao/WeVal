@@ -9,20 +9,20 @@ test.group('User auth password reset', (group) => {
     USER_PASSWORD_RESET_TEST = await User.create({
       email: 'USER_PASSWORD_RESET_TEST@gmail.com',
       password: '123456',
-      fullName: 'USER_PASSWORD_RESET_TEST',
+      username: 'USER_PASSWORD_RESET_TEST',
     })
   })
 
   test('重設密碼', async ({ client, assert }) => {
     await client
-      .post('/api/v1/user/auth/password-forgot')
+      .post('/user/auth/password-forgot')
       .form({ email: 'USER_PASSWORD_RESET_TEST@gmail.com' })
 
     const foundUser = await User.findBy('email', 'USER_PASSWORD_RESET_TEST@gmail.com')
     assert.isNotNull(foundUser?.passwordResetToken)
     assert.isNotNull(foundUser?.passwordResetExpiresAt)
 
-    const response = await client.post('/api/v1/user/auth/password-reset').form({
+    const response = await client.post('/user/auth/password-reset').form({
       passwordResetToken: foundUser?.passwordResetToken,
       password: '123456',
       passwordConfirm: '123456',

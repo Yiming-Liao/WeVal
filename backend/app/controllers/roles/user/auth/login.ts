@@ -1,31 +1,27 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import loginValidator from '#validators/roles/user/login_validator'
+import loginValidator from '#validators/roles/user/auth/login_validator'
 import User from '#models/user'
 import env from '#start/env'
+import { UserAuthService } from '#services/user_auth_service'
 
 export async function login({ request, response }: HttpContext) {
-  // 驗證輸入資料
+  // Validate
   const { email, password } = await request.validateUsing(loginValidator)
 
-  // 驗證密碼
+  // Verify password
   const foundUser = await User.verifyCredentials(email, password)
 
-  // 錯誤處理
-  if (!foundUser) {
-    return response.badRequest({ errors: [{ message: 'Invalid Credentials' }] })
-  }
+  // Generate access token
+  const accessToken = await User.accessTokens.create(foundUser!, ['*'])
 
-  // 生成 accessToken
-  const accessToken = await User.accessTokens.create(foundUser, ['*'])
+  // Generate refresh token
+  const refreshToken = await UserAuthService.generateRefreshToken(foundUser!)
 
-  // 使用 model 的方法創建 refreshToken
-  const refreshToken = await User.createRefreshToken(foundUser)
-
-  return response // Refresh Token 設置為 30天
+  return response // Refresh Token expires -> 30 days
     .cookie(env.get('REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
     .cookie(env.get('ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
     .ok({
       message: 'Successful login',
-      userData: foundUser.serialize(),
+      user: foundUser!.serialize(),
     })
 }

@@ -10,14 +10,14 @@ test.group('User auth logout', (group) => {
     USER_LOGOUT_TEST = await User.create({
       email: 'USER_LOGOUT_TEST@gmail.com',
       password: '123456',
-      fullName: 'USER_LOGOUT_TEST',
+      username: 'USER_LOGOUT_TEST',
     })
   })
 
   test('登入完成後 登出', async ({ client, assert }) => {
     // 先登入
     const loginResponse = await client
-      .post('/api/v1/user/auth/login')
+      .post('/user/auth/login')
       .form({ email: 'USER_LOGOUT_TEST@gmail.com', password: '123456' })
 
     loginResponse.assertCookie(env.get('REFRESH_TOKEN_NAME')) // 獲得 Refresh Token
@@ -27,7 +27,7 @@ test.group('User auth logout', (group) => {
     const accessToken = loginResponse.cookie(env.get('ACCESS_TOKEN_NAME'))?.value
 
     const logoutResponse = await client
-      .post('/api/v1/user/auth/logout')
+      .post('/user/auth/logout')
       .withCookie(env.get('REFRESH_TOKEN_NAME'), refreshToken)
       .withCookie(env.get('ACCESS_TOKEN_NAME'), accessToken)
 

@@ -4,7 +4,7 @@ const UserCard = () => {
   return (
     <div
       id="userCard"
-      className="absolute top-[64px] right-0 w-[296px] h-[271px]"
+      className="absolute top-[96px] right-0 w-[296px] h-[271px]"
     >
       {/* <div className="size-full rounded-[8px] bg-gradient-to-r from-[#ffffff33] to-[#ffffff4d] backdrop-blur-[14px] [box-shadow:0px_8px_16px_0px_rgba(0,0,0,0.08);]"> */}
       <div className="size-full rounded-[8px] bg-slate-400 backdrop-blur-[14px] [box-shadow:0px_8px_16px_0px_rgba(0,0,0,0.08);]">
@@ -20,7 +20,7 @@ const UserCard = () => {
                 <p>masou@gmail.com</p>
               </div>
             </div>
-            <Link href={"/dashboard"} className="h-8 rounded bg-white">
+            <Link href={"/user/dashboard"} className="h-8 rounded bg-white">
               <span>Edit Profile</span>
             </Link>
           </div>

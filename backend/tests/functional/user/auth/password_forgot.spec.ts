@@ -1,4 +1,4 @@
-import UserPasswordResetNotification from '#mails/user_password_reset_notification'
+import UserPasswordResetNotification from '#mails/user/auth/password_reset_notification'
 import User from '#models/user'
 import env from '#start/env'
 import mail from '@adonisjs/mail/services/main'
@@ -12,7 +12,7 @@ test.group('User auth password forgot', (group) => {
     USER_PASSWORD_FORGOT_TEST = await User.create({
       email: 'USER_PASSWORD_FORGOT_TEST@gmail.com',
       password: '123456',
-      fullName: 'USER_PASSWORD_FORGOT_TEST',
+      username: 'USER_PASSWORD_FORGOT_TEST',
     })
   })
 
@@ -26,7 +26,7 @@ test.group('User auth password forgot', (group) => {
     assert.isNull(foundUser?.passwordResetExpiresAt)
 
     const response = await client
-      .post('/api/v1/user/auth/password-forgot')
+      .post('/user/auth/password-forgot')
       .form({ email: 'USER_PASSWORD_FORGOT_TEST@gmail.com' })
 
     // 驗證信

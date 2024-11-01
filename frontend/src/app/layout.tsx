@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import "@/styles/typography.scss";
 import Navbar from "@/components/layout/navbar/Navbar";
 import Providers from "@/contexts/Providers";
+import { ReactNode } from "react";
 
 // 字體
 const poppins = Poppins({
@@ -19,13 +20,13 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <Providers>
-          <div className="h-[158px]"></div>
+          <div className="h-24"></div>
           <Navbar />
           {children}
         </Providers>

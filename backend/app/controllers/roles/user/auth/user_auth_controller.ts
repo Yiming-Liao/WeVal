@@ -25,26 +25,26 @@ export default class UserAuthController {
   /**
    * Email
    */
-  // 信箱驗證
-  async emailVerify(context: HttpContext) {
-    const { emailVerify } = await import('#controllers/roles/user/auth/email_verify')
-    return emailVerify(context)
+
+  // 寄送驗證碼 (註冊第一頁)
+  async registerEmailVerifySend(context: HttpContext) {
+    const { registerEmailVerifySend } = await import(
+      '#controllers/roles/user/auth/register_email_verify_send'
+    )
+    return registerEmailVerifySend(context)
   }
 
-  // 再次寄送信箱驗證信
-  async emailVerifyResend(context: HttpContext) {
-    const { emailVerifyResend } = await import('#controllers/roles/user/auth/email_verify_resend')
-    return emailVerifyResend(context)
+  // 驗證信箱 (註冊第一頁)
+  async registerEmailVerify(context: HttpContext) {
+    const { registerEmailVerify } = await import(
+      '#controllers/roles/user/auth/register_email_verify'
+    )
+    return registerEmailVerify(context)
   }
 
   /**
    * Password
    */
-  // 更改密碼
-  async passwordChange(context: HttpContext) {
-    const { passwordChange } = await import('#controllers/roles/user/auth/password_change')
-    return passwordChange(context)
-  }
 
   // 忘記密碼
   async passwordForgot(context: HttpContext) {

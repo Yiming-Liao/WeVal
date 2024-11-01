@@ -6,20 +6,34 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').notNullable()
-      table.string('full_name').nullable()
-      table.string('email', 254).notNullable().unique()
-      table.string('password').notNullable()
 
+      // Basic Info
+      table.string('email', 254).notNullable().unique()
+      table.string('username', 48).nullable()
+      table.string('phone', 16).nullable().unique()
+      table.string('password', 256).nullable()
+
+      // Time
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
 
-      table.string('email_verify_token').nullable() // Email 驗證令牌
-      table.timestamp('email_verified_at').nullable() // Email 驗證時間
-      table.string('password_reset_token').nullable() // 重置密碼令牌
-      table.timestamp('password_reset_expires_at').nullable() // 重置密碼過期時間
+      // Email verification
+      table.string('email_verify_code', 6).nullable()
+      table.timestamp('email_verified_at').nullable()
+      table.timestamp('email_verify_code_expires_at').nullable()
 
-      table.string('refresh_token').nullable() // Refresh Token
-      table.timestamp('refresh_token_expires_at').nullable() // Refresh Token 過期時間
+      // Phone verification
+      table.string('phone_verify_code', 6).nullable()
+      table.timestamp('phone_verified_at').nullable()
+      table.timestamp('phone_verify_code_expires_at').nullable()
+
+      // Password reset
+      table.string('password_reset_token', 128).nullable()
+      table.timestamp('password_reset_token_expires_at').nullable()
+
+      // Refresh Token
+      table.string('refresh_token', 128).nullable()
+      table.timestamp('refresh_token_expires_at').nullable()
     })
   }
 

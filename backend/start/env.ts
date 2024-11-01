@@ -54,4 +54,38 @@ export default await Env.create(new URL('../', import.meta.url), {
   APP_NAME: Env.schema.string(),
   ACCESS_TOKEN_NAME: Env.schema.string(),
   REFRESH_TOKEN_NAME: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | URLs
+  |----------------------------------------------------------
+  */
+  BACKEND_URL: Env.schema.string(),
+  API_URL: Env.schema.string(),
+  FRONTEND_URL: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | AWS SNS
+  |----------------------------------------------------------
+  */
+  AWS_ACCESS_KEY: Env.schema.string(),
+  AWS_SECRET_KEY: Env.schema.string(),
+  AWS_REGION: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Redis
+  |----------------------------------------------------------
+  */
+  REDIS_HOST: Env.schema.string({ format: 'host' }),
+  REDIS_PORT: Env.schema.number(),
+  REDIS_PASSWORD: Env.schema.string.optional(),
+
+  /*
+ |----------------------------------------------------------
+ | Variables for configuring the limiter package
+ |----------------------------------------------------------
+ */
+  LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const),
 })

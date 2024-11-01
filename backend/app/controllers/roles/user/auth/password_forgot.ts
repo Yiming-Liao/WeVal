@@ -1,24 +1,19 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import passwordForgotValidator from '#validators/roles/user/password_forgot_validator'
+import passwordForgotValidator from '#validators/roles/user/auth/password_forgot_validator'
 import User from '#models/user'
 import mail from '@adonisjs/mail/services/main'
-import UserPasswordResetNotification from '#mails/user_password_reset_notification'
+import PasswordResetNotification from '#mails/user/auth/password_reset_notification'
 
 export async function passwordForgot({ request, response }: HttpContext) {
-  // 驗證輸入資料
+  // Validate  // email exists
   const { email } = await request.validateUsing(passwordForgotValidator)
 
-  // 建立新資料
+  // Find User
   const foundUser = await User.findBy('email', email)
 
-  // 錯誤處理
-  if (!foundUser) {
-    return response.badRequest({ errors: [{ message: 'User not found' }] })
-  }
-
-  // 寄送密碼重設信
+  // Send password forgot email
   try {
-    await mail.send(new UserPasswordResetNotification(foundUser))
+    await mail.send(new PasswordResetNotification(foundUser!))
   } catch (error) {
     return response.internalServerError({
       errors: [{ message: 'Failed to send password reset email' }],

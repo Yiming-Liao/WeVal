@@ -18,7 +18,7 @@ import { authApiClient } from '@adonisjs/auth/plugins/api_client'
  */
 export const plugins: Config['plugins'] = [
   assert(),
-  apiClient({ baseURL: `http://${env.get('HOST')}:${env.get('PORT')}` }), // BACKEND_URL
+  apiClient({ baseURL: `${env.get('API_URL')}` }), // BACKEND_URL
   pluginAdonisJS(app),
   authApiClient(app),
 ]
@@ -33,6 +33,7 @@ export const plugins: Config['plugins'] = [
 export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
   setup: [
     async () => {
+      console.log(`${env.get('API_URL')}`)
       console.log('▶️')
       try {
         await ace.exec('migration:run', [])

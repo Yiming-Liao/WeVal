@@ -1,51 +1,56 @@
-import UserEmailVerifyNotification from '#mails/user_email_verify_notification'
+import User from '#models/user'
 import env from '#start/env'
-import mail from '@adonisjs/mail/services/main'
+import testUtils from '@adonisjs/core/services/test_utils'
 import { test } from '@japa/runner'
+import { DateTime } from 'luxon'
 
-test.group('User auth register', () => {
-  test('註冊新帳號', async ({ client }) => {
-    const { mails } = mail.fake() // 先啟動模擬 mail 模組
+test.group('User auth register', (group) => {
+  group.setup(async () => {
+    await User.create({
+      email: 'setup_user@gmail.com',
+      emailVerifiedAt: DateTime.now(),
+    })
+  })
 
-    const response = await client.post('/api/v1/user/auth/register').form({
-      fullName: `USER_REGISTER_TEST`,
-      email: 'USER_REGISTER_TEST@gmail.com',
+  test('Register', async ({ client }) => {
+    const response = await client.post('/user/auth/register').form({
+      email: 'setup_user@gmail.com',
+      username: `setup_user`,
       password: '123456',
       passwordConfirm: '123456',
-    })
-
-    // 驗證信
-    mails.assertSent(UserEmailVerifyNotification, ({ message }) => {
-      message.assertTo('USER_REGISTER_TEST@gmail.com')
-      message.assertFrom(env.get('MAIL_FROM_ADDRESS'))
-      message.assertReplyTo(env.get('MAIL_REPLYTO_ADDRESS'))
-      // message.assertSubject('Verify email')
-      return true
     })
 
     response.assertStatus(201)
     response.assertBodyContains({
       // message: 'Successful register',
-      userData: {
-        fullName: 'USER_REGISTER_TEST',
-        email: 'USER_REGISTER_TEST@gmail.com',
+      user: {
+        username: 'setup_user',
+        email: 'setup_user@gmail.com',
       },
     })
     response.assertCookie(env.get('REFRESH_TOKEN_NAME')) // 獲得 Refresh Token
     response.assertCookie(env.get('ACCESS_TOKEN_NAME')) // 獲得 Access Token
   })
 
-  test('註冊 已經存在的 Email', async ({ client }) => {
-    const response = await client.post('/api/v1/user/auth/register').form({
-      fullName: `USER_REGISTER_TEST`,
-      email: 'USER_REGISTER_TEST@gmail.com',
+  test('Register with a email is not existed in DB', async ({ client }) => {
+    const response = await client.post('/user/auth/register').form({
+      username: `user`,
+      email: 'random_email_address@gmail.com',
       password: '123456',
       passwordConfirm: '123456',
     })
 
     response.assertStatus(422)
-    // response.assertBody({
-    //   errors: [{ message: 'The email has already been taken', rule: 'database.unique', field: 'email' },],
-    // })
+    response.assertBody({
+      errors: [
+        { message: 'The selected email is invalid', rule: 'database.exists', field: 'email' },
+      ],
+    })
+  })
+
+  // Clean DB
+  group.each.teardown(async () => {
+    const truncate = await testUtils.db().truncate()
+    await truncate()
   })
 })
