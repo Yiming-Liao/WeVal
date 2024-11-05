@@ -26,6 +26,7 @@ server.use([
   () => import('#middleware/container_bindings_middleware'),
   () => import('#middleware/force_json_response_middleware'),
   () => import('@adonisjs/cors/cors_middleware'),
+  () => import('#middleware/detect_user_locale_middleware'),
 ])
 
 /**
@@ -35,6 +36,7 @@ server.use([
 router.use([
   () => import('@adonisjs/core/bodyparser_middleware'),
   () => import('@adonisjs/auth/initialize_auth_middleware'),
+  () => import('#middleware/detect_user_locale_middleware'),
 ])
 
 /**
@@ -42,7 +44,9 @@ router.use([
  * the routes or the routes group.
  */
 export const middleware = router.named({
-  userAuth: () => import('#middleware/user/user_auth_middleware'),
-  userEmailVerified: () => import('#middleware/user/user_email_verified_middleware'),
+  userAuth: () => import('#middleware/user/auth_middleware'),
+  valuerAuth: () => import('#middleware/valuer/auth_middleware'),
+  // userEmailVerified: () => import('#middleware/user/user_email_verified_middleware'),
+  apiRateLimit: () => import('#middleware/api_rate_limit_middleware'),
   auth: () => import('#middleware/auth_middleware'),
 })

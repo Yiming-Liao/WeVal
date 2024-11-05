@@ -9,19 +9,20 @@ const registerValidator = vine.compile(
       .toLowerCase()
       .exists(async (query, field) => {
         const user = await query.from('users').where('email', field).first()
-        return user // user of the email not exsits -> error
+        return user // User with this Email does not exists -> error
       })
       .unique(async (query, field) => {
         const user = await query.from('users').where('email', field).first()
-        return !user.password // user of the email finished full registration -> error
+        return !user.password // User with this email has completed registration -> error
       }),
     username: vine.string().trim().minLength(1).maxLength(64),
     password: vine
       .string()
       .trim()
       .minLength(6)
-      .maxLength(512)
+      .maxLength(256)
       .confirmed({ confirmationField: 'passwordConfirm' }),
+    passwordConfirm: vine.string().trim().minLength(6).maxLength(256),
   })
 )
 

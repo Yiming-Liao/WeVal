@@ -1,5 +1,5 @@
 import { useAxios } from "@/contexts/AxiosContext";
-import { PhoneVerifySendProps } from "@/types/user/user_profile_hooks";
+import { PhoneVerifySendProps } from "@/types/user/profile_hooks";
 
 export const usePhoneVerifySend = () => {
   const axios = useAxios();

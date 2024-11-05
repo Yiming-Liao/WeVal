@@ -1,22 +1,24 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 /**
- * 設定 User Auth 控制器
+ * [ User ]
+ * Auth Controller
+ * Referenced in: 'start/api/v1/roles/user/auth/auth_routes.ts'
  */
 export default class UserAuthController {
-  // 註冊
+  // Register (Register: second page)
   async register(context: HttpContext) {
     const { register } = await import('#controllers/roles/user/auth/register')
     return register(context)
   }
 
-  // 登入
+  // Login
   async login(context: HttpContext) {
     const { login } = await import('#controllers/roles/user/auth/login')
     return login(context)
   }
 
-  // 登出
+  // Logout
   async logout(context: HttpContext) {
     const { logout } = await import('#controllers/roles/user/auth/logout')
     return logout(context)
@@ -25,8 +27,7 @@ export default class UserAuthController {
   /**
    * Email
    */
-
-  // 寄送驗證碼 (註冊第一頁)
+  // Email verification: send email (Register: first page)
   async registerEmailVerifySend(context: HttpContext) {
     const { registerEmailVerifySend } = await import(
       '#controllers/roles/user/auth/register_email_verify_send'
@@ -34,7 +35,7 @@ export default class UserAuthController {
     return registerEmailVerifySend(context)
   }
 
-  // 驗證信箱 (註冊第一頁)
+  // Email verification: verify and update (Register: first page)
   async registerEmailVerify(context: HttpContext) {
     const { registerEmailVerify } = await import(
       '#controllers/roles/user/auth/register_email_verify'
@@ -45,14 +46,13 @@ export default class UserAuthController {
   /**
    * Password
    */
-
-  // 忘記密碼
+  // Password forgot
   async passwordForgot(context: HttpContext) {
     const { passwordForgot } = await import('#controllers/roles/user/auth/password_forgot')
     return passwordForgot(context)
   }
 
-  // 重設密碼
+  // Password reset
   async passwordReset(context: HttpContext) {
     const { passwordReset } = await import('#controllers/roles/user/auth/password_reset')
     return passwordReset(context)

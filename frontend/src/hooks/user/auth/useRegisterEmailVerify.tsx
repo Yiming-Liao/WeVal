@@ -1,5 +1,5 @@
 import { useAxios } from "@/contexts/AxiosContext";
-import { RegisterEmailVerifyProps } from "@/types/user/user_auth_hooks";
+import { RegisterEmailVerifyProps } from "@/types/user/auth_hooks";
 
 export const useRegisterEmailVerify = () => {
   const axios = useAxios();

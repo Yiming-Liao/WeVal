@@ -1,20 +1,27 @@
 import { BaseMail } from '@adonisjs/mail'
 import User from '#models/user'
 import env from '#start/env'
-import { UserAuthService } from '#services/user_auth_service'
+import { AuthService } from '#services/roles/user/auth_service'
 
+/**
+ * [ User ]
+ * Register email verify notification
+ */
 export default class RegisterEmailVerifyNotification extends BaseMail {
-  subject = 'Verify email'
-  private user!: User // 使用非空斷言運算符
+  subject = 'Verify email' // Email subject
+  private user: User
 
   constructor(user: User) {
     super()
     this.user = user
-    this.message.to(this.user.email)
+    this.message.to(this.user.email) // Email address
   }
 
+  /**
+   * Prepare email
+   */
   async prepare() {
-    const emailVerifyCode = await UserAuthService.generateEmailVerifyCode(this.user)
+    const emailVerifyCode = await AuthService.generateEmailVerifyCode(this.user)
 
     const emailVerifyUrl = `${env.get('FRONTEND_URL')}/email-verify?emailVerifyCode=${emailVerifyCode}`
 

@@ -1,0 +1,10 @@
+{
+  "shared": {
+    "fields": {
+      "email": "email"
+    },
+    "messages": {
+      "required": "Please provide your {field}."
+    }
+  }
+}

@@ -10,7 +10,7 @@ const registerEmailVerifySendValidator = vine.compile(
       .unique(async (query, field) => {
         const user = await query.from('users').where('email', field).first()
         if (user) {
-          return !user.password // user of the email finished full registration -> error
+          return !user.password // User with this email has completed registration -> error
         }
         return true
       }),

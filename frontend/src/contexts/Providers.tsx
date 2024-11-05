@@ -1,4 +1,5 @@
-import { AuthProvider } from "@/contexts/AuthContext";
+import { UserAuthProvider } from "@/contexts/UserAuthContext";
+import { ValuerAuthProvider } from "@/contexts/ValuerAuthContext";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { AxiosProvider } from "@/contexts/AxiosContext";
 import { LoadingProvider } from "@/contexts/LoadingContext";
@@ -8,7 +9,9 @@ const Providers: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     <LoadingProvider>
       <ToastProvider>
         <AxiosProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <UserAuthProvider>
+            <ValuerAuthProvider>{children}</ValuerAuthProvider>
+          </UserAuthProvider>
         </AxiosProvider>
       </ToastProvider>
     </LoadingProvider>

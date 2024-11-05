@@ -1,11 +1,19 @@
 import { HttpRouterService } from '@adonisjs/core/types'
-const UserController = () => import('#controllers/roles/user/user_controller')
-import { middleware } from '#start/kernel'
-import { throttle, throttle1t1m } from '#start/limiter'
+import authRoutes from './auth/auth_routes.js'
+import profileRoutes from './profile/profile_routes.js'
 
 /**
- * 設定 User 路由 '/api/v1/user/'
+ * [ User ]
+ * All routes | Base path '/api/v1/user'
  */
 export default function userRoutes(router: HttpRouterService) {
-  router.get('/', [UserController, 'getUserData']).use([middleware.userAuth()]).use(throttle1t1m)
+  router
+    .group(() => {
+      // 🛡️ User auth routes | Prefix: '/api/v1/user/auth'
+      authRoutes(router)
+
+      // 📋 User profile routes | Prefix: '/api/v1/user/profile'
+      profileRoutes(router)
+    })
+    .prefix('user')
 }

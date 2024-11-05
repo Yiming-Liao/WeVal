@@ -1,0 +1,102 @@
+{
+  "greeting": "Hello world",
+  "user": {
+    "auth": {
+      "register_email_verify_send": {
+        "ok": "Verification email has been sent successfully.",
+        "error_sendEmail": "Unable to send verification email at this time. Please try again later.."
+      },
+      "register_email_verify": {
+        "ok": "Email verified successfully.",
+        "error_wrongCode": "The verification code provided is incorrect. Please check and try again.",
+        "error_codeExpired": "The verification code has expired. Please request again."
+      },
+      "register": {
+        "created": "Registration successful. Welcome!"
+      },
+      "login": {
+        "ok": "Login successful. Welcome back!"
+      },
+      "logout": {
+        "ok": "Logout successful. Thank you!"
+      },
+      "password_forgot": {
+        "ok": "A password reset email has been successfully sent to your email address.",
+        "error_sendEmail": "Unable to send verification email. Please try again later."
+      },
+      "password_reset": {
+        "ok": "Your password has been reset successfully.",
+        "error_wrongToken": "The password reset token you provided is invalid.",
+        "error_tokenExpired": "The reset token has expired. Please request again."
+      }
+    },
+    "profile": {
+      "password_change": {
+        "ok": "Your password has been changed successfully."
+      },
+      "username_change": {
+        "ok": "Your username has been updated successfully."
+      },
+      "phone_verify_send": {
+        "ok": "A verification code has been sent to your phone number."
+      },
+      "phone_verify": {
+        "ok": "Your phone number has been successfully verified.",
+        "error_wrongCode": "The verification code provided is incorrect. Please check and try again.",
+        "error_codeExpired": "The verification code has expired. Please request again."
+      }
+    }
+  },
+  "valuer": {
+    "auth": {
+      "register_email_verify_send": {
+        "ok": "Verification email has been sent successfully.",
+        "error_sendEmail": "Unable to send verification email at this time. Please try again later.."
+      },
+      "register_email_verify": {
+        "ok": "Email verified successfully.",
+        "error_wrongCode": "The verification code provided is incorrect. Please check and try again.",
+        "error_codeExpired": "The verification code has expired. Please request again."
+      },
+      "register_phone_verify_send": {
+        "ok": "A verification code has been sent to your phone number."
+      },
+      "register": {
+        "created": "Registration successful. Welcome!",
+        "error_wrongCode": "The verification code provided is incorrect. Please check and try again.",
+        "error_codeExpired": "The verification code has expired. Please request again."
+      },
+      "login": {
+        "ok": "Login successful. Welcome back!"
+      },
+      "logout": {
+        "ok": "Logout successful. Thank you!"
+      },
+      "password_forgot": {
+        "ok": "A password reset email has been successfully sent to your email address.",
+        "error_sendEmail": "Unable to send verification email. Please try again later."
+      },
+      "password_reset": {
+        "ok": "Your password has been reset successfully.",
+        "error_wrongToken": "The password reset token you provided is invalid.",
+        "error_tokenExpired": "The reset token has expired. Please request again."
+      }
+    },
+    "profile": {
+      "password_change": {
+        "ok": "Your password has been changed successfully."
+      },
+      "username_change": {
+        "ok": "Your username has been updated successfully."
+      },
+      "phone_verify_send": {
+        "ok": "A verification code has been sent to your phone number."
+      },
+      "phone_verify": {
+        "ok": "Your phone number has been successfully verified.",
+        "error_wrongCode": "The verification code provided is incorrect. Please check and try again.",
+        "error_codeExpired": "The verification code has expired. Please request again."
+      }
+    }
+  }
+}

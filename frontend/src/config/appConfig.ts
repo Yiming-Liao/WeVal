@@ -3,6 +3,7 @@ export const appConfig = {
   APP_NAME: process.env.NEXT_PUBLIC_APP_NAME || "MyApp",
 
   USER_DATA_KEY: process.env.NEXT_PUBLIC_USER_DATA_KEY || "MyApp-user-data",
+  USER_ROLE_KEY: process.env.NEXT_PUBLIC_USER_ROLE_KEY || "MyApp-user-role",
 
   REFRESH_TOKEN_NAME:
     process.env.NEXT_PUBLIC_REFRESH_TOKEN_NAME || "MyApp-refresh-token",

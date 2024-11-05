@@ -9,9 +9,9 @@ const IsNotLoggedIn = () => {
       </Link>
 
       {/* register */}
-      <Link href={"/user/register-email-verify"} className="p-2">
+      {/* <Link href={"/user/register-email-verify"} className="p-2">
         Register
-      </Link>
+      </Link> */}
     </div>
   );
 };

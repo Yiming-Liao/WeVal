@@ -1,12 +1,12 @@
-import { useAuth } from "@/contexts/AuthContext";
+import { useUserAuth } from "@/contexts/UserAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
 import { appConfig } from "@/config/appConfig";
-import { User } from "@/types/user/user_model";
-import { LoginProps } from "@/types/user/user_auth_hooks";
+import { User } from "@/types/user/model";
+import { LoginProps } from "@/types/user/auth_hooks";
 
 export const useLogin = () => {
   const axios = useAxios();
-  const { setUser } = useAuth();
+  const { setUser } = useUserAuth();
 
   const login = async ({ email, password }: LoginProps): Promise<boolean> => {
     const response = await axios.post<{ user: User }>("/user/auth/login", {
@@ -16,6 +16,9 @@ export const useLogin = () => {
 
     if (response) {
       const { user } = response.data;
+
+      // set role in localStorage
+      localStorage.setItem(appConfig.USER_ROLE_KEY, "user");
 
       // set user
       setUser(user);

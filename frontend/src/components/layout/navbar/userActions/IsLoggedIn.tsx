@@ -1,15 +1,24 @@
-import { useLogout } from "@/hooks/user/auth/useLogout";
+import { useLogout as userUserLogout } from "@/hooks/user/auth/useLogout";
+import { useLogout as useValuerLogout } from "@/hooks/valuer/auth/useLogout";
 import UserCard from "../UserCard";
 import Image from "next/image";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const IsLoggedIn = () => {
+const IsLoggedIn: FC<{ role: string }> = ({ role }) => {
   const { push } = useRouter();
-  const { logout } = useLogout();
+  const { logout: userLogout } = userUserLogout();
+  const { logout: valuerLogout } = useValuerLogout();
 
   const handleLogout = async () => {
-    const isLoggedOut = await logout();
+    let isLoggedOut = false;
+
+    if (role === "user") {
+      isLoggedOut = await userLogout();
+    } else {
+      isLoggedOut = await valuerLogout();
+    }
+
     if (isLoggedOut) {
       push("/");
     }
@@ -41,8 +50,8 @@ const IsLoggedIn = () => {
           height={16}
         />
       </button>
-      {/* UserCard */}
 
+      {/* UserCard */}
       {isOpen ? <UserCard /> : null}
     </div>
   );

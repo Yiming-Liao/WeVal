@@ -1,8 +1,10 @@
+// [r: Valuer]
+
 "use client";
 
 import { FC, useState } from "react";
-import FormEmailVerify from "@/components/user/auth/register/emailVerify/FormEmailVerify";
-import FormEmailVerifySend from "@/components/user/auth/register/emailVerify/FormEmailVerifySend";
+import FormEmailVerify from "@/components/valuer/auth/register/register_page1/FormEmailVerify";
+import FormEmailVerifySend from "@/components/valuer/auth/register/register_page1/FormEmailVerifySend";
 
 const RegisterEmailVerifyPage: FC = () => {
   const [email, setEmail] = useState<string>("");

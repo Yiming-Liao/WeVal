@@ -1,29 +1,31 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
 import router from '@adonisjs/core/services/router'
-import apiV1Routes from './api/v1/routes.js'
-import User from '#models/user'
+import { DateTime } from 'luxon'
+import env from './env.js'
 import { middleware } from './kernel.js'
+import apiV1Routes from './api/v1/api_v1_routes.js'
+import User from '#models/user'
 
-router.get('/', async () => {
+// 🔎 Health check
+router.get('/', () => {
   return {
-    message: 'This is Backend',
+    status: 'OK',
+    timestamp: DateTime.now().setZone('Asia/Taipei'),
+    apiVersion: 'v1',
+    environment: process.env.NODE_ENV || 'development',
+    messages: `You are currently at '${env.get('BACKEND_URL')}'`,
   }
 })
 
-router.group(() => {
-  apiV1Routes(router)
-})
-
+// 🔎 Testing: checking tokens
 router
   .get('/tokens', async ({ auth }) => {
     return User.accessTokens.all(auth.user!)
   })
   .use(middleware.userAuth())
+
+// 📍 API v1 routes | Prefix: '/api/v1'
+router
+  .group(() => {
+    apiV1Routes(router)
+  })
+  .use(middleware.apiRateLimit()) // Allow 60 times in 1 minute for all API calls

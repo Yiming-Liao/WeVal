@@ -2,24 +2,30 @@ import type { HttpContext } from '@adonisjs/core/http'
 import registerEmailVerifyValidator from '#validators/roles/user/auth/register_email_verify_validator'
 import User from '#models/user'
 import { DateTime } from 'luxon'
+import i18n from '#services/i18n_service'
 
 export async function registerEmailVerify({ request, response }: HttpContext) {
-  // Validate
+  // 📝 Validator (Built-in error handling)
   const { email, emailVerifyCode } = await request.validateUsing(registerEmailVerifyValidator)
 
-  // Find User  // Already validated is exists
+  // 🗄️ Find User
   let foundUser = await User.findBy('email', email)
 
-  // Wrong emailVerifyCode
+  // 🚨 Error: Wrong emailVerifyCode
   if (foundUser!.emailVerifyCode !== emailVerifyCode) {
-    return response.badRequest({ errors: [{ message: 'Verification code is not correct' }] })
+    return response.badRequest({
+      errors: [{ message: i18n.t('messages.user.auth.register_email_verify.error_wrongCode') }],
+    })
   }
 
-  // emailVerifyCode expired
+  // 🚨 Error: EmailVerifyCode expired
   if (foundUser!.emailVerifyCodeExpiresAt && foundUser!.emailVerifyCodeExpiresAt < DateTime.now()) {
-    return response.badRequest({ errors: [{ message: 'Verification code has expired' }] })
+    return response.badRequest({
+      errors: [{ message: i18n.t('messages.user.auth.register_email_verify.error_codeExpired') }],
+    })
   }
 
+  // 🗄️ Update User
   await foundUser!
     .merge({
       emailVerifiedAt: DateTime.now().toISO(),
@@ -28,5 +34,5 @@ export async function registerEmailVerify({ request, response }: HttpContext) {
     })
     .save()
 
-  return response.ok({ message: 'Email verified successfully!' })
+  return response.ok({ message: i18n.t('messages.user.auth.register_email_verify.ok') })
 }
