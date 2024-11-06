@@ -25,8 +25,8 @@ test.group('User auth login', (group) => {
         email: 'setup_user@gmail.com',
       },
     })
-    response.assertCookie(env.get('REFRESH_TOKEN_NAME'))
-    response.assertCookie(env.get('ACCESS_TOKEN_NAME'))
+    response.assertCookie(env.get('USER_REFRESH_TOKEN_NAME'))
+    response.assertCookie(env.get('USER_ACCESS_TOKEN_NAME'))
   })
 
   test('Login with wrong password', async ({ client }) => {
@@ -43,16 +43,16 @@ test.group('User auth login', (group) => {
       .post('/user/auth/login')
       .form({ email: 'setup_user@gmail.com', password: '123456' })
 
-    const oldRefreshToken = firstResponse.cookie(env.get('REFRESH_TOKEN_NAME'))?.value
-    const oldAccessToken = firstResponse.cookie(env.get('ACCESS_TOKEN_NAME'))?.value
+    const oldRefreshToken = firstResponse.cookie(env.get('USER_REFRESH_TOKEN_NAME'))?.value
+    const oldAccessToken = firstResponse.cookie(env.get('USER_ACCESS_TOKEN_NAME'))?.value
 
     // Second login
     const secondResponse = await client
       .post('/user/auth/login')
       .form({ email: 'setup_user@gmail.com', password: '123456' })
 
-    const newRefreshToken = secondResponse.cookie(env.get('REFRESH_TOKEN_NAME'))?.value
-    const newAccessToken = secondResponse.cookie(env.get('ACCESS_TOKEN_NAME'))?.value
+    const newRefreshToken = secondResponse.cookie(env.get('USER_REFRESH_TOKEN_NAME'))?.value
+    const newAccessToken = secondResponse.cookie(env.get('USER_ACCESS_TOKEN_NAME'))?.value
 
     // is Token different?
     assert.isTrue(oldRefreshToken !== newRefreshToken)

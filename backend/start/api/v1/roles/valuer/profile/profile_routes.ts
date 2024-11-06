@@ -27,7 +27,7 @@ export default function profileRoutes(router: HttpRouterService) {
       //
       //
       // testing
-      router.get('/', [UserProfileController, 'getUserData'])
+      // router.get('/', [UserProfileController, 'getUserData'])
     })
     .prefix('/profile')
     .use(middleware.userAuth()) // Allow only authenticated users

@@ -8,8 +8,8 @@ import { DateTime } from 'luxon'
 
 export default class AuthMiddleware {
   async handle({ auth, request, response }: HttpContext, next: NextFn) {
-    const accessToken = request.cookie(env.get('ACCESS_TOKEN_NAME'))
-    const refreshToken = request.cookie(env.get('REFRESH_TOKEN_NAME'))
+    const accessToken = request.cookie(env.get('VALUER_ACCESS_TOKEN_NAME'))
+    const refreshToken = request.cookie(env.get('VALUER_REFRESH_TOKEN_NAME'))
 
     // [Access Token 不存在] 檢查 Refresh Token
     if (!accessToken) {
@@ -32,7 +32,7 @@ export default class AuthMiddleware {
       const newAccessToken = await Valuer.accessTokens.create(foundValuer, ['*'])
 
       // 回應新的 access token 並設置到 cookie 中
-      response.cookie(env.get('ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
+      response.cookie(env.get('VALUER_ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
 
       // 將新生成的 Access Token 設置到 request headers 中進行後續驗證
       request.headers().authorization = `Bearer ${newAccessToken.toJSON().token}`
@@ -42,7 +42,7 @@ export default class AuthMiddleware {
     }
 
     // [Access token 驗證] 取得 authenticatedValuer 實例
-    await auth.authenticateUsing(['valuer']) // guard => 'user'
+    await auth.authenticateUsing(['valuer']) // guard => 'valuer'
     const authenticatedValuer = auth.user!
 
     // [刷新快過期的 Access Token] 檢查 access token 是否即將過期（10 分鐘內過期）
@@ -52,15 +52,15 @@ export default class AuthMiddleware {
     ) {
       // 撤銷舊的 accessToken
       await Valuer.accessTokens.delete(
-        authenticatedValuer,
+        authenticatedValuer as Valuer,
         authenticatedValuer.currentAccessToken.identifier
       )
 
       // 生成新的 access token
-      const newAccessToken = await Valuer.accessTokens.create(authenticatedValuer, ['*'])
+      const newAccessToken = await Valuer.accessTokens.create(authenticatedValuer as Valuer, ['*'])
 
       // 回應新的 access token 並設置到 cookie 中
-      response.cookie(env.get('ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
+      response.cookie(env.get('VALUER_ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
     }
 
     return next()

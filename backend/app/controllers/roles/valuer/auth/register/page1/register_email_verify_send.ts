@@ -1,7 +1,7 @@
 // [r: Valuer]
 
 import type { HttpContext } from '@adonisjs/core/http'
-import registerEmailVerifySendValidator from '#validators/roles/valuer/auth/register_email_verify_send_validator'
+import registerEmailVerifySendValidator from '#validators/roles/valuer/auth/register/register_email_verify_send_validator'
 import { registerEmailVerifySendLimit } from '#services/roles/valuer/auth/register_email_verify_send_limit'
 import Valuer from '#models/valuer'
 import mail from '@adonisjs/mail/services/main'

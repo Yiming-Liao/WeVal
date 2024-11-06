@@ -11,29 +11,28 @@ import { middleware } from '#start/kernel'
 export default function authRoutes(router: HttpRouterService) {
   router
     .group(() => {
-      // [POST] Register (Register: second page)
+      //*---------------------------▼-----REGISTER-----▼---------------------------
+      // [POST] Register <page-1> Send email [🚧 Built-in limiter]
+      router.post('/register-email-verify-send', [ValuerAuthController, 'registerEmailVerifySend'])
+
+      // [POST] Register <page-1> Verify email
+      router.post('/register-email-verify', [ValuerAuthController, 'registerEmailVerify'])
+
+      // [POST] Register <page-2> Send sms [🚧 Built-in limiter]
+      router.post('/register-phone-verify-send', [ValuerAuthController, 'registerPhoneVerifySend'])
+
+      // [POST] Register <page-2>
       router.post('/register', [ValuerAuthController, 'register'])
+
+      // [POST] Register <page-3>
+      router.post('/register-qualify', [ValuerAuthController, 'registerQualify'])
+      //*---------------------------▲-----REGISTER-----▲---------------------------
 
       // [POST] Login
       router.post('/login', [ValuerAuthController, 'login'])
 
       // [POST] Logout
       router.post('/logout', [ValuerAuthController, 'logout']).use(middleware.valuerAuth())
-
-      /**
-       * Email
-       */
-      // [POST] Email verification: send email (Register: first page) [🚧 Built-in limiter]
-      router.post('/register-email-verify-send', [ValuerAuthController, 'registerEmailVerifySend'])
-
-      // [POST] Email verification: verify and update (Register: first page)
-      router.post('/register-email-verify', [ValuerAuthController, 'registerEmailVerify'])
-
-      /**
-       * Phone
-       */
-      // [POST] Phone verification: send sms (Register: second page) [🚧 Built-in limiter]
-      router.post('/register-phone-verify-send', [ValuerAuthController, 'registerPhoneVerifySend'])
 
       /**
        * Password

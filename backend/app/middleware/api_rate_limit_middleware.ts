@@ -4,7 +4,7 @@ import { NextFn } from '@adonisjs/core/types/http'
 
 // Initialize customLimiter using Redis.
 const customLimiter = limiter.use('redis', {
-  requests: 60,
+  requests: 100,
   duration: '1 minute',
 })
 

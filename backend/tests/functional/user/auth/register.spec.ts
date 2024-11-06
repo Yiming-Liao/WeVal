@@ -28,8 +28,8 @@ test.group('User auth register', (group) => {
         email: 'setup_user@gmail.com',
       },
     })
-    response.assertCookie(env.get('REFRESH_TOKEN_NAME')) // 獲得 Refresh Token
-    response.assertCookie(env.get('ACCESS_TOKEN_NAME')) // 獲得 Access Token
+    response.assertCookie(env.get('USER_REFRESH_TOKEN_NAME')) // 獲得 Refresh Token
+    response.assertCookie(env.get('USER_ACCESS_TOKEN_NAME')) // 獲得 Access Token
   })
 
   test('Register with a email is not existed in DB', async ({ client }) => {

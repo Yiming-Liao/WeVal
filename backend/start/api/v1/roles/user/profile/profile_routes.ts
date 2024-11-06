@@ -21,11 +21,6 @@ export default function profileRoutes(router: HttpRouterService) {
 
       // [POST] Phone verification: verify and update
       router.post('/phone-verify', [UserProfileController, 'phoneVerify'])
-
-      //
-      //
-      // testing
-      router.get('/', [UserProfileController, 'getUserData'])
     })
     .prefix('/profile')
     .use(middleware.userAuth()) // Allow only authenticated users

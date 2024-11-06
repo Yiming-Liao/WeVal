@@ -6,8 +6,8 @@ import { DateTime } from 'luxon'
 
 export default class AuthMiddleware {
   async handle({ auth, request, response }: HttpContext, next: NextFn) {
-    const accessToken = request.cookie(env.get('ACCESS_TOKEN_NAME'))
-    const refreshToken = request.cookie(env.get('REFRESH_TOKEN_NAME'))
+    const accessToken = request.cookie(env.get('USER_ACCESS_TOKEN_NAME'))
+    const refreshToken = request.cookie(env.get('USER_REFRESH_TOKEN_NAME'))
 
     // [Access Token 不存在] 檢查 Refresh Token
     if (!accessToken) {
@@ -30,7 +30,7 @@ export default class AuthMiddleware {
       const newAccessToken = await User.accessTokens.create(foundUser, ['*'])
 
       // 回應新的 access token 並設置到 cookie 中
-      response.cookie(env.get('ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
+      response.cookie(env.get('USER_ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
 
       // 將新生成的 Access Token 設置到 request headers 中進行後續驗證
       request.headers().authorization = `Bearer ${newAccessToken.toJSON().token}`
@@ -58,7 +58,7 @@ export default class AuthMiddleware {
       const newAccessToken = await User.accessTokens.create(authenticatedUser, ['*'])
 
       // 回應新的 access token 並設置到 cookie 中
-      response.cookie(env.get('ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
+      response.cookie(env.get('USER_ACCESS_TOKEN_NAME'), newAccessToken.toJSON().token)
     }
 
     return next()

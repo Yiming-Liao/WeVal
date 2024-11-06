@@ -13,7 +13,7 @@ export async function logout({ auth, response }: HttpContext) {
   }
 
   return response // 🍪 Clear cookies
-    .clearCookie(env.get('REFRESH_TOKEN_NAME'))
-    .clearCookie(env.get('ACCESS_TOKEN_NAME'))
+    .clearCookie(env.get('USER_REFRESH_TOKEN_NAME'))
+    .clearCookie(env.get('USER_ACCESS_TOKEN_NAME'))
     .ok({ message: i18n.t('messages.user.auth.logout.ok') })
 }

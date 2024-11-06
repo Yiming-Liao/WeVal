@@ -1,3 +1,5 @@
+// [r: Valuer]
+
 import { snsClient } from '#config/aws'
 import Valuer from '#models/valuer'
 import i18n from '#services/i18n_service'

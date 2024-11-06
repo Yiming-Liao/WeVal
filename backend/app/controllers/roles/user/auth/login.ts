@@ -19,8 +19,8 @@ export async function login({ request, response }: HttpContext) {
   const refreshToken = await AuthService.generateRefreshToken(foundUser!)
 
   return response // Refresh Token expires in 30 days
-    .cookie(env.get('REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
-    .cookie(env.get('ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
+    .cookie(env.get('USER_REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
+    .cookie(env.get('USER_ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
     .ok({
       message: i18n.t('messages.user.auth.login.ok'),
       user: foundUser!.serialize(),

@@ -10,6 +10,7 @@
 */
 
 import { Env } from '@adonisjs/core/env'
+import { envCustom } from './env_costum.js'
 
 export default await Env.create(new URL('../', import.meta.url), {
   NODE_ENV: Env.schema.enum(['development', 'production', 'test'] as const),
@@ -48,33 +49,6 @@ export default await Env.create(new URL('../', import.meta.url), {
 
   /*
   |----------------------------------------------------------
-  | Variables for configuring tokens name
-  |----------------------------------------------------------
-  */
-  APP_NAME: Env.schema.string(),
-  ACCESS_TOKEN_NAME: Env.schema.string(),
-  REFRESH_TOKEN_NAME: Env.schema.string(),
-
-  /*
-  |----------------------------------------------------------
-  | URLs
-  |----------------------------------------------------------
-  */
-  BACKEND_URL: Env.schema.string(),
-  API_URL: Env.schema.string(),
-  FRONTEND_URL: Env.schema.string(),
-
-  /*
-  |----------------------------------------------------------
-  | AWS SNS
-  |----------------------------------------------------------
-  */
-  AWS_ACCESS_KEY: Env.schema.string(),
-  AWS_SECRET_KEY: Env.schema.string(),
-  AWS_REGION: Env.schema.string(),
-
-  /*
-  |----------------------------------------------------------
   | Redis
   |----------------------------------------------------------
   */
@@ -88,4 +62,18 @@ export default await Env.create(new URL('../', import.meta.url), {
  |----------------------------------------------------------
  */
   LIMITER_STORE: Env.schema.enum(['redis', 'memory'] as const),
+
+  /*
+ |----------------------------------------------------------
+ | Custom environment variables
+ |----------------------------------------------------------
+ */
+  ...envCustom,
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the drive package
+  |----------------------------------------------------------
+  */
+  DRIVE_DISK: Env.schema.enum(['s3'] as const),
 })

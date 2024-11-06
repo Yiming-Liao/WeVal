@@ -27,11 +27,4 @@ export default class UserProfileController {
     const { phoneVerify } = await import('#controllers/roles/user/profile/phone_verify')
     return phoneVerify(context)
   }
-
-  //
-  //
-  // Testing
-  async getUserData({ response }: HttpContext) {
-    return response.ok({ message: 'User data!' })
-  }
 }

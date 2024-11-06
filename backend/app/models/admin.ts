@@ -11,9 +11,9 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 })
 
 /**
- * User
+ * Admin
  */
-export default class User extends compose(BaseModel, AuthFinder) {
+export default class Admin extends compose(BaseModel, AuthFinder) {
   @column({ isPrimary: true, serializeAs: null })
   declare id: number
 
@@ -22,8 +22,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare email: string
   @column()
   declare username: string | null
-  @column()
-  declare phone: string | null
 
   @column({ serializeAs: null })
   declare password: string | null
@@ -33,22 +31,6 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare createdAt: DateTime
   @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   declare updatedAt: DateTime | null
-
-  // ✉️ Email verification
-  @column({ serializeAs: null })
-  declare emailVerifyCode: string | null
-  @column.dateTime({ serializeAs: null })
-  declare emailVerifiedAt: DateTime | null // verifiedAt
-  @column.dateTime({ serializeAs: null })
-  declare emailVerifyCodeExpiresAt: DateTime | null // expiresAt
-
-  // 💬 Phone verification
-  @column({ serializeAs: null })
-  declare phoneVerifyCode: string | null
-  @column.dateTime({ serializeAs: null })
-  declare phoneVerifiedAt: DateTime | null // verifiedAt
-  @column.dateTime({ serializeAs: null })
-  declare phoneVerifyCodeExpiresAt: DateTime | null // expiresAt
 
   // Password reset
   @column({ serializeAs: null })
@@ -63,8 +45,8 @@ export default class User extends compose(BaseModel, AuthFinder) {
   declare refreshTokenExpiresAt: DateTime | null
 
   // 🔑 OAT Access Token
-  static accessTokens = DbAccessTokensProvider.forModel(User, {
+  static accessTokens = DbAccessTokensProvider.forModel(Admin, {
     expiresIn: '1h',
-    table: 'user_auth_access_tokens',
+    table: 'admin_auth_access_tokens',
   })
 }

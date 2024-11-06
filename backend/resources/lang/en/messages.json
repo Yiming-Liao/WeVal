@@ -66,6 +66,9 @@
         "error_wrongCode": "The verification code provided is incorrect. Please check and try again.",
         "error_codeExpired": "The verification code has expired. Please request again."
       },
+      "register_qualify": {
+        "created": "Your qualification details have been submitted and are awaiting review."
+      },
       "login": {
         "ok": "Login successful. Welcome back!"
       },

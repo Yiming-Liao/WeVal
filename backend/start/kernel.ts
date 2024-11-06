@@ -46,7 +46,5 @@ router.use([
 export const middleware = router.named({
   userAuth: () => import('#middleware/user/auth_middleware'),
   valuerAuth: () => import('#middleware/valuer/auth_middleware'),
-  // userEmailVerified: () => import('#middleware/user/user_email_verified_middleware'),
   apiRateLimit: () => import('#middleware/api_rate_limit_middleware'),
-  auth: () => import('#middleware/auth_middleware'),
 })

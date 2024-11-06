@@ -1,7 +1,7 @@
 // [r: Valuer]
 
 import type { HttpContext } from '@adonisjs/core/http'
-import registerValidator from '#validators/roles/valuer/auth/register_validator'
+import registerValidator from '#validators/roles/valuer/auth/register/register_validator'
 import Valuer from '#models/valuer'
 import env from '#start/env'
 import { AuthService } from '#services/roles/valuer/auth_service'
@@ -56,8 +56,8 @@ export async function register({ request, response }: HttpContext) {
   const refreshToken = await AuthService.generateRefreshToken(updatedValuer)
 
   return response // Refresh Token expires in 30 days
-    .cookie(env.get('REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
-    .cookie(env.get('ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
+    .cookie(env.get('VALUER_REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
+    .cookie(env.get('VALUER_ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
     .created({
       message: i18n.t('messages.valuer.auth.register.created'),
       valuer: updatedValuer.serialize(),

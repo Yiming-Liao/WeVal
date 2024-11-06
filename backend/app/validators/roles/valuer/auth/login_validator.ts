@@ -8,8 +8,8 @@ const loginValidator = vine.compile(
       .email()
       .toLowerCase()
       .exists(async (query, field) => {
-        const user = await query.from('users').where('email', field).first()
-        return user // User with this Email does not exists -> error
+        const valuer = await query.from('valuers').where('email', field).first()
+        return valuer // Valuer with this Email does not exists -> error
       }),
     password: vine.string().trim().minLength(6).maxLength(256),
   })
