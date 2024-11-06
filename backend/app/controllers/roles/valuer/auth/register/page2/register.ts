@@ -55,9 +55,10 @@ export async function register({ request, response }: HttpContext) {
   // 🔑 Generate refresh token
   const refreshToken = await AuthService.generateRefreshToken(updatedValuer)
 
-  return response // Refresh Token expires in 30 days
+  return response // Refresh Token expires in 30 days (same wuth role name)
     .cookie(env.get('VALUER_REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
     .cookie(env.get('VALUER_ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
+    .plainCookie(env.get('USER_ROLE_NAME'), 'valuer', { maxAge: 30 * 24 * 60 * 60, encode: false })
     .created({
       message: i18n.t('messages.valuer.auth.register.created'),
       valuer: updatedValuer.serialize(),

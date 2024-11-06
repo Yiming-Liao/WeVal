@@ -42,3 +42,14 @@ export interface RegisterPhoneVerifySendProps {
   email: string;
   phone: string;
 }
+
+// useRegisterQualify
+export interface RegisterQualifyProps {
+  email: string;
+  serviceArea: string;
+  address: string;
+  abn: string;
+  certificateFile: File;
+  agreement1: boolean;
+  agreement2: boolean;
+}

@@ -1,29 +1,38 @@
-import { useUserAuth } from "@/contexts/UserAuthContext";
+// [r: Valuer]
+
+import { useValuerAuth } from "@/contexts/ValuerAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
-import { appConfig } from "@/config/appConfig";
-import { User } from "@/types/user/model";
+import { Valuer } from "@/types/valuer/model";
 import { LoginProps } from "@/types/user/auth_hooks";
+import AuthLocalStorage from "@/utils/AuthLocalStorage";
 
 export const useLogin = () => {
   const axios = useAxios();
-  const { setUser } = useUserAuth();
+  const { setValuer } = useValuerAuth();
 
-  const login = async ({ email, password }: LoginProps): Promise<boolean> => {
-    const response = await axios.post<{ user: User }>("/user/auth/login", {
-      email,
-      password,
-    });
+  const login = async ({
+    email,
+    password,
+  }: LoginProps): Promise<
+    boolean | { isValuerQualificationCreated: boolean }
+  > => {
+    const response = await axios.post<{ valuer: Valuer }>(
+      "/valuer/auth/login",
+      { email, password }
+    );
 
     if (response) {
-      const { user } = response.data;
+      const { valuer } = response.data;
 
-      // set user
-      setUser(user);
+      // Set user{...data} for context
+      setValuer(valuer);
 
-      // set user{} in localStorage
-      localStorage.setItem(appConfig.USER_DATA_KEY, JSON.stringify(user));
+      // Set user{...data} & role in local storage
+      AuthLocalStorage.set({ user: valuer, role: "valuer" });
 
-      return true;
+      return {
+        isValuerQualificationCreated: valuer.isValuerQualificationCreated,
+      };
     }
 
     return false;

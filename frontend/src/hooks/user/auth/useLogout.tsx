@@ -1,6 +1,6 @@
 import { useUserAuth } from "@/contexts/UserAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
-import { appConfig } from "@/config/appConfig";
+import AuthLocalStorage from "@/utils/AuthLocalStorage";
 
 export const useLogout = () => {
   const axios = useAxios();
@@ -10,13 +10,11 @@ export const useLogout = () => {
     const response = await axios.post<void>("/user/auth/logout");
 
     if (response) {
-      // clear user
+      // Clear user{...data} from context
       setUser(null);
 
-      // clear role in localStorage
-      localStorage.removeItem(appConfig.USER_ROLE_KEY);
-      // clear user{} in local storage
-      localStorage.removeItem(appConfig.USER_DATA_KEY);
+      // Remove user{...data} & role in local storage
+      AuthLocalStorage.remove();
 
       return true;
     }

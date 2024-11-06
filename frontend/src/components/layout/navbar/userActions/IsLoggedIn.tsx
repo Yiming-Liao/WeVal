@@ -1,6 +1,6 @@
 import { useLogout as userUserLogout } from "@/hooks/user/auth/useLogout";
 import { useLogout as useValuerLogout } from "@/hooks/valuer/auth/useLogout";
-import UserCard from "../UserCard";
+import UserCard from "./UserCard";
 import Image from "next/image";
 import { FC, useState } from "react";
 import { useRouter } from "next/navigation";

@@ -9,6 +9,7 @@
 
 ### Limiting Time
 
+- ApiRateLimitMiddleware - 100 times 1 minute
 - password_forgot_limit - 1 time 30 Seconds
 - register_email_verify_send_limit - 1 time 30 Seconds
 
@@ -29,6 +30,11 @@
 
 ### Role indentifier in files
 
-// [r: User]
-// [r: Valuer]
-// [r: User]
+- // [r: User]
+- // [r: Valuer]
+- // [r: Admin]
+
+### File proxy routes
+
+- [GET] /api/v1/files/\*
+- [DELETE] /api/v1/files/\*

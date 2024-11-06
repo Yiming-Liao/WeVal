@@ -1,5 +1,6 @@
 // [r: Valuer]
 
+import { HttpContext } from '@adonisjs/core/http'
 import { HttpRouterService } from '@adonisjs/core/types'
 const ValuerAuthController = () => import('#controllers/roles/valuer/auth/valuer_auth_controller')
 import { middleware } from '#start/kernel'
@@ -42,6 +43,14 @@ export default function authRoutes(router: HttpRouterService) {
 
       // [POST] Password reset
       router.post('/password-reset', [ValuerAuthController, 'passwordReset'])
+
+      //*---------------------------▼-----🚦 Check permission-----▼---------------------------
+      router
+        .get('/check-permission', ({ response }: HttpContext) => {
+          return response.ok({ message: 'Approved!' })
+        })
+        .use(middleware.valuerAuth())
+      //*---------------------------▲-----🚦 Check permission-----▲---------------------------
     })
     .prefix('/auth')
 }

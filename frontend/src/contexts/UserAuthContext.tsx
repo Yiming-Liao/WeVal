@@ -27,7 +27,7 @@ export const UserAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     setIsLoading(true);
 
-    // User or Valuer
+    // user | valuer | admin
     const role = localStorage.getItem(appConfig.USER_ROLE_KEY);
 
     const storedUser = localStorage.getItem(appConfig.USER_DATA_KEY);

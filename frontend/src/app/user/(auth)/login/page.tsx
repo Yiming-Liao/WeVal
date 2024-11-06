@@ -13,7 +13,7 @@ const LoginPage = () => {
 
       <FormLogin />
 
-      <Link href={"/user/register-email-verify"}>Register as user</Link>
+      <Link href={"/user/register/page-1"}>Register as user</Link>
     </div>
   );
 };

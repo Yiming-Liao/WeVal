@@ -1,6 +1,8 @@
+// [r: Valuer]
+
 "use client";
 
-import { useLogin } from "@/hooks/user/auth/useLogin";
+import { useLogin } from "@/hooks/valuer/auth/useLogin";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC, FormEventHandler, useState } from "react";
@@ -14,9 +16,18 @@ const FormLogin: FC = () => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+
     const isLoggedIn = await login({ email, password });
+
     if (isLoggedIn) {
-      push("/user/dashboard");
+      if (
+        typeof isLoggedIn !== "boolean" &&
+        isLoggedIn.isValuerQualificationCreated
+      ) {
+        push("/valuer/dashboard");
+      } else {
+        push("/valuer/register/page-3");
+      }
     }
   };
 

@@ -1,8 +1,8 @@
 import { useUserAuth } from "@/contexts/UserAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
-import { appConfig } from "@/config/appConfig";
 import { User } from "@/types/user/model";
 import { LoginProps } from "@/types/user/auth_hooks";
+import AuthLocalStorage from "@/utils/AuthLocalStorage";
 
 export const useLogin = () => {
   const axios = useAxios();
@@ -17,14 +17,11 @@ export const useLogin = () => {
     if (response) {
       const { user } = response.data;
 
-      // set role in localStorage
-      localStorage.setItem(appConfig.USER_ROLE_KEY, "user");
-
-      // set user
+      // Set user{...data} for context
       setUser(user);
 
-      // set user{} in localStorage
-      localStorage.setItem(appConfig.USER_DATA_KEY, JSON.stringify(user));
+      // Set user{...data} & role in local storage
+      AuthLocalStorage.set({ user, role: "user" });
 
       return true;
     }

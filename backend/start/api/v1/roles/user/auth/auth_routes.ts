@@ -1,4 +1,5 @@
 import { HttpRouterService } from '@adonisjs/core/types'
+import { HttpContext } from '@adonisjs/core/http'
 const UserAuthController = () => import('#controllers/roles/user/auth/user_auth_controller')
 import { middleware } from '#start/kernel'
 
@@ -9,23 +10,22 @@ import { middleware } from '#start/kernel'
 export default function authRoutes(router: HttpRouterService) {
   router
     .group(() => {
-      // [POST] Register (Register: second page)
+      //*---------------------------▼-----REGISTER-----▼---------------------------
+      // [POST] Register <page-1> Send email [🚧 Built-in limiter]
+      router.post('/register-email-verify-send', [UserAuthController, 'registerEmailVerifySend'])
+
+      // [POST] Register <page-1> Verify email
+      router.post('/register-email-verify', [UserAuthController, 'registerEmailVerify'])
+
+      // [POST] Register <page-2> Send sms
       router.post('/register', [UserAuthController, 'register'])
+      //*---------------------------▲-----REGISTER-----▲---------------------------
 
       // [POST] Login
       router.post('/login', [UserAuthController, 'login'])
 
       // [POST] Logout
       router.post('/logout', [UserAuthController, 'logout']).use(middleware.userAuth())
-
-      /**
-       * Email
-       */
-      // [POST] Email verification: send email (Register: first page) [🚧 Built-in limiter]
-      router.post('/register-email-verify-send', [UserAuthController, 'registerEmailVerifySend'])
-
-      // [POST] Email verification: verify and update (Register: first page)
-      router.post('/register-email-verify', [UserAuthController, 'registerEmailVerify'])
 
       /**
        * Password
@@ -35,6 +35,14 @@ export default function authRoutes(router: HttpRouterService) {
 
       // [POST] Password reset
       router.post('/password-reset', [UserAuthController, 'passwordReset'])
+
+      //*---------------------------▼-----🚦 Check permission-----▼---------------------------
+      router
+        .get('/check-permission', ({ response }: HttpContext) => {
+          return response.ok({ message: 'Approved!' })
+        })
+        .use(middleware.userAuth())
+      //*---------------------------▲-----🚦 Check permission-----▲---------------------------
     })
     .prefix('/auth')
 }

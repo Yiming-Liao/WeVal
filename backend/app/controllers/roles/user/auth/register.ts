@@ -24,6 +24,7 @@ export async function register({ request, response }: HttpContext) {
   return response // Refresh Token expires in 30 days
     .cookie(env.get('USER_REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
     .cookie(env.get('USER_ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
+    .plainCookie(env.get('USER_ROLE_NAME'), 'user', { maxAge: 30 * 24 * 60 * 60, encode: false })
     .created({
       message: i18n.t('messages.user.auth.register.created'),
       user: updatedUser.serialize(),

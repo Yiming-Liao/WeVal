@@ -5,7 +5,14 @@ export const envCustom = {
 
   /*
   |----------------------------------------------------------
-  | Tokens name
+  | Role's cookie name
+  |----------------------------------------------------------
+  */
+  USER_ROLE_NAME: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Authentication tokens' cookie name
   |----------------------------------------------------------
   */
   USER_ACCESS_TOKEN_NAME: Env.schema.string(),

@@ -15,5 +15,6 @@ export async function logout({ auth, response }: HttpContext) {
   return response // 🍪 Clear cookies
     .clearCookie(env.get('USER_REFRESH_TOKEN_NAME'))
     .clearCookie(env.get('USER_ACCESS_TOKEN_NAME'))
+    .clearCookie(env.get('USER_ROLE_NAME'))
     .ok({ message: i18n.t('messages.user.auth.logout.ok') })
 }

@@ -1,36 +1,48 @@
 import { NextRequest, NextResponse } from "next/server";
 import { appConfig } from "./config/appConfig";
+import userMiddleware from "./middlewares/userMiddleware";
+import valuerMiddleware from "./middlewares/valuerMiddleware";
+import adminMiddleware from "./middlewares/adminMiddleware";
 
-// 定義受保護的路徑
-const PROTECTED_PATHS = ["/user/dashboard", "/password-change"];
+// Protected paths
+const PROTECTED_PATHS = [
+  "/user/dashboard",
+  "/password-change",
+  "/valuer/dashboard",
+];
 
-export function middleware(req: NextRequest) {
-  // 獲取所有 cookies
-  const cookies = req.cookies.getAll();
+const ROLE_MIDDLEWARES: Record<
+  string,
+  (req: NextRequest) => Promise<NextResponse>
+> = {
+  user: userMiddleware,
+  valuer: valuerMiddleware,
+  admin: adminMiddleware,
+};
 
-  // 判斷是否存在 refresh token
-  const hasRefreshToken = cookies.some(({ name }) => {
-    return name === appConfig.REFRESH_TOKEN_NAME;
-  });
+export async function middleware(req: NextRequest) {
+  const role = req.cookies.get(appConfig.USER_ROLE_KEY)?.value;
 
+  // Accessing proteced paths
   if (PROTECTED_PATHS.some((path) => req.nextUrl.pathname.startsWith(path))) {
-    /**
-     * 此為受保護路由
-     */
-    // 沒有 Refresh Token
-    if (!hasRefreshToken) {
-      console.warn("\x1b[35m試圖訪問沒有授權的網址\x1b[0m");
-
-      // 重定向到登入頁面
-      return NextResponse.redirect(new URL("/user/login", req.url));
+    // Check if role is valid
+    if (!role || (role !== "user" && role !== "valuer" && role !== "admin")) {
+      return NextResponse.redirect(new URL("/", req.url));
     }
+
+    // Use role middleware
+    return await ROLE_MIDDLEWARES[role](req);
   }
 
-  // 如果已經登入或是非保護路由，則繼續
+  // Accessing none protected paths
   return NextResponse.next();
 }
 
-// 定義 middleware 要套用的路徑
+// Matching Paths
 export const config = {
-  matcher: ["/user/dashboard/:path*", "/password-change/:path*"], // 保護 dashboard 路徑
+  matcher: [
+    "/user/dashboard/:path*",
+    "/password-change/:path*",
+    "/valuer/dashboard/:path*",
+  ],
 };

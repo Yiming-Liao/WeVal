@@ -1,4 +1,6 @@
-import FormLogin from "@/components/user/auth/login/FormLogin";
+// [r: Valuer]
+
+import FormLogin from "@/components/valuer/auth/login/FormLogin";
 import Link from "next/link";
 
 const LoginPage = () => {
@@ -13,7 +15,7 @@ const LoginPage = () => {
 
       <FormLogin />
 
-      <Link href={"/valuer/register-email-verify"}>Register as valuer</Link>
+      <Link href={"/valuer/register/page-1"}>Register as valuer</Link>
     </div>
   );
 };

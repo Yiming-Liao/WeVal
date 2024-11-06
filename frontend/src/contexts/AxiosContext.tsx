@@ -13,7 +13,7 @@ export const AxiosProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const { setIsLoading } = useLoading();
 
   const axios: AxiosInstance = Axios.create({
-    baseURL: appConfig.API_URL, // "http://localhost:3333/api/v1"
+    baseURL: appConfig.API_URL, // "http://127.0.0.1:3333/api/v1"
     withCredentials: true,
   });
 
@@ -21,11 +21,6 @@ export const AxiosProvider: FC<{ children: ReactNode }> = ({ children }) => {
   axios.interceptors.request.use(
     (config) => {
       setIsLoading(true);
-
-      // 檢查 baseURL，若為 localhost 則改為 127.0.0.1
-      if (config.baseURL && config.baseURL.includes("localhost")) {
-        config.baseURL = config.baseURL.replace("localhost", "127.0.0.1");
-      }
 
       return config;
     },
