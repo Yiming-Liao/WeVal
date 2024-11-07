@@ -1,31 +1,34 @@
-import { useUserAuth } from "@/contexts/UserAuthContext";
+// [r: Admin]
+
 import { useAxios } from "@/contexts/AxiosContext";
-import { appConfig } from "@/config/appConfig";
-import { User } from "@/types/user/model";
-import { LoginProps } from "@/types/user/auth_hooks";
+import { LoginProps } from "@/types/admin/auth_hooks";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { Admin } from "@/types/admin/model";
+import AuthLocalStorage from "@/utils/AuthLocalStorage";
 
 export const useLogin = () => {
   const axios = useAxios();
-  const { setUser } = useUserAuth();
+  const { setAdmin } = useAdminAuth();
 
-  const login = async ({ email, password }: LoginProps): Promise<boolean> => {
-    const response = await axios.post<{ user: User }>("/user/auth/login", {
+  const login = async ({
+    email,
+    password,
+  }: LoginProps): Promise<boolean | { uuid: string }> => {
+    const response = await axios.post<{ admin: Admin }>("/admin/auth/login", {
       email,
       password,
     });
 
     if (response) {
-      const { user } = response.data;
+      const { admin } = response.data;
 
-      // set user
-      setUser(user);
+      // Set user{...data} for context
+      setAdmin(admin);
 
-      // set role in localStorage
-      localStorage.setItem(appConfig.USER_ROLE_KEY, "user");
-      // set user{} in localStorage
-      localStorage.setItem(appConfig.USER_DATA_KEY, JSON.stringify(user));
+      // Set user{...data} & role in local storage
+      AuthLocalStorage.set({ userData: admin, role: "admin" });
 
-      return true;
+      return { uuid: admin.uuid! };
     }
 
     return false;

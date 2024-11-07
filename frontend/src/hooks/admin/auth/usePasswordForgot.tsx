@@ -1,13 +1,15 @@
-import { useAxios } from "@/contexts/AxiosContext"; // 使用 useAxios
-import { PasswordForgotProps } from "@/types/user/auth_hooks";
+// [r: Admin]
+
+import { useAxios } from "@/contexts/AxiosContext";
+import { PasswordForgotProps } from "@/types/admin/auth_hooks";
 
 export const usePasswordForgot = () => {
-  const axios = useAxios(); // 獲取 Axios 實例
+  const axios = useAxios();
 
   const passwordForgot = async ({
     email,
   }: PasswordForgotProps): Promise<boolean> => {
-    const response = await axios.post<void>("/user/auth/password-forgot", {
+    const response = await axios.post<void>("/admin/auth/password-forgot", {
       email,
     });
 

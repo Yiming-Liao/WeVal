@@ -1,6 +1,6 @@
 "use client";
 
-import { appConfig } from "@/config/appConfig";
+import { envConfig } from "@/config/envConfig";
 import { User } from "@/types/user/model";
 import {
   createContext,
@@ -28,9 +28,9 @@ export const UserAuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setIsLoading(true);
 
     // user | valuer | admin
-    const role = localStorage.getItem(appConfig.USER_ROLE_KEY);
+    const role = localStorage.getItem(envConfig.USER_ROLE_KEY);
 
-    const storedUser = localStorage.getItem(appConfig.USER_DATA_KEY);
+    const storedUser = localStorage.getItem(envConfig.USER_DATA_KEY);
     const parsedUser =
       storedUser && storedUser !== "undefined" ? JSON.parse(storedUser) : null;
 

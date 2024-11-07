@@ -6,13 +6,13 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
 
     // Check if it exists or not
-    const adminExists = await Admin.query().where('email', 'masouivan@gamil.com').first()
+    const adminExists = await Admin.query().where('email', 'masouivan@gmail.com').first()
 
     if (!adminExists) {
       await Admin.create({
-        email: 'masouivan@gamil.com',
+        email: 'masouivan@gmail.com',
         username: 'masouivan',
-        password: 'adminPassword',
+        password: '123456',
       })
     }
   }

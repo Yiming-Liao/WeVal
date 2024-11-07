@@ -1,8 +1,8 @@
-import { useAxios } from "@/contexts/AxiosContext"; // 使用 useAxios
+import { useAxios } from "@/contexts/AxiosContext";
 import { PasswordForgotProps } from "@/types/user/auth_hooks";
 
 export const usePasswordForgot = () => {
-  const axios = useAxios(); // 獲取 Axios 實例
+  const axios = useAxios();
 
   const passwordForgot = async ({
     email,

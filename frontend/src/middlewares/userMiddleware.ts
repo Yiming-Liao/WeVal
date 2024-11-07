@@ -1,14 +1,14 @@
 // [r: User]
 
 import { NextRequest, NextResponse } from "next/server";
-import { appConfig } from "@/config/appConfig";
+import { envConfig } from "@/config/envConfig";
 import AuthMiddleware from "@/utils/AuthMiddleware";
 
 export default async function userMiddleware(req: NextRequest) {
   const cookies = req.cookies.getAll();
 
   const hasAccessToken = cookies.some(({ name }) => {
-    return name === appConfig.USER_ACCESS_TOKEN_NAME;
+    return name === envConfig.USER_ACCESS_TOKEN_NAME;
   });
 
   // Got access token

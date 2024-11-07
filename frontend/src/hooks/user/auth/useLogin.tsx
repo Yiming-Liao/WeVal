@@ -21,7 +21,7 @@ export const useLogin = () => {
       setUser(user);
 
       // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ user, role: "user" });
+      AuthLocalStorage.set({ userData: user, role: "user" });
 
       return true;
     }

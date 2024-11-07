@@ -1,3 +1,5 @@
+// [r: User]
+
 import { BaseMail } from '@adonisjs/mail'
 import User from '#models/user'
 import env from '#start/env'

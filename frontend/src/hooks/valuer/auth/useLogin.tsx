@@ -28,7 +28,7 @@ export const useLogin = () => {
       setValuer(valuer);
 
       // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ user: valuer, role: "valuer" });
+      AuthLocalStorage.set({ userData: valuer, role: "valuer" });
 
       return {
         isValuerQualificationCreated: valuer.isValuerQualificationCreated,

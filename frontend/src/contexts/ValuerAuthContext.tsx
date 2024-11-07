@@ -2,7 +2,7 @@
 
 "use client";
 
-import { appConfig } from "@/config/appConfig";
+import { envConfig } from "@/config/envConfig";
 import { Valuer } from "@/types/valuer/model";
 import {
   createContext,
@@ -32,9 +32,9 @@ export const ValuerAuthProvider: FC<{ children: ReactNode }> = ({
     setIsLoading(true);
 
     // user | valuer | admin
-    const role = localStorage.getItem(appConfig.USER_ROLE_KEY);
+    const role = localStorage.getItem(envConfig.USER_ROLE_KEY);
 
-    const storedValuer = localStorage.getItem(appConfig.USER_DATA_KEY);
+    const storedValuer = localStorage.getItem(envConfig.USER_DATA_KEY);
     const parsedValuer =
       storedValuer && storedValuer !== "undefined"
         ? JSON.parse(storedValuer)
@@ -61,7 +61,7 @@ export const ValuerAuthProvider: FC<{ children: ReactNode }> = ({
 export const useValuerAuth = () => {
   const context = useContext(ValuerAuthContext);
   if (!context) {
-    throw new Error("useUserAuth must be used within an ValuerAuthProvider");
+    throw new Error("useValuerAuth must be used within an ValuerAuthProvider");
   }
   return context;
 };

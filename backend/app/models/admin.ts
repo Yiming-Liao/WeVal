@@ -26,6 +26,10 @@ export default class Admin extends compose(BaseModel, AuthFinder) {
   @column({ serializeAs: null })
   declare password: string | null
 
+  // 🏷 UUID
+  @column()
+  declare uuid: string | null
+
   // Timestamp
   @column.dateTime({ autoCreate: true, serializeAs: null })
   declare createdAt: DateTime

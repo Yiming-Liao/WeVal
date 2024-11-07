@@ -17,7 +17,7 @@ router
       }
     })
 
-    // 📍 API v1 routes | Prefix: '/api/v1'
+    // 🚩 API v1 routes | Prefix: '/api/v1'
     router.group(() => {
       apiV1Routes(router)
     })

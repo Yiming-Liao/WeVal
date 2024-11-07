@@ -1,6 +1,7 @@
 import { HttpRouterService } from '@adonisjs/core/types'
 import userRoutes from './roles/user/user_routes.js'
 import valuerRoutes from './roles/valuer/valuer_routes.js'
+import adminRoutes from './roles/admin/admin_routes.js'
 import fileProxyRoutes from './fileProxy/file_proxy_routes.js'
 
 // import postRoutes from './posts/routes.js'
@@ -20,6 +21,11 @@ export default function apiV1Routes(router: HttpRouterService) {
       // 👨🏻‍💼 Valuer routes | Prefix: '/api/v1/valuer'
       router.group(() => {
         valuerRoutes(router)
+      })
+
+      // 👮🏻‍♂️ Admin routes | Prefix: '/api/v1/admin'
+      router.group(() => {
+        adminRoutes(router)
       })
 
       // // Post | 'posts'

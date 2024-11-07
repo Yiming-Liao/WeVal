@@ -1,22 +1,22 @@
-import { useUserAuth } from "@/contexts/UserAuthContext";
+// [r: Admin]
+
 import { useAxios } from "@/contexts/AxiosContext";
-import { appConfig } from "@/config/appConfig";
+import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 export const useLogout = () => {
   const axios = useAxios();
-  const { setUser } = useUserAuth();
+  const { setAdmin } = useAdminAuth();
 
   const logout = async () => {
-    const response = await axios.post<void>("/user/auth/logout");
+    const response = await axios.post<void>("/admin/auth/logout");
 
     if (response) {
-      // clear user
-      setUser(null);
+      // Clear user{...data} from context
+      setAdmin(null);
 
-      // clear role in localStorage
-      localStorage.removeItem(appConfig.USER_ROLE_KEY);
-      // clear user{} in local storage
-      localStorage.removeItem(appConfig.USER_DATA_KEY);
+      // Remove user{...data} & role in local storage
+      AuthLocalStorage.remove();
 
       return true;
     }

@@ -28,7 +28,7 @@ export default function authRoutes(router: HttpRouterService) {
       router.post('/logout', [UserAuthController, 'logout']).use(middleware.userAuth())
 
       /**
-       * Password
+       * Password forgot & reset
        */
       // [POST] Password forgot
       router.post('/password-forgot', [UserAuthController, 'passwordForgot'])

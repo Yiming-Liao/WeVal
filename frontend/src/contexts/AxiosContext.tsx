@@ -4,7 +4,7 @@ import { useToast } from "@/contexts/ToastContext";
 import { createContext, useContext, ReactNode, FC } from "react";
 import Axios, { AxiosInstance, AxiosResponse, isAxiosError } from "axios";
 import { useLoading } from "./LoadingContext";
-import { appConfig } from "@/config/appConfig";
+import { envConfig } from "@/config/envConfig";
 
 const AxiosContext = createContext<AxiosInstance | undefined>(undefined);
 
@@ -13,7 +13,7 @@ export const AxiosProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const { setIsLoading } = useLoading();
 
   const axios: AxiosInstance = Axios.create({
-    baseURL: appConfig.API_URL, // "http://127.0.0.1:3333/api/v1"
+    baseURL: envConfig.API_URL, // "http://127.0.0.1:3333/api/v1"
     withCredentials: true,
   });
 

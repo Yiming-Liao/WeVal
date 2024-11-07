@@ -1,6 +1,6 @@
 import { useUserAuth } from "@/contexts/UserAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
-import { appConfig } from "@/config/appConfig";
+import { envConfig } from "@/config/envConfig";
 import { User } from "@/types/user/model";
 import { UsernameChangeProps } from "@/types/user/profile_hooks";
 
@@ -22,7 +22,7 @@ export const useUsernameChange = () => {
       setUser(user);
 
       // set user{} in localStorage
-      localStorage.setItem(appConfig.USER_DATA_KEY, JSON.stringify(user));
+      localStorage.setItem(envConfig.USER_DATA_KEY, JSON.stringify(user));
 
       return true;
     }

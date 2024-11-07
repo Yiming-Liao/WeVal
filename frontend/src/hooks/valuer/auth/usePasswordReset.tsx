@@ -1,8 +1,8 @@
-import { useAxios } from "@/contexts/AxiosContext"; // 使用 useAxios
+import { useAxios } from "@/contexts/AxiosContext";
 import { PasswordResetProps } from "@/types/user/auth_hooks";
 
 export const usePasswordReset = () => {
-  const axios = useAxios(); // 獲取 Axios 實例
+  const axios = useAxios();
 
   const passwordReset = async ({
     passwordResetToken,

@@ -1,22 +1,24 @@
+// [r: Valuer]
+
 import { BaseMail } from '@adonisjs/mail'
-import User from '#models/user'
+import Valuer from '#models/valuer'
 import env from '#start/env'
-import { AuthService } from '#services/roles/user/auth_service'
+import { AuthService } from '#services/roles/valuer/auth_service'
 
 export default class PasswordResetNotification extends BaseMail {
   subject = 'Reset password'
-  private user!: User
+  private valuer!: Valuer
 
-  constructor(user: User) {
+  constructor(valuer: Valuer) {
     super()
-    this.user = user
-    this.message.to(this.user.email)
+    this.valuer = valuer
+    this.message.to(this.valuer.email)
   }
 
   async prepare() {
-    const passwordResetToken = await AuthService.generatePasswordResetToken(this.user)
+    const passwordResetToken = await AuthService.generatePasswordResetToken(this.valuer)
 
-    const passwordResetUrl = `${env.get('FRONTEND_URL')}/user/password-reset?passwordResetToken=${passwordResetToken}`
+    const passwordResetUrl = `${env.get('FRONTEND_URL')}/valuer/password-reset?passwordResetToken=${passwordResetToken}`
 
     this.message.html(`
       <h1> Reset password </h1>

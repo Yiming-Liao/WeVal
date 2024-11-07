@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "@/app/globals.css";
 import "@/styles/typography.scss";
-import Navbar from "@/components/layout/navbar/Navbar";
 import Providers from "@/contexts/Providers";
 import { ReactNode } from "react";
 
-// 字體
+// Font
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -25,11 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
-        <Providers>
-          <div className="h-24"></div>
-          <Navbar />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

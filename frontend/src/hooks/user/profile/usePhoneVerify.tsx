@@ -1,4 +1,4 @@
-import { appConfig } from "@/config/appConfig";
+import { envConfig } from "@/config/envConfig";
 import { useUserAuth } from "@/contexts/UserAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
 import { User } from "@/types/user/model";
@@ -27,7 +27,7 @@ export const usePhoneVerify = () => {
       setUser(user);
 
       // set user{} in localStorage
-      localStorage.setItem(appConfig.USER_DATA_KEY, JSON.stringify(user));
+      localStorage.setItem(envConfig.USER_DATA_KEY, JSON.stringify(user));
 
       return true;
     }
