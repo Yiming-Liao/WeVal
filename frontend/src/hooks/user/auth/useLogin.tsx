@@ -2,7 +2,7 @@ import { useUserAuth } from "@/contexts/UserAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
 import { User } from "@/types/user/model";
 import { LoginProps } from "@/types/user/auth_hooks";
-import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 
 export const useLogin = () => {
   const axios = useAxios();

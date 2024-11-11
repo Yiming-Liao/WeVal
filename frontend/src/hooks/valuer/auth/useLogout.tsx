@@ -2,7 +2,7 @@
 
 import { useValuerAuth } from "@/contexts/ValuerAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
-import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 
 export const useLogout = () => {
   const axios = useAxios();

@@ -4,7 +4,7 @@ import { useAxios } from "@/contexts/AxiosContext";
 import { LoginProps } from "@/types/admin/auth_hooks";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 import { Admin } from "@/types/admin/model";
-import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 
 export const useLogin = () => {
   const axios = useAxios();

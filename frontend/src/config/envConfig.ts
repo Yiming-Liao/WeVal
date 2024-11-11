@@ -2,6 +2,8 @@
 export const APP_NAME = process.env.APP_NAME || "WeVal";
 
 export const envConfig = {
+  NODE_ENV: process.env.NODE_ENV || "development",
+
   // 🪪 App name
   APP_NAME: process.env.APP_NAME || "WeVal",
 
@@ -43,4 +45,12 @@ export const envConfig = {
     "WeVal-admin-refresh-token",
   ADMIN_UUID_NAME:
     `${APP_NAME}${process.env.ADMIN_UUID_NAME}` || "WeVal-admin-uuid",
+
+  // 🪣 File proxy URLs
+  NEXT_PUBLIC_USER_FILES_URL:
+    `${process.env.NEXT_PUBLIC_USER_FILES_URL}` || "/files/user/",
+  NEXT_PUBLIC_VALUER_FILES_URL:
+    `${process.env.NEXT_PUBLIC_VALUER_FILES_URL}` || "/files/valuer/",
+  NEXT_PUBLIC_ADMIN_FILES_URL:
+    `${process.env.NEXT_PUBLIC_ADMIN_FILES_URL}` || "/files/admin/",
 };

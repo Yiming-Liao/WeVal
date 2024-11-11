@@ -4,7 +4,7 @@ import { useValuerAuth } from "@/contexts/ValuerAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
 import { Valuer } from "@/types/valuer/model";
 import { RegisterProps } from "@/types/valuer/auth_hooks";
-import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 
 export const useRegister = () => {
   const axios = useAxios();
@@ -37,7 +37,7 @@ export const useRegister = () => {
       setValuer(valuer);
 
       // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ user: valuer, role: "valuer" });
+      AuthLocalStorage.set({ userData: valuer, role: "valuer" });
 
       return true;
     }

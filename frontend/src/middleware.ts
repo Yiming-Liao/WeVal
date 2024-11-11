@@ -1,8 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { envConfig } from "./config/envConfig";
-import userMiddleware from "./middlewares/userMiddleware";
-import valuerMiddleware from "./middlewares/valuerMiddleware";
-import adminMiddleware from "./middlewares/adminMiddleware";
+import userMiddleware from "./ssr/middlewares/userMiddleware";
+import valuerMiddleware from "./ssr/middlewares/valuerMiddleware";
+import adminMiddleware from "./ssr/middlewares/adminMiddleware";
+
+// 🚨 Matching Paths
+export const config = {
+  matcher: [
+    "/user/dashboard/:path*",
+    "/valuer/dashboard/:path*",
+    "/admin/:path/dashboard/:path*", // Matching: /admin/uuid.../dashboard/*
+  ],
+};
 
 // 🚨 Protected paths
 const PROTECTED_PATHS: Record<string, string> = {
@@ -36,15 +45,6 @@ export async function middleware(req: NextRequest) {
   }
   //*----------▲-----🔑 Enter protected path & valid role detected-----▲----------
 }
-
-// 🚨 Matching Paths
-export const config = {
-  matcher: [
-    "/user/dashboard/:path*",
-    "/valuer/dashboard/:path*",
-    "/admin/:path/dashboard/:path*", // Matching: /admin/uuid.../dashboard/*
-  ],
-};
 
 // ⚡ Middleware: Custom middlewares for different roles
 const ROLE_MIDDLEWARES: Record<

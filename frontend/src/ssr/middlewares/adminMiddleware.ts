@@ -2,11 +2,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { envConfig } from "@/config/envConfig";
-import AuthMiddleware from "@/utils/AuthMiddleware";
+import AuthMiddlewareService from "../services/admin/AuthMiddlewareService";
 
 export default async function adminMiddleware(req: NextRequest) {
-  const cookies = req.cookies.getAll();
-
   //*---------------------------▼----- 🚦 Check UUID Path -----▼---------------------------
   // Get accessing uuid from current path
   const currentPathUuid = req.nextUrl.pathname.split("/")[2];
@@ -20,21 +18,18 @@ export default async function adminMiddleware(req: NextRequest) {
   }
   //*---------------------------▲----- 🚦 Check UUID Path -----▲---------------------------
 
-  const hasAccessToken = cookies.some(({ name }) => {
-    return name === envConfig.ADMIN_ACCESS_TOKEN_NAME;
-  });
-
-  // Got access token
-  if (hasAccessToken) {
+  // Has access token
+  if (req.cookies.get(envConfig.ADMIN_ACCESS_TOKEN_NAME)) {
     return NextResponse.next();
   }
 
-  // Got refresh token (and refresh for a new access token)
-  const nextResponse = await AuthMiddleware.checkPermission(req, "admin");
+  // Has refresh token (then refresh a new access token)
+  const nextResponse = await AuthMiddlewareService.checkPermission(req);
 
   if (nextResponse) {
     return nextResponse;
   }
 
+  // No tokens | Refresh token invalid
   return NextResponse.redirect(new URL("/admin/login", req.url));
 }

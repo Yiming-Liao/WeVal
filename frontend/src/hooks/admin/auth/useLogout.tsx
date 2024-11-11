@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import { useAxios } from "@/contexts/AxiosContext";
-import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
 
 export const useLogout = () => {

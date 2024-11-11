@@ -4,7 +4,7 @@
 
 import { useRegisterQualify } from "@/hooks/valuer/auth/register/useRegisterQualify";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, Suspense, useState } from "react";
 
 const FormRegisterQualification = () => {
   const searchParams = useSearchParams();
@@ -129,4 +129,13 @@ const FormRegisterQualification = () => {
     </>
   );
 };
-export default FormRegisterQualification;
+
+const FormRegisterQualificationWrapper = () => {
+  return (
+    <Suspense fallback={<>Loading...</>}>
+      <FormRegisterQualification />
+    </Suspense>
+  );
+};
+
+export default FormRegisterQualificationWrapper;

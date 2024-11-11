@@ -4,7 +4,7 @@
 
 import { useRegister } from "@/hooks/valuer/auth/register/useRegister";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, Suspense, useState } from "react";
 import FormPhoneVerifySend from "./FormPhoneVerifySend";
 
 const FormRegister = () => {
@@ -97,4 +97,13 @@ const FormRegister = () => {
     </>
   );
 };
-export default FormRegister;
+
+const FormRegisterWrapper = () => {
+  return (
+    <Suspense fallback={<>Loading...</>}>
+      <FormRegister />
+    </Suspense>
+  );
+};
+
+export default FormRegisterWrapper;

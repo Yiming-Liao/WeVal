@@ -2,7 +2,7 @@ import { useUserAuth } from "@/contexts/UserAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
 import { User } from "@/types/user/model";
 import { RegisterProps } from "@/types/user/auth_hooks";
-import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 
 export const useRegister = () => {
   const axios = useAxios();
@@ -28,7 +28,7 @@ export const useRegister = () => {
       setUser(user);
 
       // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ user, role: "user" });
+      AuthLocalStorage.set({ userData: user, role: "user" });
 
       return true;
     }

@@ -4,7 +4,7 @@ import { useValuerAuth } from "@/contexts/ValuerAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
 import { Valuer } from "@/types/valuer/model";
 import { LoginProps } from "@/types/user/auth_hooks";
-import AuthLocalStorage from "@/utils/AuthLocalStorage";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 
 export const useLogin = () => {
   const axios = useAxios();

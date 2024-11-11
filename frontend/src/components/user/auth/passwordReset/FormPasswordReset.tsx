@@ -4,7 +4,7 @@
 
 import { usePasswordReset } from "@/hooks/user/auth/usePasswordReset";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, Suspense, useState } from "react";
 
 const FormPasswordReset = () => {
   const { passwordReset } = usePasswordReset();
@@ -57,4 +57,13 @@ const FormPasswordReset = () => {
     </>
   );
 };
-export default FormPasswordReset;
+
+const FormPasswordResetWrapper = () => {
+  return (
+    <Suspense fallback={<>Loading...</>}>
+      <FormPasswordReset />
+    </Suspense>
+  );
+};
+
+export default FormPasswordResetWrapper;

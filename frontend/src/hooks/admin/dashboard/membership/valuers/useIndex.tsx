@@ -8,7 +8,7 @@ export const useIndex = () => {
 
   const index = async () => {
     const response = await axios.get<{ valuers: Valuer[] }>(
-      "/admin/membership/index"
+      "/admin/membership/valuer/index"
     );
 
     if (response) {

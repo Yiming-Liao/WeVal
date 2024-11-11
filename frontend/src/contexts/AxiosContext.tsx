@@ -33,7 +33,9 @@ export const AxiosProvider: FC<{ children: ReactNode }> = ({ children }) => {
   // 回應攔截器
   axios.interceptors.response.use(
     (response: AxiosResponse) => {
-      toast({ type: "success", message: response.data.message }); // 使用 toast 顯示成功訊息
+      if (response.data.message) {
+        toast({ type: "success", message: response.data.message }); // 使用 toast 顯示成功訊息
+      }
       setIsLoading(false);
       return response;
     },

@@ -2,7 +2,7 @@
 
 import { useRegister } from "@/hooks/user/auth/register/useRegister";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEventHandler, useState } from "react";
+import { FormEventHandler, Suspense, useState } from "react";
 
 const FormRegister = () => {
   const { push } = useRouter();
@@ -69,4 +69,13 @@ const FormRegister = () => {
     </>
   );
 };
-export default FormRegister;
+
+const FormRegisterWrapper = () => {
+  return (
+    <Suspense fallback={<>Loading...</>}>
+      <FormRegister />
+    </Suspense>
+  );
+};
+
+export default FormRegisterWrapper;
