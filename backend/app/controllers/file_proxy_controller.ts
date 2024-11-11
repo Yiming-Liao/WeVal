@@ -4,6 +4,10 @@ import { s3Client } from '#config/aws'
 import { DeleteObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3'
 import { Readable } from 'node:stream'
 
+/**
+ * File Proxy Controller
+ * Referenced in: 'start/api/v1/fileProxy/file_proxy_routes.ts'
+ */
 export default class FileProxyController {
   // 🪣 GET a file
   public async get({ params, response }: HttpContext) {

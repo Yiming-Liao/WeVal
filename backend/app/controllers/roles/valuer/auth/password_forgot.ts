@@ -6,7 +6,7 @@ import User from '#models/user'
 import mail from '@adonisjs/mail/services/main'
 import PasswordResetNotification from '#mails/user/auth/password_reset_notification'
 import i18n from '#services/i18n_service'
-import { passwordForgotLimit } from '#services/roles/user/auth/password_forgot_limit'
+import { passwordForgotLimit } from '#limiters/roles/user/auth/password_forgot_limit'
 
 export async function passwordForgot(ctx: HttpContext) {
   const { request, response } = ctx

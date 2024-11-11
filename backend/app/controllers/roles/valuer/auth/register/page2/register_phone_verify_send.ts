@@ -3,7 +3,7 @@
 import { snsClient } from '#config/aws'
 import Valuer from '#models/valuer'
 import i18n from '#services/i18n_service'
-import { phoneVerifySendLimit } from '#services/roles/valuer/auth/phone_verify_send_limit'
+import { phoneVerifySendLimit } from '#limiters/roles/valuer/auth/phone_verify_send_limit'
 import { AuthService } from '#services/roles/valuer/auth_service'
 import phoneVerifySendValidator from '#validators/roles/valuer/auth/phone_verify_send_validator'
 import type { HttpContext } from '@adonisjs/core/http'

@@ -1,11 +1,11 @@
 ### Expire Time
 
-- accessTokens - expiresIn: '1h'
-- refreshTokenExpiresAt - 30 days
-- passwordResetExpiresAt - 10 minutes
-- emailVerifyCodeExpiresAt - 10 minutes
-- phoneVerifyCodeExpiresAt - 10 minutes
-- phone_verify_send_limit - 10 minutes
+- accessTokens - expiresIn: '1h' [User | Valuer | Admin]
+- refreshTokenExpiresAt - 30 days [User | Valuer | Admin]
+- passwordResetExpiresAt - 10 minutes [User | Valuer | Admin]
+- emailVerifyCodeExpiresAt - 10 minutes [User | Valuer]
+- phoneVerifyCodeExpiresAt - 10 minutes [User | Valuer]
+- phone_verify_send_limit - 10 minutes [User | Valuer]
 
 ### Limiting Time
 
@@ -38,3 +38,7 @@
 
 - [GET] /api/v1/files/\*
 - [DELETE] /api/v1/files/\*
+
+### Admin protection
+
+- UUID Route for dashboard entry

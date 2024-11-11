@@ -23,11 +23,11 @@ export async function login({ request, response }: HttpContext) {
   // 🔑 Generate refresh token
   const refreshToken = await AuthService.generateRefreshToken(foundAdmin!)
 
-  return response // Refresh Token expires in 30 days (same wuth role name)
+  return response // Refresh Token expires in 30 days (same wuth role name & uuid)
     .cookie(env.get('ADMIN_REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
     .cookie(env.get('ADMIN_ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
     .plainCookie(env.get('USER_ROLE_NAME'), 'admin', { maxAge: 30 * 24 * 60 * 60, encode: false })
-    .plainCookie(env.get('ADMIN_UUID_NAME'), uuid) // Frontend Path UUID
+    .plainCookie(env.get('ADMIN_UUID_NAME'), uuid, { maxAge: 30 * 24 * 60 * 60 }) // Frontend Path UUID
     .ok({
       message: i18n.t('messages.admin.auth.login.ok'),
       admin: foundAdmin!.serialize(),

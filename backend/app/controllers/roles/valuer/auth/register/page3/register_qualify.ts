@@ -19,15 +19,17 @@ export async function registerQualify({ request, response }: HttpContext) {
   await certificateFile.moveToDisk(certificatePath)
 
   // 🗄️ Created Valuer Qualification
-  const createdValuerQualification = await foundValuer!.related('valuerQualification').create({
+  await foundValuer!.related('valuerQualification').create({
     serviceArea: serviceArea,
     address,
     abn,
     certificatePath: certificatePath,
   })
 
+  // 🗄️ Update Valuer
+  await foundValuer!.merge({ isValuerQualificationCreated: true }).save()
+
   return response.created({
     message: i18n.t('messages.valuer.auth.register_qualify.created'),
-    createdValuerQualification,
   })
 }

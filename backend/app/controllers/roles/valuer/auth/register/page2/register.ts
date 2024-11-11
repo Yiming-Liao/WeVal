@@ -31,7 +31,7 @@ export async function register({ request, response }: HttpContext) {
     foundValuer!.phoneVerifyCodeExpiresAt < DateTime.now()
   ) {
     return response.badRequest({
-      errors: [{ message: i18n.t('messages.valuer.profile.register.error_codeExpired') }],
+      errors: [{ message: i18n.t('messages.valuer.auth.register.error_codeExpired') }],
     })
   }
   //**------------------------------------------------------------

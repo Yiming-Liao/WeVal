@@ -9,7 +9,7 @@ export async function logout({ auth, response }: HttpContext) {
 
   // 🔑 Revoke the access token
   if (accessTokenIdentifier) {
-    await User.accessTokens.delete(auth.user!, accessTokenIdentifier)
+    await User.accessTokens.delete(auth.user! as User, accessTokenIdentifier)
   }
 
   return response // 🍪 Clear cookies

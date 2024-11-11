@@ -17,7 +17,7 @@ export default class ApiRateLimitMiddleware {
     const { request, response } = ctx
 
     // Unique key based on IP
-    const key = `<limiter_key>apiLimit:${request.ip()}`
+    const key = `<all>apiLimit:${request.ip()}`
 
     // Consume 1 request for a given key
     const executed = await customLimiter.attempt(key, () => true)

@@ -1,18 +1,16 @@
 // [r: Admin]
 
 import { HttpRouterService } from '@adonisjs/core/types'
-const AdminMembershipController = () =>
-  import('#controllers/roles/admin/dashboard/membership/admin_membership_controller')
+import membershipValuerRoutes from './valuer/membership_valuer_routes.js'
 
 /**
  * [ Admin ]
- * Auth routes | Base path '/api/v1/admin/auth'
+ * Membership routes | Base path '/api/v1/admin/mambership'
  */
 export default function membershipRoutes(router: HttpRouterService) {
   router
     .group(() => {
-      // [GET] Index
-      router.get('/index', [AdminMembershipController, 'index'])
+      membershipValuerRoutes(router)
     })
     .prefix('/membership')
 }

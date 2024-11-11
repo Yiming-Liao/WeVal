@@ -21,7 +21,7 @@ export async function register({ request, response }: HttpContext) {
   // 🔑 Generate refresh token
   const refreshToken = await AuthService.generateRefreshToken(updatedUser)
 
-  return response // Refresh Token expires in 30 days
+  return response // Refresh Token expires in 30 days (same wuth role name)
     .cookie(env.get('USER_REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
     .cookie(env.get('USER_ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
     .plainCookie(env.get('USER_ROLE_NAME'), 'user', { maxAge: 30 * 24 * 60 * 60, encode: false })

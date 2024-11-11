@@ -3,7 +3,7 @@ import registerEmailVerifySendValidator from '#validators/roles/user/auth/regist
 import User from '#models/user'
 import mail from '@adonisjs/mail/services/main'
 import RegisterEmailVerifyNotification from '#mails/user/auth/register_email_verify_notification'
-import { registerEmailVerifySendLimit } from '#services/roles/user/auth/register_email_verify_send_limit'
+import { registerEmailVerifySendLimit } from '#limiters/roles/user/auth/register_email_verify_send_limit'
 import i18n from '#services/i18n_service'
 
 export async function registerEmailVerifySend(ctx: HttpContext) {
