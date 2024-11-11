@@ -12,7 +12,10 @@ const Navbar = () => {
         <div className="relative container">
           <div className="flex justify-between items-center">
             {/* logo */}
-            <Link href={"/"} className="flex justify-center items-center">
+            <Link
+              href={"/valuer/dashboard"}
+              className="flex justify-center items-center"
+            >
               <Image
                 src={"/images/layout/navbar/logo.svg"}
                 alt={""}

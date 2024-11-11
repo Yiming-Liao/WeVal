@@ -7,12 +7,16 @@ export interface Valuer {
   isValuerQualificationCreated: boolean;
   isQualified: boolean;
   valuerQualification?: ValuerQualification;
+  QualificationRejection?: QualificationRejection;
 }
 
 export interface ValuerQualification {
-  valuerId: number;
   serviceArea: string;
   address: string;
   abn: string;
   certificatePath: string;
+}
+
+export interface QualificationRejection {
+  reason: string;
 }

@@ -3,12 +3,12 @@
 import { useAxios } from "@/contexts/AxiosContext";
 import { Valuer } from "@/types/valuer/model";
 
-export const useShow = () => {
+export const useApprove = () => {
   const axios = useAxios();
 
-  const show = async ({ email }: { email: string }) => {
-    const response = await axios.get<{ valuer: Valuer }>(
-      `/admin/membership/valuers/${email}`
+  const approve = async ({ email }: { email: string }) => {
+    const response = await axios.patch<{ valuer: Valuer }>(
+      `/admin/membership/valuers/${email}/approve`
     );
 
     if (response) {
@@ -18,5 +18,5 @@ export const useShow = () => {
     return false;
   };
 
-  return { show };
+  return { approve };
 };
