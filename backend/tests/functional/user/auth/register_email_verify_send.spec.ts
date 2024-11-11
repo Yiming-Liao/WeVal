@@ -1,5 +1,5 @@
 import RegisterEmailVerifyNotification from '#mails/user/auth/register_email_verify_notification'
-import User from '#models/user'
+import User from '#models/user/user'
 import env from '#start/env'
 import testUtils from '@adonisjs/core/services/test_utils'
 import mail from '@adonisjs/mail/services/main'

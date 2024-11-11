@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import type { HttpContext } from '@adonisjs/core/http'
-import Admin from '#models/admin'
+import Admin from '#models/admin/admin'
 import { DateTime } from 'luxon'
 import env from '#start/env'
 import { AccessToken } from '@adonisjs/auth/access_tokens'

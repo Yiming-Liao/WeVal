@@ -2,7 +2,7 @@
 
 import type { HttpContext } from '@adonisjs/core/http'
 import registerQualifyValidator from '#validators/roles/valuer/auth/register/register_qualify_validator'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import i18n from '#services/i18n_service'
 import { cuid } from '@adonisjs/core/helpers'
 

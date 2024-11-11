@@ -1,7 +1,7 @@
 // [r: Valuer]
 
 import type { HttpContext } from '@adonisjs/core/http'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import { DateTime } from 'luxon'
 import env from '#start/env'
 import { AccessToken } from '@adonisjs/auth/access_tokens'

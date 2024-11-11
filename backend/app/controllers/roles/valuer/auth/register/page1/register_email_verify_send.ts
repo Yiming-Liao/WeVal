@@ -3,7 +3,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import registerEmailVerifySendValidator from '#validators/roles/valuer/auth/register/register_email_verify_send_validator'
 import { registerEmailVerifySendLimit } from '#limiters/roles/valuer/auth/register_email_verify_send_limit'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import mail from '@adonisjs/mail/services/main'
 import RegisterEmailVerifyNotification from '#mails/valuer/auth/register_email_verify_notification'
 import i18n from '#services/i18n_service'

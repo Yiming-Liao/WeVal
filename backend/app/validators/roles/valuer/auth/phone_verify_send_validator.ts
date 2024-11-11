@@ -20,7 +20,14 @@ const phoneVerifySendValidator = vine.compile(
       .string()
       .trim()
       .regex(/^\+\d{1,3}\d{4,14}$/)
-      .maxLength(16),
+      .maxLength(16)
+      .unique(async (query, field) => {
+        const valuer = await query.from('valuers').where('phone', field).first()
+        if (valuer) {
+          return !valuer.phone // Valuer with this email has completed registration -> error
+        }
+        return true
+      }),
   })
 )
 

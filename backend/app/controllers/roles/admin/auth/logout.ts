@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import { HttpContext } from '@adonisjs/core/http'
-import Admin from '#models/admin'
+import Admin from '#models/admin/admin'
 import env from '#start/env'
 import i18n from '#services/i18n_service'
 

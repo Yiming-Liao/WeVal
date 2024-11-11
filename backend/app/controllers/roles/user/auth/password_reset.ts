@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import passwordResetValidator from '#validators/roles/user/auth/password_reset_validator'
-import User from '#models/user'
+import User from '#models/user/user'
 import i18n from '#services/i18n_service'
 import { DateTime } from 'luxon'
 

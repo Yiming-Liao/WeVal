@@ -1,5 +1,5 @@
 import { snsClient } from '#config/aws'
-import User from '#models/user'
+import User from '#models/user/user'
 import i18n from '#services/i18n_service'
 import { phoneVerifySendLimit } from '#limiters/roles/user/auth/phone_verify_send_limit'
 import { AuthService } from '#services/roles/user/auth_service'

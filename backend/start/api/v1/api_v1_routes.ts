@@ -4,8 +4,6 @@ import valuerRoutes from './roles/valuer/valuer_routes.js'
 import adminRoutes from './roles/admin/admin_routes.js'
 import fileProxyRoutes from './fileProxy/file_proxy_routes.js'
 
-// import postRoutes from './posts/routes.js'
-
 /**
  * [ API routes entry point ]
  * API v1 routes | Base path '/api/v1'
@@ -27,11 +25,6 @@ export default function apiV1Routes(router: HttpRouterService) {
       router.group(() => {
         adminRoutes(router)
       })
-
-      // // Post | 'posts'
-      // router.group(() => {
-      //   postRoutes(router)
-      // })
 
       // 🪣 File proxy routes | Prefix: '/api/v1/files'
       router.group(() => {

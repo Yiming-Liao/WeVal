@@ -1,6 +1,6 @@
 // [r: User]
 
-import User from '#models/user'
+import User from '#models/user/user'
 import crypto from 'node:crypto'
 import { DateTime } from 'luxon'
 

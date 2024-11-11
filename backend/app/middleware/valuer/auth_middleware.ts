@@ -1,6 +1,6 @@
 // [r: Valuer]
 
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import { AuthMiddlewareService } from '#services/roles/valuer/auth_middleware_service'
 import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'

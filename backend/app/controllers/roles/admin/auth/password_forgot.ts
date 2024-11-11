@@ -2,7 +2,7 @@
 
 import type { HttpContext } from '@adonisjs/core/http'
 import passwordForgotValidator from '#validators/roles/admin/auth/password_forgot_validator'
-import Admin from '#models/admin'
+import Admin from '#models/admin/admin'
 import mail from '@adonisjs/mail/services/main'
 import PasswordResetNotification from '#mails/admin/auth/password_reset_notification'
 import i18n from '#services/i18n_service'

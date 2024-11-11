@@ -1,4 +1,4 @@
-import User from '#models/user'
+import User from '#models/user/user'
 import env from '#start/env'
 import { test } from '@japa/runner'
 

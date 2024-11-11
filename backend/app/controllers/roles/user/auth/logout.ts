@@ -1,5 +1,5 @@
 import { HttpContext } from '@adonisjs/core/http'
-import User from '#models/user'
+import User from '#models/user/user'
 import env from '#start/env'
 import i18n from '#services/i18n_service'
 

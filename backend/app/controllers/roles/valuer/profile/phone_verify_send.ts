@@ -5,7 +5,7 @@ import { AuthService } from '#services/roles/user/auth_service'
 import phoneVerifySendValidator from '#validators/roles/user/profile/phone_verify_send_validator'
 import type { HttpContext } from '@adonisjs/core/http'
 import { PublishCommand } from '@aws-sdk/client-sns'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 
 export async function phoneVerifySend(ctx: HttpContext) {
   const { request, response, auth } = ctx

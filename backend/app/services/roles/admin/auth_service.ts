@@ -1,6 +1,6 @@
 // [r: Admin]
 
-import Admin from '#models/admin'
+import Admin from '#models/admin/admin'
 import crypto, { randomUUID } from 'node:crypto'
 import { DateTime } from 'luxon'
 

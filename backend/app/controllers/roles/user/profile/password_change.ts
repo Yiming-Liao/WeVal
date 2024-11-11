@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import passwordChangeValidator from '#validators/roles/user/profile/password_change_validator'
-import User from '#models/user'
+import User from '#models/user/user'
 import i18n from '#services/i18n_service'
 
 export async function passwordChange({ request, response, auth }: HttpContext) {

@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import phoneVerifyValidator from '#validators/roles/user/profile/phone_verify_validator'
 import { DateTime } from 'luxon'
 import i18n from '#services/i18n_service'
-import User from '#models/user'
+import User from '#models/user/user'
 
 export async function phoneVerify({ request, response, auth }: HttpContext) {
   // 📝 Validator (Built-in error handling)

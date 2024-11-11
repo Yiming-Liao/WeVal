@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import loginValidator from '#validators/roles/user/auth/login_validator'
-import User from '#models/user'
+import User from '#models/user/user'
 import env from '#start/env'
 import { AuthService } from '#services/roles/user/auth_service'
 import i18n from '#services/i18n_service'

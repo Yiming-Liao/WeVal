@@ -1,6 +1,6 @@
 // [r: Admin]
 
-import Admin from '#models/admin'
+import Admin from '#models/admin/admin'
 import { AuthMiddlewareService } from '#services/roles/admin/auth_middleware_service'
 import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'

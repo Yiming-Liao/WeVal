@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import registerEmailVerifySendValidator from '#validators/roles/user/auth/register_email_verify_send_validator'
-import User from '#models/user'
+import User from '#models/user/user'
 import mail from '@adonisjs/mail/services/main'
 import RegisterEmailVerifyNotification from '#mails/user/auth/register_email_verify_notification'
 import { registerEmailVerifySendLimit } from '#limiters/roles/user/auth/register_email_verify_send_limit'

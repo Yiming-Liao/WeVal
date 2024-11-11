@@ -10,7 +10,7 @@ const authConfig = defineConfig({
     user: tokensGuard({
       provider: tokensUserProvider({
         tokens: 'accessTokens',
-        model: () => import('#models/user'), // User
+        model: () => import('#models/user/user'), // User
       }),
     }),
 
@@ -18,7 +18,7 @@ const authConfig = defineConfig({
     valuer: tokensGuard({
       provider: tokensUserProvider({
         tokens: 'accessTokens',
-        model: () => import('#models/valuer'),
+        model: () => import('#models/valuer/valuer'),
       }),
     }),
 
@@ -26,7 +26,7 @@ const authConfig = defineConfig({
     admin: tokensGuard({
       provider: tokensUserProvider({
         tokens: 'accessTokens',
-        model: () => import('#models/admin'),
+        model: () => import('#models/admin/admin'),
       }),
     }),
   },

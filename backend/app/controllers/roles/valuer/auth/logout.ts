@@ -1,7 +1,7 @@
 // [r: Valuer]
 
 import { HttpContext } from '@adonisjs/core/http'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import env from '#start/env'
 import i18n from '#services/i18n_service'
 

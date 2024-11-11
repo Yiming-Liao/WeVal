@@ -1,5 +1,5 @@
 import UserPasswordResetNotification from '#mails/user/auth/password_reset_notification'
-import User from '#models/user'
+import User from '#models/user/user'
 import env from '#start/env'
 import mail from '@adonisjs/mail/services/main'
 import { test } from '@japa/runner'

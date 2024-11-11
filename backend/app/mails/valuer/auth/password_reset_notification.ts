@@ -1,7 +1,7 @@
 // [r: Valuer]
 
 import { BaseMail } from '@adonisjs/mail'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import env from '#start/env'
 import { AuthService } from '#services/roles/valuer/auth_service'
 

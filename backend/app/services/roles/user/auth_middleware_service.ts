@@ -1,7 +1,7 @@
 // [r: User]
 
 import type { HttpContext } from '@adonisjs/core/http'
-import User from '#models/user'
+import User from '#models/user/user'
 import { DateTime } from 'luxon'
 import env from '#start/env'
 import { AccessToken } from '@adonisjs/auth/access_tokens'

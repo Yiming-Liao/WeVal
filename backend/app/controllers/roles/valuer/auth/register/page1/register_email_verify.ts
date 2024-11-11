@@ -2,7 +2,7 @@
 
 import type { HttpContext } from '@adonisjs/core/http'
 import registerEmailVerifyValidator from '#validators/roles/valuer/auth/register/register_email_verify_validator'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import { DateTime } from 'luxon'
 import i18n from '#services/i18n_service'
 

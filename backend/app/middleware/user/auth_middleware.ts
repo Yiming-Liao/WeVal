@@ -1,6 +1,6 @@
 // [r: User]
 
-import User from '#models/user'
+import User from '#models/user/user'
 import { AuthMiddlewareService } from '#services/roles/user/auth_middleware_service'
 import env from '#start/env'
 import type { HttpContext } from '@adonisjs/core/http'

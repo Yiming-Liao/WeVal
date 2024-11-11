@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import { HttpRouterService } from '@adonisjs/core/types'
-import membershipValuerRoutes from './valuer/membership_valuer_routes.js'
+import membershipValuersRoutes from './valuers/membership_valuers_routes.js'
 
 /**
  * [ Admin ]
@@ -10,7 +10,7 @@ import membershipValuerRoutes from './valuer/membership_valuer_routes.js'
 export default function membershipRoutes(router: HttpRouterService) {
   router
     .group(() => {
-      membershipValuerRoutes(router)
+      membershipValuersRoutes(router)
     })
     .prefix('/membership')
 }

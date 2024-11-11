@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import { BaseMail } from '@adonisjs/mail'
-import Admin from '#models/admin'
+import Admin from '#models/admin/admin'
 import env from '#start/env'
 import { AuthService } from '#services/roles/admin/auth_service'
 

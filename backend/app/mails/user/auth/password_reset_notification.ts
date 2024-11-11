@@ -1,7 +1,7 @@
 // [r: User]
 
 import { BaseMail } from '@adonisjs/mail'
-import User from '#models/user'
+import User from '#models/user/user'
 import env from '#start/env'
 import { AuthService } from '#services/roles/user/auth_service'
 

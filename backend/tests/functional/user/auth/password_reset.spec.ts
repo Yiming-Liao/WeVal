@@ -1,4 +1,4 @@
-import User from '#models/user'
+import User from '#models/user/user'
 import { test } from '@japa/runner'
 
 test.group('User auth password reset', (group) => {

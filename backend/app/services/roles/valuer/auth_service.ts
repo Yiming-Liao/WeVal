@@ -1,6 +1,6 @@
 // [r: Valuer]
 
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import crypto from 'node:crypto'
 import { DateTime } from 'luxon'
 

@@ -1,7 +1,7 @@
 // [r: Valuer]
 
 import { snsClient } from '#config/aws'
-import Valuer from '#models/valuer'
+import Valuer from '#models/valuer/valuer'
 import i18n from '#services/i18n_service'
 import { phoneVerifySendLimit } from '#limiters/roles/valuer/auth/phone_verify_send_limit'
 import { AuthService } from '#services/roles/valuer/auth_service'
