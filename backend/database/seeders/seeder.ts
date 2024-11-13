@@ -30,6 +30,7 @@ export default class Seeder extends BaseSeeder {
     await Valuer.create({
       email: 'valuer1@gmail.com',
       username: 'valuer1',
+      phone: '+61000000000',
       password: '123456',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
@@ -40,6 +41,7 @@ export default class Seeder extends BaseSeeder {
       email: 'valuer2@gmail.com',
       username: 'valuer2',
       password: '123456',
+      phone: '+61000000000',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
       isQualified: false,
@@ -57,6 +59,7 @@ export default class Seeder extends BaseSeeder {
       email: 'valuer3@gmail.com',
       username: 'valuer3',
       password: '123456',
+      phone: '+61000000000',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
       isQualified: true,

@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+import type { PluginAPI, Config } from "tailwindcss/types/config";
 
 const config: Config = {
   content: [
@@ -11,10 +11,29 @@ const config: Config = {
       colors: {
         primary: "var(--primary, #213DEB)",
         secondary: "var(--secondary, #1A2596)",
-        base: "var(--base, #09034B)",
+        deep: "var(--deep, #09034B)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }: AddComponents) {
+      addComponents({
+        ".typography-label-sm": {
+          fontSize: "12px",
+          // fontWeight: "300",
+          lineHeight: "18px",
+        },
+        ".typography-title-md": {
+          fontSize: "28px",
+          // fontWeight: "300",
+          lineHeight: "42px",
+        },
+      });
+    },
+  ],
 };
 export default config;
+
+interface AddComponents {
+  addComponents: PluginAPI["addComponents"];
+}

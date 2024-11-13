@@ -5,10 +5,12 @@ import { useAxios } from "@/contexts/AxiosContext";
 import { Valuer } from "@/types/valuer/model";
 import { RegisterProps } from "@/types/valuer/auth_hooks";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
+import { useState } from "react";
 
 export const useRegister = () => {
   const axios = useAxios();
   const { setValuer } = useValuerAuth();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const register = async ({
     email,
@@ -18,6 +20,8 @@ export const useRegister = () => {
     password,
     passwordConfirm,
   }: RegisterProps): Promise<boolean> => {
+    setIsLoading(true);
+
     const response = await axios.post<{ valuer: Valuer }>(
       "/valuer/auth/register",
       {
@@ -29,6 +33,8 @@ export const useRegister = () => {
         passwordConfirm,
       }
     );
+
+    setIsLoading(false);
 
     if (response) {
       const { valuer } = response.data;
@@ -45,5 +51,5 @@ export const useRegister = () => {
     return false;
   };
 
-  return { register };
+  return { register, isLoading };
 };

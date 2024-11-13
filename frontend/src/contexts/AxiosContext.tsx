@@ -1,15 +1,16 @@
 "use client";
 
-import { useToast } from "@/contexts/ToastContext";
+// import { useToast } from "@/contexts/ToastContext";
 import { createContext, useContext, ReactNode, FC } from "react";
 import Axios, { AxiosInstance, AxiosResponse, isAxiosError } from "axios";
 import { useLoading } from "./LoadingContext";
 import { envConfig } from "@/config/envConfig";
+import toast from "react-hot-toast";
 
 const AxiosContext = createContext<AxiosInstance | undefined>(undefined);
 
 export const AxiosProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const { toast } = useToast();
+  // const { toast } = useToast();
   const { setIsLoading } = useLoading();
 
   const axios: AxiosInstance = Axios.create({
@@ -34,7 +35,11 @@ export const AxiosProvider: FC<{ children: ReactNode }> = ({ children }) => {
   axios.interceptors.response.use(
     (response: AxiosResponse) => {
       if (response.data.message) {
-        toast({ type: "success", message: response.data.message }); // 使用 toast 顯示成功訊息
+        toast.success(response.data.message, {
+          position: "bottom-left",
+          duration: 4000,
+        });
+        // toast({ type: "success", message: response.data.message }); // 使用 toast 顯示成功訊息
       }
       setIsLoading(false);
       return response;
@@ -47,11 +52,19 @@ export const AxiosProvider: FC<{ children: ReactNode }> = ({ children }) => {
         if (error.response && error.response.data.errors) {
           error.response.data.errors.forEach(
             (adonisError: { message: string }) => {
-              toast({ type: "error", message: adonisError.message }); // 使用 toast 顯示錯誤訊息
+              toast.error(adonisError.message, {
+                position: "bottom-left",
+                duration: 4000,
+              });
+              // toast({ type: "error", message: adonisError.message }); // 使用 toast 顯示錯誤訊息
             }
           );
         } else {
-          toast({ type: "error", message: "伺服器回應錯誤或無法處理請求" }); // 使用 toast 顯示錯誤訊息
+          // toast({ type: "error", message: "伺服器回應錯誤或無法處理請求" }); // 使用 toast 顯示錯誤訊息
+          toast.error("伺服器回應錯誤或無法處理請求", {
+            position: "bottom-left",
+            duration: 4000,
+          });
         }
       } else {
         console.warn("發生未知錯誤: ", error);

@@ -1,3 +1,5 @@
+// [r: User]
+
 import vine from '@vinejs/vine'
 
 const passwordForgotValidator = vine.compile(

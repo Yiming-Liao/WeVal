@@ -1,12 +1,19 @@
-import FormPasswordReset from "@/components/user/auth/passwordReset/FormPasswordReset";
+// [r: Valuer]
 
-const PasswordResetPage = () => {
+import { FC } from "react";
+import { Header } from "@/components/ui";
+import FormPasswordReset from "@/components/ValuerLayout/auth/passwordReset/FormPasswordReset";
+
+const PasswordResetPage: FC = () => {
   return (
-    <div className="flex flex-col items-center gap-16 p-16">
-      <h1 className="text-4xl">PasswordResetPage</h1>
+    <>
+      <Header title={"Reset password"} />
 
-      <FormPasswordReset />
-    </div>
+      {/* Forgot password form */}
+      <section className="flex flex-col items-center">
+        <FormPasswordReset />
+      </section>
+    </>
   );
 };
 export default PasswordResetPage;

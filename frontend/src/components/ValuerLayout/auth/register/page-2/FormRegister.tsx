@@ -1,30 +1,23 @@
 // [r: Valuer]
 
-"use client";
-
+import { Agreement, Button, Input, InputPassword } from "@/components/ui";
 import { useRegister } from "@/hooks/valuer/auth/register/useRegister";
-import { useRouter, useSearchParams } from "next/navigation";
-import { FormEventHandler, Suspense, useState } from "react";
-import FormPhoneVerifySend from "./FormPhoneVerifySend";
+import { useRouter } from "next/navigation";
+import { FC, FormEventHandler, useState } from "react";
 
-const FormRegister = () => {
-  const searchParams = useSearchParams();
-  const email = searchParams.get("email"); // Get email from URL searchParams
-
-  const { register } = useRegister();
-
+const FormRegister: FC<Props> = ({ username, email, phone, isSent }) => {
   const { push } = useRouter();
+  const { register, isLoading } = useRegister();
 
-  const [phone, setPhone] = useState<string>("");
   const [phoneVerifyCode, setPhoneVerifyCode] = useState<string>("");
 
-  const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
 
-  // Register
+  const [isAgree, setIsAgree] = useState<boolean>(false);
+
+  // ⚡ Send verification SMS
   const handleRegister: FormEventHandler<HTMLFormElement> = async (e) => {
-    console.log(123);
     e.preventDefault();
     const isRegistered = await register({
       email,
@@ -42,68 +35,69 @@ const FormRegister = () => {
   };
 
   return (
-    <>
-      <div className="w-96 flex flex-col gap-4 ">
-        {/* username */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">username</label>
-          <input
-            type="text"
-            className="border-2"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
+    <form
+      onSubmit={handleRegister}
+      className="h-full flex flex-col justify-between gap-2"
+    >
+      <div className="flex flex-col gap-4">
+        {/* Input: phoneVerifyCode */}
+        <Input
+          placeholder="Verification code"
+          minLength={6}
+          maxLength={6}
+          value={phoneVerifyCode}
+          onChange={(e) => setPhoneVerifyCode(e.target.value)}
+          disabled={!isSent}
+          className={`w-full ${
+            !isSent ? "opacity-25" : "opacity-100"
+          } duration-200`}
+        />
 
-        {/* Send phone verification code */}
-        <FormPhoneVerifySend email={email} phone={phone} setPhone={setPhone} />
+        {/* Input: password */}
+        <InputPassword
+          type="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <p className="typography-label-sm text-deep">
+          Please set a password that is at least 6 characters long, includes at
+          least one uppercase letter, and must not be the same as your username
+          or email.
+        </p>
 
-        <form onSubmit={handleRegister}>
-          {/* Phone */}
-          <div className="flex flex-col gap-1">
-            <label htmlFor="">Phone verification code</label>
-            <input
-              type="text"
-              placeholder="phoneVerifyCode"
-              className="border"
-              value={phoneVerifyCode}
-              onChange={(e) => setPhoneVerifyCode(e.target.value)}
-            />
-          </div>
-          {/* password */}
-          <div className="flex flex-col gap-1">
-            <label htmlFor="">password</label>
-            <input
-              type="password"
-              className="border-2"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          {/* confirm password */}
-          <div className="flex flex-col gap-1">
-            <label htmlFor="">confirm password</label>
-            <input
-              type="password"
-              className="border-2"
-              value={passwordConfirm}
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-            />
-          </div>
-          <button>Submit</button>
-        </form>
+        {/* Input: confirm password */}
+        <InputPassword
+          type="password"
+          placeholder="Confirm Password"
+          required
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+        />
       </div>
-    </>
+
+      {/* Agreement & Button */}
+      <div className="flex flex-col gap-4">
+        {/* Agreement */}
+        <Agreement isAgree={isAgree} setIsAgree={setIsAgree}>
+          By checking this box, you agree to the terms of service and privacy
+          policy, and may continue using the service.
+        </Agreement>
+
+        {/* Button: submit */}
+        <Button type="submit" isDisabled={!isAgree} isLoading={isLoading}>
+          Sign up
+        </Button>
+      </div>
+    </form>
   );
 };
+export default FormRegister;
 
-const FormRegisterWrapper = () => {
-  return (
-    <Suspense fallback={<>Loading...</>}>
-      <FormRegister />
-    </Suspense>
-  );
-};
-
-export default FormRegisterWrapper;
+interface Props {
+  username: string;
+  email: string | null;
+  phone: string;
+  isSent: boolean;
+}

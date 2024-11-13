@@ -1,41 +1,67 @@
+// [r: Valuer]
+
+import { ButtonOutline, Input } from "@/components/ui";
 import { useRegisterEmailVerifySend } from "@/hooks/valuer/auth/register/useRegisterEmailVerifySend";
-import { Dispatch, FC, FormEventHandler, SetStateAction } from "react";
+import { useCountdown } from "@/hooks/utils/useCountDown";
+import { Dispatch, FormEventHandler, SetStateAction } from "react";
 
-const FormEmailVerifySend: FC<Props> = ({ email, setEmail }) => {
-  const { registerEmailVerifySend } = useRegisterEmailVerifySend();
+const FormEmailVerifySend = ({
+  email,
+  setEmail,
+  setIsSent,
+}: FormEmailVerifySendProps) => {
+  const { registerEmailVerifySend, isLoading } = useRegisterEmailVerifySend();
+  const { timeLeft, isCounting, startCountdown } = useCountdown(30); // 30 seconds count down
 
-  // 寄送驗證信
-  const handleSendVerifyCode: FormEventHandler<HTMLFormElement> = async (e) => {
+  // ⚡ Send verify email
+  const handleSendVerifyEmail: FormEventHandler<HTMLFormElement> = async (
+    e
+  ) => {
     e.preventDefault();
     const isSent = await registerEmailVerifySend({ email });
     if (isSent) {
-      console.log("email sent");
+      setIsSent(true);
+      startCountdown();
     }
   };
 
-  return (
-    <>
-      {/* form */}
-      <form onSubmit={handleSendVerifyCode} className="w-96 flex gap-4 ">
-        {/* email */}
-        <div className="w-full flex flex-col gap-1">
-          <label htmlFor="">email</label>
-          <input
-            type="email"
-            className="border-2"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+  // Button text (Send | Counting)
+  const buttonText = !isCounting ? (
+    "Send verification email"
+  ) : (
+    <span>
+      Please wait
+      <span className="inline-block w-5 ml-1 text-end">{timeLeft}</span>s to
+      resend
+    </span>
+  );
 
-        <button className="border">Send</button>
-      </form>
-    </>
+  return (
+    <form onSubmit={handleSendVerifyEmail} className="flex flex-col gap-4">
+      {/* Input: email */}
+      <Input
+        type="email"
+        placeholder="Email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      {/* Button: submit */}
+      <ButtonOutline
+        type="submit"
+        isDisabled={isCounting}
+        isLoading={isLoading}
+      >
+        {buttonText}
+      </ButtonOutline>
+    </form>
   );
 };
 export default FormEmailVerifySend;
 
-interface Props {
+interface FormEmailVerifySendProps {
   email: string;
   setEmail: Dispatch<SetStateAction<string>>;
+  setIsSent: Dispatch<SetStateAction<boolean>>;
 }

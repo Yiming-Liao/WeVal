@@ -49,7 +49,5 @@ export interface RegisterQualifyProps {
   serviceArea: string;
   address: string;
   abn: string;
-  certificateFile: File;
-  agreement1: boolean;
-  agreement2: boolean;
+  certificateFile: File | null;
 }

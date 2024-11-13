@@ -1,60 +1,74 @@
 // [r: Valuer]
 
+import { Arrow } from "@/components/svg";
+import { Agreement, Button, Input } from "@/components/ui";
 import { useRegisterEmailVerify } from "@/hooks/valuer/auth/register/useRegisterEmailVerify";
 import { useRouter } from "next/navigation";
-import { FC, FormEventHandler, useState } from "react";
+import { FormEventHandler, useState } from "react";
+import toast from "react-hot-toast";
 
-const FormEmailVerify: FC<Props> = ({ email }) => {
+const FormEmailVerify = ({ email, isSent }: FormEmailVerifyProps) => {
   const { push } = useRouter();
-  const { registerEmailVerify } = useRegisterEmailVerify();
+  const { registerEmailVerify, isLoading } = useRegisterEmailVerify();
 
   const [emailVerifyCode, setemailVerifyCode] = useState("");
   const [isAgree, setIsAgree] = useState<boolean>(false);
 
+  // ⚡ Verify email & Go to next step
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     if (!isAgree) {
-      return alert("Please agree");
+      return toast.error(
+        "Please agree to the terms and conditions to proceed.",
+        {
+          position: "bottom-left",
+          duration: 4000,
+        }
+      );
     }
     const isCorrect = await registerEmailVerify({ email, emailVerifyCode });
-
-    // Push to [Register page 2]
     if (isCorrect)
       push(`/valuer/register/page-2?email=${encodeURIComponent(email)}`);
   };
 
   return (
-    <>
-      {/* form 註冊信箱 */}
-      <form onSubmit={handleSubmit} className="w-96 flex flex-col gap-4 ">
-        {/* emailVerifyCode */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">emailVerifyCode</label>
-          <input
-            type="emailVerifyCode"
-            className="border-2"
-            value={emailVerifyCode}
-            onChange={(e) => setemailVerifyCode(e.target.value)}
-          />
-        </div>
+    <form
+      onSubmit={handleSubmit}
+      className="h-full flex flex-col justify-between gap-2"
+    >
+      {/* Input: emailVerifyCode */}
+      <Input
+        placeholder="Verification code"
+        minLength={6}
+        maxLength={6}
+        value={emailVerifyCode}
+        onChange={(e) => setemailVerifyCode(e.target.value)}
+        className={`w-full ${
+          !isSent ? "opacity-25" : "opacity-100"
+        } duration-200`}
+      />
 
-        <div>
-          <label>Agree?</label>
-          <input
-            type="checkbox"
-            checked={isAgree}
-            onChange={() => setIsAgree((prev) => !prev)}
-            className="size-8"
-          />
-        </div>
+      {/* Agreement & Button */}
+      <div className="flex flex-col gap-4">
+        {/* Agreement */}
+        <Agreement isAgree={isAgree} setIsAgree={setIsAgree}>
+          By checking this box, you agree to the terms of service and privacy
+          policy, and may continue using the service.
+        </Agreement>
 
-        <button className="border">Next</button>
-      </form>
-    </>
+        {/* Button: submit */}
+        <Button type="submit" isDisabled={!isAgree} isLoading={isLoading}>
+          <span className="flex gap-2">
+            Next <Arrow />
+          </span>
+        </Button>
+      </div>
+    </form>
   );
 };
 export default FormEmailVerify;
 
-interface Props {
+interface FormEmailVerifyProps {
   email: string;
+  isSent: boolean;
 }

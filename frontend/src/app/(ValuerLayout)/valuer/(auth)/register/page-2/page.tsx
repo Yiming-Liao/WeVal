@@ -1,16 +1,24 @@
 // [r: Valuer]
 
-import FormRegister from "@/components/ValuerLayout/auth/register/page-2/FormRegister";
+import { FC } from "react";
+import { Header } from "@/components/ui";
+import { Steps2of3 } from "@/components/svg";
+import RegisterContainerWrapper from "@/components/ValuerLayout/auth/register/page-2/RegisterContainer";
 
 // RegisterPage
-const RegisterPage2 = () => {
+const RegisterPage2: FC = () => {
   return (
-    <div className="flex flex-col items-center gap-16 p-16">
-      <h1 className="text-4xl">RegisterPage2</h1>
+    <>
+      <Header title={"Sign up"} />
 
-      {/* form */}
-      <FormRegister />
-    </div>
+      <section className="size-full flex flex-col items-center gap-6">
+        {/* <SVG> Steps */}
+        <Steps2of3 />
+
+        {/* Container */}
+        <RegisterContainerWrapper />
+      </section>
+    </>
   );
 };
 export default RegisterPage2;

@@ -24,12 +24,26 @@ const registerQualifyValidator = vine.compile(
     abn: vine.string().trim().minLength(11).maxLength(11),
 
     certificateFile: vine.file({
-      size: 5 * 1024 * 1024,
-      extnames: ['pdf', 'png', 'jpeg', 'jpg'],
+      size: 5 * 1024 * 1024, // Maximum: 5 MB
+      extnames: [
+        'pdf',
+        'png',
+        'jpeg',
+        'jpg',
+        'webp',
+        'doc',
+        'docx',
+        'ppt',
+        'pptx',
+        'xls',
+        'xlsx',
+        'txt',
+        'zip',
+        'rar',
+        'odt',
+        'ods',
+      ],
     }),
-
-    agreement1: vine.boolean(),
-    agreement2: vine.boolean(),
   })
 )
 

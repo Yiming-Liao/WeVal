@@ -31,5 +31,6 @@ export async function registerQualify({ request, response }: HttpContext) {
 
   return response.created({
     message: i18n.t('messages.valuer.auth.register_qualify.created'),
+    valuer: foundValuer,
   })
 }

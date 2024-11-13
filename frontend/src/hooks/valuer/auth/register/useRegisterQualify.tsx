@@ -1,10 +1,15 @@
 // [r: Valuer]
 
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useAxios } from "@/contexts/AxiosContext";
+import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { RegisterQualifyProps } from "@/types/valuer/auth_hooks";
+import { Valuer } from "@/types/valuer/model";
+import { useState } from "react";
 
 export const useRegisterQualify = () => {
   const axios = useAxios();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const registerQualify = async ({
     email,
@@ -12,29 +17,35 @@ export const useRegisterQualify = () => {
     address,
     abn,
     certificateFile,
-    agreement1,
-    agreement2,
   }: RegisterQualifyProps): Promise<boolean> => {
+    setIsLoading(true);
+
     const formData = new FormData();
     formData.append("email", email);
     formData.append("serviceArea", serviceArea);
     formData.append("address", address);
     formData.append("abn", abn);
-    formData.append("certificateFile", certificateFile);
-    formData.append("agreement1", String(agreement1));
-    formData.append("agreement2", String(agreement2));
+    certificateFile && formData.append("certificateFile", certificateFile);
 
-    const response = await axios.post<void>(
+    const response = await axios.post<{ valuer: Valuer }>(
       "/valuer/auth/register-qualify",
       formData
     );
 
+    setIsLoading(false);
+
     if (response) {
+      const { valuer } = response.data;
+
+      // Set user{...data} & role in local storage
+      AuthLocalStorage.set({ userData: valuer, role: "valuer" });
+
+      console.log(valuer);
       return true;
     }
 
     return false;
   };
 
-  return { registerQualify };
+  return { registerQualify, isLoading };
 };

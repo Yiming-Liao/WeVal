@@ -1,25 +1,24 @@
 // [r: Valuer]
 
-"use client";
-
-import { FC, useState } from "react";
-import FormEmailVerify from "@/components/ValuerLayout/auth/register/page-1/FormEmailVerify";
-import FormEmailVerifySend from "@/components/ValuerLayout/auth/register/page-1/FormEmailVerifySend";
+import { FC } from "react";
+import { Header } from "@/components/ui";
+import { Steps1of3 } from "@/components/svg";
+import EmailVerificationContainer from "@/components/ValuerLayout/auth/register/page-1/EmailVerificationContainer";
 
 // RegisterEmailVerifyPage
 const RegisterPage1: FC = () => {
-  const [email, setEmail] = useState<string>("");
-
   return (
-    <div className="flex flex-col items-center gap-16 p-16">
-      <h1 className="text-4xl">RegisterPage1</h1>
+    <>
+      <Header title={"Sign up"} />
 
-      {/* form 寄送驗證碼 */}
-      <FormEmailVerifySend email={email} setEmail={setEmail} />
+      <section className="size-full flex flex-col items-center gap-6">
+        {/* <SVG> Steps */}
+        <Steps1of3 />
 
-      {/* form 註冊信箱 */}
-      <FormEmailVerify email={email} />
-    </div>
+        {/* Container */}
+        <EmailVerificationContainer />
+      </section>
+    </>
   );
 };
 export default RegisterPage1;

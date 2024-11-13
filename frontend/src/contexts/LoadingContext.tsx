@@ -3,16 +3,15 @@
 import Loading from "@/components/Loading";
 import { createContext, useContext, useState, ReactNode, FC } from "react";
 
-// 定義 LoadingContext 的型別
 interface LoadingContextType {
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
 }
 
-// 創建 LoadingContext
+// LoadingContext
 const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
 
-// LoadingProvider 組件
+// LoadingProvider
 export const LoadingProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   return (
@@ -23,7 +22,7 @@ export const LoadingProvider: FC<{ children: ReactNode }> = ({ children }) => {
   );
 };
 
-// 自定義 Hook 用於使用 LoadingContext
+// Custom hook
 export const useLoading = () => {
   const context = useContext(LoadingContext);
   if (!context) {

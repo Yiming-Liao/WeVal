@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import { useAxios } from "@/contexts/AxiosContext";
-import { ValuerRejectionReason } from "@/types/valuer/model";
+import { QualificationRejection } from "@/types/valuer/model";
 
 export const useReject = () => {
   const axios = useAxios();
@@ -14,7 +14,7 @@ export const useReject = () => {
     reason: string;
   }) => {
     const response = await axios.post<{
-      rejectionReason: ValuerRejectionReason;
+      rejectionReason: QualificationRejection;
     }>(`/admin/membership/valuers/${email}/valuer-rejection-reasons`, {
       reason,
     });

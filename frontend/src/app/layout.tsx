@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import "@/styles/typography.scss";
 import Providers from "@/contexts/Providers";
 import { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 
 // Font
 const poppins = Poppins({
@@ -25,6 +26,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <Providers>{children}</Providers>
+        <Toaster /> {/* React hot toast */}
       </body>
     </html>
   );

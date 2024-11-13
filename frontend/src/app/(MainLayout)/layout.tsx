@@ -1,5 +1,3 @@
-// [r: Admin]
-
 import { ReactNode } from "react";
 import Navbar from "@/components/MainLayout/Navbar/Navbar";
 

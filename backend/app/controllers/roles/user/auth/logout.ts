@@ -1,3 +1,5 @@
+// [r: User]
+
 import { HttpContext } from '@adonisjs/core/http'
 import User from '#models/user/user'
 import env from '#start/env'
