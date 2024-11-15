@@ -38,11 +38,8 @@ const ValuersPage = () => {
             >
               <p>Email: {valuer.email}</p>
               <p>Name: {valuer.username}</p>
-              <p>Qualified: {valuer.isQualified ? "Yes" : "No"}</p>
-              <p>
-                Qualification data:
-                {valuer.isValuerQualificationCreated ? "Created" : "None"}
-              </p>
+
+              <p>Status: {valuer.status}</p>
             </Link>
           ))}
         </div>

@@ -2,39 +2,57 @@
 
 "use client";
 
+import { Button, Input } from "@/components/ui";
 import { usePasswordForgot } from "@/hooks/admin/auth/usePasswordForgot";
+import { useCountdown } from "@/hooks/utils/useCountDown";
 import { FC, FormEventHandler, useState } from "react";
 
 const FormPasswordForgot: FC = () => {
-  const [email, setEmail] = useState("");
-  const { passwordForgot } = usePasswordForgot();
+  const { passwordForgot, isLoading } = usePasswordForgot();
+  const { timeLeft, isCounting, startCountdown } = useCountdown(30); // 30 seconds count down
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+  const [email, setEmail] = useState("");
+
+  // ⚡ Send reset email
+  const handleSendResetEmail: FormEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
     event.preventDefault();
     const isSent = await passwordForgot({ email });
     if (isSent) {
-      console.log("Email sent!");
+      startCountdown();
     }
   };
+  // Button text (Send | Counting)
+  const buttonText = !isCounting ? (
+    "Send password reset email"
+  ) : (
+    <span>
+      Please wait
+      <span className="inline-block w-5 ml-1 text-end">{timeLeft}</span>s to
+      resend
+    </span>
+  );
 
   return (
-    <>
-      {/* form */}
-      <form onSubmit={handleSubmit} className="w-96 flex flex-col gap-4 ">
-        {/* email */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">email</label>
-          <input
-            type="email"
-            className="border-2"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+    <form
+      onSubmit={handleSendResetEmail}
+      className="size-full flex flex-col gap-4"
+    >
+      {/* Input: email */}
+      <Input
+        type="email"
+        placeholder="Email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <button>Submit</button>
-      </form>
-    </>
+      {/* Button: submit */}
+      <Button type="submit" isDisabled={isCounting} isLoading={isLoading}>
+        {buttonText}
+      </Button>
+    </form>
   );
 };
 export default FormPasswordForgot;

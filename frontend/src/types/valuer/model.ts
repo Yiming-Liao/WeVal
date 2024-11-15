@@ -4,10 +4,9 @@ export interface Valuer {
   email: string;
   username: string;
   phone: string;
-  isValuerQualificationCreated: boolean;
-  isQualified: boolean;
+  status: ValuerStatus;
+  qualificationRejectionMessage?: string;
   valuerQualification?: ValuerQualification;
-  QualificationRejection?: QualificationRejection;
 }
 
 export interface ValuerQualification {
@@ -17,6 +16,9 @@ export interface ValuerQualification {
   certificatePath: string;
 }
 
-export interface QualificationRejection {
-  reason: string;
-}
+export type ValuerStatus =
+  | "noQualificationCreated"
+  | "qualificationCreated"
+  | "qualificationRejected"
+  | "approved"
+  | "disabled";

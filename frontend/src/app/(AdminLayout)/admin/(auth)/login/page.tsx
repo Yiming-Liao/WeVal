@@ -1,14 +1,19 @@
 // [r: Admin]
 
+import { FC } from "react";
+import { Header } from "@/components/ui";
 import FormLogin from "@/components/AdminLayout/auth/login/FormLogin";
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
   return (
-    <div className="flex flex-col items-center gap-16 p-16">
-      <h1 className="text-4xl">LoginPage</h1>
+    <>
+      <Header title={"Sign in"} />
 
-      <FormLogin />
-    </div>
+      {/* Login form */}
+      <section className="flex flex-col items-center">
+        <FormLogin />
+      </section>
+    </>
   );
 };
 export default LoginPage;

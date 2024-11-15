@@ -1,27 +1,26 @@
 // [r: Admin]
 
 import { useAxios } from "@/contexts/AxiosContext";
-import { QualificationRejection } from "@/types/valuer/model";
+import { Valuer } from "@/types/valuer/model";
 
 export const useReject = () => {
   const axios = useAxios();
 
   const reject = async ({
     email,
-    reason,
+    message,
   }: {
     email: string;
-    reason: string;
+    message: string;
   }) => {
-    const response = await axios.post<{
-      rejectionReason: QualificationRejection;
-    }>(`/admin/membership/valuers/${email}/valuer-rejection-reasons`, {
-      reason,
+    const response = await axios.patch<{
+      valuer: Valuer;
+    }>(`/admin/membership/valuers/${email}/reject`, {
+      message,
     });
 
     if (response) {
-      const { rejectionReason } = response.data;
-      return rejectionReason;
+      return true;
     }
     return false;
   };

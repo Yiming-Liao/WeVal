@@ -18,15 +18,29 @@ const config: Config = {
   plugins: [
     function ({ addComponents }: AddComponents) {
       addComponents({
-        ".typography-label-sm": {
-          fontSize: "12px",
-          // fontWeight: "300",
-          lineHeight: "18px",
-        },
+        // Title
         ".typography-title-md": {
           fontSize: "28px",
           // fontWeight: "300",
           lineHeight: "42px",
+        },
+
+        // Body
+        ".typography-body-md": {
+          fontSize: "16px",
+          lineHeight: "24px",
+        },
+
+        // Label
+        ".typography-label-md": {
+          fontSize: "14px",
+          // fontWeight: "300",
+          lineHeight: "21px",
+        },
+        ".typography-label-sm": {
+          fontSize: "12px",
+          // fontWeight: "300",
+          lineHeight: "18px",
         },
       });
     },

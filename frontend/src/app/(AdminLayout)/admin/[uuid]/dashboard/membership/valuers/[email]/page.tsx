@@ -8,17 +8,18 @@ import { useApprove } from "@/hooks/admin/dashboard/membership/valuers/useApprov
 import { useShow } from "@/hooks/admin/dashboard/membership/valuers/useShow";
 import { Valuer } from "@/types/valuer/model";
 import { useEffect, useState } from "react";
-import { useStore } from "@/hooks/valuer/qualificationRejection/useStore";
+import { useReject } from "@/hooks/admin/dashboard/membership/valuers/useReject";
 
 const ValuerShowPage = ({ params }: { params: Promise<{ email: string }> }) => {
   const { refresh } = useRouter();
   const { show } = useShow();
   const { approve } = useApprove();
-  const { store } = useStore();
+  const { reject } = useReject();
 
   const [valuer, setValuer] = useState<Valuer | null>(null);
   const [email, setEmail] = useState<string>("");
 
+  // Fetch the valuer
   useEffect(() => {
     const fetchData = async () => {
       const { email } = await params;
@@ -37,6 +38,7 @@ const ValuerShowPage = ({ params }: { params: Promise<{ email: string }> }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
+  // Approve
   const handleApprove = async () => {
     const yes = confirm("Are you sure?");
     if (!yes) {
@@ -50,25 +52,27 @@ const ValuerShowPage = ({ params }: { params: Promise<{ email: string }> }) => {
 
   // Modal
   const [isModalOpen, setModalOpen] = useState(false);
-  const [reason, setReason] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
-  const handleStoreReason = async () => {
+  // Reject
+  const handleReject = async () => {
     const yes = confirm("Are you sure?");
     if (!yes) {
       return;
     }
-    const rejectionReason = await store({ email, reason });
-    if (rejectionReason) {
-      console.log(rejectionReason);
+    const isRejected = await reject({ email, message });
+    if (isRejected) {
+      refresh();
       setModalOpen(false);
     }
   };
 
+  console.log(valuer);
   return (
     <>
       {valuer ? (
         <div>
-          {!valuer.isQualified && valuer.valuerQualification ? (
+          {valuer.status === "qualificationCreated" && (
             <>
               <div>
                 <button
@@ -87,21 +91,17 @@ const ValuerShowPage = ({ params }: { params: Promise<{ email: string }> }) => {
               <RejectModal
                 isModalOpen={isModalOpen}
                 setModalOpen={setModalOpen}
-                handleStoreReason={handleStoreReason}
-                reason={reason}
-                setReason={setReason}
+                handleReject={handleReject}
+                message={message}
+                setMessage={setMessage}
               />
             </>
-          ) : null}
+          )}
           <div className="flex flex-col gap-4 p-4 border">
             <div className="flex flex-col gap-4">
               <p>Email: {valuer.email}</p>
               <p>Name: {valuer.username}</p>
-              <p>Qualified: {valuer.isQualified ? "Yes" : "No"}</p>
-              <p>
-                Qualification data:
-                {valuer.isValuerQualificationCreated ? "Created" : "None"}
-              </p>
+              <p>Status: {valuer.status}</p>
             </div>
 
             {valuer.valuerQualification ? (

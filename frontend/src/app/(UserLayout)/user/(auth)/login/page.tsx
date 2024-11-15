@@ -1,10 +1,11 @@
 // [r: User]
 
-import { ButtonOutline, Header } from "@/components/ui";
-import FormLogin from "@/components/UserLayout/auth/login/FormLogin";
+import { FC } from "react";
 import Link from "next/link";
+import FormLogin from "@/components/UserLayout/auth/login/FormLogin";
+import { ButtonOutline, Header } from "@/components/ui";
 
-const UserLoginPage = () => {
+const UserLoginPage: FC = () => {
   return (
     <>
       <Header title={"Sign in"} />

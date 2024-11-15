@@ -1,15 +1,19 @@
 // [r: Admin]
 
-import FormPasswordForgot from "@/components/AdminLayout/auth/passwordForgot/FormPasswordForgot";
 import { FC } from "react";
+import { Header } from "@/components/ui";
+import FormPasswordForgot from "@/components/AdminLayout/auth/passwordForgot/FormPasswordForgot";
 
 const PasswordForgotPage: FC = () => {
   return (
-    <div className="flex flex-col items-center gap-16 p-16">
-      <h1 className="text-4xl">PasswordForgotPage</h1>
+    <>
+      <Header title={"Forgot password"} />
 
-      <FormPasswordForgot />
-    </div>
+      {/* Forgot password form */}
+      <section className="flex flex-col items-center">
+        <FormPasswordForgot />
+      </section>
+    </>
   );
 };
 export default PasswordForgotPage;

@@ -27,7 +27,7 @@ export async function registerQualify({ request, response }: HttpContext) {
   })
 
   // 🗄️ Update Valuer
-  await foundValuer!.merge({ isValuerQualificationCreated: true }).save()
+  await foundValuer!.merge({ status: 'qualificationCreated' }).save()
 
   return response.created({
     message: i18n.t('messages.valuer.auth.register_qualify.created'),

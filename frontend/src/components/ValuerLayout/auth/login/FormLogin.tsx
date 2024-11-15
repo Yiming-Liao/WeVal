@@ -19,10 +19,10 @@ const FormLogin: FC = () => {
   const handleLogin: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    const isLoggedIn = await login({ email, password });
+    const valuer = await login({ email, password });
 
-    if (isLoggedIn) {
-      if (typeof isLoggedIn !== "boolean" && isLoggedIn.isQualified) {
+    if (valuer) {
+      if (typeof valuer !== "boolean" && valuer.status === "approved") {
         push("/valuer/dashboard");
       } else {
         push(`/valuer/register/page-3?email=${encodeURIComponent(email)}`);
@@ -31,7 +31,7 @@ const FormLogin: FC = () => {
   };
 
   return (
-    <form onSubmit={handleLogin} className="size-full flex flex-col gap-9">
+    <form onSubmit={handleLogin} className="w-full flex flex-col gap-9">
       <div className="flex flex-col gap-4">
         {/* Input: email */}
         <Input

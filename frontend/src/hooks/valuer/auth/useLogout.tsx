@@ -3,13 +3,19 @@
 import { useValuerAuth } from "@/contexts/ValuerAuthContext";
 import { useAxios } from "@/contexts/AxiosContext";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
+import { useState } from "react";
 
 export const useLogout = () => {
   const axios = useAxios();
   const { setValuer } = useValuerAuth();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const logout = async () => {
+  const logout = async (): Promise<boolean> => {
+    setIsLoading(true);
+
     const response = await axios.post<void>("/valuer/auth/logout");
+
+    setIsLoading(false);
 
     if (response) {
       // Clear user{...data} from context
@@ -23,5 +29,5 @@ export const useLogout = () => {
     return false;
   };
 
-  return { logout };
+  return { logout, isLoading };
 };

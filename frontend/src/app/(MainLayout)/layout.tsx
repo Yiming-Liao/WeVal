@@ -1,11 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "@/components/MainLayout/Navbar/Navbar";
 
-export default function AdminLayout({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
+const MainLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <>
       <div className="h-24"></div>
@@ -13,4 +9,6 @@ export default function AdminLayout({
       {children}
     </>
   );
-}
+};
+
+export default MainLayout;

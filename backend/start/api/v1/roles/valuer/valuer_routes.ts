@@ -3,8 +3,10 @@
 import { HttpRouterService } from '@adonisjs/core/types'
 import authRoutes from './auth/auth_routes.js'
 import profileRoutes from './profile/profile_routes.js'
-const QualificationRejectionsController = () =>
-  import('#controllers/roles/valuer/qualificationRejection/qualification_rejections_controller')
+import { HttpContext } from '@adonisjs/core/http'
+import Valuer from '#models/valuer/valuer'
+import { middleware } from '#start/kernel'
+
 /**
  * [ Valuer ]
  * All routes | Base path '/api/v1/valuer'
@@ -18,10 +20,13 @@ export default function valuerRoutes(router: HttpRouterService) {
       // 📋 Valuer profile routes | Prefix: '/api/v1/valuer/profile'
       profileRoutes(router)
 
-      // 🧾 ValuerRejectionReason <Resource> routes | Prefix: '/api/v1/valuer-rejection-reasons'
+      //*---------------------------▼-----🔎 Get Valuer Model-----▼---------------------------
       router
-        .resource('/qualification-rejections/:email', QualificationRejectionsController)
-        .except(['create', 'edit', 'show', 'destroy'])
+        .get('/', ({ response, auth }: HttpContext) => {
+          return response.ok({ valuer: auth.user as Valuer })
+        })
+        .use(middleware.valuerAuth())
+      //*---------------------------▲-----🔎 Get Valuer Model-----▲---------------------------
     })
     .prefix('valuer')
 }

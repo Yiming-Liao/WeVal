@@ -1,6 +1,8 @@
-import Password from "@/components/UserLayout/profile/password/Password";
-import Phone from "@/components/UserLayout/profile/phone/Phone";
-import Username from "@/components/UserLayout/profile/username/Username";
+// [r: Valuer]
+
+import Password from "@/components/ValuerLayout/profile/password/Password";
+import Phone from "@/components/ValuerLayout/profile/phone/Phone";
+import Username from "@/components/ValuerLayout/profile/username/Username";
 
 const ProfilePage = () => {
   return (

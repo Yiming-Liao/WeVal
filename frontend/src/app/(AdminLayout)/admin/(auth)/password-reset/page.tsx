@@ -1,14 +1,18 @@
 // [r: Admin]
 
-import FormPasswordReset from "@/components/AdminLayout/auth/passwordReset/FormPasswordReset";
+import { Header } from "@/components/ui";
+import FormPasswordResetWrapper from "@/components/AdminLayout/auth/passwordReset/FormPasswordReset";
 
 const PasswordResetPage = () => {
   return (
-    <div className="flex flex-col items-center gap-16 p-16">
-      <h1 className="text-4xl">PasswordResetPage</h1>
+    <>
+      <Header title={"Reset password"} />
 
-      <FormPasswordReset />
-    </div>
+      {/* Forgot password form */}
+      <section className="flex flex-col items-center">
+        <FormPasswordResetWrapper />
+      </section>
+    </>
   );
 };
 export default PasswordResetPage;

@@ -19,6 +19,9 @@ export default function membershipValuerRoutes(router: HttpRouterService) {
 
       // [PATCH] Approve | Approve a valuer
       router.patch('/:email/approve', [MembershipValuersController, 'approve'])
+
+      // [PATCH] Reject | reject a valuer
+      router.patch('/:email/reject', [MembershipValuersController, 'reject'])
     })
     .prefix('/valuers')
 }

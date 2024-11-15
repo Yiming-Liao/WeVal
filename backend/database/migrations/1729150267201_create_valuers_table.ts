@@ -11,8 +11,17 @@ export default class extends BaseSchema {
       table.string('email', 254).notNullable().unique()
       table.string('username', 48).nullable()
       table.string('phone', 16).nullable().unique()
-      table.boolean('is_qualified').notNullable().defaultTo(false)
-      table.boolean('is_valuer_qualification_created').notNullable().defaultTo(false)
+      table
+        .enu('status', [
+          'noQualificationCreated',
+          'qualificationCreated',
+          'qualificationRejected',
+          'approved',
+          'disabled',
+        ])
+        .defaultTo('noQualificationCreated')
+      table.text('qualification_rejection_message').nullable()
+
       table.string('password', 256).nullable()
 
       // Timestamp

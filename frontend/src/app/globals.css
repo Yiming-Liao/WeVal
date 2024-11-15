@@ -38,3 +38,88 @@
     transform: rotate(360deg);
   }
 }
+
+/* Blur fade in */
+.blur-in {
+  animation: blur-in 0.5s;
+}
+
+@keyframes blur-in {
+  0% {
+    filter: blur(4px);
+  }
+  100% {
+    filter: blur(0px);
+  }
+}
+
+/* Skeleton base style */
+.skeleton {
+  background-color: #e0e0e0;
+  width: 100%;
+  min-height: 18px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 2s infinite linear;
+}
+
+/* Animation effect for skeleton */
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Animation for Earth SVG */
+.rotate-animation-1 {
+  transform-origin: center;
+  animation: rotate-animation-1 15s linear infinite;
+}
+@keyframes rotate-animation-1 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-animation-2 {
+  transform-origin: center;
+  animation: rotate-animation-2 25s linear infinite;
+}
+
+@keyframes rotate-animation-2 {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.rotate-animation-3 {
+  transform-origin: center;
+  animation: rotate-animation-3 15s linear infinite;
+}
+
+@keyframes rotate-animation-3 {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Animation for Map SVG */
+.ping-animation {
+  animation: ping-animation 2s linear infinite;
+}
+
+@keyframes ping-animation {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}

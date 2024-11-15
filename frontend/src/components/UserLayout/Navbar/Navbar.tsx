@@ -1,13 +1,14 @@
-"use client";
+// [r: User]
 
+import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import NavLink from "./NavLink";
-import UserActions from "./userActions/UserActions";
+import UserCardButton from "./UserCardButton";
+import SignOutButton from "./SignOutButton";
 
-const Navbar = () => {
+const Navbar: FC = () => {
   return (
-    <header className="fixed top-0 left-0 w-full h-24 bg-deep text-white z-[999]">
+    <header className="fixed top-0 left-0 w-full h-24 bg-gradient-to-tl from-[#2300E9] via-[#0083D4] to-[#00E5F5] text-white z-[999]">
       <div className="w-full h-full px-[104px] flex justify-center items-center gap-3">
         <div className="relative container">
           <div className="flex justify-between items-center">
@@ -15,21 +16,16 @@ const Navbar = () => {
             <Link href={"/"} className="flex justify-center items-center">
               <Image
                 src={"/images/layout/navbar/logo.svg"}
-                alt={""}
+                alt={"WeVal logo"}
                 width={204}
                 height={52}
               />
             </Link>
 
-            {/* Nav */}
-            <nav className="flex">
-              <NavLink href={"/about"} text={"About Us"} />
-              <NavLink href={"/news"} text={"News"} />
-              <NavLink href={"/contact"} text={"Contact Us"} />
-            </nav>
-
-            {/* User Actions [logged in / Not logged in] */}
-            <UserActions />
+            <div className="flex gap-4">
+              <SignOutButton />
+              <UserCardButton />
+            </div>
           </div>
         </div>
       </div>

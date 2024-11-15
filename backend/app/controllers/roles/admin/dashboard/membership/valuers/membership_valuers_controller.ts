@@ -2,7 +2,6 @@
 
 import type { HttpContext } from '@adonisjs/core/http'
 import Valuer from '#models/valuer/valuer'
-import approveValidator from '#validators/roles/admin/dashboard/mambership/valuers/approve_validator'
 import showValidator from '#validators/roles/admin/dashboard/mambership/valuers/show_validator'
 
 /**
@@ -26,25 +25,25 @@ export default class MembershipValuersController {
     const { email } = await showValidator.validate({ email: params.email })
 
     // 🗄️ Find Valuer
-    const foundValuer = await Valuer.findBy('email', email)
-
-    // 🗄️ Load ValuerQualification
-    await foundValuer!.load('valuerQualification')
+    const foundValuer = await Valuer.query()
+      .where('email', email)
+      .preload('valuerQualification')
+      .first()
 
     return response.ok({ valuer: foundValuer })
   }
 
   // [PATCH] Approve
-  async approve({ response, params }: HttpContext) {
-    // 📝 Validator (Built-in error handling)
-    const { email } = await approveValidator.validate({ email: params.email })
+  async approve(context: HttpContext) {
+    const { approve } = await import(
+      '#controllers/roles/admin/dashboard/membership/valuers/approve'
+    )
+    return approve(context)
+  }
 
-    // 🗄️ Find Valuer
-    const foundValuer = await Valuer.findBy('email', email)
-
-    // 🗄️ Update Valuer
-    const updatedValuer = await foundValuer!.merge({ isQualified: true }).save()
-
-    return response.ok({ valuer: updatedValuer })
+  // [PATCH] Reject
+  async reject(context: HttpContext) {
+    const { reject } = await import('#controllers/roles/admin/dashboard/membership/valuers/reject')
+    return reject(context)
   }
 }

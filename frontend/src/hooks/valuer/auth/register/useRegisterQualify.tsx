@@ -2,6 +2,7 @@
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { useAxios } from "@/contexts/AxiosContext";
+import { useValuerAuth } from "@/contexts/ValuerAuthContext";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { RegisterQualifyProps } from "@/types/valuer/auth_hooks";
 import { Valuer } from "@/types/valuer/model";
@@ -9,6 +10,7 @@ import { useState } from "react";
 
 export const useRegisterQualify = () => {
   const axios = useAxios();
+  const { setValuer } = useValuerAuth();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const registerQualify = async ({
@@ -37,10 +39,12 @@ export const useRegisterQualify = () => {
     if (response) {
       const { valuer } = response.data;
 
+      // Set user{...data} for context
+      setValuer(valuer);
+
       // Set user{...data} & role in local storage
       AuthLocalStorage.set({ userData: valuer, role: "valuer" });
 
-      console.log(valuer);
       return true;
     }
 

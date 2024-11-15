@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import { FullLogoWhite } from "@/components/svg";
 
-const ValuerLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
+const ValuerAuthLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <main className="relative flex min-h-screen">
       {/* Left Block */}
@@ -18,4 +18,4 @@ const ValuerLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     </main>
   );
 };
-export default ValuerLayout;
+export default ValuerAuthLayout;

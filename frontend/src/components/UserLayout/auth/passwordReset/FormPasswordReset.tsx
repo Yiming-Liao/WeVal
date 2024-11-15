@@ -16,7 +16,7 @@ const FormPasswordReset = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  const handlePasswordReset: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const isReset = await passwordReset({
       passwordResetToken,
@@ -29,7 +29,10 @@ const FormPasswordReset = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-96 flex flex-col gap-4 ">
+    <form
+      onSubmit={handlePasswordReset}
+      className="size-full flex flex-col gap-4 "
+    >
       {/* Input: password */}
       <InputPassword
         type="password"

@@ -1,35 +1,18 @@
 // [r: Admin]
 
-"use client";
-
-import { useAdminAuth } from "@/contexts/AdminAuthContext";
-import Link from "next/link";
 import { ReactNode } from "react";
+import Navbar from "@/components/AdminLayout/Navbar/Navbar";
 
-export default function AdminLayout({
+const AdminDashboardLayout = ({
   children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
-  const { admin } = useAdminAuth();
-
+}: Readonly<{ children: ReactNode }>) => {
   return (
-    <>
-      <nav className="h-12 bg-slate-200 flex items-center gap-4 px-4">
-        <Link
-          href={`/admin/${admin?.uuid}/dashboard`}
-          className={`${!admin ? "pointer-events-none" : ""}`}
-        >
-          Dashboard
-        </Link>
-        <Link
-          href={`/admin/${admin?.uuid}/dashboard/membership`}
-          className={`${!admin ? "pointer-events-none" : ""}`}
-        >
-          Membership
-        </Link>
-      </nav>
+    <div>
+      <div className="h-24"></div> {/* Spacer for Navbar */}
+      <Navbar />
       {children}
-    </>
+    </div>
   );
-}
+};
+
+export default AdminDashboardLayout;

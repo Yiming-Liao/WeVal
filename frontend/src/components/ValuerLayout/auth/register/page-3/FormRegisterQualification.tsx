@@ -1,20 +1,12 @@
 // [r: Valuer]
 
-import {
-  Dispatch,
-  FC,
-  FormEventHandler,
-  SetStateAction,
-  Suspense,
-  useState,
-} from "react";
-import { useSearchParams } from "next/navigation";
+import { FC, FormEventHandler, Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useRegisterQualify } from "@/hooks/valuer/auth/register/useRegisterQualify";
 import { Agreement, Button, Input, InputFile, Select } from "@/components/ui";
 
-const FormRegisterQualification: FC<{
-  setIsCreated: Dispatch<SetStateAction<boolean>>;
-}> = ({ setIsCreated }) => {
+const FormRegisterQualification: FC = () => {
+  const { refresh } = useRouter();
   const { registerQualify, isLoading } = useRegisterQualify();
   const searchParams = useSearchParams();
   const email = searchParams.get("email"); // Get email from URL
@@ -30,7 +22,7 @@ const FormRegisterQualification: FC<{
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    const isDone = await registerQualify({
+    const isSent = await registerQualify({
       email: email || "",
       serviceArea,
       address,
@@ -38,15 +30,15 @@ const FormRegisterQualification: FC<{
       certificateFile,
     });
 
-    if (isDone) {
-      setIsCreated(true);
+    if (isSent) {
+      refresh();
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="h-full flex flex-col justify-between gap-16"
+      className="size-full flex flex-col justify-between gap-16"
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
@@ -116,12 +108,10 @@ const FormRegisterQualification: FC<{
 };
 
 // Wrapper
-const FormRegisterQualificationWrapper: FC<{
-  setIsCreated: Dispatch<SetStateAction<boolean>>;
-}> = ({ setIsCreated }) => {
+const FormRegisterQualificationWrapper: FC = () => {
   return (
     <Suspense fallback={<>Loading...</>}>
-      <FormRegisterQualification setIsCreated={setIsCreated} />
+      <FormRegisterQualification />
     </Suspense>
   );
 };

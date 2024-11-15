@@ -1,62 +1,18 @@
 // [r: Admin]
 
-"use client";
+import { Header } from "@/components/ui";
+import FormPassworChanged from "@/components/AdminLayout/auth/passwordChange/FormPasswordChange";
 
-import { usePasswordChange } from "@/hooks/admin/auth/usePasswordChange";
-import { FormEventHandler, useState } from "react";
-
-const PassworChangedPage = () => {
-  const { passwordChange } = usePasswordChange();
-
-  const [password, setPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
-
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
-    event.preventDefault();
-    await passwordChange({ password, newPassword, newPasswordConfirm });
-  };
-
+const PasswordChangePage = () => {
   return (
-    <div className="flex flex-col items-center gap-16 p-16">
-      <h1 className="text-4xl">PassworChangedPage</h1>
+    <>
+      <Header title={"Change password"} />
 
-      {/* form */}
-      <form onSubmit={handleSubmit} className="w-96 flex flex-col gap-4 ">
-        {/* password */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">password</label>
-          <input
-            type="password"
-            className="border-2"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {/* newPassword */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">newPassword</label>
-          <input
-            type="password"
-            className="border-2"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </div>
-        {/* passwordConfirm */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">newPasswordConfirm</label>
-          <input
-            type="password"
-            className="border-2"
-            value={newPasswordConfirm}
-            onChange={(e) => setNewPasswordConfirm(e.target.value)}
-          />
-        </div>
-
-        <button>Submit</button>
-      </form>
-    </div>
+      {/* Change password form */}
+      <section className="flex flex-col items-center">
+        <FormPassworChanged />
+      </section>
+    </>
   );
 };
-export default PassworChangedPage;
+export default PasswordChangePage;

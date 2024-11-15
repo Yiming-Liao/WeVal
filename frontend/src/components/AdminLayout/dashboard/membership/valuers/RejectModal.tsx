@@ -4,9 +4,9 @@ import ReactDOM from "react-dom";
 const RejectModal = ({
   isModalOpen,
   setModalOpen,
-  handleStoreReason,
-  reason,
-  setReason,
+  handleReject,
+  message,
+  setMessage,
 }: RejectModalProps) => {
   if (!isModalOpen) return;
 
@@ -16,12 +16,12 @@ const RejectModal = ({
         className="size-96 bg-slate-200 rounded p-4 flex flex-col gap-4 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <p>Rejection reason:</p>
+        <p>Rejection message:</p>
         <textarea
           className="w-full h-64 rounded p-4"
           style={{ resize: "none" }}
-          value={reason}
-          onChange={(e) => setReason(e.target.value)}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
         ></textarea>
         <div className="flex justify-center gap-8">
           <button
@@ -30,10 +30,7 @@ const RejectModal = ({
           >
             Cancel
           </button>
-          <button
-            onClick={handleStoreReason}
-            className="p-2 bg-red-500 rounded"
-          >
+          <button onClick={handleReject} className="p-2 bg-red-500 rounded">
             Reject
           </button>
         </div>
@@ -48,7 +45,7 @@ export default RejectModal;
 interface RejectModalProps {
   isModalOpen: boolean;
   setModalOpen: Dispatch<SetStateAction<boolean>>;
-  handleStoreReason: () => void;
-  reason: string;
-  setReason: Dispatch<SetStateAction<string>>;
+  handleReject: () => void;
+  message: string;
+  setMessage: Dispatch<SetStateAction<string>>;
 }

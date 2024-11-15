@@ -22,7 +22,7 @@ const NavLink: FC<Props> = ({ href = "/", text = "Link" }) => {
   return (
     <Link
       href={href}
-      className={`w-[10vw] h-[72px] flex justify-center items-center ${
+      className={`w-[10vw] max-w-48  h-14 flex justify-center items-center ${
         isActive ? "border-b-[1px]" : ""
       }`}
     >

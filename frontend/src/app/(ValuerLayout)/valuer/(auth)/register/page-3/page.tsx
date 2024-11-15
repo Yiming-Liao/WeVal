@@ -1,9 +1,12 @@
-import { Steps3of3 } from "@/components/svg";
+// [r: Valuer]
+
+import { FC } from "react";
 import { Header } from "@/components/ui";
+import { Steps3of3 } from "@/components/svg";
 import RegisterQualificationContainer from "@/components/ValuerLayout/auth/register/page-3/RegisterQualificationContainer";
 
 // RegisterQualifyPage
-const RegisterPage3 = () => {
+const RegisterPage3: FC = () => {
   return (
     <>
       <Header title={"Qualification Verification"} />

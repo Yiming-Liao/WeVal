@@ -3,13 +3,19 @@
 import { useAxios } from "@/contexts/AxiosContext";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
+import { useState } from "react";
 
 export const useLogout = () => {
   const axios = useAxios();
   const { setAdmin } = useAdminAuth();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const logout = async () => {
+  const logout = async (): Promise<boolean> => {
+    setIsLoading(true);
+
     const response = await axios.post<void>("/admin/auth/logout");
+
+    setIsLoading(false);
 
     if (response) {
       // Clear user{...data} from context
@@ -23,5 +29,5 @@ export const useLogout = () => {
     return false;
   };
 
-  return { logout };
+  return { logout, isLoading };
 };

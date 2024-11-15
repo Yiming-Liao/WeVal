@@ -16,8 +16,8 @@ export default class Seeder extends BaseSeeder {
    */
   static async admin() {
     await Admin.create({
-      email: 'admin@gmail.com',
-      username: 'admin',
+      email: 'masouivan@gmail.com',
+      username: 'masouivan',
       password: '123456',
     })
   }
@@ -30,10 +30,11 @@ export default class Seeder extends BaseSeeder {
     await Valuer.create({
       email: 'valuer1@gmail.com',
       username: 'valuer1',
-      phone: '+61000000000',
+      phone: '+61000000001',
       password: '123456',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
+      status: 'noQualificationCreated',
     })
 
     // Valuer2: Registered, and applied qualification data, but not approved yet.
@@ -41,17 +42,16 @@ export default class Seeder extends BaseSeeder {
       email: 'valuer2@gmail.com',
       username: 'valuer2',
       password: '123456',
-      phone: '+61000000000',
+      phone: '+61000000002',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
-      isQualified: false,
-      isValuerQualificationCreated: true,
+      status: 'qualificationCreated',
     })
     await createdValuer2.related('valuerQualification').create({
       serviceArea: 'south_australia',
       address: 'full-address',
       abn: '12345678987',
-      certificatePath: 'fake/image.jpg',
+      certificatePath: 'fake/image0.jpg',
     })
 
     // Valuer3: Registered, and approved.
@@ -59,17 +59,16 @@ export default class Seeder extends BaseSeeder {
       email: 'valuer3@gmail.com',
       username: 'valuer3',
       password: '123456',
-      phone: '+61000000000',
+      phone: '+61000000003',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
-      isQualified: true,
-      isValuerQualificationCreated: true,
+      status: 'approved',
     })
     await createdValuer3.related('valuerQualification').create({
       serviceArea: 'south_australia',
       address: 'full-address',
       abn: '12345678987',
-      certificatePath: 'fake/image.jpg',
+      certificatePath: 'fake/image2.jpg',
     })
   }
 

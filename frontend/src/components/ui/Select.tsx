@@ -1,5 +1,5 @@
 import { FC, ReactNode, SelectHTMLAttributes } from "react";
-import { Chevron } from "../svg";
+import { ArrowDown } from "../svg";
 
 type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   className?: string;
@@ -25,7 +25,7 @@ const Select: FC<SelectProps> = ({
         {children}
       </select>
       <div className="absolute top-[50%] translate-y-[-50%] right-4">
-        <Chevron />
+        <ArrowDown />
       </div>
     </div>
   );

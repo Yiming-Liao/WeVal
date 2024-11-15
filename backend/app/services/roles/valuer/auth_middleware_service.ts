@@ -16,7 +16,7 @@ export class AuthMiddlewareService {
     // ⛔ Refresh Token not exists: Return unauthorized error
     if (!refreshToken) {
       return response.unauthorized({
-        errors: [{ message: 'No access token or refresh token found' }],
+        errors: [{ message: 'No access token or refresh token found.' }],
       })
     }
 
@@ -25,7 +25,7 @@ export class AuthMiddlewareService {
 
     // ⛔ Refresh Token invalid: Return unauthorized error
     if (!foundValuer || (foundValuer?.refreshTokenExpiresAt || 0) < DateTime.now()) {
-      return response.unauthorized({ errors: [{ message: 'Invalid or expired refresh token' }] })
+      return response.unauthorized({ errors: [{ message: 'Invalid or expired refresh token.' }] })
     }
 
     // Return valuer found by the refreshToken

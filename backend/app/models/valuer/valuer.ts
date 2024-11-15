@@ -6,7 +6,6 @@ import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import hash from '@adonisjs/core/services/hash'
 import ValuerQualification from './valuer_qualification.js'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
-import QualificationRejection from './qualification_rejection.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -28,9 +27,14 @@ export default class Valuer extends compose(BaseModel, AuthFinder) {
   @column()
   declare phone: string | null
   @column()
-  declare isQualified: boolean // Qualified or not
+  declare status:
+    | 'noQualificationCreated'
+    | 'qualificationCreated'
+    | 'qualificationRejected'
+    | 'approved'
+    | 'disabled'
   @column()
-  declare isValuerQualificationCreated: boolean // Created valuerQualification or not
+  declare qualificationRejectionMessage: string | null // Rejection message
 
   @column({ serializeAs: null })
   declare password: string | null
@@ -78,8 +82,4 @@ export default class Valuer extends compose(BaseModel, AuthFinder) {
   // 🔗 Valuer qualification
   @hasOne(() => ValuerQualification)
   declare valuerQualification: HasOne<typeof ValuerQualification>
-
-  // 🔗 Valuer rejection reason
-  @hasOne(() => QualificationRejection)
-  declare qualificationRejection: HasOne<typeof QualificationRejection>
 }

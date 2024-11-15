@@ -2,20 +2,21 @@
 
 "use client";
 
+import { Button, InputPassword } from "@/components/ui";
 import { usePasswordReset } from "@/hooks/admin/auth/usePasswordReset";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEventHandler, Suspense, useState } from "react";
 
 const FormPasswordReset = () => {
-  const { passwordReset } = usePasswordReset();
   const { push } = useRouter();
+  const { passwordReset, isLoading } = usePasswordReset();
   const searchParams = useSearchParams();
-  const passwordResetToken = searchParams.get("passwordResetToken"); // 獲取 URL 中的 passwordResetToken
+  const passwordResetToken = searchParams.get("passwordResetToken"); // Get passwordResetToken from URL
 
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  const handlePasswordReset: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const isReset = await passwordReset({
       passwordResetToken,
@@ -28,33 +29,38 @@ const FormPasswordReset = () => {
   };
 
   return (
-    <>
-      {/* form */}
-      <form onSubmit={handleSubmit} className="w-96 flex flex-col gap-4 ">
-        {/* password */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">password</label>
-          <input
-            type="password"
-            className="border-2"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {/* passwordConfirm */}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="">passwordConfirm</label>
-          <input
-            type="password"
-            className="border-2"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-          />
-        </div>
+    <form
+      onSubmit={handlePasswordReset}
+      className="size-full flex flex-col gap-4"
+    >
+      {/* Input: password */}
+      <InputPassword
+        type="password"
+        placeholder="Password"
+        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <p className="typography-label-sm text-deep">
+        Please set a password that is at least 6 characters long, includes at
+        least one uppercase letter, and must not be the same as your username or
+        email.
+      </p>
 
-        <button>Submit</button>
-      </form>
-    </>
+      {/* Input: confirm password */}
+      <InputPassword
+        type="password"
+        placeholder="Confirm Password"
+        required
+        value={passwordConfirm}
+        onChange={(e) => setPasswordConfirm(e.target.value)}
+      />
+
+      {/* Button: submit */}
+      <Button type="submit" isLoading={isLoading}>
+        Reset password
+      </Button>
+    </form>
   );
 };
 

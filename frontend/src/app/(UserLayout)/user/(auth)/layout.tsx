@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 import { FullLogoWhite } from "@/components/svg";
 
-const UserLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
+const UserAuthLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <main className="relative flex min-h-screen">
       {/* Left Block */}
@@ -18,4 +18,4 @@ const UserLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
     </main>
   );
 };
-export default UserLayout;
+export default UserAuthLayout;

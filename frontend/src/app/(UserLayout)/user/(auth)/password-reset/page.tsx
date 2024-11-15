@@ -2,7 +2,7 @@
 
 import { FC } from "react";
 import { Header } from "@/components/ui";
-import FormPasswordReset from "@/components/UserLayout/auth/passwordReset/FormPasswordReset";
+import FormPasswordResetWrapper from "@/components/UserLayout/auth/passwordReset/FormPasswordReset";
 
 const PasswordResetPage: FC = () => {
   return (
@@ -11,7 +11,7 @@ const PasswordResetPage: FC = () => {
 
       {/* Forgot password form */}
       <section className="flex flex-col items-center">
-        <FormPasswordReset />
+        <FormPasswordResetWrapper />
       </section>
     </>
   );

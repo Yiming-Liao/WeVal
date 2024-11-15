@@ -1,3 +1,5 @@
+// [r: User]
+
 import { HttpRouterService } from '@adonisjs/core/types'
 import authRoutes from './auth/auth_routes.js'
 import profileRoutes from './profile/profile_routes.js'

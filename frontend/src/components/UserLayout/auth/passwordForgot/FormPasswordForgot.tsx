@@ -36,7 +36,10 @@ const FormPasswordForgot: FC = () => {
   );
 
   return (
-    <form onSubmit={handleSendResetEmail} className="w-96 flex flex-col gap-4">
+    <form
+      onSubmit={handleSendResetEmail}
+      className="size-full flex flex-col gap-4"
+    >
       {/* Input: email */}
       <Input
         type="email"

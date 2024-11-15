@@ -18,7 +18,9 @@ const FormLogin: FC = () => {
   // ⚡ Login
   const handleLogin: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+
     const isLoggedIn = await login({ email, password });
+
     if (isLoggedIn) {
       push("/user/dashboard");
     }

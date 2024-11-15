@@ -15,7 +15,7 @@ export const useLogin = () => {
   const login = async ({
     email,
     password,
-  }: LoginProps): Promise<boolean | { isQualified: boolean }> => {
+  }: LoginProps): Promise<boolean | Valuer> => {
     setIsLoading(true);
 
     const response = await axios.post<{ valuer: Valuer }>(
@@ -34,9 +34,7 @@ export const useLogin = () => {
       // Set user{...data} & role in local storage
       AuthLocalStorage.set({ userData: valuer, role: "valuer" });
 
-      return {
-        isQualified: valuer.isQualified,
-      };
+      return valuer;
     }
 
     return false;

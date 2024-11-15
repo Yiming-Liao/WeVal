@@ -1,11 +1,13 @@
-import { useUserAuth } from "@/contexts/UserAuthContext";
+// [r: Valuer]
+
+import { useValuerAuth } from "@/contexts/ValuerAuthContext";
 import { Dispatch, FC, SetStateAction } from "react";
 
 const FormUsername: FC<FormUsernameProps> = ({ setIsEditing }) => {
-  const { user } = useUserAuth();
+  const { valuer } = useValuerAuth();
   return (
     <div className="flex gap-8">
-      {user && <p className="border">{user.username}</p>}
+      {valuer && <p className="border">{valuer.username}</p>}
 
       <button onClick={() => setIsEditing(true)}>Edit</button>
     </div>

@@ -1,18 +1,21 @@
 // [r: Admin]
 
 import { ReactNode } from "react";
+import { FullLogoWhite } from "@/components/svg";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
+const AdminAuthLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
-    <div>
-      <div className="w-24 h-12 border-4 flex justify-center items-center font-bold">
-        Admin
+    <main className="relative flex min-h-screen">
+      {/* Left Block */}
+      <div className="flex-1 h-screen sticky top-0 bg-gradient-to-br from-[#b0a689] to-[#b86f4d] flex justify-center items-center">
+        <FullLogoWhite />
       </div>
-      {children}
-    </div>
+
+      {/* Right Block */}
+      <div className="w-auto pt-9 pb-[96px] px-24">
+        <div className="w-96 h-full flex flex-col gap-16">{children}</div>
+      </div>
+    </main>
   );
-}
+};
+export default AdminAuthLayout;

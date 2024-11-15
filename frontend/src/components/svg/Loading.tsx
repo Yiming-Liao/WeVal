@@ -1,4 +1,4 @@
-const Loading = ({ color }: { color?: string }) => {
+const Loading = ({ color = "#fff" }: { color?: string }) => {
   return (
     <svg
       version="1.1"

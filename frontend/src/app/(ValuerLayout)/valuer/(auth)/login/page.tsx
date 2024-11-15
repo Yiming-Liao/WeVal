@@ -3,8 +3,9 @@
 import { ButtonOutline, Header } from "@/components/ui";
 import FormLogin from "@/components/ValuerLayout/auth/login/FormLogin";
 import Link from "next/link";
+import { FC } from "react";
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
   return (
     <>
       <Header title={"Sign in"} />

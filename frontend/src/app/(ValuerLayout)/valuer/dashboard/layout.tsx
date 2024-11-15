@@ -1,10 +1,15 @@
+// [r: Valuer]
+
 import Navbar from "@/components/ValuerLayout/Navbar/Navbar";
 import Link from "next/link";
 import { ReactNode } from "react";
 
-const layout = ({ children }: Readonly<{ children: ReactNode }>) => {
+const ValuerDashboardLayout = ({
+  children,
+}: Readonly<{ children: ReactNode }>) => {
   return (
     <div>
+      <div className="h-24"></div> {/* Spacer for Navbar */}
       <Navbar />
       <div className="flex gap-4 p-4">
         <Link href={"/valuer/dashboard/profile"}>Profile</Link>
@@ -16,4 +21,4 @@ const layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     </div>
   );
 };
-export default layout;
+export default ValuerDashboardLayout;
