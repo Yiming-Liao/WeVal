@@ -12,9 +12,6 @@ export default class extends BaseSchema {
       table.string('username', 48).nullable()
       table.string('password', 256).nullable()
 
-      // 🏷 UUID
-      table.string('uuid', 48).nullable()
-
       // Timestamp
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()

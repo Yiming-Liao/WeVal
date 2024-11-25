@@ -1,12 +1,12 @@
-import { useUserAuth } from "@/contexts/UserAuthContext";
-import { useAxios } from "@/contexts/AxiosContext";
+import { useUserStore } from "@/stores/userStore";
+import { useAxiosStore } from "@/stores/axiosStore";
 import { envConfig } from "@/config/envConfig";
 import { User } from "@/types/user/model";
 import { UsernameChangeProps } from "@/types/user/profile_hooks";
 
 export const useUsernameChange = () => {
-  const axios = useAxios();
-  const { setUser } = useUserAuth();
+  const { axios } = useAxiosStore();
+  const { setUser } = useUserStore();
 
   const usernameChange = async ({
     username,

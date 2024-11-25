@@ -1,13 +1,13 @@
 // [r: Valuer]
 
-import { useAxios } from "@/contexts/AxiosContext";
-import { useValuerAuth } from "@/contexts/ValuerAuthContext";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { useValuerStore } from "@/stores/valuerStore";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
-import { Valuer } from "@/types/valuer/model";
+import { Valuer } from "@/types/models/valuer.types";
 
 export const useValuerData = () => {
-  const axios = useAxios();
-  const { setValuer } = useValuerAuth();
+  const { axios } = useAxiosStore();
+  const { setValuer } = useValuerStore();
 
   const valuerData = async (): Promise<Valuer | boolean> => {
     const response = await axios.get<{ valuer: Valuer }>("/valuer");
@@ -15,7 +15,7 @@ export const useValuerData = () => {
     if (response) {
       const { valuer } = response.data;
 
-      // Set user{...data} for context
+      // Set user{...data}
       setValuer(valuer);
 
       // Set user{...data} & role in local storage

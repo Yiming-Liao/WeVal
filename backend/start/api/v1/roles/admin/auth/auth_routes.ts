@@ -32,13 +32,13 @@ export default function authRoutes(router: HttpRouterService) {
         .put('/password-change', [AdminAuthController, 'passwordChange'])
         .use(middleware.adminAuth())
 
-      //*---------------------------▼-----🚦 Check permission-----▼---------------------------
+      //*-----------------▼-----🚦 Check permission and Get Admin data -----▼-----------------
       router
-        .get('/check-permission', ({ response }: HttpContext) => {
-          return response.ok({ message: 'Approved!' })
+        .get('/', ({ response, auth }: HttpContext) => {
+          return response.ok({ admin: auth.user })
         })
         .use(middleware.adminAuth())
-      //*---------------------------▲-----🚦 Check permission-----▲---------------------------
+      //*-----------------▲-----🚦 Check permission and Get Admin data -----▲-----------------
     })
     .prefix('/auth')
 }

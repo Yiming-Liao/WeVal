@@ -1,8 +1,8 @@
-import { useAxios } from "@/contexts/AxiosContext";
+import { useAxiosStore } from "@/stores/axiosStore";
 import { PasswordChangeProps } from "@/types/user/profile_hooks";
 
 export const usePasswordChange = () => {
-  const axios = useAxios();
+  const { axios } = useAxiosStore();
 
   const passwordChange = async ({
     password,

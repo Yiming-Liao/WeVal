@@ -36,13 +36,13 @@ export default function authRoutes(router: HttpRouterService) {
       // [POST] Password reset
       router.post('/password-reset', [UserAuthController, 'passwordReset'])
 
-      //*---------------------------▼-----🚦 Check permission-----▼---------------------------
+      //*-----------------▼-----🚦 Check permission and Get User data -----▼-----------------
       router
-        .get('/check-permission', ({ response }: HttpContext) => {
-          return response.ok({ message: 'Approved!' })
+        .get('/', ({ response, auth }: HttpContext) => {
+          return response.ok({ user: auth.user })
         })
         .use(middleware.userAuth())
-      //*---------------------------▲-----🚦 Check permission-----▲---------------------------
+      //*-----------------▲-----🚦 Check permission and Get User data -----▲-----------------
     })
     .prefix('/auth')
 }

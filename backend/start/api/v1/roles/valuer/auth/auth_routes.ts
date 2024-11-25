@@ -44,13 +44,13 @@ export default function authRoutes(router: HttpRouterService) {
       // [POST] Password reset
       router.post('/password-reset', [ValuerAuthController, 'passwordReset'])
 
-      //*---------------------------▼-----🚦 Check permission-----▼---------------------------
+      //*-----------------▼-----🚦 Check permission and Get Valuer data -----▼-----------------
       router
-        .get('/check-permission', ({ response }: HttpContext) => {
-          return response.ok({ message: 'Approved!' })
+        .get('/', ({ response, auth }: HttpContext) => {
+          return response.ok({ valuer: auth.user })
         })
         .use(middleware.valuerAuth())
-      //*---------------------------▲-----🚦 Check permission-----▲---------------------------
+      //*-----------------▲-----🚦 Check permission and Get Valuer data -----▲-----------------
     })
     .prefix('/auth')
 }

@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import Admin from '#models/admin/admin'
-import crypto, { randomUUID } from 'node:crypto'
+import crypto from 'node:crypto'
 import { DateTime } from 'luxon'
 
 export class AuthService {
@@ -59,18 +59,5 @@ export class AuthService {
     await admin.merge({ phoneVerifyCode, phoneVerifyCodeExpiresAt }).save()
 
     return phoneVerifyCode
-  }
-
-  /**
-   * 🏷️ Generate admin UUID and Save
-   */
-  static async generateUuid(admin: Admin): Promise<string> {
-    // Generate UUID
-    const uuid = randomUUID()
-
-    // Save
-    await admin.merge({ uuid }).save()
-
-    return uuid
   }
 }

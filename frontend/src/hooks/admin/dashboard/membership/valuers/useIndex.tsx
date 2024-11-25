@@ -1,11 +1,11 @@
 // [r: Admin]
 
-import { useAxios } from "@/contexts/AxiosContext";
-import { Valuer } from "@/types/valuer/model";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { Valuer } from "@/types/models/valuer.types";
 import { useState } from "react";
 
 export const useIndex = () => {
-  const axios = useAxios();
+  const { axios } = useAxiosStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const index = async () => {

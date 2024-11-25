@@ -5,7 +5,6 @@ import Admin from '#models/admin/admin'
 import { DateTime } from 'luxon'
 import env from '#start/env'
 import { AccessToken } from '@adonisjs/auth/access_tokens'
-import { AuthService } from './auth_service.js'
 
 export class AuthMiddlewareService {
   /**
@@ -65,16 +64,6 @@ export class AuthMiddlewareService {
 
     // Return new access token
     return authenticatedAdmin
-  }
-
-  /**
-   * 🏷 Refresh Admin UUID
-   */
-  static async refreshUuid(ctx: HttpContext, admin: Admin): Promise<void> {
-    // 🏷 Generate UUID
-    const uuid = await AuthService.generateUuid(admin!)
-
-    ctx.response.plainCookie(env.get('ADMIN_UUID_NAME'), uuid)
   }
 }
 

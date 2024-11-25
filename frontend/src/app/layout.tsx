@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "@/app/globals.css";
-import "@/styles/typography.scss";
-import Providers from "@/contexts/Providers";
 import { ReactNode } from "react";
+
 import { Toaster } from "react-hot-toast";
+import "@/app/globals.css";
+import Provider from "./Provider";
 
 // Font
 const poppins = Poppins({
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
-        <Providers>{children}</Providers>
+        <Provider>{children}</Provider>
         <Toaster /> {/* React hot toast */}
       </body>
     </html>

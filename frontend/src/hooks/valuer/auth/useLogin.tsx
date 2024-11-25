@@ -1,15 +1,15 @@
 // [r: Valuer]
 
-import { useValuerAuth } from "@/contexts/ValuerAuthContext";
-import { useAxios } from "@/contexts/AxiosContext";
-import { Valuer } from "@/types/valuer/model";
+import { useValuerStore } from "@/stores/valuerStore";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { Valuer } from "@/types/models/valuer.types";
 import { LoginProps } from "@/types/user/auth_hooks";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { useState } from "react";
 
 export const useLogin = () => {
-  const axios = useAxios();
-  const { setValuer } = useValuerAuth();
+  const { axios } = useAxiosStore();
+  const { setValuer } = useValuerStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const login = async ({
@@ -28,7 +28,7 @@ export const useLogin = () => {
     if (response) {
       const { valuer } = response.data;
 
-      // Set user{...data} for context
+      // Set user{...data}
       setValuer(valuer);
 
       // Set user{...data} & role in local storage

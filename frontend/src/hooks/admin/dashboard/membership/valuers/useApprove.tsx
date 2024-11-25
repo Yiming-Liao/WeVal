@@ -1,10 +1,10 @@
 // [r: Admin]
 
-import { useAxios } from "@/contexts/AxiosContext";
-import { Valuer } from "@/types/valuer/model";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { Valuer } from "@/types/models/valuer.types";
 
 export const useApprove = () => {
-  const axios = useAxios();
+  const { axios } = useAxiosStore();
 
   const approve = async ({ email }: { email: string }) => {
     const response = await axios.patch<{ valuer: Valuer }>(

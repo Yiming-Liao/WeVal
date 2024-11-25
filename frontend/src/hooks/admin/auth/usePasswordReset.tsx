@@ -1,33 +1,33 @@
 // [r: Admin]
 
-import { useAxios } from "@/contexts/AxiosContext";
-import { PasswordResetProps } from "@/types/admin/auth_hooks";
-import { useState } from "react";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { PasswordResetProps } from "@/types/admin/auth_hooks.types";
+import { useMutation } from "@tanstack/react-query";
 
 export const usePasswordReset = () => {
-  const axios = useAxios();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { axios } = useAxiosStore();
 
+  // ⚡ passwordReset
   const passwordReset = async ({
     passwordResetToken,
     password,
     passwordConfirm,
   }: PasswordResetProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>("/admin/auth/password-reset", {
       passwordResetToken,
       password,
       passwordConfirm,
     });
+    if (!response) return false;
 
-    setIsLoading(false);
-
-    if (response) {
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  return { passwordReset, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: passwordReset });
+
+  return {
+    passwordReset: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

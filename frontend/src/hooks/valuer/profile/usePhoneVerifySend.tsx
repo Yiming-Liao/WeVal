@@ -1,8 +1,8 @@
-import { useAxios } from "@/contexts/AxiosContext";
+import { useAxiosStore } from "@/stores/axiosStore";
 import { PhoneVerifySendProps } from "@/types/valuer/profile_hooks";
 
 export const usePhoneVerifySend = () => {
-  const axios = useAxios();
+  const { axios } = useAxiosStore();
 
   const phoneVerifySend = async ({
     phone,

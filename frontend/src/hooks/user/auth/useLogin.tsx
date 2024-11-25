@@ -1,15 +1,15 @@
 // [r: User]
 
-import { useUserAuth } from "@/contexts/UserAuthContext";
-import { useAxios } from "@/contexts/AxiosContext";
-import { User } from "@/types/user/model";
+import { useUserStore } from "@/stores/userStore";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { User } from "@/types/models/user.types";
 import { LoginProps } from "@/types/user/auth_hooks";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { useState } from "react";
 
 export const useLogin = () => {
-  const axios = useAxios();
-  const { setUser } = useUserAuth();
+  const { axios } = useAxiosStore();
+  const { setUser } = useUserStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const login = async ({ email, password }: LoginProps): Promise<boolean> => {
@@ -25,7 +25,7 @@ export const useLogin = () => {
     if (response) {
       const { user } = response.data;
 
-      // Set user{...data} for context
+      // Set user{...data}
       setUser(user);
 
       // Set user{...data} & role in local storage

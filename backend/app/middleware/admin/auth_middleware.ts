@@ -15,6 +15,7 @@ export default class AuthMiddleware {
     if (!accessToken) {
       // 🔑 Check if refresh token valid and return foundAdmin
       const foundAdmin = await AuthMiddlewareService.checkRefreshToken(ctx)
+      if (!foundAdmin) return
 
       // 🔑 Refresh access token and return
       accessToken = await AuthMiddlewareService.refreshAccessToken(ctx, foundAdmin!)

@@ -9,7 +9,7 @@ export const config = {
   matcher: [
     "/user/dashboard/:path*",
     "/valuer/dashboard/:path*",
-    "/admin/:path/dashboard/:path*", // Matching: /admin/uuid.../dashboard/*
+    "/admin/dashboard/:path*",
   ],
 };
 
@@ -17,7 +17,7 @@ export const config = {
 const PROTECTED_PATHS: Record<string, string> = {
   "/user/dashboard": "user",
   "/valuer/dashboard": "valuer",
-  "/admin": "admin",
+  "/admin/dashboard": "admin",
 };
 
 /**

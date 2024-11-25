@@ -22,7 +22,7 @@ export const envConfig = {
   USER_ROLE_NAME:
     `${APP_NAME}${process.env.USER_ROLE_NAME}` || "WeVal-user-role",
 
-  // 🍪 [Cookie name] Authentication tokens & uuid
+  // 🍪 [Cookie name] Authentication tokens
   USER_ACCESS_TOKEN_NAME:
     `${APP_NAME}${process.env.USER_ACCESS_TOKEN_NAME}` ||
     "WeVal-user-access-token",
@@ -43,8 +43,6 @@ export const envConfig = {
   ADMIN_REFRESH_TOKEN_NAME:
     `${APP_NAME}${process.env.ADMIN_REFRESH_TOKEN_NAME}` ||
     "WeVal-admin-refresh-token",
-  ADMIN_UUID_NAME:
-    `${APP_NAME}${process.env.ADMIN_UUID_NAME}` || "WeVal-admin-uuid",
 
   // 🪣 File proxy URLs
   NEXT_PUBLIC_USER_FILES_URL:

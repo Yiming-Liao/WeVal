@@ -14,20 +14,16 @@ export async function login({ request, response }: HttpContext) {
   // 🗄️ Find Admin (Built-in error handling)
   const foundAdmin = await Admin.verifyCredentials(email, password)
 
-  // 🏷 Generate UUID
-  const uuid = await AuthService.generateUuid(foundAdmin!)
-
   // 🔑 Generate access token
   const accessToken = await Admin.accessTokens.create(foundAdmin!, ['*'])
 
   // 🔑 Generate refresh token
   const refreshToken = await AuthService.generateRefreshToken(foundAdmin!)
 
-  return response // Refresh Token expires in 30 days (same wuth role name & uuid)
+  return response // Refresh Token expires in 30 days (same wuth role name)
     .cookie(env.get('ADMIN_REFRESH_TOKEN_NAME'), refreshToken, { maxAge: 30 * 24 * 60 * 60 })
     .cookie(env.get('ADMIN_ACCESS_TOKEN_NAME'), accessToken.toJSON().token)
     .plainCookie(env.get('USER_ROLE_NAME'), 'admin', { maxAge: 30 * 24 * 60 * 60, encode: false })
-    .plainCookie(env.get('ADMIN_UUID_NAME'), uuid, { maxAge: 30 * 24 * 60 * 60 }) // Frontend Path UUID
     .ok({
       message: i18n.t('messages.admin.auth.login.ok'),
       admin: foundAdmin!.serialize(),

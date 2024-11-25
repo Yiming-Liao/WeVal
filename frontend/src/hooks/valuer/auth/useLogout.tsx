@@ -1,13 +1,13 @@
 // [r: Valuer]
 
-import { useValuerAuth } from "@/contexts/ValuerAuthContext";
-import { useAxios } from "@/contexts/AxiosContext";
+import { useValuerStore } from "@/stores/valuerStore";
+import { useAxiosStore } from "@/stores/axiosStore";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { useState } from "react";
 
 export const useLogout = () => {
-  const axios = useAxios();
-  const { setValuer } = useValuerAuth();
+  const { axios } = useAxiosStore();
+  const { setValuer } = useValuerStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const logout = async (): Promise<boolean> => {

@@ -1,10 +1,10 @@
 // [r: Admin]
 
-import { useAxios } from "@/contexts/AxiosContext";
-import { Valuer } from "@/types/valuer/model";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { Valuer } from "@/types/models/valuer.types";
 
 export const useReject = () => {
-  const axios = useAxios();
+  const { axios } = useAxiosStore();
 
   const reject = async ({
     email,

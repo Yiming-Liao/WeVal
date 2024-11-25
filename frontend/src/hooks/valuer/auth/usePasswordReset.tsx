@@ -1,11 +1,11 @@
 // [r: Valuer]
 
-import { useAxios } from "@/contexts/AxiosContext";
+import { useAxiosStore } from "@/stores/axiosStore";
 import { PasswordResetProps } from "@/types/valuer/auth_hooks";
 import { useState } from "react";
 
 export const usePasswordReset = () => {
-  const axios = useAxios();
+  const { axios } = useAxiosStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const passwordReset = async ({

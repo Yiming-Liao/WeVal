@@ -18,6 +18,5 @@ export async function logout({ auth, response }: HttpContext) {
     .clearCookie(env.get('ADMIN_REFRESH_TOKEN_NAME'))
     .clearCookie(env.get('ADMIN_ACCESS_TOKEN_NAME'))
     .clearCookie(env.get('USER_ROLE_NAME'))
-    .clearCookie(env.get('ADMIN_UUID_NAME'))
     .ok({ message: i18n.t('messages.admin.auth.logout.ok') })
 }

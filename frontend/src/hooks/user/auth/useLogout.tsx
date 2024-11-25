@@ -1,11 +1,11 @@
-import { useUserAuth } from "@/contexts/UserAuthContext";
-import { useAxios } from "@/contexts/AxiosContext";
+import { useUserStore } from "@/stores/userStore";
+import { useAxiosStore } from "@/stores/axiosStore";
 import AuthLocalStorage from "@/services/AuthLocalStorage";
 import { useState } from "react";
 
 export const useLogout = () => {
-  const axios = useAxios();
-  const { setUser } = useUserAuth();
+  const { axios } = useAxiosStore();
+  const { setUser } = useUserStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const logout = async (): Promise<boolean> => {

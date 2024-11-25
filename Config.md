@@ -38,7 +38,3 @@
 
 - [GET] /api/v1/files/\*
 - [DELETE] /api/v1/files/\*
-
-### Admin protection
-
-- UUID Route for dashboard entry

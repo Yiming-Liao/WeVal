@@ -1,12 +1,12 @@
 import { envConfig } from "@/config/envConfig";
-import { useUserAuth } from "@/contexts/UserAuthContext";
-import { useAxios } from "@/contexts/AxiosContext";
+import { useUserStore } from "@/stores/userStore";
+import { useAxiosStore } from "@/stores/axiosStore";
 import { User } from "@/types/user/model";
 import { PhoneVerifyProps } from "@/types/user/profile_hooks";
 
 export const usePhoneVerify = () => {
-  const axios = useAxios();
-  const { setUser } = useUserAuth();
+  const { axios } = useAxiosStore();
+  const { setUser } = useUserStore();
 
   const phoneVerify = async ({
     phone,

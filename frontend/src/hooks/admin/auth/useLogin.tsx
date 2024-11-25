@@ -1,44 +1,36 @@
 // [r: Admin]
 
-import { useAxios } from "@/contexts/AxiosContext";
-import { LoginProps } from "@/types/admin/auth_hooks";
-import { useAdminAuth } from "@/contexts/AdminAuthContext";
-import { Admin } from "@/types/admin/model";
-import AuthLocalStorage from "@/services/AuthLocalStorage";
-import { useState } from "react";
+import { useAxiosStore } from "@/stores/axiosStore";
+import { LoginProps } from "@/types/admin/auth_hooks.types";
+import { useAdminStore } from "@/stores/adminStore";
+import { Admin } from "@/types/models/admin.types";
+import { useMutation } from "@tanstack/react-query";
 
 export const useLogin = () => {
-  const axios = useAxios();
-  const { setAdmin } = useAdminAuth();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { axios } = useAxiosStore();
+  const { setAdmin, setIsLoading } = useAdminStore();
 
-  const login = async ({
-    email,
-    password,
-  }: LoginProps): Promise<boolean | { uuid: string }> => {
-    setIsLoading(true);
-
+  // ⚡ login
+  const login = async ({ email, password }: LoginProps): Promise<boolean> => {
     const response = await axios.post<{ admin: Admin }>("/admin/auth/login", {
       email,
       password,
     });
+    if (!response) return false;
 
+    const { admin } = response.data;
+    // Set user{...data} in global store
+    setAdmin(admin);
     setIsLoading(false);
 
-    if (response) {
-      const { admin } = response.data;
-
-      // Set user{...data} for context
-      setAdmin(admin);
-
-      // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ userData: admin, role: "admin" });
-
-      return { uuid: admin.uuid! };
-    }
-
-    return false;
+    return true;
   };
 
-  return { login, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: login });
+
+  return {
+    login: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

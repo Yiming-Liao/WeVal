@@ -1,11 +1,11 @@
 // [r: Valuer]
 
-import { useAxios } from "@/contexts/AxiosContext";
+import { useAxiosStore } from "@/stores/axiosStore";
 import { RegisterEmailVerifyProps } from "@/types/valuer/auth_hooks";
 import { useState } from "react";
 
 export const useRegisterEmailVerify = () => {
-  const axios = useAxios();
+  const { axios } = useAxiosStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const registerEmailVerify = async ({

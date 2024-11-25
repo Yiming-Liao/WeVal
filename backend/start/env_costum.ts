@@ -21,7 +21,6 @@ export const envCustom = {
   VALUER_REFRESH_TOKEN_NAME: Env.schema.string(),
   ADMIN_ACCESS_TOKEN_NAME: Env.schema.string(),
   ADMIN_REFRESH_TOKEN_NAME: Env.schema.string(),
-  ADMIN_UUID_NAME: Env.schema.string(),
 
   /*
   |----------------------------------------------------------

@@ -1,6 +1,6 @@
 import { envConfig } from "@/config/envConfig";
 import { User } from "@/types/user/model";
-import { Valuer } from "@/types/valuer/model";
+import { Valuer } from "@/types/models/valuer.types";
 import { Admin } from "@/types/admin/model";
 
 export default class AuthLocalStorage {
