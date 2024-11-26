@@ -9,9 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "var(--primary, #213DEB)",
-        secondary: "var(--secondary, #1A2596)",
-        deep: "var(--deep, #09034B)",
+        primary: "#213DEB",
+        secondary: "#1A2596",
+        deep: "#09034B",
+        light: "#DAECFD",
+        silver: "#73798D",
+      },
+      backgroundImage: {
+        "hero-section": "url('/images/home-page/HeroSection/background.gif')",
       },
     },
   },
@@ -19,6 +24,12 @@ const config: Config = {
     function ({ addComponents }: AddComponents) {
       addComponents({
         // Title
+
+        ".typography-title-lg": {
+          fontSize: "36px",
+          // fontWeight: "300",
+          lineHeight: "54px",
+        },
         ".typography-title-md": {
           fontSize: "28px",
           // fontWeight: "300",
@@ -30,8 +41,22 @@ const config: Config = {
           fontSize: "16px",
           lineHeight: "24px",
         },
+        ".typography-body-sm": {
+          fontSize: "14px",
+          lineHeight: "21px",
+        },
 
         // Label
+        ".typography-label-xl": {
+          fontSize: "20px",
+          // fontWeight: "300",
+          lineHeight: "30px",
+        },
+        ".typography-label-lg": {
+          fontSize: "18px",
+          // fontWeight: "300",
+          lineHeight: "27px",
+        },
         ".typography-label-md": {
           fontSize: "14px",
           // fontWeight: "300",

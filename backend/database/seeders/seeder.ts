@@ -6,7 +6,7 @@ import { DateTime } from 'luxon'
 
 export default class Seeder extends BaseSeeder {
   async run() {
-    await Seeder.admin()
+    // await Seeder.admin()
     await Seeder.valuer()
     await Seeder.user()
   }
@@ -56,7 +56,7 @@ export default class Seeder extends BaseSeeder {
 
     // Valuer3: Registered, and approved.
     const createdValuer3 = await Valuer.create({
-      email: 'valuer3@gmail.com',
+      email: 'masouivan@gmail.com',
       username: 'valuer3',
       password: '123456',
       phone: '+61000000003',
@@ -77,7 +77,7 @@ export default class Seeder extends BaseSeeder {
    */
   static async user() {
     await User.create({
-      email: 'user1@gmail.com',
+      email: 'masouivan@gmail.com',
       username: 'user1',
       password: '123456',
       emailVerifiedAt: DateTime.now(),

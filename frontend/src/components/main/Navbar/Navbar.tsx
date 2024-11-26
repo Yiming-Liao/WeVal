@@ -1,65 +1,76 @@
 "use client";
 
-import { FC, useEffect, useMemo, useState } from "react";
+// import { FC, useEffect, useMemo } from "react";
+import { FC } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import UserSignOutButton from "@/components/user/Navbar/SignOutButton";
-import ValuerSignOutButton from "@/components/valuer/Navbar/SignOutButton";
-import AdminSignOutButton from "@/components/admin/Navbar/SignOutButton";
-import UserUserCardButton from "@/components/user/Navbar/UserCardButton";
-import ValuerUserCardButton from "@/components/valuer/Navbar/UserCardButton";
 import NavLink from "./NavLink";
-import { useAdminStore } from "@/stores/adminStore";
-import { useUserStore } from "@/stores/userStore";
-import { useValuerStore } from "@/stores/valuerStore";
+// import UserSignOutButton from "@/components/user/Navbar/SignOutButton";
+// import ValuerSignOutButton from "@/components/valuer/Navbar/SignOutButton";
+// import AdminSignOutButton from "@/components/admin/Navbar/SignOutButton";
+// import UserUserCardButton from "@/components/user/Navbar/UserCardButton";
+// import ValuerUserCardButton from "@/components/valuer/Navbar/UserCardButton";
+// import { useAdminStore } from "@/stores/adminStore";
+// import { useUserStore } from "@/stores/userStore";
+// import { useValuerStore } from "@/stores/valuerStore";
+// import { useRoleStore } from "@/stores/roleStore";
+// import { useAdminInit } from "@/hooks/admin/useAdminInit";
+// import { useUserInit } from "@/hooks/user/useUserInit";
+// import { useValuerInit } from "@/hooks/valuer/useValuerInit";
 
 const Navbar: FC = () => {
-  const { user } = useUserStore();
-  const { valuer } = useValuerStore();
-  const { admin } = useAdminStore();
+  // const { user } = useUserStore();
+  // const { valuer } = useValuerStore();
+  // const { admin } = useAdminStore();
+  // const { role, setRole } = useRoleStore();
 
-  const [role, setRole] = useState<null | "user" | "valuer" | "admin">(null);
+  // const init =
+  //   role === "user"
+  //     ? useUserInit
+  //     : role === "valuer"
+  //     ? useValuerInit
+  //     : useAdminInit;
+  // init();
 
-  useEffect(() => {
-    if (user) {
-      setRole("user");
-    } else if (valuer) {
-      setRole("valuer");
-    } else if (admin) {
-      setRole("admin");
-    } else {
-      setRole(null);
-    }
-  }, [admin, user, valuer]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setRole("user");
+  //   } else if (valuer) {
+  //     setRole("valuer");
+  //   } else if (admin) {
+  //     setRole("admin");
+  //     // } else {
+  //     //   setRole("");
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [admin, user, valuer]);
 
-  const renderSignOutButton = useMemo(() => {
-    switch (role) {
-      case "user":
-        return <UserSignOutButton />;
-      case "valuer":
-        return <ValuerSignOutButton />;
-      case "admin":
-        return <AdminSignOutButton />;
-      default:
-        return <UserSignOutButton />;
-    }
-  }, [role]);
+  // const renderSignOutButton = useMemo(() => {
+  //   switch (role) {
+  //     case "user":
+  //       return <UserSignOutButton />;
+  //     case "valuer":
+  //       return <ValuerSignOutButton />;
+  //     case "admin":
+  //       return <AdminSignOutButton />;
+  //     default:
+  //       return <UserSignOutButton />;
+  //   }
+  // }, [role]);
 
-  const renderUserCardButton = useMemo(() => {
-    switch (role) {
-      case "user":
-        return <UserUserCardButton />;
-      case "valuer":
-        return <ValuerUserCardButton />;
-      default:
-        return <UserUserCardButton />;
-    }
-  }, [role]);
-
-  console.log(role);
+  // const renderUserCardButton = useMemo(() => {
+  //   switch (role) {
+  //     case "user":
+  //       return <UserUserCardButton />;
+  //     case "valuer":
+  //       return <ValuerUserCardButton />;
+  //     default:
+  //       return <UserUserCardButton />;
+  //   }
+  // }, [role]);
 
   return (
-    <header className="fixed top-0 left-0 w-full h-24 bg-deep text-white z-[999]">
+    <header className="fixed top-0 left-0 w-full h-24 bg-secondary text-white z-[999]">
       <div className="w-full h-full px-[104px] flex justify-center items-center gap-3">
         <div className="relative container">
           <div className="flex justify-between items-center">
@@ -85,19 +96,19 @@ const Navbar: FC = () => {
                 href={"/create-order"}
                 className="h-12 px-4 rounded-lg bg-white text-deep flex justify-center items-center"
               >
-                Create an order
+                Request a Valuation
               </Link>
               <div className="w-[184px] flex gap-4 justify-end">
-                {role ? (
+                {/* {role ? (
                   <>
                     {renderSignOutButton}
                     {renderUserCardButton}
                   </>
-                ) : (
-                  <Link href={"/user/login"} className="relative -mr-2 p-2">
-                    Sign in
-                  </Link>
-                )}
+                ) : ( */}
+                <Link href={"/user/login"} className="relative -mr-2 p-2">
+                  Sign in
+                </Link>
+                {/* )} */}
               </div>
             </div>
           </div>

@@ -10,7 +10,6 @@ import Steps1of3 from "./steps/Steps1of3";
 import Checked from "./checkbox/Checked";
 import Steps2of3 from "./steps/Steps2of3";
 import Steps3of3 from "./steps/Steps3of3";
-import ArrowDown from "./ArrowDown";
 import FileUpload from "./FileUpload/FileUpload";
 import FileUploadBorder from "./FileUpload/FileUploadBorder";
 import UserCardToggle from "./UserCard/UserCardToggle";
@@ -22,6 +21,12 @@ import Revenue from "./page-nav-icons/Revenue";
 import Logo from "./logo/Logo";
 import Earth from "./MainFeature/Earth";
 import MapNewSouthWales from "./MainFeature/MapNewSouthWales";
+import Facebook from "./social-media-apps/Facebook";
+import ValuerSignUpIcon from "./home-page/HeroSection/ValuerSignUpIcon";
+import Arrow45deg from "./home-page/HeroSection/Arrow45deg";
+import UserSignUpIcon from "./home-page/HeroSection/UserSignUpIcon";
+import ArrowMore from "./home-page/NewsSection/ArrowMore";
+import TriangleDown from "./TriangleDown";
 
 export {
   FullLogoBlue,
@@ -36,7 +41,6 @@ export {
   EyeClose,
   EyeOpen,
   Checked,
-  ArrowDown,
   FileUpload,
   FileUploadBorder,
   UserCardToggle,
@@ -48,4 +52,10 @@ export {
   Logo,
   Earth,
   MapNewSouthWales,
+  Facebook,
+  ValuerSignUpIcon,
+  UserSignUpIcon,
+  Arrow45deg,
+  ArrowMore,
+  TriangleDown,
 };

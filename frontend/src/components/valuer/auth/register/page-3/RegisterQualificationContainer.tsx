@@ -2,24 +2,15 @@
 
 "use client";
 
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import FormRegisterQualificationWrapper from "./FormRegisterQualification";
 import QualificationRejection from "./QualificationRejection";
-import { useValuerData } from "@/hooks/valuer/useValuerData";
 import { useValuerStore } from "@/stores/valuerStore";
+import { useValuerInit } from "@/hooks/valuer/useValuerInit";
 
 const RegisterQualificationContainer: FC = () => {
-  const { valuerData } = useValuerData();
   const { valuer } = useValuerStore();
-
-  useEffect(() => {
-    const fetchValuerData = async () => {
-      await valuerData();
-    };
-
-    fetchValuerData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useValuerInit();
 
   if (!valuer) {
     return <p>Loading...</p>;

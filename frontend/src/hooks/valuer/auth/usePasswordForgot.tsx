@@ -1,29 +1,29 @@
 // [r: Valuer]
 
 import { useAxiosStore } from "@/stores/axiosStore";
-import { PasswordForgotProps } from "@/types/user/auth_hooks";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { PasswordForgotProps } from "@/types/valuer/auth_hooks.types";
 
 export const usePasswordForgot = () => {
   const { axios } = useAxiosStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Forgot password
   const passwordForgot = async ({
     email,
   }: PasswordForgotProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>("/valuer/auth/password-forgot", {
       email,
     });
+    if (!response) return false;
 
-    setIsLoading(false);
-
-    if (response) {
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  return { passwordForgot, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: passwordForgot });
+
+  return {
+    passwordForgot: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

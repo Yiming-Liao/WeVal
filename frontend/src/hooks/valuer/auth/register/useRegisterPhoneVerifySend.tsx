@@ -1,35 +1,31 @@
 // [r: Valuer]
 
 import { useAxiosStore } from "@/stores/axiosStore";
-import { RegisterPhoneVerifySendProps } from "@/types/valuer/auth_hooks";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { RegisterPhoneVerifySendProps } from "@/types/valuer/auth_hooks.types";
 
 export const useRegisterPhoneVerifySend = () => {
   const { axios } = useAxiosStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Send verification SMS for registration
   const registerPhoneVerifySend = async ({
     email,
     phone,
   }: RegisterPhoneVerifySendProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>(
       "/valuer/auth/register-phone-verify-send",
-      {
-        email,
-        phone,
-      }
+      { email, phone }
     );
+    if (!response) return false;
 
-    setIsLoading(false);
-
-    if (response) {
-      return true;
-    }
-
-    return false;
+    return true;
   };
 
-  return { registerPhoneVerifySend, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: registerPhoneVerifySend });
+
+  return {
+    registerPhoneVerifySend: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

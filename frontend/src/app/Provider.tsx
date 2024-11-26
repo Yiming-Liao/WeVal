@@ -1,5 +1,3 @@
-// [r: Admin]
-
 "use client";
 
 import { ReactNode } from "react";

@@ -1,44 +1,43 @@
 // [r: Valuer]
 
-import { useValuerStore } from "@/stores/valuerStore";
 import { useAxiosStore } from "@/stores/axiosStore";
+import { LoginProps } from "@/types/valuer/auth_hooks.types";
+import { useValuerStore } from "@/stores/valuerStore";
 import { Valuer } from "@/types/models/valuer.types";
-import { LoginProps } from "@/types/user/auth_hooks";
-import AuthLocalStorage from "@/services/AuthLocalStorage";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import LocalStorageService from "@/services/LocalStorageService";
 
 export const useLogin = () => {
   const { axios } = useAxiosStore();
-  const { setValuer } = useValuerStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { setValuer, setIsLoading } = useValuerStore();
 
+  // ⚡ Login
   const login = async ({
     email,
     password,
-  }: LoginProps): Promise<boolean | Valuer> => {
-    setIsLoading(true);
-
+  }: LoginProps): Promise<Valuer | boolean> => {
     const response = await axios.post<{ valuer: Valuer }>(
       "/valuer/auth/login",
       { email, password }
     );
+    if (!response) return false;
+
+    const { valuer } = response.data;
+    // Set user{...data}
+    setValuer(valuer);
+
+    LocalStorageService.setRole({ role: "valuer" });
 
     setIsLoading(false);
 
-    if (response) {
-      const { valuer } = response.data;
-
-      // Set user{...data}
-      setValuer(valuer);
-
-      // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ userData: valuer, role: "valuer" });
-
-      return valuer;
-    }
-
-    return false;
+    return valuer;
   };
 
-  return { login, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: login });
+
+  return {
+    login: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

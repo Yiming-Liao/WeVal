@@ -1,31 +1,29 @@
-import { useUserStore } from "@/stores/userStore";
+// [r: User]
+
 import { useAxiosStore } from "@/stores/axiosStore";
-import AuthLocalStorage from "@/services/AuthLocalStorage";
-import { useState } from "react";
+import { useUserStore } from "@/stores/userStore";
+import { useMutation } from "@tanstack/react-query";
 
 export const useLogout = () => {
   const { axios } = useAxiosStore();
   const { setUser } = useUserStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Logout
   const logout = async (): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>("/user/auth/logout");
+    if (!response) return false;
 
-    setIsLoading(false);
+    // Clear user{...data}
+    setUser(null);
 
-    if (response) {
-      // Clear user{...data} from context
-      setUser(null);
-
-      // Remove user{...data} & role in local storage
-      AuthLocalStorage.remove();
-
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  return { logout, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: logout });
+
+  return {
+    logout: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

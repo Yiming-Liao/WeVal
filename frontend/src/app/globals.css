@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary: #213deb;
-  --secondary: #1a2596;
-  --deep: #09034b;
-}
-
 input::placeholder {
   font-family: Poppins;
   font-size: 14px;
@@ -18,35 +12,17 @@ input::placeholder {
   text-decoration-skip-ink: none;
 }
 
-/*
-* Loading
-*/
-#loading {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 2000;
+/* Hero section */
+.bg-main-gradient {
+  background: linear-gradient(315deg, #2300e9 0%, #0083d4 60%, #00e5f5 100%);
 }
-
-#loading div {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
-  width: 64px;
-  height: 64px;
-  border: 8px solid gray;
-  border-left: 0;
-  border-right: 0;
-  border-radius: 100%;
-  animation: spin infinite 1s linear;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
+.bg-glassmorphism {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  backdrop-filter: blur(8px);
 }
 
 /* Blur fade in */

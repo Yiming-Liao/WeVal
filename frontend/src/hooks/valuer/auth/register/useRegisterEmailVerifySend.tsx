@@ -1,30 +1,30 @@
 // [r: Valuer]
 
 import { useAxiosStore } from "@/stores/axiosStore";
-import { RegisterEmailVerifySendProps } from "@/types/user/auth_hooks";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { RegisterEmailVerifySendProps } from "@/types/user/auth_hooks.types";
 
 export const useRegisterEmailVerifySend = () => {
   const { axios } = useAxiosStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Send verification email for registration
   const registerEmailVerifySend = async ({
     email,
   }: RegisterEmailVerifySendProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>(
       "/valuer/auth/register-email-verify-send",
       { email }
     );
+    if (!response) return false;
 
-    setIsLoading(false);
-
-    if (response) {
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  return { registerEmailVerifySend, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: registerEmailVerifySend });
+
+  return {
+    registerEmailVerifySend: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

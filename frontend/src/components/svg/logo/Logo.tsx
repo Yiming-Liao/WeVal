@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 const Logo: FC<{ color?: string; className?: string }> = ({
-  color = "#1A2596",
+  color = "#213DEB",
   className = "",
 }) => {
   return (

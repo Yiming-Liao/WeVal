@@ -43,6 +43,7 @@ const FormEmailVerify = ({ email, isSent }: FormEmailVerifyProps) => {
         maxLength={6}
         value={emailVerifyCode}
         onChange={(e) => setemailVerifyCode(e.target.value)}
+        disabled={!isSent}
         className={`w-full ${
           !isSent ? "opacity-25" : "opacity-100"
         } duration-200`}

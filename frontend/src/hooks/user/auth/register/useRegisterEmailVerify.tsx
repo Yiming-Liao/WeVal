@@ -1,31 +1,31 @@
 // [r: User]
 
 import { useAxiosStore } from "@/stores/axiosStore";
-import { RegisterEmailVerifyProps } from "@/types/user/auth_hooks";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { RegisterEmailVerifyProps } from "@/types/user/auth_hooks.types";
 
+// ⚡ Verify SMS code for registration
 export const useRegisterEmailVerify = () => {
   const { axios } = useAxiosStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const registerEmailVerify = async ({
     email,
     emailVerifyCode,
   }: RegisterEmailVerifyProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>(
       "/user/auth/register-email-verify",
       { email, emailVerifyCode }
     );
+    if (!response) return false;
 
-    setIsLoading(false);
-
-    if (response) {
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  return { registerEmailVerify, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: registerEmailVerify });
+
+  return {
+    registerEmailVerify: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

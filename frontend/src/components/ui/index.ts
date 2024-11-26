@@ -8,6 +8,7 @@ import InputPassword from "./Input/InputPassword";
 import Header from "./auth/Header";
 import Select from "./Select";
 import InputFile from "./Input/InputFile";
+import Accordion from "./Accordion";
 
 export {
   Button,
@@ -20,4 +21,5 @@ export {
   Header,
   Select,
   InputFile,
+  Accordion,
 };

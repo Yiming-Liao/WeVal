@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 export const usePasswordChange = () => {
   const { axios } = useAxiosStore();
 
-  // ⚡ passwordChange
+  // ⚡ Change password
   const passwordChange = async ({
     password,
     newPassword,

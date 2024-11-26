@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 export const usePasswordForgot = () => {
   const { axios } = useAxiosStore();
 
-  // ⚡ passwordForgot
+  // ⚡ Forgot password
   const passwordForgot = async ({
     email,
   }: PasswordForgotProps): Promise<boolean> => {

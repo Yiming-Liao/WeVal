@@ -3,15 +3,15 @@
 import { useValuerStore } from "@/stores/valuerStore";
 import { useAxiosStore } from "@/stores/axiosStore";
 import { Valuer } from "@/types/models/valuer.types";
-import { RegisterProps } from "@/types/valuer/auth_hooks";
-import AuthLocalStorage from "@/services/AuthLocalStorage";
-import { useState } from "react";
+import { RegisterProps } from "@/types/valuer/auth_hooks.types";
+import AuthLocalStorage from "@/services/LocalStorageService";
+import { useMutation } from "@tanstack/react-query";
 
 export const useRegister = () => {
   const { axios } = useAxiosStore();
   const { setValuer } = useValuerStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Register
   const register = async ({
     email,
     username,
@@ -20,8 +20,6 @@ export const useRegister = () => {
     password,
     passwordConfirm,
   }: RegisterProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<{ valuer: Valuer }>(
       "/valuer/auth/register",
       {
@@ -33,23 +31,20 @@ export const useRegister = () => {
         passwordConfirm,
       }
     );
+    if (!response) return false;
 
-    setIsLoading(false);
+    const { valuer } = response.data;
 
-    if (response) {
-      const { valuer } = response.data;
+    // Set user{...data}
+    setValuer(valuer);
 
-      // Set user{...data}
-      setValuer(valuer);
+    AuthLocalStorage.setRole({ role: "valuer" });
 
-      // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ userData: valuer, role: "valuer" });
-
-      return true;
-    }
-
-    return false;
+    return true;
   };
 
-  return { register, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: register });
+
+  return { register: mutation.mutateAsync, isLoading: mutation.isPending };
 };

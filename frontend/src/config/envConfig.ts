@@ -13,8 +13,8 @@ export const envConfig = {
   FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL || "http://127.0.0.1:3000",
 
   // 🎟️ [Local storage key] User data & User role
-  USER_DATA_KEY:
-    `${APP_NAME}${process.env.NEXT_PUBLIC_USER_DATA_KEY}` || "WeVal-user-data",
+  // USER_DATA_KEY:
+  //   `${APP_NAME}${process.env.NEXT_PUBLIC_USER_DATA_KEY}` || "WeVal-user-data",
   USER_ROLE_KEY:
     `${APP_NAME}${process.env.NEXT_PUBLIC_USER_ROLE_KEY}` || "WeVal-user-role",
 

@@ -1,48 +1,43 @@
 // [r: User]
 
-import { useState } from "react";
 import { useUserStore } from "@/stores/userStore";
 import { useAxiosStore } from "@/stores/axiosStore";
 import { User } from "@/types/models/user.types";
-import { RegisterProps } from "@/types/user/auth_hooks";
-import AuthLocalStorage from "@/services/AuthLocalStorage";
+import { RegisterProps } from "@/types/user/auth_hooks.types";
+import AuthLocalStorage from "@/services/LocalStorageService";
+import { useMutation } from "@tanstack/react-query";
 
 export const useRegister = () => {
   const { axios } = useAxiosStore();
   const { setUser } = useUserStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Register
   const register = async ({
     email,
     username,
     password,
     passwordConfirm,
   }: RegisterProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<{ user: User }>("/user/auth/register", {
       email,
       username,
       password,
       passwordConfirm,
     });
+    if (!response) return false;
 
-    setIsLoading(false);
+    const { user } = response.data;
 
-    if (response) {
-      const { user } = response.data;
+    // Set user{...data}
+    setUser(user);
 
-      // Set user{...data}
-      setUser(user);
+    AuthLocalStorage.setRole({ role: "valuer" });
 
-      // Set user{...data} & role in local storage
-      AuthLocalStorage.set({ userData: user, role: "user" });
-
-      return true;
-    }
-
-    return false;
+    return true;
   };
 
-  return { register, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: register });
+
+  return { register: mutation.mutateAsync, isLoading: mutation.isPending };
 };

@@ -7,7 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 export const usePasswordReset = () => {
   const { axios } = useAxiosStore();
 
-  // ⚡ passwordReset
+  // ⚡ Reset password
   const passwordReset = async ({
     passwordResetToken,
     password,

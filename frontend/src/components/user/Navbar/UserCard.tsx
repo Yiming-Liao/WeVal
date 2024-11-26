@@ -1,7 +1,7 @@
 // [r: User]
 
 import { Order, UserCard as UserCardIcon } from "@/components/svg";
-import { User } from "@/types/user/model";
+import { User } from "@/types/models/user.types";
 import Link from "next/link";
 import { Dispatch, FC, SetStateAction } from "react";
 

@@ -1,7 +1,7 @@
-import { envConfig } from "@/config/envConfig";
+// import { envConfig } from "@/config/envConfig";
 import { useUserStore } from "@/stores/userStore";
 import { useAxiosStore } from "@/stores/axiosStore";
-import { User } from "@/types/user/model";
+import { User } from "@/types/models/user.types";
 import { PhoneVerifyProps } from "@/types/user/profile_hooks";
 
 export const usePhoneVerify = () => {
@@ -26,8 +26,8 @@ export const usePhoneVerify = () => {
       // set user
       setUser(user);
 
-      // set user{} in localStorage
-      localStorage.setItem(envConfig.USER_DATA_KEY, JSON.stringify(user));
+      // // set user{} in localStorage
+      // localStorage.setItem(envConfig.USER_DATA_KEY, JSON.stringify(user));
 
       return true;
     }

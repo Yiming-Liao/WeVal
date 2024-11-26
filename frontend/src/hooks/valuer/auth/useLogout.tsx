@@ -1,33 +1,32 @@
 // [r: Valuer]
 
-import { useValuerStore } from "@/stores/valuerStore";
 import { useAxiosStore } from "@/stores/axiosStore";
-import AuthLocalStorage from "@/services/AuthLocalStorage";
-import { useState } from "react";
+import { useValuerStore } from "@/stores/valuerStore";
+import { useMutation } from "@tanstack/react-query";
+import LocalStorageService from "@/services/LocalStorageService";
 
 export const useLogout = () => {
   const { axios } = useAxiosStore();
   const { setValuer } = useValuerStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Logout
   const logout = async (): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>("/valuer/auth/logout");
+    if (!response) return false;
 
-    setIsLoading(false);
+    // Clear user{...data}
+    setValuer(null);
 
-    if (response) {
-      // Clear user{...data} from context
-      setValuer(null);
+    LocalStorageService.removeRole();
 
-      // Remove user{...data} & role in local storage
-      AuthLocalStorage.remove();
-
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  return { logout, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: logout });
+
+  return {
+    logout: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

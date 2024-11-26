@@ -1,33 +1,33 @@
 // [r: Valuer]
 
 import { useAxiosStore } from "@/stores/axiosStore";
-import { PasswordResetProps } from "@/types/valuer/auth_hooks";
-import { useState } from "react";
+import { PasswordResetProps } from "@/types/valuer/auth_hooks.types";
+import { useMutation } from "@tanstack/react-query";
 
 export const usePasswordReset = () => {
   const { axios } = useAxiosStore();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // ⚡ Reset password
   const passwordReset = async ({
     passwordResetToken,
     password,
     passwordConfirm,
   }: PasswordResetProps): Promise<boolean> => {
-    setIsLoading(true);
-
     const response = await axios.post<void>("/valuer/auth/password-reset", {
       passwordResetToken,
       password,
       passwordConfirm,
     });
+    if (!response) return false;
 
-    setIsLoading(false);
-
-    if (response) {
-      return true;
-    }
-    return false;
+    return true;
   };
 
-  return { passwordReset, isLoading };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: passwordReset });
+
+  return {
+    passwordReset: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };
