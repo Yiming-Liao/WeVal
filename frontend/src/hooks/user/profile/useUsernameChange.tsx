@@ -1,34 +1,37 @@
+// [r: User]
+
 import { useUserStore } from "@/stores/userStore";
 import { useAxiosStore } from "@/stores/axiosStore";
-// import { envConfig } from "@/config/envConfig";
 import { User } from "@/types/models/user.types";
 import { UsernameChangeProps } from "@/types/user/profile_hooks";
+import { useMutation } from "@tanstack/react-query";
 
 export const useUsernameChange = () => {
   const { axios } = useAxiosStore();
   const { setUser } = useUserStore();
 
+  // ⚡
   const usernameChange = async ({
     username,
   }: UsernameChangeProps): Promise<boolean> => {
     const response = await axios.put<{ user: User }>("/user/profile/username", {
       username,
     });
+    if (!response) return false;
 
-    if (response) {
-      const { user } = response.data;
+    const { user } = response.data;
 
-      // set user
-      setUser(user);
+    // Set user{...data}
+    setUser(user);
 
-      // // set user{} in localStorage
-      // localStorage.setItem(envConfig.USER_DATA_KEY, JSON.stringify(user));
-
-      return true;
-    }
-
-    return false;
+    return true;
   };
 
-  return { usernameChange };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: usernameChange });
+
+  return {
+    usernameChange: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

@@ -49,4 +49,11 @@ export const envCustom = {
   AWS_S3_BUCKET: Env.schema.string(),
   AWS_S3_ACCESS_KEY: Env.schema.string(),
   AWS_S3_SECRET_KEY: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Stripe
+  |----------------------------------------------------------
+  */
+  STRIPE_SECRET_KEY: Env.schema.string(),
 }

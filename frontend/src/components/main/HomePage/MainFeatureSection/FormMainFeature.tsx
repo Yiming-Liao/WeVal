@@ -1,29 +1,29 @@
 import { Arrow } from "@/components/svg";
 import { Button, Select } from "@/components/ui";
-import { Area } from "@/types/area.types";
+import { Region } from "@/types/region.types";
 import { useRouter } from "next/navigation";
 import { Dispatch, FC, SetStateAction } from "react";
 
-const FormMainFeature: FC<FormMainFeatureProps> = ({ area, setArea }) => {
+const FormMainFeature: FC<FormMainFeatureProps> = ({ region, setRegion }) => {
   const { push } = useRouter();
 
   const handleNext = () => {
-    if (area === "" || area === "default") return;
-    push(`/create-order/details?area=${area}`);
+    if (region === "" || region === "default") return;
+    push(`/order/fill-info?region=${region}`);
   };
 
   return (
     <div className="size-full flex flex-col justify-between">
       <div className="flex flex-col gap-4">
         <h2 className="typography-title-md text-white font-[300] flex flex-col">
-          <span>Select your area </span>
+          <span>Select your region </span>
           <span>to find the best local valuer</span>
         </h2>
 
         <p className="typography-body-md text-white font-[300]">
           We will provide you with the most suitable professional appraiser to
           meet your needs. Simply enter your address, and the system will
-          automatically match you with experienced appraisers in your area,
+          automatically match you with experienced appraisers in your region,
           ensuring that you receive the most accurate service and quickly begin
           your appraisal process.
         </p>
@@ -31,13 +31,13 @@ const FormMainFeature: FC<FormMainFeatureProps> = ({ area, setArea }) => {
 
       <Select
         required
-        value={area}
+        value={region}
         onChange={(e) =>
-          setArea(e.target.value as FormMainFeatureProps["area"])
+          setRegion(e.target.value as FormMainFeatureProps["region"])
         }
       >
-        <option value="default">Select area</option>
-        <option value="new_south_wales">New South Wales</option>
+        <option value="default">Select region</option>
+        <option value="new-south-wales">New South Wales</option>
       </Select>
 
       <div className="flex flex-col gap-6">
@@ -58,6 +58,6 @@ const FormMainFeature: FC<FormMainFeatureProps> = ({ area, setArea }) => {
 export default FormMainFeature;
 
 interface FormMainFeatureProps {
-  area: Area;
-  setArea: Dispatch<SetStateAction<Area>>;
+  region: Region;
+  setRegion: Dispatch<SetStateAction<Region>>;
 }

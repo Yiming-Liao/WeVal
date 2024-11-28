@@ -9,6 +9,7 @@ import Header from "./auth/Header";
 import Select from "./Select";
 import InputFile from "./Input/InputFile";
 import Accordion from "./Accordion";
+import TitleAndBreadcrumbs from "./TitleAndBreadcrumbs";
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   Select,
   InputFile,
   Accordion,
+  TitleAndBreadcrumbs,
 };

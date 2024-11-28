@@ -14,7 +14,7 @@ export async function registerQualify({ request, response }: HttpContext) {
   // 🗄️ Find Valuer
   const foundValuer = await Valuer.findBy('email', email)
 
-  // 🪣 Upload to S3    // ex. valuer/masouivan-gmail-com/uzr99nvnicaaf7558uyy9r3o.jpg
+  // 🪣 Upload to S3    // eg. valuer/masouivan-gmail-com/uzr99nvnicaaf7558uyy9r3o.jpg
   const certificatePath = `valuer/${email.replace(/[@.]/g, '-')}/certificate-${cuid()}.${certificateFile.extname}`
   await certificateFile.moveToDisk(certificatePath)
 

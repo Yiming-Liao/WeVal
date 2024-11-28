@@ -1,4 +1,10 @@
-const Loading = ({ color = "#fff" }: { color?: string }) => {
+const Loading = ({
+  className = "",
+  color = "#73798d",
+}: {
+  className?: string;
+  color?: string;
+}) => {
   return (
     <svg
       version="1.1"
@@ -7,7 +13,7 @@ const Loading = ({ color = "#fff" }: { color?: string }) => {
       x="0px"
       y="0px"
       viewBox="0 0 512 512"
-      className="size-4 animate-spin "
+      className={`${className} size-4 animate-spin`}
     >
       <g>
         <path
@@ -18,7 +24,7 @@ const Loading = ({ color = "#fff" }: { color?: string }) => {
           C314.5,41.8,285.7,36,256,36c-9.9,0-18-8.1-18-18s8.1-18,18-18c34.6,0,68.1,6.8,99.6,20.1C386.2,33,413.5,51.5,437,75
           s42,50.9,54.9,81.4c13.4,31.5,20.1,65.1,20.1,99.6c0,34.5-6.8,68.1-20.1,99.6C479,386.1,460.5,413.5,437,437s-50.9,42-81.4,54.9
           C324.1,505.3,290.6,512,256,512z"
-          style={{ fill: color }} // 動態設置顏色
+          style={{ fill: color }} // Dynamically set color
         />
       </g>
     </svg>

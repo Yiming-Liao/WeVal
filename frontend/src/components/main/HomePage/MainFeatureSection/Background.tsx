@@ -1,10 +1,10 @@
 import { Earth } from "@/components/svg";
 import MapNewSouthWales from "@/components/svg/MainFeature/MapNewSouthWales";
-import { Area } from "@/types/area.types";
+import { Region } from "@/types/region.types";
 import gsap from "gsap";
 import { FC, useEffect, useRef, useState } from "react";
 
-const Background: FC<{ area: Area }> = ({ area }) => {
+const Background: FC<{ region: Region }> = ({ region }) => {
   const backgroundRef = useRef<HTMLDivElement | null>(null);
 
   // Background component
@@ -16,7 +16,7 @@ const Background: FC<{ area: Area }> = ({ area }) => {
 
   // Swithing animation
   useEffect(() => {
-    if (!backgroundRef.current || area === "") return;
+    if (!backgroundRef.current || region === "") return;
 
     const tl = gsap.timeline();
     tl.fromTo(
@@ -24,13 +24,13 @@ const Background: FC<{ area: Area }> = ({ area }) => {
       { opacity: 1, scale: 1 },
       {
         opacity: 0,
-        scale: area === "default" ? 0.8 : 1.2,
+        scale: region === "default" ? 0.8 : 1.2,
         transformOrigin: "center",
         duration: 0.2,
         // Switch background after animation finished.
         onComplete: () => {
-          switch (area) {
-            case "new_south_wales":
+          switch (region) {
+            case "new-south-wales":
               setBackgroundComponent(<MapNewSouthWales />);
               break;
             default:
@@ -44,11 +44,11 @@ const Background: FC<{ area: Area }> = ({ area }) => {
       }
     ).fromTo(
       backgroundRef.current,
-      { scale: area === "default" ? 1.2 : 0.8 },
+      { scale: region === "default" ? 1.2 : 0.8 },
       { opacity: 1, scale: 1, transformOrigin: "center", duration: 0.2 },
       "+=.1"
     );
-  }, [area]);
+  }, [region]);
 
   return (
     <div ref={backgroundRef} className="size-full">

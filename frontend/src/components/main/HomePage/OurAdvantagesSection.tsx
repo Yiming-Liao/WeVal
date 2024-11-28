@@ -1,6 +1,6 @@
 const OurAdvantagesSection = () => {
   return (
-    <section className="w-full h-[458px pt-[76px] pb-[104px]">
+    <section className="w-full pt-[76px] pb-[104px]">
       <div className="size-full border-t border-b-[0.5px] border-light flex justify-center">
         <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] px-16">
           <div className="flex flex-col gap-4">
@@ -11,7 +11,7 @@ const OurAdvantagesSection = () => {
 
             <div className="flex gap-6">
               {/* Card1 */}
-              <div className="flex-1 h-[196px] py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
+              <div className="flex-1 py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
                 <h3 className="typography-body-md font-medium text-primary">
                   Finding a local valuer
                 </h3>
@@ -22,7 +22,7 @@ const OurAdvantagesSection = () => {
                 </p>
               </div>
               {/* Card2 */}
-              <div className="flex-1 h-[196px] py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
+              <div className="flex-1 py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
                 <h3 className="typography-body-md font-medium text-primary">
                   Certified Practicing Valuer/ Residential Practicing Valuer
                 </h3>
@@ -33,7 +33,7 @@ const OurAdvantagesSection = () => {
                 </p>
               </div>
               {/* Card3 */}
-              <div className="flex-1 h-[196px] py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
+              <div className="flex-1 py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
                 <h3 className="typography-body-md font-medium text-primary">
                   Purchasing Security
                 </h3>

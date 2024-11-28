@@ -93,7 +93,7 @@ const Navbar: FC = () => {
 
             <div className="flex items-center gap-8">
               <Link
-                href={"/create-order"}
+                href={"/order/select-region"}
                 className="h-12 px-4 rounded-lg bg-white text-deep flex justify-center items-center"
               >
                 Request a Valuation

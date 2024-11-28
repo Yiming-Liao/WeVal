@@ -10,7 +10,7 @@ export default class FileProxyController {
   public async get(ctx: HttpContext) {
     const { response, params } = ctx
 
-    // ex. valuer/masouivan-gmail-com/certificate-cg5aj38xgg2dqzofyhwzdy8x.jpg
+    // eg. valuer/masouivan-gmail-com/certificate-cg5aj38xgg2dqzofyhwzdy8x.jpg
     const key = params['*'].join('/')
 
     try {
@@ -25,7 +25,7 @@ export default class FileProxyController {
   public async delete(ctx: HttpContext) {
     const { params } = ctx
 
-    // ex. valuer/masouivan-gmail-com/certificate-cg5aj38xgg2dqzofyhwzdy8x.jpg
+    // eg. valuer/masouivan-gmail-com/certificate-cg5aj38xgg2dqzofyhwzdy8x.jpg
     const key = params['*'].join('/')
 
     try {

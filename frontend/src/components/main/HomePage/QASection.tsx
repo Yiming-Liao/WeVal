@@ -1,8 +1,9 @@
+import Building from "@/components/svg/main/home-page/QASection/Building";
 import { Accordion } from "@/components/ui";
 
 const QASection = () => {
   return (
-    <section className="w-full pt-[126px] pb-[196px]">
+    <section className="relative w-full pt-[126px] pb-[196px]">
       <div className="size-full border-t border-light flex justify-center">
         <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] px-16">
           <div className="flex flex-col gap-4 ic">
@@ -60,6 +61,11 @@ const QASection = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Background SVG */}
+      <div className="absolute bottom-[72px] left-[-15px]">
+        <Building />
       </div>
     </section>
   );

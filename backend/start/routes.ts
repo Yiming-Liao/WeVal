@@ -2,7 +2,7 @@ import router from '@adonisjs/core/services/router'
 import { DateTime } from 'luxon'
 import env from './env.js'
 import { middleware } from './kernel.js'
-import apiV1Routes from './api/v1/api_v1_routes.js'
+import apiV1Routes from './api/v1/api_v1.routes.js'
 
 router
   .group(() => {

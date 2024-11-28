@@ -3,7 +3,7 @@ import { Facebook, Logo } from "@/components/svg";
 
 const Footer = () => {
   return (
-    <footer className="w-full flex justify-center border-t border-secondary">
+    <footer className="w-full flex justify-center border-t-[0.5px] border-secondary">
       <div className="2xl:w-[80%] xl:w-[90%] w-full  max-w-[1380px] pt-14 pb-16 px-14 flex justify-between">
         {/* Left block */}
         <div className="flex items-center gap-8">

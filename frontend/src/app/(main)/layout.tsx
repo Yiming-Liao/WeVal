@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "@/components/main/Navbar/Navbar";
-import LayoutBackground from "@/components/common/LayoutBackground";
 import Footer from "@/components/common/Footer";
+import LayoutBackground from "@/components/common/LayoutBackground";
 
 const MainLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (

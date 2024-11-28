@@ -15,18 +15,19 @@ import FileUploadBorder from "./FileUpload/FileUploadBorder";
 import UserCardToggle from "./UserCard/UserCardToggle";
 import ChevronDown from "./UserCard/ChevronDown";
 import UserCard from "./UserCard/UserCard";
-import Order from "./page-nav-icons/Order";
-import Resume from "./page-nav-icons/Resume";
-import Revenue from "./page-nav-icons/Revenue";
+import Order from "./dashboard-nav-icons/Order";
+import Resume from "./dashboard-nav-icons/Resume";
+import Revenue from "./dashboard-nav-icons/Revenue";
 import Logo from "./logo/Logo";
 import Earth from "./MainFeature/Earth";
 import MapNewSouthWales from "./MainFeature/MapNewSouthWales";
 import Facebook from "./social-media-apps/Facebook";
-import ValuerSignUpIcon from "./home-page/HeroSection/ValuerSignUpIcon";
-import Arrow45deg from "./home-page/HeroSection/Arrow45deg";
-import UserSignUpIcon from "./home-page/HeroSection/UserSignUpIcon";
-import ArrowMore from "./home-page/NewsSection/ArrowMore";
+import ValuerSignUpIcon from "./main/home-page/HeroSection/ValuerSignUpIcon";
+import Arrow45deg from "./main/home-page/HeroSection/Arrow45deg";
+import UserSignUpIcon from "./main/home-page/HeroSection/UserSignUpIcon";
+import ArrowMore from "./main/home-page/NewsSection/ArrowMore";
 import TriangleDown from "./TriangleDown";
+import Profile from "./dashboard-nav-icons/Profile";
 
 export {
   FullLogoBlue,
@@ -58,4 +59,5 @@ export {
   Arrow45deg,
   ArrowMore,
   TriangleDown,
+  Profile,
 };

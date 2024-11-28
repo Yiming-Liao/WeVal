@@ -17,10 +17,10 @@ export default class AuthMiddlewareService {
         .join("; ");
 
       // Access backend with client cookies for permission checking
-      const fetchResponse = await fetch(
-        `${envConfig.API_URL}/valuer/auth/check-permission`,
-        { method: "GET", headers: { Cookie: clientCookies } }
-      );
+      const fetchResponse = await fetch(`${envConfig.API_URL}/valuer/auth`, {
+        method: "GET",
+        headers: { Cookie: clientCookies },
+      });
 
       // 🍪 Received cookies from backend
       const receivedCookies = fetchResponse.headers.get("set-cookie");

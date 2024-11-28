@@ -19,7 +19,7 @@ const Button: FC<ButtonProps> = ({
     <button
       disabled={isDisabled}
       className={`${className} ${isDisabled ? "opacity-50" : null} duration-200
-       h-12 bg-primary text-white rounded-lg flex justify-center items-center`}
+      w-full h-[52px] bg-primary text-white rounded-lg flex justify-center items-center`}
       {...props}
     >
       {isLoading ? <Loading color={"#fff"} /> : children}

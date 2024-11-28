@@ -3,12 +3,14 @@ import Admin from '#models/admin/admin'
 import User from '#models/user/user'
 import Valuer from '#models/valuer/valuer'
 import { DateTime } from 'luxon'
+import { PriceRange } from '#config/stripe'
 
 export default class Seeder extends BaseSeeder {
   async run() {
     // await Seeder.admin()
-    await Seeder.valuer()
-    await Seeder.user()
+    // await Seeder.valuer()
+    // await Seeder.user()
+    await Seeder.order()
   }
 
   /**
@@ -82,6 +84,33 @@ export default class Seeder extends BaseSeeder {
       password: '123456',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
+    })
+  }
+
+  /**
+   * Seeder for Order
+   */
+  static async order() {
+    const user = await User.first() // Get seeded User
+
+    await user!.related('orders').create({
+      ownerName: 'Mandy',
+      ownerPhone: '+61000222334',
+      region: 'Victoria',
+      address: '500 George Street, Sydney City Center',
+      priceRange: PriceRange['0M_to_1M'],
+
+      amount: 500,
+    })
+
+    await user!.related('orders').create({
+      ownerName: 'Hemsworth',
+      ownerPhone: '+61000222334',
+      region: 'Queensland',
+      address: '500 Oxford Street, Sydney City Center',
+      priceRange: PriceRange['2.5M_to_3M'],
+
+      amount: 750,
     })
   }
 }

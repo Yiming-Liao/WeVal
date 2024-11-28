@@ -1,6 +1,6 @@
 // [r: User]
 
-import { Order, UserCard as UserCardIcon } from "@/components/svg";
+import { Order, Profile, UserCard as UserCardIcon } from "@/components/svg";
 import { User } from "@/types/models/user.types";
 import Link from "next/link";
 import { Dispatch, FC, SetStateAction } from "react";
@@ -41,15 +41,26 @@ const UserCard: FC<UserCardProps> = ({ user, setIsOpen }) => {
         {/* Divider */}
         <div className="h-px bg-black/25 mt-2"></div>
 
-        {/* Link: order */}
-        <Link
-          href={"/user/dashboard/order"}
-          className="flex gap-2 p-2 rounded hover:bg-blue-50 duration-200"
-          onClick={() => setIsOpen(false)}
-        >
-          <Order />
-          <p className="typography-label-md text-secondary">Order</p>
-        </Link>
+        <div className="flex flex-col gap-1">
+          {/* Link: profile */}
+          <Link
+            href={"/user/dashboard/profile"}
+            className="flex gap-2 p-2 rounded hover:bg-blue-50 duration-200"
+            onClick={() => setIsOpen(false)}
+          >
+            <Profile />
+            <p className="typography-label-md text-secondary">Profile</p>
+          </Link>
+          {/* Link: orders */}
+          <Link
+            href={"/user/dashboard/orders"}
+            className="flex gap-2 p-2 rounded hover:bg-blue-50 duration-200"
+            onClick={() => setIsOpen(false)}
+          >
+            <Order />
+            <p className="typography-label-md text-secondary">Orders</p>
+          </Link>
+        </div>
       </div>
     </div>
   );
