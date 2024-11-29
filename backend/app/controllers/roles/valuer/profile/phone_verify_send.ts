@@ -1,14 +1,16 @@
 import { snsClient } from '#config/aws'
 import i18n from '#services/i18n_service'
-import { phoneVerifySendLimit } from '#limiters/roles/user/auth/phone_verify_send_limit'
-import { AuthService } from '#services/roles/user/auth_service'
-import phoneVerifySendValidator from '#validators/roles/user/profile/phone_verify_send_validator'
+import { phoneVerifySendLimit } from '#limiters/roles/valuer/auth/phone_verify_send_limit'
+import { AuthService } from '#services/roles/valuer/auth_service'
+import phoneVerifySendValidator from '#validators/roles/valuer/profile/phone_verify_send_validator'
 import type { HttpContext } from '@adonisjs/core/http'
 import { PublishCommand } from '@aws-sdk/client-sns'
 import Valuer from '#models/valuer/valuer'
 
 export async function phoneVerifySend(ctx: HttpContext) {
   const { request, response, auth } = ctx
+
+  const authenticatedValuer = auth.user! as Valuer
 
   // 📝 Validator (Built-in error handling)
   const { phone } = await request.validateUsing(phoneVerifySendValidator)
@@ -17,7 +19,7 @@ export async function phoneVerifySend(ctx: HttpContext) {
   if (!(await phoneVerifySendLimit(ctx))) return
 
   // 🔢 Generate access token
-  const phoneVerifyCode = await AuthService.generatePhoneVerifyCode(auth.user! as Valuer)
+  const phoneVerifyCode = await AuthService.generatePhoneVerifyCode(authenticatedValuer)
 
   // 💬 Send sms with OTP code
   await snsClient.send(

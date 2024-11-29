@@ -2,11 +2,9 @@ import User from '#models/user/user'
 import { test } from '@japa/runner'
 
 test.group('User auth password reset', (group) => {
-  let USER_PASSWORD_RESET_TEST: User
-
   group.setup(async () => {
     // 創建新的使用者
-    USER_PASSWORD_RESET_TEST = await User.create({
+    await User.create({
       email: 'USER_PASSWORD_RESET_TEST@gmail.com',
       password: '123456',
       username: 'USER_PASSWORD_RESET_TEST',
@@ -20,7 +18,7 @@ test.group('User auth password reset', (group) => {
 
     const foundUser = await User.findBy('email', 'USER_PASSWORD_RESET_TEST@gmail.com')
     assert.isNotNull(foundUser?.passwordResetToken)
-    assert.isNotNull(foundUser?.passwordResetExpiresAt)
+    assert.isNotNull(foundUser?.passwordResetTokenExpiresAt)
 
     const response = await client.post('/user/auth/password-reset').form({
       passwordResetToken: foundUser?.passwordResetToken,
@@ -34,6 +32,6 @@ test.group('User auth password reset', (group) => {
     const updatedUser = await User.findBy('email', 'USER_PASSWORD_RESET_TEST@gmail.com')
 
     assert.isNull(updatedUser?.passwordResetToken)
-    assert.isNull(updatedUser?.passwordResetExpiresAt)
+    assert.isNull(updatedUser?.passwordResetTokenExpiresAt)
   })
 })

@@ -4,12 +4,14 @@ import { useUserStore } from "@/stores/userStore";
 import { useAxiosStore } from "@/stores/axiosStore";
 import { User } from "@/types/models/user.types";
 import { RegisterProps } from "@/types/user/auth_hooks.types";
-import AuthLocalStorage from "@/services/LocalStorageService";
 import { useMutation } from "@tanstack/react-query";
+import LocalStorageService from "@/services/LocalStorageService";
+import { useRoleStore } from "@/stores/roleStore";
 
 export const useRegister = () => {
   const { axios } = useAxiosStore();
   const { setUser } = useUserStore();
+  const { setRole } = useRoleStore();
 
   // ⚡ Register
   const register = async ({
@@ -31,7 +33,9 @@ export const useRegister = () => {
     // Set user{...data}
     setUser(user);
 
-    AuthLocalStorage.setRole({ role: "valuer" });
+    // Set role & set in local storage
+    setRole("user");
+    LocalStorageService.setRole({ role: "user" });
 
     return true;
   };

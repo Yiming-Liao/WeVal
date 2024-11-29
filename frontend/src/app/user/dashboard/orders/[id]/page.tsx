@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { TitleAndBreadcrumbs } from "@/components/ui";
-import { Order, Profile } from "@/components/svg";
+import { Loading, Order, Profile } from "@/components/svg";
 import { useOrderShow } from "@/hooks/user/orders/useOrderShow";
 
 const OrderDetailPage = ({ id }: { id: string }) => {
@@ -56,6 +56,7 @@ const OrderDetailPage = ({ id }: { id: string }) => {
         {/* Main */}
         <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] min-h-screen flex flex-col gap-10">
           {/* Order */}
+          {isLoading && <Loading />}
           <p>{order?.ownerName}</p>
           <p>{order?.status}</p>
         </div>

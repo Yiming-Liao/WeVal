@@ -5,11 +5,9 @@ import mail from '@adonisjs/mail/services/main'
 import { test } from '@japa/runner'
 
 test.group('User auth password forgot', (group) => {
-  let USER_PASSWORD_FORGOT_TEST: User
-
   group.setup(async () => {
     // 創建新的使用者
-    USER_PASSWORD_FORGOT_TEST = await User.create({
+    await User.create({
       email: 'USER_PASSWORD_FORGOT_TEST@gmail.com',
       password: '123456',
       username: 'USER_PASSWORD_FORGOT_TEST',
@@ -23,7 +21,7 @@ test.group('User auth password forgot', (group) => {
     const foundUser = await User.findBy('email', 'USER_PASSWORD_FORGOT_TEST@gmail.com')
 
     assert.isNull(foundUser?.passwordResetToken)
-    assert.isNull(foundUser?.passwordResetExpiresAt)
+    assert.isNull(foundUser?.passwordResetTokenExpiresAt)
 
     const response = await client
       .post('/user/auth/password-forgot')
@@ -44,6 +42,6 @@ test.group('User auth password forgot', (group) => {
     const updatedUser = await User.findBy('email', 'USER_PASSWORD_FORGOT_TEST@gmail.com')
 
     assert.isNotNull(updatedUser?.passwordResetToken)
-    assert.isNotNull(updatedUser?.passwordResetExpiresAt)
+    assert.isNotNull(updatedUser?.passwordResetTokenExpiresAt)
   })
 })

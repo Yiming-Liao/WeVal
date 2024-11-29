@@ -7,9 +7,9 @@ import { PriceRange } from '#config/stripe'
 
 export default class Seeder extends BaseSeeder {
   async run() {
-    // await Seeder.admin()
-    // await Seeder.valuer()
-    // await Seeder.user()
+    await Seeder.admin()
+    await Seeder.valuer()
+    await Seeder.user()
     await Seeder.order()
   }
 

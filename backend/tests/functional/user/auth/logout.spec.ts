@@ -3,11 +3,9 @@ import env from '#start/env'
 import { test } from '@japa/runner'
 
 test.group('User auth logout', (group) => {
-  let USER_LOGOUT_TEST: User
-
   group.setup(async () => {
     // 創建新的使用者
-    USER_LOGOUT_TEST = await User.create({
+    await User.create({
       email: 'USER_LOGOUT_TEST@gmail.com',
       password: '123456',
       username: 'USER_LOGOUT_TEST',

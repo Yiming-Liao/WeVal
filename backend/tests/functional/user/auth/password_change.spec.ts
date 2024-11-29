@@ -3,11 +3,9 @@ import env from '#start/env'
 import { test } from '@japa/runner'
 
 test.group('User auth password change', (group) => {
-  let USER_PASSWORD_CHANGE_TEST: User
-
   group.setup(async () => {
     // 創建新的使用者
-    USER_PASSWORD_CHANGE_TEST = await User.create({
+    User.create({
       email: 'USER_PASSWORD_CHANGE_TEST@gmail.com',
       password: '123456',
       username: 'USER_PASSWORD_CHANGE_TEST',

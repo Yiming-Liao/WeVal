@@ -35,7 +35,7 @@ export default class Order extends BaseModel {
   @column()
   declare paymentUrl: string | null
   @column()
-  declare status: 'unpaid' | 'completed' | 'failed'
+  declare status: OrderStatus
   @column()
   declare amount: number | null // Amount in cents (AUD), eg. 500.00 -> 50000
 
@@ -54,30 +54,28 @@ export default class Order extends BaseModel {
   declare userId: number // Foreign key
 
   /**
-   * 🪝 Clean up expired orders
+   * 🪝 Set orderId & expiresAt & Clean up expired orders
    */
   @beforeCreate()
-  public static async cleanUpExpiredOrders() {
+  public static async beforeCreate(order: Order) {
+    // Set orderId
+    order.orderId = IdGeneratorService.generateOrderId()
+    // Set expiresAt
+    order.expiresAt = DateTime.local().plus({ hours: 24 })
+    // Clean up expired orders
     const now = DateTime.local()
     await Order.query()
       .where('expires_at', '<', now.toISO())
-      .andWhere('status', '!=', 'completed')
+      .andWhere('status', '!=', OrderStatus.COMPLETED)
       .delete()
   }
+}
 
-  /**
-   * 🪝 Set orderId
-   */
-  @beforeCreate()
-  public static async generateOrderId(order: Order) {
-    order.orderId = IdGeneratorService.generateOrderId()
-  }
-
-  /**
-   * 🪝 Set expiresAt
-   */
-  @beforeCreate()
-  public static async setExpiresAt(order: Order) {
-    order.expiresAt = DateTime.local().plus({ hours: 24 })
-  }
+// Type
+export enum OrderStatus {
+  UNPAID = 'unpaid',
+  AWAITING_VALUER = 'awaiting-valuer',
+  IN_PROGRESS = 'in-progress',
+  COMPLETED = 'completed',
+  FAILED = 'failed',
 }

@@ -68,7 +68,7 @@ const NewsAllPage = () => {
           {/* News cards */}
           <div className="px-9 flex flex-wrap gap-6">
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -78,7 +78,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -88,7 +88,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -98,7 +98,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -108,7 +108,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -118,7 +118,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -128,7 +128,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -138,7 +138,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -148,7 +148,7 @@ const NewsAllPage = () => {
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={

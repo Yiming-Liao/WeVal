@@ -1,6 +1,6 @@
 // [r: User]
 
-import { PRODUCT_IDS, stripe } from '#config/stripe'
+import { stripe } from '#config/stripe'
 import env from '#start/env'
 
 export class StripeService {

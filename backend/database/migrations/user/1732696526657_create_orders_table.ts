@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.increments('id')
 
       // 🆔 Order ID
-      table.string('order_id')
+      table.string('order_id').notNullable().unique()
 
       // 📋 Basic Info
       table.string('owner_name').notNullable()
@@ -21,8 +21,11 @@ export default class extends BaseSchema {
       // 💰 Payment Info
       table.string('session_id', 500).nullable()
       table.string('payment_url', 1000).nullable()
-      table.enu('status', ['unpaid', 'completed', 'failed']).defaultTo('unpaid')
-      table.decimal('amount', 10, 2).nullable() // Decimal (e.g., 750.00)
+      table
+        .enu('status', ['unpaid', 'awaiting-valuer', 'in-progress', 'completed', 'failed'])
+        .defaultTo('unpaid')
+        .notNullable()
+      table.decimal('amount', 10, 2).nullable() // Storing amount in cents for precision (e.g., 75000 for $750.00)
 
       // 🗓️ Timestamps
       table.timestamp('created_at')

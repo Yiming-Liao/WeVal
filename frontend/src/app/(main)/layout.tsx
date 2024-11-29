@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Navbar from "@/components/main/Navbar/Navbar";
+import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/common/Footer";
 import LayoutBackground from "@/components/common/LayoutBackground";
 

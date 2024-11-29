@@ -101,7 +101,7 @@ const NewsCategoryPage = async ({
           {/* News cards */}
           <div className="px-9 flex flex-wrap gap-6">
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -111,7 +111,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -121,7 +121,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -131,7 +131,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -141,7 +141,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -151,7 +151,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -161,7 +161,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -171,7 +171,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={
@@ -181,7 +181,7 @@ const NewsCategoryPage = async ({
               alt={""}
             />
             <NewsCard
-              href="/"
+              href="/news/events/impact"
               category={"Announcements"}
               title={"Price Trends and Market Resilience"}
               description={

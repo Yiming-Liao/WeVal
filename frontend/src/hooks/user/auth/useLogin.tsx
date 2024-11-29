@@ -6,10 +6,12 @@ import { User } from "@/types/models/user.types";
 import { useUserStore } from "@/stores/userStore";
 import { useMutation } from "@tanstack/react-query";
 import LocalStorageService from "@/services/LocalStorageService";
+import { useRoleStore } from "@/stores/roleStore";
 
 export const useLogin = () => {
   const { axios } = useAxiosStore();
   const { setUser, setIsLoading } = useUserStore();
+  const { setRole } = useRoleStore();
 
   // ⚡ Login
   const login = async ({ email, password }: LoginProps): Promise<boolean> => {
@@ -23,7 +25,9 @@ export const useLogin = () => {
     // Set user{...data}
     setUser(user);
 
-    LocalStorageService.removeRole();
+    // Set role & set in local storage
+    setRole("user");
+    LocalStorageService.setRole({ role: "user" });
 
     setIsLoading(false);
 

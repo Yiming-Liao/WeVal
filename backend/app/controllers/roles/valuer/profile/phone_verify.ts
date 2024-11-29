@@ -2,20 +2,26 @@ import type { HttpContext } from '@adonisjs/core/http'
 import phoneVerifyValidator from '#validators/roles/user/profile/phone_verify_validator'
 import { DateTime } from 'luxon'
 import i18n from '#services/i18n_service'
+import Valuer from '#models/valuer/valuer'
 
 export async function phoneVerify({ request, response, auth }: HttpContext) {
   // 📝 Validator (Built-in error handling)
   const { phone, phoneVerifyCode } = await request.validateUsing(phoneVerifyValidator)
 
+  const authenticatedValuer = auth.user! as Valuer
+
   // 🚨 Error: Wrong phoneVerifyCode
-  if (auth.user!.phoneVerifyCode !== phoneVerifyCode) {
+  if (authenticatedValuer.phoneVerifyCode !== phoneVerifyCode) {
     return response.badRequest({
       errors: [{ message: i18n.t('messages.user.profile.phone_verify.error_wrongCode') }],
     })
   }
 
   // 🚨 Error: phoneVerifyCode expired
-  if (auth.user!.phoneVerifyCodeExpiresAt && auth.user!.phoneVerifyCodeExpiresAt < DateTime.now()) {
+  if (
+    authenticatedValuer.phoneVerifyCodeExpiresAt &&
+    authenticatedValuer.phoneVerifyCodeExpiresAt < DateTime.now()
+  ) {
     return response.badRequest({
       errors: [{ message: i18n.t('messages.user.profile.phone_verify.error_codeExpired') }],
     })

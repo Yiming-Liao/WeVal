@@ -12,7 +12,7 @@ import UserCardButton from "./UserCardButton";
 import { useValuerInit } from "@/hooks/valuer/useValuerInit";
 
 const Navbar: FC = () => {
-  useValuerInit();
+  useValuerInit({ role: "valuer" });
 
   const { push } = useRouter();
   const { valuer } = useValuerStore();

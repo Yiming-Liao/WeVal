@@ -9,7 +9,7 @@ import { Logo } from "@/components/svg";
 import { useAdminInit } from "@/hooks/admin/useAdminInit";
 
 const Navbar: FC = () => {
-  useAdminInit();
+  useAdminInit({ role: "admin" });
 
   return (
     <header className="fixed top-0 left-0 w-full h-24 bg-gradient-to-br from-[#b0a689] to-[#b86f4d] text-white z-[999]">

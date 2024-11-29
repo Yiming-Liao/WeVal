@@ -10,7 +10,7 @@ import { useValuerInit } from "@/hooks/valuer/useValuerInit";
 
 const RegisterQualificationContainer: FC = () => {
   const { valuer } = useValuerStore();
-  useValuerInit();
+  useValuerInit({ role: "valuer" });
 
   if (!valuer) {
     return <p>Loading...</p>;
