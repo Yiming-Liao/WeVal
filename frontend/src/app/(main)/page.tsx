@@ -1,3 +1,4 @@
+import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import ContactUsSection from "@/components/main/HomePage/ContactUsSection";
 import HeroSection from "@/components/main/HomePage/HeroSection";
 import MainFeatureSection from "@/components/main/HomePage/MainFeatureSection/MainFeatureSection";
@@ -7,14 +8,19 @@ import QASection from "@/components/main/HomePage/QASection";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col">
-      <HeroSection />
-      <OurAdvantagesSection />
-      <MainFeatureSection />
-      <NewsSection />
-      <QASection />
-      <ContactUsSection />
-    </div>
+    <>
+      <div className="flex flex-col">
+        <HeroSection />
+        <OurAdvantagesSection />
+        <MainFeatureSection />
+        <NewsSection />
+        <QASection />
+        <ContactUsSection />
+      </div>
+
+      {/* Layout background */}
+      <BackgroundDecoration />
+    </>
   );
 };
 

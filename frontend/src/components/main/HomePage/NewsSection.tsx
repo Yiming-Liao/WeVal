@@ -1,19 +1,24 @@
+import LayoutContainer from "@/components/common/LayoutContainer";
 import NewsCard from "@/components/NewsCard";
 import { ArrowMore } from "@/components/svg";
 import Link from "next/link";
+import HomePageTitle from "./HomePageTitle";
 
 const NewsSection = () => {
   return (
     <section className="w-full h-[458px pt-[126px] pb-[149px]">
       <div className="size-full border-t border-b-[0.5px] border-light flex justify-center">
-        <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] px-16">
-          <div className="flex flex-col gap-4">
-            {/* Title */}
-            <div className="relative top-[-12px] flex justify-between items-center">
-              <h2 className="typography-title-lg text-deep">News</h2>
+        <LayoutContainer>
+          <div className="flex flex-col gap-4 px-16">
+            {/* Title & Read more */}
+            <div className="flex justify-between items-center">
+              {/* Title */}
+              <HomePageTitle title="News" />
+
+              {/* Link: Read more */}
               <Link
-                href={""}
-                className="typography-body-md text-deep flex gap-3 items-center"
+                href={"/news"}
+                className="relative -top-[12px] typography-body-md text-deep flex gap-3 items-center"
               >
                 Read More <ArrowMore />
               </Link>
@@ -21,7 +26,7 @@ const NewsSection = () => {
 
             <div className="flex gap-6">
               {/* Card1 */}
-              <div className="flex-1">
+              <div className="flex-1 h-full">
                 <NewsCard
                   href="/"
                   category={"Announcements"}
@@ -35,7 +40,7 @@ const NewsSection = () => {
               </div>
 
               {/* Card2 */}
-              <div className="flex-1">
+              <div className="flex-1 h-full">
                 <NewsCard
                   href="/"
                   category={"Other news"}
@@ -49,7 +54,7 @@ const NewsSection = () => {
               </div>
 
               {/* Card3 */}
-              <div className="flex-1">
+              <div className="flex-1 h-full">
                 <NewsCard
                   href="/"
                   category={"Events"}
@@ -63,7 +68,7 @@ const NewsSection = () => {
               </div>
             </div>
           </div>
-        </div>
+        </LayoutContainer>
       </div>
     </section>
   );

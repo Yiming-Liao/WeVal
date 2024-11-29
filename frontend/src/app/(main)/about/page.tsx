@@ -3,155 +3,132 @@ import PageTitle from "@/components/main/AboutPage/PageTitle";
 import Image from "next/image";
 import { FC } from "react";
 import Community from "@/components/svg/main/about-page/Community";
+import BackgroundDecoration from "@/components/common/BackgroundDecoration";
+import LayoutContainer from "@/components/common/LayoutContainer";
+import AdvantageCard from "@/components/main/AdvantageCard";
+import Description from "@/components/main/Description";
 
 const AboutPage = () => {
   return (
-    <div className="relative flex flex-col items-center">
-      <section className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px]">
-        {/* Title & Breadcrumbs */}
-        <TitleAndBreadcrumbs
-          links={[{ href: "/", page: "Home" }]}
-          currentPage={"About Us"}
-          title={"About WeVal"}
-        />
+    <>
+      <section className="relative flex flex-col items-center">
+        <LayoutContainer>
+          {/* Title & Breadcrumbs */}
+          <TitleAndBreadcrumbs
+            links={[{ href: "/", page: "Home" }]}
+            currentPage={"About Us"}
+            title={"About WeVal"}
+          />
 
-        <div className="relative pt-5 pb-[120px]">
-          {/* Description */}
-          <div className="px-16 flex flex-col pb-[100px]">
-            <p className="typography-body-md leading-[28px] text-secondary font-light">
-              WEVAL PTY LTD is a forward-thinking Australian property technology
-              company dedicated to supporting clients through every step of the
-              home-buying process. We address critical considerations such as
-              property pricing, condition, and risk assessment, viewing each
-              transaction from a lender’s perspective to ensure comprehensive
-              evaluations. Our services are delivered exclusively by local
-              licensed valuers, guaranteeing an impartial and professional
-              assessment. As we remain entirely independent of sales
-              transactions, clients can have complete confidence in a
-              conflict-free, transparent service experience.
-            </p>
-          </div>
-
-          {/* Conteiner card */}
-          <div className="bg-white py-[44px] px-[68px] rounded-[60px] flex gap-6 [box-shadow:0px_-8px_16px_0px_#1A259614]">
-            <div className="flex-1 flex justify-center items-center rounded-[32px] overflow-hidden">
-              <Image
-                src={"/images/about-page/container-card-background.jpg"}
-                alt={""}
-                width={816}
-                height={612}
-                className="size-full object-cover"
-              />
+          <div className="relative pt-5 pb-[120px]">
+            {/* Description */}
+            <div className="px-16 flex flex-col pb-[100px]">
+              <Description text=" WEVAL PTY LTD is a forward-thinking Australian property technology company dedicated to supporting clients through every step of the home-buying process. We address critical considerations such as property pricing, condition, and risk assessment, viewing each transaction from a lender’s perspective to ensure comprehensive evaluations. Our services are delivered exclusively by local licensed valuers, guaranteeing an impartial and professional assessment. As we remain entirely independent of sales transactions, clients can have complete confidence in a conflict-free, transparent service experience." />
             </div>
 
-            {/* Cards */}
-            <div className="w-96 flex flex-col gap-3">
-              {/* Card1 */}
-              <div className="py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
-                <h3 className="typography-body-md font-medium text-primary">
-                  Finding a local valuer
-                </h3>
-                <p className="typography-body-sm font-light text-primary">
-                  Connecting you with a local licensed valuer to provide
-                  accurate property due diligence, helping you avoid overpaying
-                  and ensuring your best interests.
-                </p>
+            {/* Conteiner card */}
+            <div className="bg-white py-[44px] px-[68px] rounded-[60px] flex gap-6 [box-shadow:0px_-8px_16px_0px_#1A259614]">
+              {/* Left block */}
+              <div className="flex-1 flex justify-center items-center rounded-[32px] overflow-hidden">
+                <Image
+                  src={"/images/about-page/container-card-background.jpg"}
+                  alt={""}
+                  width={816}
+                  height={612}
+                  className="size-full object-cover"
+                />
               </div>
-              {/* Card2 */}
-              <div className="py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
-                <h3 className="typography-body-md font-medium text-primary">
-                  Certified Practicing Valuer/ Residential Practicing Valuer
-                </h3>
-                <p className="typography-body-sm font-light text-primary">
-                  Valuers registered on our platform are certified
-                  professionals, ensuring that you receive services of the
-                  highest standard.
-                </p>
-              </div>
-              {/* Card3 */}
-              <div className="py-6 px-5 bg-[#F0F3FA] rounded-[20px] flex flex-col gap-6">
-                <h3 className="typography-body-md font-medium text-primary">
-                  Purchasing Security
-                </h3>
-                <p className="typography-body-sm font-light text-primary">
-                  For your property due diligence, we adhere to bank-level risk
-                  management standards, assuring you of a thorough and reliable
-                  assessment. We also make it clear that we are not involved in
-                  sales, eliminating any conflict of interest.
-                </p>
+
+              {/* Right block: Cards */}
+              <div className="w-96 flex flex-col gap-3">
+                {/* Card1 */}
+                <AdvantageCard
+                  title={"Finding a local valuer"}
+                  description={`Connecting you with a local licensed valuer to provide accurate property due diligence, helping you avoid overpaying and ensuring your best interests.`}
+                />
+                {/* Card2 */}
+                <AdvantageCard
+                  title={
+                    "Certified Practicing Valuer/ Residential Practicing Valuer"
+                  }
+                  description={`Valuers registered on our platform are certified professionals, ensuring that you receive services of the highest standard.`}
+                />
+                {/* Card3 */}
+                <AdvantageCard
+                  title={"Purchasing Security"}
+                  description={`For your property due diligence, we adhere to bank-level risk management standards, assuring you of a thorough and reliable assessment. We also make it clear that we are not involved in sales, eliminating any conflict of interest.`}
+                />
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Success Stories */}
-        <div className="pb-[115px] flex gap-4 pr-24">
-          {/* Title & Description */}
-          <div className="flex flex-col gap-5">
-            <PageTitle title={"Success Stories"} />
-            <p className="typography-body-md leading-[28px] text-secondary font-light pl-16">
-              Each feedback clearly demonstrates how our platform successfully
-              matches you with the highest quality appraisers, ensuring that the
-              services you receive meet professional standards and fulfill your
-              needs.
-            </p>
-          </div>
+          {/* Success Stories */}
+          <div className="pb-[115px] flex gap-4 pr-24">
+            {/* Title & Description */}
+            <div className="flex flex-col gap-5">
+              <PageTitle title={"Success Stories"} />
+              <Description text="Each feedback clearly demonstrates how our platform successfully matches you with the highest quality appraisers, ensuring that the services you receive meet professional standards and fulfill your needs." />
+            </div>
 
-          {/* Reviews */}
-          <div className="relative xl:min-w-[660px]">
-            {/* Card1: Top Left */}
-            <div className="ml-12">
-              <ReviewCard
-                name="Candy"
-                text="Despite challenges like interest rate hikes and economic pressures,
+            {/* Reviews */}
+            <div className="relative xl:min-w-[660px]">
+              {/* Card1: Top Left */}
+              <div className="ml-12">
+                <ReviewCard
+                  name="Candy"
+                  text="Despite challenges like interest rate hikes and economic pressures,
                       property prices in Australia have ......"
-              />
-            </div>
+                />
+              </div>
 
-            {/* Card2: Bottom Right */}
-            <div className="mt-[158px] ml-[333px]">
-              <ReviewCard
-                name="Ken"
-                text="Despite challenges like interest rate hikes and economic pressures,
+              {/* Card2: Bottom Right */}
+              <div className="mt-[158px] ml-[333px]">
+                <ReviewCard
+                  name="Ken"
+                  text="Despite challenges like interest rate hikes and economic pressures,
                       property prices in Australia have ......"
-              />
-            </div>
+                />
+              </div>
 
-            {/* Card3: Middle */}
-            <div className="absolute top-[35%] left-[20%] z-10">
-              <ReviewCard
-                name="Summer"
-                text="Despite challenges like interest rate hikes and economic pressures,
+              {/* Card3: Middle */}
+              <div className="absolute top-[35%] left-[20%] z-10">
+                <ReviewCard
+                  name="Summer"
+                  text="Despite challenges like interest rate hikes and economic pressures,
                      property prices in Australia have ......"
-              />
-            </div>
+                />
+              </div>
 
-            {/* Card4: Bottom Left */}
-            <div className="absolute bottom-9 left-0">
-              <ReviewCard
-                name="Amber"
-                text="Despite challenges like interest rate hikes and economic pressures,
+              {/* Card4: Bottom Left */}
+              <div className="absolute bottom-9 left-0">
+                <ReviewCard
+                  name="Amber"
+                  text="Despite challenges like interest rate hikes and economic pressures,
                      property prices in Australia have ......"
-              />
-            </div>
+                />
+              </div>
 
-            {/* Card5: Top Right */}
-            <div className="absolute top-[100px] right-0">
-              <ReviewCard
-                name="Lily"
-                text="Despite challenges like interest rate hikes and economic pressures,
+              {/* Card5: Top Right */}
+              <div className="absolute top-[100px] right-0">
+                <ReviewCard
+                  name="Lily"
+                  text="Despite challenges like interest rate hikes and economic pressures,
                      property prices in Australia have ......"
-              />
+                />
+              </div>
             </div>
           </div>
+        </LayoutContainer>
+
+        {/* Background SVG */}
+        <div className="absolute bottom-[69px] left-0 pointer-events-none -z-10">
+          <Community />
         </div>
       </section>
 
-      {/* Background SVG */}
-      <div className="absolute bottom-[69px] left-0 pointer-events-none -z-10">
-        <Community />
-      </div>
-    </div>
+      {/* Layout background */}
+      <BackgroundDecoration />
+    </>
   );
 };
 export default AboutPage;

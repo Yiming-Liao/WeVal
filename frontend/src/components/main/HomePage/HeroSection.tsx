@@ -1,3 +1,4 @@
+import LayoutContainer from "@/components/common/LayoutContainer";
 import { Arrow45deg, UserSignUpIcon, ValuerSignUpIcon } from "@/components/svg";
 import Link from "next/link";
 
@@ -8,7 +9,8 @@ const HeroSection = () => {
         {/* Background gif */}
         <div className="absolute size-full bg-hero-section bg-no-repeat bg-center bg-cover opacity-20" />
 
-        <div className="2xl:w-[80%] xl:w-[90%] max-w-[1380px] pt-[188px]">
+        <LayoutContainer className="pt-[188px]">
+          {/* Guiding card */}
           <div className="w-[946px] h-[480px] rounded-[40px] bg-glassmorphism py-12 px-16">
             <div className="flex flex-col gap-16">
               <div className="flex flex-col gap-9">
@@ -26,6 +28,7 @@ const HeroSection = () => {
                 </p>
               </div>
 
+              {/* Links */}
               <div className="flex gap-5">
                 {/* Find a Valuer */}
                 <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden">
@@ -63,7 +66,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-        </div>
+        </LayoutContainer>
       </div>
     </section>
   );

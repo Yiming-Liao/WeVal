@@ -1,16 +1,16 @@
+import LayoutContainer from "@/components/common/LayoutContainer";
 import Building from "@/components/svg/main/home-page/QASection/Building";
 import { Accordion } from "@/components/ui";
+import HomePageTitle from "./HomePageTitle";
 
 const QASection = () => {
   return (
-    <section className="relative w-full pt-[126px] pb-[196px]">
+    <section className="relative w-full pb-[196px]">
       <div className="size-full border-t border-light flex justify-center">
-        <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] px-16">
-          <div className="flex flex-col gap-4 ic">
+        <LayoutContainer>
+          <div className="flex flex-col gap-4 px-16">
             {/* Title */}
-            <div className="relative top-[-12px]">
-              <h2 className="typography-title-lg text-deep">Q&A</h2>
-            </div>
+            <HomePageTitle title="Q&A" />
 
             <div className="flex justify-center">
               <div className="max-w-[924px] flex flex-col">
@@ -60,7 +60,7 @@ const QASection = () => {
               </div>
             </div>
           </div>
-        </div>
+        </LayoutContainer>
       </div>
 
       {/* Background SVG */}

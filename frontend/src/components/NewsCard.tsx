@@ -13,7 +13,7 @@ const NewsCard: FC<NewsCardProps> = ({
   return (
     <Link
       href={href}
-      className="relative max-w-[418px] bg-[#F0F3FA] rounded-[20px] overflow-hidden flex flex-col gap-2"
+      className="relative max-w-[418px] h-full bg-[#F0F3FA] rounded-[20px] overflow-hidden flex flex-col gap-3 justify-between"
     >
       {/* Top: Info */}
       <div className="flex flex-col gap-12 p-5 pb-0">
@@ -26,7 +26,7 @@ const NewsCard: FC<NewsCardProps> = ({
           </h3>
 
           {/* Description */}
-          <p className="typography-body-sm font-light text-deep">
+          <p className="typography-body-sm font-light text-deep line-clamp-4">
             {description}
           </p>
         </div>
@@ -54,6 +54,7 @@ interface NewsCardProps {
   alt: string;
 }
 
+// Arrow button SVG
 const ArrowButton = () => {
   return (
     <svg

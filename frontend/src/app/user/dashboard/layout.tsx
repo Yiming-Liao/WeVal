@@ -3,7 +3,6 @@
 import { ReactNode } from "react";
 import Navbar from "@/components/user/Navbar";
 import Footer from "@/components/common/Footer";
-import LayoutBackground from "@/components/common/LayoutBackground";
 
 const UserDashboardLayout = ({
   children,
@@ -19,9 +18,6 @@ const UserDashboardLayout = ({
         <main>{children}</main>
         <Footer />
       </div>
-
-      {/* Layout background */}
-      <LayoutBackground />
     </div>
   );
 };

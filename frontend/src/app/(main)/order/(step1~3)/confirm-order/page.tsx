@@ -1,9 +1,13 @@
 "use client";
 
+import BackgroundDecoration from "@/components/common/BackgroundDecoration";
+import LayoutContainer from "@/components/common/LayoutContainer";
+import Description from "@/components/main/Description";
 import { TitleAndBreadcrumbs } from "@/components/ui";
 import { useOrderStore } from "@/hooks/user/orders/useOrderStore";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FC } from "react";
 
 const DATA = {
   username: "Candy Lee",
@@ -20,6 +24,9 @@ const ConfirmOrderPage = () => {
 
   //
   const handlePayment = async () => {
+    const yes = confirm("Are you sure?");
+    if (!yes) return;
+
     const paymentUrl = await orderStore({
       ownerName: DATA.ownerName,
       ownerPhone: DATA.ownerPhone,
@@ -32,107 +39,101 @@ const ConfirmOrderPage = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center">
-      <section className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px]">
-        {/* Title & Breadcrumbs */}
-        <TitleAndBreadcrumbs
-          links={[
-            { href: "/", page: "Home" },
-            { href: "/order/select-region", page: "Select region" },
-            { href: "/order/fill-info", page: "Fill in Order Information" },
-          ]}
-          currentPage={"Confirm order"}
-          title={"Confirm order"}
-        />
+    <>
+      <section className="relative flex flex-col items-center">
+        <LayoutContainer>
+          {/* Title & Breadcrumbs */}
+          <TitleAndBreadcrumbs
+            links={[
+              { href: "/", page: "Home" },
+              { href: "/order/select-region", page: "Select region" },
+              { href: "/order/fill-info", page: "Fill in Order Information" },
+            ]}
+            currentPage={"Confirm order"}
+            title={"Confirm order"}
+          />
 
-        <div className="relative pt-5 pb-[76px] flex flex-col items-center gap-12">
-          {/* Description */}
-          <div className="px-16 flex flex-col">
-            <p className="typography-body-md leading-[28px] text-secondary font-light">
-              We will provide you with the most suitable professional appraiser
-              to meet your needs. Simply enter your address, and the system will
-              automatically match you with experienced appraisers in your area,
-              ensuring that you receive the most accurate service and quickly
-              begin your appraisal process.
-            </p>
-          </div>
+          <div className="relative pt-5 pb-[76px] flex flex-col items-center gap-12">
+            {/* Description */}
+            <div className="px-16 flex flex-col">
+              <Description text="We will provide you with the most suitable professional appraiser to meet your needs. Simply enter your address, and the system will automatically match you with experienced appraisers in your area, ensuring that you receive the most accurate service and quickly begin your appraisal process." />
+            </div>
 
-          {/* Main */}
-          <div className="w-full px-16 flex flex-col gap-12">
-            <div className="bg-white rounded-xl p-12 [box-shadow:0px_8px_16px_0px_#00000014] flex gap-36">
-              <div className="flex flex-col gap-7 justify-between">
-                {/* Owner name */}
-                <div className="w-max flex flex-col gap-6 typography-label-md">
-                  <label className="text-silver font-medium">
-                    Property owner
-                  </label>
-                  <p className="text-deep">{DATA.ownerName}</p>
+            {/* Main */}
+            <div className="w-full px-16 flex flex-col gap-12">
+              {/* Order card */}
+              <div className="bg-white rounded-xl p-12 [box-shadow:0px_8px_16px_0px_#00000014] flex gap-36">
+                <div className="flex flex-col gap-7 justify-between">
+                  {/* Owner name */}
+                  <Field label="Property owner" data={DATA.ownerName} />
+
+                  {/* Owner number */}
+                  <Field label="Contact number" data={DATA.ownerPhone} />
                 </div>
 
-                {/* Owner number */}
-                <div className="w-max flex flex-col gap-6 typography-label-md">
-                  <label className="text-silver font-medium">
-                    Contact number
-                  </label>
-                  <p className="text-deep">{DATA.ownerPhone}</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-7 justify-between">
-                {/* Request address */}
-                <div className="w-max flex flex-col gap-6 typography-label-md">
-                  <label className="text-silver font-medium">
-                    Request address
-                  </label>
-                  {/* Region */}
-                  <div className="flex flex-col gap-2">
-                    <p className="text-deep">{DATA.region}</p>
-                    {/* Full address */}
-                    <p className="text-deep font-light">{DATA.address}</p>
+                <div className="flex flex-col gap-7 justify-between">
+                  {/* Request address */}
+                  <div className="w-max flex flex-col gap-6 typography-label-md">
+                    <label className="text-silver font-medium">
+                      Request address
+                    </label>
+                    {/* Region */}
+                    <div className="flex flex-col gap-2">
+                      <p className="text-deep">{DATA.region}</p>
+                      {/* Full address */}
+                      <p className="text-deep font-light">{DATA.address}</p>
+                    </div>
                   </div>
-                </div>
 
-                {/* House Price Range */}
-                <div className="w-max flex flex-col gap-6 typography-label-md">
-                  <label className="text-silver font-medium">
-                    House Price Range
-                  </label>
-                  <p className="text-deep">{DATA.priceRange}</p>
+                  {/* House Price Range */}
+                  <Field label="House Price Range" data={DATA.priceRange} />
                 </div>
               </div>
-            </div>
 
-            <div className="flex justify-between">
-              {/* Button: Payment */}
-              <Link
-                href="/order/fill-info"
-                type="submit"
-                className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-gray-400 text-white rounded-lg"
-              >
-                <span className="rotate-180">
-                  <Arrow />
-                </span>
-                Prev
-              </Link>
+              {/* Buttons */}
+              <div className="flex justify-between">
+                {/* Button: Payment */}
+                <Link
+                  href="/order/fill-info"
+                  type="button"
+                  className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-gray-400 text-white rounded-lg"
+                >
+                  <span className="rotate-180">
+                    <Arrow />
+                  </span>
+                  Prev
+                </Link>
 
-              {/* Button: Payment */}
-              <button
-                type="submit"
-                onClick={handlePayment}
-                className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-primary text-white rounded-lg"
-              >
-                Payment
-              </button>
+                {/* Button: Payment */}
+                <button
+                  onClick={handlePayment}
+                  className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-primary text-white rounded-lg"
+                >
+                  Payment
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        </LayoutContainer>
       </section>
+
+      {/* Layout background */}
+      <BackgroundDecoration />
+    </>
+  );
+};
+export default ConfirmOrderPage;
+
+const Field: FC<{ label: string; data: string }> = ({ label, data }) => {
+  return (
+    <div className="w-max flex flex-col gap-6 typography-label-md">
+      <label className="text-silver font-medium">{label}</label>
+      <p className="text-deep">{data}</p>
     </div>
   );
 };
 
-export default ConfirmOrderPage;
-
+// Arrow SVG
 const Arrow = () => {
   return (
     <svg

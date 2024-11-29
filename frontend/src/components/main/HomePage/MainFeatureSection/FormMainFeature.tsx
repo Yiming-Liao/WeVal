@@ -16,16 +16,16 @@ const FormMainFeature: FC<FormMainFeatureProps> = ({ region, setRegion }) => {
     <div className="size-full flex flex-col justify-between">
       <div className="flex flex-col gap-4">
         <h2 className="typography-title-md text-white font-[300] flex flex-col">
-          <span>Select your region </span>
-          <span>to find the best local valuer</span>
+          <span>Purchasing Security (是我的產品名稱)</span>
+          {/* <span>to find the best local valuer</span> */}
         </h2>
 
         <p className="typography-body-md text-white font-[300]">
-          We will provide you with the most suitable professional appraiser to
-          meet your needs. Simply enter your address, and the system will
-          automatically match you with experienced appraisers in your region,
-          ensuring that you receive the most accurate service and quickly begin
-          your appraisal process.
+          For your property due diligence, we follow bank-level risk management
+          standards to ensure a reliable assessment. We’re not involved in
+          sales, avoiding any conflict of interest. Key client needs are covered
+          in our documentation, and our valuers personally inspect the property,
+          offering advice tailored to your situation.
         </p>
       </div>
 
@@ -42,9 +42,7 @@ const FormMainFeature: FC<FormMainFeatureProps> = ({ region, setRegion }) => {
 
       <div className="flex flex-col gap-6">
         <p className="typography-body-md text-white font-[300]">
-          Please note: After submitting your information, please be patient. The
-          system will assign the most suitable appraiser to you within one day.
-          Please check your email for confirmation.
+          Let us secure your property purchase.
         </p>
 
         <Button type="button" onClick={handleNext} className="flex gap-2">

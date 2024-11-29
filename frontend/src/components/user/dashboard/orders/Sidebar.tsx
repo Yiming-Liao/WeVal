@@ -3,7 +3,7 @@ import { FC } from "react";
 
 const Sidebar: FC<{ status: ORDER_STATUS | null }> = ({ status }) => {
   return (
-    <div className="absolute left-0 w-full max-w-[350px]">
+    <div className="max-2xl:hidden absolute left-0 w-full max-w-[350px]">
       <div className="h-[496px] rounded-r-lg bg-white flex justify-end">
         <div className="w-[220px] flex flex-col pt-6 gap-6">
           {/* All */}

@@ -1,5 +1,7 @@
 "use client";
 
+import BackgroundDecoration from "@/components/common/BackgroundDecoration";
+import LayoutContainer from "@/components/common/LayoutContainer";
 import { TitleAndBreadcrumbs } from "@/components/ui";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,137 +16,143 @@ const NewsDetailPage = ({ id }: { id: string }) => {
     category.charAt(0).toUpperCase() + category.slice(1).split("-").join(" ");
 
   return (
-    <div className="relative flex flex-col items-center">
-      <section className="size-full flex flex-col items-center">
-        <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px]">
-          {/* Title & Breadcrumbs */}
-          <TitleAndBreadcrumbs
-            links={[{ href: "/", page: "Home" }]}
-            currentPage={"News"}
-            title={"News"}
-          />
-        </div>
+    <>
+      <div className="relative flex flex-col items-center">
+        <section className="size-full flex flex-col items-center">
+          <LayoutContainer>
+            {/* Title & Breadcrumbs */}
+            <TitleAndBreadcrumbs
+              links={[{ href: "/", page: "Home" }]}
+              currentPage={"News"}
+              title={"News"}
+            />
+          </LayoutContainer>
 
-        {/* Category links */}
-        <div className="w-full border-b-[0.25px] border-secondary flex justify-center">
-          <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] pt-10 pl-16">
-            <div className="flex gap-2">
-              <Link
-                href={"/news/all"}
-                className="-ml-2 px-3 typography-label-lg text-secondary flex justify-center"
-              >
-                <span className={`py-2`}>All</span>
-              </Link>
-              <Link
-                href={"/news/announcements"}
-                className="px-3 typography-label-lg text-secondary flex justify-center"
-              >
-                <span
-                  className={`py-2 ${
-                    category === "announcements"
-                      ? " border-b border-secondary"
-                      : ""
-                  }`}
+          {/* Category links */}
+          <div className="w-full border-b-[0.25px] border-secondary flex justify-center">
+            <LayoutContainer>
+              <div className="flex gap-2 pt-10 pl-16">
+                <Link
+                  href={"/news/all"}
+                  className="-ml-2 px-3 typography-label-lg text-secondary flex justify-center"
                 >
-                  Announcements
-                </span>
-              </Link>
-              <Link
-                href={"/news/events"}
-                className="px-3 typography-label-lg text-secondary flex justify-center"
-              >
-                <span
-                  className={`py-2 ${
-                    category === "events" ? " border-b border-secondary" : ""
-                  }`}
+                  <span className={`py-2`}>All</span>
+                </Link>
+                <Link
+                  href={"/news/announcements"}
+                  className="px-3 typography-label-lg text-secondary flex justify-center"
                 >
-                  Events
-                </span>
-              </Link>
-              <Link
-                href={"/news/other-news"}
-                className="px-3 typography-label-lg text-secondary flex justify-center"
-              >
-                <span
-                  className={`py-2 ${
-                    category === "other-news"
-                      ? " border-b border-secondary"
-                      : ""
-                  }`}
+                  <span
+                    className={`py-2 ${
+                      category === "announcements"
+                        ? " border-b border-secondary"
+                        : ""
+                    }`}
+                  >
+                    Announcements
+                  </span>
+                </Link>
+                <Link
+                  href={"/news/events"}
+                  className="px-3 typography-label-lg text-secondary flex justify-center"
                 >
-                  Other news
-                </span>
-              </Link>
-            </div>
+                  <span
+                    className={`py-2 ${
+                      category === "events" ? " border-b border-secondary" : ""
+                    }`}
+                  >
+                    Events
+                  </span>
+                </Link>
+                <Link
+                  href={"/news/other-news"}
+                  className="px-3 typography-label-lg text-secondary flex justify-center"
+                >
+                  <span
+                    className={`py-2 ${
+                      category === "other-news"
+                        ? " border-b border-secondary"
+                        : ""
+                    }`}
+                  >
+                    Other news
+                  </span>
+                </Link>
+              </div>
+            </LayoutContainer>
           </div>
-        </div>
 
-        {/* Main */}
-        <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] pt-20 pb-12 flex flex-col gap-[92px]">
-          <div className="flex flex-col items-center gap-16">
-            <div className="px-16 max-w-[680px] flex flex-col items-center gap-10">
-              {/* Category & Title */}
-              <div className="flex flex-col items-center gap-4">
-                {/* Category */}
-                <h2 className="typography-body-md text-[#A9ADBB]">
-                  {formattedCategory}
-                </h2>
+          {/* Main */}
+          <LayoutContainer>
+            <div className="pt-20 pb-12 flex flex-col items-center gap-[92px]">
+              <div className="lg:px-16 max-w-[680px] flex flex-col items-center gap-10">
+                {/* Category & Title */}
+                <div className="flex flex-col items-center gap-4">
+                  {/* Category */}
+                  <h2 className="typography-body-md text-[#A9ADBB]">
+                    {formattedCategory}
+                  </h2>
 
-                {/* Title */}
-                <h1 className="typography-title-md text-secondary">
-                  Impact of Interest Rates and Migration
-                </h1>
+                  {/* Title */}
+                  <h1 className="typography-title-md text-secondary">
+                    Impact of Interest Rates and Migration
+                  </h1>
+                </div>
+
+                {/* Image */}
+                <Image
+                  src={"https://placehold.co/680x520/EEE/31343C"}
+                  alt={""}
+                  width={680}
+                  height={520}
+                  unoptimized
+                />
+
+                {/* Text */}
+                <p className="typography-body-md leading-7 text-deep font-light">
+                  Weval Solutions Pty Ltd is a dynamic Australian-based
+                  technology firm specializing in innovative solutions for the
+                  real estate and appraisal industry. With a focus on leveraging
+                  cutting-edge technologies, Weval aims to streamline the
+                  connection between clients and certified appraisers, ensuring
+                  accurate, transparent, and efficient appraisal processes. The{" "}
+                  {`company's`} platform is designed to match clients with
+                  licensed professionals quickly, while also providing a
+                  seamless and secure transaction environment. Weval is
+                  committed to delivering exceptional customer experiences
+                  through personalized services, state-of-the-art tools, and a
+                  user-centric approach to solving industry challenges.
+                </p>
               </div>
 
-              {/* Image */}
-              <Image
-                src={"https://placehold.co/680x520/EEE/31343C"}
-                alt={""}
-                width={680}
-                height={520}
-                unoptimized
-              />
-
-              {/* Text */}
-              <p className="typography-body-md leading-7 text-deep font-light">
-                Weval Solutions Pty Ltd is a dynamic Australian-based technology
-                firm specializing in innovative solutions for the real estate
-                and appraisal industry. With a focus on leveraging cutting-edge
-                technologies, Weval aims to streamline the connection between
-                clients and certified appraisers, ensuring accurate,
-                transparent, and efficient appraisal processes. The{" "}
-                {`company's`} platform is designed to match clients with
-                licensed professionals quickly, while also providing a seamless
-                and secure transaction environment. Weval is committed to
-                delivering exceptional customer experiences through personalized
-                services, state-of-the-art tools, and a user-centric approach to
-                solving industry challenges.
-              </p>
-            </div>
-
-            <div className="w-full px-16 flex justify-between">
-              {/* Prev */}
-              <Link href={""} className="flex items-center gap-2 py-4 px-8">
-                <Arrow />
-                <span className="typography-body-md text-deep font-light">
-                  Prev
-                </span>
-              </Link>
-
-              {/* Next */}
-              <Link href={""} className="flex items-center gap-2 py-4 px-8">
-                <span className="typography-body-md text-deep font-light">
-                  Next
-                </span>
-                <span className="rotate-180">
+              {/* Nav buttons */}
+              <div className="w-full px-16 flex justify-between">
+                {/* Prev */}
+                <Link href={""} className="flex items-center gap-2 py-4 px-8">
                   <Arrow />
-                </span>
-              </Link>
+                  <span className="typography-body-md text-deep font-light">
+                    Prev
+                  </span>
+                </Link>
+
+                {/* Next */}
+                <Link href={""} className="flex items-center gap-2 py-4 px-8">
+                  <span className="typography-body-md text-deep font-light">
+                    Next
+                  </span>
+                  <span className="rotate-180">
+                    <Arrow />
+                  </span>
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-    </div>
+          </LayoutContainer>
+        </section>
+      </div>
+
+      {/* Layout background */}
+      <BackgroundDecoration partial />
+    </>
   );
 };
 

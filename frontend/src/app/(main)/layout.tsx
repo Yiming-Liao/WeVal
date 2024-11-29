@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import Navbar from "@/components/main/Navbar";
 import Footer from "@/components/common/Footer";
-import LayoutBackground from "@/components/common/LayoutBackground";
 
 const MainLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
@@ -15,9 +14,6 @@ const MainLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
         <main>{children}</main>
         <Footer />
       </div>
-
-      {/* Layout background */}
-      <LayoutBackground />
     </div>
   );
 };

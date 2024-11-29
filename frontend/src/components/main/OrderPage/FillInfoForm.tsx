@@ -1,9 +1,14 @@
 "use client";
 
 import { Input, Select } from "@/components/ui";
+import { COMMISSION_AMOUNT, PriceRange } from "@/types/stripe/priceRange.types";
 import Link from "next/link";
+import { useState } from "react";
 
 const FillInfoForm = () => {
+  const [purpose, setPurpose] = useState<PurposeTypes>("");
+  const [priceRange, setPriceRange] = useState<PriceRange | "">("");
+
   return (
     <form className="flex flex-col gap-20">
       {/* Inputs */}
@@ -11,26 +16,29 @@ const FillInfoForm = () => {
         <div className="flex-1 max-w-[324px] flex flex-col gap-3">
           {/* Select: Purpose of valuation */}
           <Select
-          // value={serviceArea}
-          // onChange={(e) => setServiceArea(e.target.value)}
+            value={purpose}
+            onChange={(e) => setPurpose(e.target.value as PurposeTypes)}
           >
             <option value="" disabled hidden>
               Purpose of valuation
             </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
+            <option value="buying">Buying house</option>
+            <option value="selling">Selling house</option>
           </Select>
 
           {/* Select: House price range */}
           <Select
-          // value={serviceArea}
-          // onChange={(e) => setServiceArea(e.target.value)}
+            value={priceRange}
+            onChange={(e) => setPriceRange(e.target.value as PriceRange)}
           >
             <option value="" disabled hidden>
               House price range
             </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
+            {Object.entries(COMMISSION_AMOUNT).map((entry) => (
+              <option key={entry[0]} value={entry[0]}>
+                {entry[0]} _ {entry[1]}
+              </option>
+            ))}
           </Select>
         </div>
         <div className="flex-1 max-w-[324px] flex flex-col gap-3">
@@ -102,3 +110,6 @@ const Arrow = () => {
     </svg>
   );
 };
+
+// Type
+type PurposeTypes = "" | "buying" | "selling";

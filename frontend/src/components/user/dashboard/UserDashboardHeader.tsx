@@ -1,31 +1,45 @@
+import LayoutContainer from "@/components/common/LayoutContainer";
 import { Order, Profile } from "@/components/svg";
 import { TitleAndBreadcrumbs } from "@/components/ui";
 import Link from "next/link";
+import { FC } from "react";
 
-const Header = () => {
+const UserDashboardHeader: FC<UserDashboardHeaderProps> = ({
+  links = [],
+  currentPage = "",
+  title = "",
+  activeTab = "",
+}) => {
   return (
     <header className="w-full flex flex-col items-center">
       {/* Title & Breadcrumbs */}
-      <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px]">
+      <LayoutContainer>
         <TitleAndBreadcrumbs
           links={[
             { href: "/", page: "Home" },
             { href: "/user/dashboard", page: "Dashboard" },
+            ...links,
           ]}
-          currentPage={"Orders"}
-          title={"Orders"}
+          currentPage={currentPage}
+          title={title}
         />
-      </div>
+      </LayoutContainer>
 
       {/* Dashboard links */}
       <div className="w-full border-b-[0.25px] border-secondary flex justify-center pt-10 pl-16">
-        <div className="2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px]">
+        <LayoutContainer>
           <nav className="flex gap-2">
             <Link
               href={"/user/dashboard/profile"}
               className="-ml-2 px-3 typography-label-lg text-secondary flex justify-center"
             >
-              <span className="py-2 border-b border-black/0 flex items-center gap-2">
+              <span
+                className={`py-2 flex items-center gap-2 ${
+                  activeTab === "profile"
+                    ? "border-b border-secondary"
+                    : "border-b border-black/0"
+                }`}
+              >
                 <Profile />
                 Profile
               </span>
@@ -34,15 +48,28 @@ const Header = () => {
               href={"/user/dashboard/orders"}
               className="px-3 typography-label-lg text-secondary flex justify-center"
             >
-              <span className="py-2 border-b border-secondary flex items-center gap-2">
+              <span
+                className={`py-2 flex items-center gap-2 ${
+                  activeTab === "orders"
+                    ? "border-b border-secondary"
+                    : "border-b border-black/0"
+                }`}
+              >
                 <Order />
                 Orders
               </span>
             </Link>
           </nav>
-        </div>
+        </LayoutContainer>
       </div>
     </header>
   );
 };
-export default Header;
+export default UserDashboardHeader;
+
+interface UserDashboardHeaderProps {
+  links?: { href: string; page: string }[];
+  currentPage?: string;
+  title?: string;
+  activeTab?: string;
+}
