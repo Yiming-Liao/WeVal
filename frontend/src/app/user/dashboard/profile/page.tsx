@@ -5,7 +5,8 @@ import FormUsername from "@/components/user/dashboard/profile/username/FormUsern
 import FormPassword from "@/components/user/dashboard/profile/password/FormPassword";
 import LayoutContainer from "@/components/common/LayoutContainer";
 import BackgroundDecoration from "@/components/common/BackgroundDecoration";
-import UserDashboardHeader from "@/components/user/dashboard/UserDashboardHeader";
+import PageHeader from "@/components/common/PageHeader";
+import { Order, Profile } from "@/components/svg";
 
 const ProfilePage = () => {
   return (
@@ -13,10 +14,27 @@ const ProfilePage = () => {
       <div className="relative flex flex-col items-center">
         <section className="size-full flex flex-col items-center">
           {/* Header */}
-          <UserDashboardHeader
-            currentPage={"profile"}
+          <PageHeader
+            breadcrumbsLinks={[
+              { href: "/", page: "Home" },
+              { href: "/user/dashboard", page: "Dashboard" },
+            ]}
+            currentPage={"Profile"}
             title={"Profile"}
-            activeTab="profile"
+            tabs={[
+              {
+                text: "Profile",
+                href: "/user/dashboard/profile",
+                isActive: true,
+                icon: <Profile />,
+              },
+              {
+                text: "Orders",
+                href: "/user/dashboard/orders",
+                isActive: false,
+                icon: <Order />,
+              },
+            ]}
           />
 
           {/* Main */}

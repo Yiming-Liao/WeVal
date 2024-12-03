@@ -1,23 +1,24 @@
 import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import LayoutContainer from "@/components/common/LayoutContainer";
+import PageHeader from "@/components/common/PageHeader";
 import Description from "@/components/main/Description";
 import { FullLogoBlue } from "@/components/svg";
 import Buildings from "@/components/svg/main/contact-page/Buildings";
-import { Button, Input, Select, TitleAndBreadcrumbs } from "@/components/ui";
+import { Button, Input, Select } from "@/components/ui";
 import Image from "next/image";
 
 const ContactPage = () => {
   return (
     <>
       <section className="relative flex flex-col items-center">
-        <LayoutContainer>
-          {/* Title & Breadcrumbs */}
-          <TitleAndBreadcrumbs
-            links={[{ href: "/", page: "Home" }]}
-            currentPage={"Contact Us"}
-            title={"Contact Us"}
-          />
+        {/* Header */}
+        <PageHeader
+          breadcrumbsLinks={[{ href: "/", page: "Home" }]}
+          currentPage={"Contact Us"}
+          title={"Contact Us"}
+        />
 
+        <LayoutContainer>
           <div className="relative pt-5 pb-[145px] flex flex-col items-center">
             {/* Description */}
             <div className="px-16 flex flex-col pb-[100px]">

@@ -8,7 +8,7 @@ const TitleAndBreadcrumbs: FC<TitleAndBreadcrumbsProps> = ({
   title,
 }) => {
   return (
-    <div className="flex items-end gap-3 pt-[85px]">
+    <div className="flex items-end gap-3 pt-[85px] border-x border-light">
       <div className="relative left-[-4px] bottom-[21px]">
         <ConnectLine />
       </div>

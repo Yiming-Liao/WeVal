@@ -3,18 +3,18 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { StripeService } from '#services/roles/user/stripe_service'
 import User from '#models/user/user'
-import { COMMISSION_AMOUNT, PriceRange, PRODUCT_IDS } from '#config/stripe'
+import { PAYMENT_AMOUNT, PriceRange, PRODUCT_IDS } from '#config/stripe'
 
 export async function store({ request, response, auth }: HttpContext) {
   const payload = request.all()
 
   // Define commissionAmount & productId
-  const commisionAmount = COMMISSION_AMOUNT[payload.priceRange as PriceRange]
+  const paymentAmount = PAYMENT_AMOUNT[payload.priceRange as PriceRange]
   const productId = PRODUCT_IDS[payload.priceRange as PriceRange]
 
   // Create new Order
   const createdOrder = await (auth.user as User).related('orders').create({
-    amount: commisionAmount,
+    amount: paymentAmount,
     ...payload,
   })
 

@@ -1,12 +1,11 @@
 "use client";
 
 import LayoutContainer from "@/components/common/LayoutContainer";
-import { Loading } from "@/components/svg";
-import UserDashboardHeader from "@/components/user/dashboard/UserDashboardHeader";
-import Sidebar, {
-  ORDER_STATUS,
-} from "@/components/user/dashboard/orders/Sidebar";
+import PageHeader from "@/components/common/PageHeader";
+import { Loading, Order, Profile } from "@/components/svg";
+
 import { useOrderShow } from "@/hooks/user/orders/useOrderShow";
+import { orderStatusDisplay } from "@/types/models/order.types";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -17,39 +16,43 @@ const OrderDetailPage = ({ id }: { id: string }) => {
     <div className="relative flex flex-col items-center">
       <section className="size-full flex flex-col items-center">
         {/* Header */}
-        <UserDashboardHeader
-          links={[{ href: "/user/dashboard/orders", page: "Orders" }]}
-          currentPage={id}
-          title={id}
-          activeTab="orders"
+        <PageHeader
+          breadcrumbsLinks={[
+            { href: "/", page: "Home" },
+            { href: "/user/dashboard", page: "Dashboard" },
+          ]}
+          currentPage={order?.orderId}
+          title={order?.orderId}
+          tabs={[
+            {
+              text: "Profile",
+              href: "/user/dashboard/profile",
+              isActive: false,
+              icon: <Profile />,
+            },
+            {
+              text: "Orders",
+              href: "/user/dashboard/orders",
+              isActive: true,
+              icon: <Order />,
+            },
+          ]}
         />
 
         {/* Main */}
         <div className="w-full flex justify-center pt-20">
           <LayoutContainer>
-            <div className="min-h-screen pl-52 flex flex-col gap-10">
-              {/* Side bar */}
-              <Sidebar
-                status={(order && (order.status as ORDER_STATUS)) || null}
-              />
-
+            <div className="min-h-screen flex flex-col gap-10 px-16">
               {/* Order card */}
-              <div className="min-h-72 bg-white rounded-xl p-12 [box-shadow:0px_8px_16px_0px_#00000014] flex gap-36">
+              <div className="bg-white rounded-xl p-12 [box-shadow:0px_8px_16px_0px_#00000014] flex gap-12">
                 {!order ? (
                   <Loading />
                 ) : (
                   <>
-                    <div className="flex flex-col gap-7 justify-between">
-                      {/* Owner name */}
-                      <Field label="Property owner" data={order.ownerName} />
-
-                      {/* Owner number */}
-                      <Field label="Contact number" data={order.ownerPhone} />
-                    </div>
-
-                    <div className="flex flex-col gap-7 justify-between">
+                    {/* Column 1 */}
+                    <div className="min-w-64 max-w-80 flex flex-col gap-7 justify-between">
                       {/* Request address */}
-                      <div className="w-max flex flex-col gap-6 typography-label-md">
+                      <div className="flex flex-col gap-6 typography-label-md">
                         <label className="text-silver font-medium">
                           Request address
                         </label>
@@ -57,7 +60,7 @@ const OrderDetailPage = ({ id }: { id: string }) => {
                         <div className="flex flex-col gap-2">
                           <p className="text-deep">{order.region}</p>
                           {/* Full address */}
-                          <p className="text-deep font-light">
+                          <p className="text-deep font-light overflow-auto text-nowrap">
                             {order.address}
                           </p>
                         </div>
@@ -70,11 +73,24 @@ const OrderDetailPage = ({ id }: { id: string }) => {
                       />
                     </div>
 
-                    <div className="flex flex-col gap-7 justify-between">
-                      {/* House Price Range */}
-                      <Field label="Status" data={order.status} />
+                    {/* Column 2 */}
+                    <div className="min-w-64 max-w-80 flex flex-col gap-7 justify-between">
+                      {/* Owner name */}
+                      <Field label="Property owner" data={order.ownerName} />
 
-                      {order.status === "unpaid" && (
+                      {/* Owner number */}
+                      <Field label="Contact number" data={order.ownerPhone} />
+                    </div>
+
+                    {/* Column 3 */}
+                    <div className="min-w-64 max-w-80 flex flex-col gap-7 justify-between">
+                      {/* House Price Range */}
+                      <Field
+                        label="Status"
+                        data={orderStatusDisplay[order.orderStatus]}
+                      />
+
+                      {order.orderStatus === "unpaid" && (
                         <Link href={order.paymentUrl} className="border-8">
                           Pay
                         </Link>

@@ -1,8 +1,8 @@
 import { FC } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import NavLink from "./NavLink";
 import UserActions from "./UserActions";
+import { FullLogoWhite } from "@/components/svg";
 
 const Navbar: FC = () => {
   return (
@@ -12,12 +12,7 @@ const Navbar: FC = () => {
           <div className="flex justify-between items-center">
             {/* logo */}
             <Link href={"/"} className="flex justify-center items-center">
-              <Image
-                src={"/images/layout/navbar/logo.svg"}
-                alt={"WeVal logo"}
-                width={204}
-                height={52}
-              />
+              <FullLogoWhite />
             </Link>
 
             {/* Nav */}

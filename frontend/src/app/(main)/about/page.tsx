@@ -7,19 +7,20 @@ import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import LayoutContainer from "@/components/common/LayoutContainer";
 import AdvantageCard from "@/components/main/AdvantageCard";
 import Description from "@/components/main/Description";
+import PageHeader from "@/components/common/PageHeader";
 
 const AboutPage = () => {
   return (
     <>
       <section className="relative flex flex-col items-center">
-        <LayoutContainer>
-          {/* Title & Breadcrumbs */}
-          <TitleAndBreadcrumbs
-            links={[{ href: "/", page: "Home" }]}
-            currentPage={"About Us"}
-            title={"About WeVal"}
-          />
+        {/* Header */}
+        <PageHeader
+          breadcrumbsLinks={[{ href: "/", page: "Home" }]}
+          currentPage={"About Us"}
+          title={"About WeVal"}
+        />
 
+        <LayoutContainer>
           <div className="relative pt-5 pb-[120px]">
             {/* Description */}
             <div className="px-16 flex flex-col pb-[100px]">

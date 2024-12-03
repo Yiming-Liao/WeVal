@@ -24,4 +24,15 @@ export class StripeService {
 
     return { sessionId: session.id, paymentUrl: session.url }
   }
+
+  /**
+   * 🆂 Check payment status of a checkout session
+   */
+  static async checkPaymentStatus(sessionId: string) {
+    // Retrieve the session details
+    const session = await stripe.checkout.sessions.retrieve(sessionId)
+
+    // Return the payment status
+    return session.payment_status
+  }
 }

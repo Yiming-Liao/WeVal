@@ -1,26 +1,45 @@
 "use client";
 
-import { Loading } from "@/components/svg";
+import { Loading, Order, Profile } from "@/components/svg";
 import OrderList from "@/components/user/dashboard/orders/OrderList";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Sidebar, {
-  ORDER_STATUS,
-} from "@/components/user/dashboard/orders/Sidebar";
-import UserDashboardHeader from "@/components/user/dashboard/UserDashboardHeader";
+import Sidebar from "@/components/user/dashboard/orders/Sidebar";
 import LayoutContainer from "@/components/common/LayoutContainer";
+import { useOrderIndex } from "@/hooks/user/orders/useOrderIndex";
+import { OrderStatus } from "@/types/models/order.types";
+import PageHeader from "@/components/common/PageHeader";
 
 const OrdersPage = () => {
   const status = useSearchParams().get("status");
+
+  const { orders, statusCounts, isLoading } = useOrderIndex({ status });
 
   return (
     <div className="relative flex flex-col items-center">
       <section className="size-full flex flex-col items-center">
         {/* Header */}
-        <UserDashboardHeader
-          currentPage="orders"
-          title="Orders"
-          activeTab="orders"
+        <PageHeader
+          breadcrumbsLinks={[
+            { href: "/", page: "Home" },
+            { href: "/user/dashboard", page: "Dashboard" },
+          ]}
+          currentPage={"Orders"}
+          title={"Orders"}
+          tabs={[
+            {
+              text: "Profile",
+              href: "/user/dashboard/profile",
+              isActive: false,
+              icon: <Profile />,
+            },
+            {
+              text: "Orders",
+              href: "/user/dashboard/orders",
+              isActive: true,
+              icon: <Order />,
+            },
+          ]}
         />
 
         {/* Main */}
@@ -28,7 +47,10 @@ const OrdersPage = () => {
           <LayoutContainer>
             <div className="min-h-screen 2xl:pl-52 max-2xl:mx-16 flex flex-col gap-10">
               {/* Side bar */}
-              <Sidebar status={status as ORDER_STATUS} />
+              <Sidebar
+                status={status as OrderStatus}
+                statusCounts={statusCounts}
+              />
 
               {/* Search */}
               <div className="flex justify-end">
@@ -36,7 +58,7 @@ const OrdersPage = () => {
               </div>
 
               {/* List */}
-              <OrderList />
+              <OrderList orders={orders} isLoading={isLoading} />
             </div>
           </LayoutContainer>
         </div>

@@ -22,11 +22,7 @@ const FillInfoPage = () => {
           <div className="relative pt-5 pb-[76px] flex flex-col items-center">
             {/* Description */}
             <div className="px-16 flex flex-col pb-[100px]">
-              <Description
-                text={
-                  "We will provide you with the most suitable professional appraiser to meet your needs. Simply enter your address, and the system will automatically match you with experienced appraisers in your area, ensuring that you receive the most accurate service and quickly begin your appraisal process."
-                }
-              />
+              <Description text="We will provide you with the most suitable professional appraiser to meet your needs. Simply enter your address, and the system will automatically match you with experienced appraisers in your area, ensuring that you receive the most accurate service and quickly begin your appraisal process." />
             </div>
 
             {/* Main */}

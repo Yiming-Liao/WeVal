@@ -9,7 +9,7 @@ const OrdersLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       {children}
 
       {/* Background decoration */}
-      <BackgroundDecoration partial />
+      <BackgroundDecoration noBorder />
     </>
   );
 };

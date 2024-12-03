@@ -16,7 +16,10 @@ const config: Config = {
         silver: "#73798D",
       },
       backgroundImage: {
-        "hero-section": "url('/images/home-page/HeroSection/background.gif')",
+        "hero-section-gif":
+          "url('/images/home-page/HeroSection/background.gif')",
+        "user-gradient":
+          "linear-gradient(315deg, #26427F 0%, #0083D4 50%, #66D9FC 100%)",
       },
     },
   },
@@ -24,7 +27,6 @@ const config: Config = {
     function ({ addComponents }: AddComponents) {
       addComponents({
         // Title
-
         ".typography-title-lg": {
           fontSize: "36px",
           // fontWeight: "300",

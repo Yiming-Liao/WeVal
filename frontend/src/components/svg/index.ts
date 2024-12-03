@@ -28,6 +28,7 @@ import UserSignUpIcon from "./main/home-page/HeroSection/UserSignUpIcon";
 import ArrowMore from "./main/home-page/NewsSection/ArrowMore";
 import TriangleDown from "./TriangleDown";
 import Profile from "./dashboard-nav-icons/Profile";
+import AuthBackgroundBuildings from "./auth/AuthBackgroundBuildings";
 
 export {
   FullLogoBlue,
@@ -60,4 +61,5 @@ export {
   ArrowMore,
   TriangleDown,
   Profile,
+  AuthBackgroundBuildings, // Auth
 };

@@ -1,6 +1,13 @@
 import { DateTime } from 'luxon'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import { column, BaseModel, belongsTo, beforeCreate } from '@adonisjs/lucid/orm'
+import {
+  column,
+  BaseModel,
+  belongsTo,
+  beforeCreate,
+  afterFetch,
+  afterFind,
+} from '@adonisjs/lucid/orm'
 import User from './user.js'
 import { PriceRange } from '#config/stripe'
 import IdGeneratorService from '#services/id_generator_service'
@@ -19,6 +26,8 @@ export default class Order extends BaseModel {
 
   // 📋 Basic Info
   @column()
+  declare orderStatus: OrderStatus // Order status
+  @column()
   declare ownerName: string
   @column()
   declare ownerPhone: string
@@ -35,7 +44,7 @@ export default class Order extends BaseModel {
   @column()
   declare paymentUrl: string | null
   @column()
-  declare status: OrderStatus
+  declare paymentStatus: PaymentStatus // Payment status
   @column()
   declare amount: number | null // Amount in cents (AUD), eg. 500.00 -> 50000
 
@@ -59,23 +68,57 @@ export default class Order extends BaseModel {
   @beforeCreate()
   public static async beforeCreate(order: Order) {
     // Set orderId
-    order.orderId = IdGeneratorService.generateOrderId()
+    let isUnique = false
+    while (!isUnique) {
+      const orderId = IdGeneratorService.generateOrderId()
+      if (!(await Order.query().where('orderId', orderId).first())) {
+        order.orderId = orderId
+        isUnique = true
+      }
+    }
     // Set expiresAt
     order.expiresAt = DateTime.local().plus({ hours: 24 })
-    // Clean up expired orders
-    const now = DateTime.local()
-    await Order.query()
-      .where('expires_at', '<', now.toISO())
-      .andWhere('status', '!=', OrderStatus.COMPLETED)
-      .delete()
+  }
+
+  /**
+   * 🪝 Set CANCELLED status for expired orders
+   */
+  @afterFetch() // When using Order.all()
+  public static async afterFetch(orders: Order[]) {
+    for (const order of orders) {
+      await this.checkAndCancelExpiredOrder(order)
+    }
+  }
+  @afterFind() // When using Order.findBy()
+  public static async afterFind(order: Order) {
+    await this.checkAndCancelExpiredOrder(order)
+  }
+  private static async checkAndCancelExpiredOrder(order: Order) {
+    if (
+      order.paymentStatus !== PaymentStatus.PAID &&
+      order.expiresAt &&
+      DateTime.local() > order.expiresAt
+    ) {
+      await order.merge({ orderStatus: OrderStatus.CANCELLED }).save()
+    }
   }
 }
 
 // Type
 export enum OrderStatus {
+  UNPAID = 'unpaid', // PaymentStatus: 'pending', 'unpaid'
+  AWAITING_VALUER = 'awaiting-valuer', // PaymentStatus: 'paid'
+  IN_PROGRESS = 'in-progress', // PaymentStatus: 'paid'
+  COMPLETED = 'completed', // PaymentStatus: 'paid'
+  CANCELLED = 'cancelled', // PaymentStatus: 'expired'
+}
+
+export enum PaymentStatus {
+  PENDING = 'pending',
   UNPAID = 'unpaid',
-  AWAITING_VALUER = 'awaiting-valuer',
-  IN_PROGRESS = 'in-progress',
-  COMPLETED = 'completed',
-  FAILED = 'failed',
+  PAID = 'paid',
+  CANCELLED = 'cancelled',
+  REQUIRES_PAYMENT_METHOD = 'requires_payment_method', // None
+  NO_PAYMENT_REQUIRED = 'no_payment_required', // None
+  EXPIRED = 'expired',
 }

@@ -12,6 +12,10 @@ export default class extends BaseSchema {
       table.string('order_id').notNullable().unique()
 
       // 📋 Basic Info
+      table
+        .enu('order_status', ['unpaid', 'awaiting-valuer', 'in-progress', 'completed', 'cancelled'])
+        .defaultTo('unpaid')
+        .notNullable()
       table.string('owner_name').notNullable()
       table.string('owner_phone').notNullable()
       table.string('region').notNullable()
@@ -22,8 +26,16 @@ export default class extends BaseSchema {
       table.string('session_id', 500).nullable()
       table.string('payment_url', 1000).nullable()
       table
-        .enu('status', ['unpaid', 'awaiting-valuer', 'in-progress', 'completed', 'failed'])
-        .defaultTo('unpaid')
+        .enu('payment_status', [
+          'pending',
+          'unpaid',
+          'paid',
+          'cancelled',
+          'requires_payment_method',
+          'no_payment_required',
+          'expired',
+        ])
+        .defaultTo('pending')
         .notNullable()
       table.decimal('amount', 10, 2).nullable() // Storing amount in cents for precision (e.g., 75000 for $750.00)
 

@@ -3,13 +3,13 @@
 "use client";
 
 import { FC, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useValuerStore } from "@/stores/valuerStore";
 import SignOutButton from "./SignOutButton";
 import UserCardButton from "./UserCardButton";
 import { useValuerInit } from "@/hooks/valuer/useValuerInit";
+import { FullLogoWhite } from "@/components/svg";
 
 const Navbar: FC = () => {
   useValuerInit({ role: "valuer" });
@@ -32,12 +32,7 @@ const Navbar: FC = () => {
           <div className="flex justify-between items-center">
             {/* logo */}
             <Link href={"/"} className="flex justify-center items-center">
-              <Image
-                src={"/images/layout/navbar/logo.svg"}
-                alt={"WeVal logo"}
-                width={204}
-                height={52}
-              />
+              <FullLogoWhite />
             </Link>
 
             <div className="flex gap-4">

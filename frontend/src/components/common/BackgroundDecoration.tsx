@@ -1,16 +1,16 @@
 import { FC } from "react";
 import LayoutContainer from "./LayoutContainer";
 
-const BackgroundDecoration: FC<{ partial?: boolean }> = ({
-  partial = false,
+const BackgroundDecoration: FC<{ noBorder?: boolean }> = ({
+  noBorder = false,
 }) => {
   return (
-    <div className="absolute top-0 left-0 size-full flex justify-center -z-50 bg-[#FAFAFA]">
+    <div className="fixed top-24 left-0 size-full flex justify-center -z-50 bg-[#FAFAFA]">
       <LayoutContainer>
         <div
-          className={`w-full ${
-            !partial ? "h-full" : "h-[337px]"
-          } border-l border-r border-light`}
+          className={`size-full ${
+            !noBorder ? "border-l border-r border-light" : "border-0"
+          } `}
         />
       </LayoutContainer>
     </div>

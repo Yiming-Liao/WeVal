@@ -30,7 +30,7 @@ const Background: FC<{ region: Region }> = ({ region }) => {
         // Switch background after animation finished.
         onComplete: () => {
           switch (region) {
-            case "new-south-wales":
+            case "new_south_wales":
               setBackgroundComponent(<MapNewSouthWales />);
               break;
             default:

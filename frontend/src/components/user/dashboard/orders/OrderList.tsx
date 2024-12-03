@@ -1,17 +1,19 @@
 "use client";
 
+import { FC } from "react";
 import { Loading } from "@/components/svg";
-import { useOrderIndex } from "@/hooks/user/orders/useOrderIndex";
+import { Order, orderStatusDisplay } from "@/types/models/order.types";
 import Link from "next/link";
 
-const OrderList = () => {
-  const { orders, isLoading } = useOrderIndex();
+const OrderList: FC<OrderListProps> = ({ orders, isLoading }) => {
+  // const status = useSearchParams().get("status");
+  // const { orders, statusCounts, isLoading } = useOrderIndex({ status });
 
   return (
     <div className="flex flex-col">
       {/* Table head */}
       <div className="py-6 flex justify-between gap-4 typography-label-md text-primary">
-        <label className="w-28">Status</label>
+        <label className="min-w-28">Status</label>
         <label className="w-80">Property Address</label>
         <label className="w-48">Property owner</label>
         <label className="w-32">Payment</label>
@@ -25,7 +27,7 @@ const OrderList = () => {
         orders.map((order) => {
           const {
             orderId,
-            status,
+            orderStatus,
             region,
             address,
             ownerName,
@@ -37,7 +39,7 @@ const OrderList = () => {
               key={orderId}
               className="py-10 flex items-center justify-between gap-4 typography-label-md text-deep border-b-[0.5px] border-primary"
             >
-              <div className="w-28">{status}</div>
+              <div className="min-w-28">{orderStatusDisplay[orderStatus]}</div>
               <div className="w-80 flex flex-col gap-2">
                 <p>{region}</p>
                 <p className="font-light line-clamp-1">{address}</p>
@@ -62,3 +64,8 @@ const OrderList = () => {
   );
 };
 export default OrderList;
+
+interface OrderListProps {
+  orders: Order[];
+  isLoading: boolean;
+}

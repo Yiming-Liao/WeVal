@@ -28,7 +28,7 @@ export const PRODUCT_IDS: Record<PriceRange, string> = {
 }
 
 // Commission amounts
-export const COMMISSION_AMOUNT: Record<PriceRange, number> = {
+export const PAYMENT_AMOUNT: Record<PriceRange, number> = {
   '0M_to_1M': 550,
   '1M_to_1.5M': 600,
   '1.5M_to_2M': 650,

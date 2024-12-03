@@ -3,11 +3,11 @@
 "use client";
 
 import { FC } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import UserCardButton from "./UserCardButton";
 import SignOutButton from "./SignOutButton";
 import { useUserInit } from "@/hooks/user/useUserInit";
+import { FullLogoWhite } from "@/components/svg";
 
 const Navbar: FC = () => {
   useUserInit({ role: "user" });
@@ -19,17 +19,12 @@ const Navbar: FC = () => {
           <div className="flex justify-between items-center">
             {/* logo */}
             <Link href={"/"} className="flex justify-center items-center">
-              <Image
-                src={"/images/layout/navbar/logo.svg"}
-                alt={"WeVal logo"}
-                width={204}
-                height={52}
-              />
+              <FullLogoWhite />
             </Link>
 
             <div className="flex gap-4">
               <Link
-                href={"/order/select-region"}
+                href={"/FullLogoWhite/select-region"}
                 className="h-12 px-4 rounded-lg bg-gradient-to-r from-neutral-50 to-blue-200 text-deep flex justify-center items-center"
               >
                 Request a Valuation

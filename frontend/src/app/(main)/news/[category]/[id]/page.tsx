@@ -2,7 +2,7 @@
 
 import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import LayoutContainer from "@/components/common/LayoutContainer";
-import { TitleAndBreadcrumbs } from "@/components/ui";
+import PageHeader from "@/components/common/PageHeader";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,68 +19,38 @@ const NewsDetailPage = ({ id }: { id: string }) => {
     <>
       <div className="relative flex flex-col items-center">
         <section className="size-full flex flex-col items-center">
-          <LayoutContainer>
-            {/* Title & Breadcrumbs */}
-            <TitleAndBreadcrumbs
-              links={[{ href: "/", page: "Home" }]}
-              currentPage={"News"}
-              title={"News"}
-            />
-          </LayoutContainer>
-
-          {/* Category links */}
-          <div className="w-full border-b-[0.25px] border-secondary flex justify-center">
-            <LayoutContainer>
-              <div className="flex gap-2 pt-10 pl-16">
-                <Link
-                  href={"/news/all"}
-                  className="-ml-2 px-3 typography-label-lg text-secondary flex justify-center"
-                >
-                  <span className={`py-2`}>All</span>
-                </Link>
-                <Link
-                  href={"/news/announcements"}
-                  className="px-3 typography-label-lg text-secondary flex justify-center"
-                >
-                  <span
-                    className={`py-2 ${
-                      category === "announcements"
-                        ? " border-b border-secondary"
-                        : ""
-                    }`}
-                  >
-                    Announcements
-                  </span>
-                </Link>
-                <Link
-                  href={"/news/events"}
-                  className="px-3 typography-label-lg text-secondary flex justify-center"
-                >
-                  <span
-                    className={`py-2 ${
-                      category === "events" ? " border-b border-secondary" : ""
-                    }`}
-                  >
-                    Events
-                  </span>
-                </Link>
-                <Link
-                  href={"/news/other-news"}
-                  className="px-3 typography-label-lg text-secondary flex justify-center"
-                >
-                  <span
-                    className={`py-2 ${
-                      category === "other-news"
-                        ? " border-b border-secondary"
-                        : ""
-                    }`}
-                  >
-                    Other news
-                  </span>
-                </Link>
-              </div>
-            </LayoutContainer>
-          </div>
+          {/* Header */}
+          <PageHeader
+            breadcrumbsLinks={[
+              { href: "/", page: "Home" },
+              { href: "/news", page: "News" },
+              { href: `/news/${category}`, page: `${formattedCategory}` },
+            ]}
+            currentPage={"News title"}
+            title={"News title"}
+            tabs={[
+              {
+                text: "All",
+                href: "/news",
+                isActive: false,
+              },
+              {
+                text: "Announcements",
+                href: "/news/announcements",
+                isActive: category === "announcements",
+              },
+              {
+                text: "Events",
+                href: "/news/events",
+                isActive: category === "events",
+              },
+              {
+                text: "Other news",
+                href: "/news/other-news",
+                isActive: category === "other-news",
+              },
+            ]}
+          />
 
           {/* Main */}
           <LayoutContainer>
@@ -151,7 +121,7 @@ const NewsDetailPage = ({ id }: { id: string }) => {
       </div>
 
       {/* Layout background */}
-      <BackgroundDecoration partial />
+      <BackgroundDecoration noBorder />
     </>
   );
 };

@@ -7,7 +7,7 @@ const HeroSection = () => {
     <section className="relative w-full h-screen min-h-[600px] max-h-[784px] bg-main-gradient rounded-b-[60px] overflow-hidden">
       <div className="relative size-full flex justify-center">
         {/* Background gif */}
-        <div className="absolute size-full bg-hero-section bg-no-repeat bg-center bg-cover opacity-20" />
+        <div className="absolute size-full bg-hero-section-gif bg-no-repeat bg-center bg-cover opacity-20" />
 
         <LayoutContainer className="pt-[188px]">
           {/* Guiding card */}
@@ -38,7 +38,7 @@ const HeroSection = () => {
                   >
                     <UserSignUpIcon />
                     <span className="typography-label-xl text-primary">
-                      Find a Valuer
+                      Request a Valuation
                     </span>
 
                     <div className="absolute top-5 right-5 size-[52px] bg-primary rounded-full flex justify-center items-center">
