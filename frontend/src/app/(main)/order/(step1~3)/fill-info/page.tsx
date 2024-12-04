@@ -1,24 +1,24 @@
 import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import LayoutContainer from "@/components/common/LayoutContainer";
+import PageHeader from "@/components/common/PageHeader";
 import Description from "@/components/main/Description";
 import FillInfoForm from "@/components/main/OrderPage/FillInfoForm";
-import { TitleAndBreadcrumbs } from "@/components/ui";
 
 const FillInfoPage = () => {
   return (
     <>
       <section className="relative flex flex-col items-center">
-        <LayoutContainer>
-          {/* Title & Breadcrumbs */}
-          <TitleAndBreadcrumbs
-            links={[
-              { href: "/", page: "Home" },
-              { href: "/order/select-region", page: "Select region" },
-            ]}
-            currentPage={"Fill in Order Information"}
-            title={"Fill in Order Information"}
-          />
+        {/* Header */}
+        <PageHeader
+          breadcrumbsLinks={[
+            { href: "/", page: "Home" },
+            { href: "/order/select-region", page: "Select region" },
+          ]}
+          currentPage={"Fill in Order Information"}
+          title={"Fill in Order Information"}
+        />
 
+        <LayoutContainer>
           <div className="relative pt-5 pb-[76px] flex flex-col items-center">
             {/* Description */}
             <div className="px-16 flex flex-col pb-[100px]">

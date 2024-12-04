@@ -91,7 +91,6 @@ const ConfirmOrderForm = () => {
               const priceRange = sessionStorage.getItem(
                 "priceRange"
               ) as PriceRange | null;
-              console.log(priceRange);
               if (priceRange && priceRange in PAYMENT_AMOUNT) {
                 return `$ ${PAYMENT_AMOUNT[priceRange]}`;
               }
@@ -106,7 +105,7 @@ const ConfirmOrderForm = () => {
         {/* Button: Payment */}
         <Link
           href="/order/fill-info"
-          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-gray-400 text-white rounded-lg"
+          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-gray-400 text-white rounded-lg button-interaction"
         >
           <span className="rotate-180">
             <Arrow />
@@ -117,7 +116,7 @@ const ConfirmOrderForm = () => {
         {/* Button: Payment */}
         <button
           type="submit"
-          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-primary text-white rounded-lg"
+          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-primary text-white rounded-lg button-interaction"
         >
           Confirm & Pay
         </button>

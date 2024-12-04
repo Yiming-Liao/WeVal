@@ -1,13 +1,13 @@
 // [r: Valuer]
 
 import { FC } from "react";
-import { Header } from "@/components/ui";
 import FormPasswordReset from "@/components/valuer/auth/passwordReset/FormPasswordReset";
+import AuthHeader from "@/components/common/auth/AuthHeader";
 
 const PasswordResetPage: FC = () => {
   return (
     <>
-      <Header title={"Reset password"} />
+      <AuthHeader title={"Reset password"} />
 
       {/* Forgot password form */}
       <section className="flex flex-col items-center">

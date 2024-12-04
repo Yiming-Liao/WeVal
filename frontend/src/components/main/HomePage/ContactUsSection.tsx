@@ -14,7 +14,7 @@ const ContactUsSection = () => {
       </Link>
 
       {/* Background */}
-      <div className="absolute top-0 size-full bg-main-gradient overflow-hidden z-0">
+      <div className="absolute top-0 size-full bg-secondary-gradient overflow-hidden z-0">
         <Image
           src={"/images/home-page/ContactUsSection/background.jpg"}
           alt={""}

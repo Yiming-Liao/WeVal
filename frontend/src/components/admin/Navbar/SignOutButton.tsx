@@ -34,8 +34,8 @@ const SignOutButton: FC = () => {
     <button
       onClick={handleLogOut}
       className={`w-28 p-2 flex justify-center items-center ${
-        !admin ? "blur-sm pointer-events-none select-none" : "blur-in"
-      }  p-2 px-5 rounded-full hover:shadow-md duration-200`}
+        !admin ? "pointer-events-none" : ""
+      }`}
     >
       {buttonText}
     </button>

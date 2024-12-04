@@ -6,7 +6,6 @@ import FormPassword from "@/components/user/dashboard/profile/password/FormPassw
 import LayoutContainer from "@/components/common/LayoutContainer";
 import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import PageHeader from "@/components/common/PageHeader";
-import { Order, Profile } from "@/components/svg";
 
 const ProfilePage = () => {
   return (
@@ -21,20 +20,7 @@ const ProfilePage = () => {
             ]}
             currentPage={"Profile"}
             title={"Profile"}
-            tabs={[
-              {
-                text: "Profile",
-                href: "/user/dashboard/profile",
-                isActive: true,
-                icon: <Profile />,
-              },
-              {
-                text: "Orders",
-                href: "/user/dashboard/orders",
-                isActive: false,
-                icon: <Order />,
-              },
-            ]}
+            tabs={"user"}
           />
 
           {/* Main */}

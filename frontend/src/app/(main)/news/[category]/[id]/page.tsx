@@ -3,6 +3,7 @@
 import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import LayoutContainer from "@/components/common/LayoutContainer";
 import PageHeader from "@/components/common/PageHeader";
+import { ArrowNext, ArrowPrev } from "@/components/svg";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -98,21 +99,25 @@ const NewsDetailPage = ({ id }: { id: string }) => {
               {/* Nav buttons */}
               <div className="w-full px-16 flex justify-between">
                 {/* Prev */}
-                <Link href={""} className="flex items-center gap-2 py-4 px-8">
-                  <Arrow />
+                <Link
+                  href={""}
+                  className="flex items-center gap-2 py-4 px-8 button-interaction"
+                >
+                  <ArrowPrev className="text-primary" />
                   <span className="typography-body-md text-deep font-light">
                     Prev
                   </span>
                 </Link>
 
                 {/* Next */}
-                <Link href={""} className="flex items-center gap-2 py-4 px-8">
+                <Link
+                  href={""}
+                  className="flex items-center gap-2 py-4 px-8 button-interaction"
+                >
                   <span className="typography-body-md text-deep font-light">
                     Next
                   </span>
-                  <span className="rotate-180">
-                    <Arrow />
-                  </span>
+                  <ArrowNext className="text-primary" />
                 </Link>
               </div>
             </div>
@@ -132,23 +137,3 @@ const NewsDetailPageWrapper = ({ params }: { params: { id: string } }) => {
   return <NewsDetailPage id={id} />;
 };
 export default NewsDetailPageWrapper;
-
-// Arrow SVG
-const Arrow = () => {
-  return (
-    <svg
-      width="22"
-      height="14"
-      viewBox="0 0 22 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M21.5 7C21.5 6.58579 21.1642 6.25 20.75 6.25L3.06066 6.25L7.78033 1.53033C8.07322 1.23744 8.07322 0.762562 7.78033 0.469669C7.48744 0.176776 7.01256 0.176776 6.71967 0.469669L0.719669 6.46967C0.426777 6.76256 0.426777 7.23744 0.719669 7.53033L6.71967 13.5303C7.01256 13.8232 7.48744 13.8232 7.78033 13.5303C8.07322 13.2374 8.07322 12.7626 7.78033 12.4697L3.06066 7.75L20.75 7.75C21.1642 7.75 21.5 7.41421 21.5 7Z"
-        fill="#213DEB"
-      />
-    </svg>
-  );
-};

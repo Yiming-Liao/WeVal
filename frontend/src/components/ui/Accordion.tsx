@@ -37,7 +37,7 @@ const Accordion: FC<AccordionProps> = ({ buttonText, bodyText }) => {
 
       {/* Accordion body */}
       <div
-        className={`overflow-hidden duration-300 bg-[#FAFAFA] rounded-b-xl`}
+        className={`overflow-hidden duration-300 bg-[#F5F5F5] rounded-b-xl`}
         style={{ maxHeight: isOpen ? `${scrollHeight + 20}px` : "0px" }}
         ref={bodyRef}
       >

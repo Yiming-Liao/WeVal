@@ -1,5 +1,6 @@
 // [r: Valuer]
 
+import { Region } from '#models/user/order'
 import vine from '@vinejs/vine'
 
 const registerQualifyValidator = vine.compile(
@@ -19,7 +20,7 @@ const registerQualifyValidator = vine.compile(
         return !valuer.qualify // Valuer with this email has qualified -> error
       }),
 
-    serviceArea: vine.string().trim().minLength(1).maxLength(16),
+    region: vine.enum(Object.values(Region)),
     address: vine.string().trim().minLength(1).maxLength(256),
     abn: vine.string().trim().minLength(11).maxLength(11),
 

@@ -2,7 +2,7 @@ import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import LayoutContainer from "@/components/common/LayoutContainer";
 import PageHeader from "@/components/common/PageHeader";
 import Description from "@/components/main/Description";
-import NewsCard from "@/components/NewsCard";
+import NewsCard from "@/components/main/NewsCard";
 
 const NewsAllPage = () => {
   return (

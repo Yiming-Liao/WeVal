@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import { ReactNode } from "react";
-import Navbar from "@/components/admin/Navbar/Navbar";
+import Navbar from "@/components/admin/Navbar";
 
 const AdminDashboardLayout = ({
   children,

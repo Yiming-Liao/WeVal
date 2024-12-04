@@ -1,11 +1,14 @@
 import { FC } from "react";
 import LayoutContainer from "./LayoutContainer";
 
-const BackgroundDecoration: FC<{ noBorder?: boolean }> = ({
+const BackgroundDecoration: FC<BackgroundDecorationProps> = ({
+  className = "",
   noBorder = false,
 }) => {
   return (
-    <div className="fixed top-24 left-0 size-full flex justify-center -z-50 bg-[#FAFAFA]">
+    <div
+      className={`${className} fixed top-24 left-0 size-full flex justify-center -z-50 bg-snow`}
+    >
       <LayoutContainer>
         <div
           className={`size-full ${
@@ -17,3 +20,8 @@ const BackgroundDecoration: FC<{ noBorder?: boolean }> = ({
   );
 };
 export default BackgroundDecoration;
+
+interface BackgroundDecorationProps {
+  className?: string;
+  noBorder?: boolean;
+}

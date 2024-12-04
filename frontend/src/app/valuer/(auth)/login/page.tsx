@@ -1,6 +1,7 @@
 // [r: Valuer]
 
-import { ButtonOutline, Header } from "@/components/ui";
+import AuthHeader from "@/components/common/auth/AuthHeader";
+import { ButtonOutline } from "@/components/ui";
 import FormLogin from "@/components/valuer/auth/login/FormLogin";
 import Link from "next/link";
 import { FC } from "react";
@@ -8,7 +9,7 @@ import { FC } from "react";
 const LoginPage: FC = () => {
   return (
     <>
-      <Header title={"Sign in"} />
+      <AuthHeader title={"Sign in"} />
 
       <div className="h-full flex flex-col gap-44">
         <div className="flex flex-col gap-7">

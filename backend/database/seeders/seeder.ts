@@ -1,7 +1,7 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Admin from '#models/admin/admin'
 import User from '#models/user/user'
-import Valuer from '#models/valuer/valuer'
+import Valuer, { ValuerStatus } from '#models/valuer/valuer'
 import { DateTime } from 'luxon'
 import { PriceRange } from '#config/stripe'
 
@@ -36,7 +36,7 @@ export default class Seeder extends BaseSeeder {
       password: '123456',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
-      status: 'noQualificationCreated',
+      status: ValuerStatus.NoQualificationCreated,
     })
 
     // Valuer2: Registered, and applied qualification data, but not approved yet.
@@ -47,10 +47,10 @@ export default class Seeder extends BaseSeeder {
       phone: '+61000000002',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
-      status: 'qualificationCreated',
+      status: ValuerStatus.QualificationCreated,
     })
     await createdValuer2.related('valuerQualification').create({
-      serviceArea: 'south_australia',
+      region: 'south_australia',
       address: 'full-address',
       abn: '12345678987',
       certificatePath: 'fake/image0.jpg',
@@ -64,10 +64,10 @@ export default class Seeder extends BaseSeeder {
       phone: '+61000000003',
       emailVerifiedAt: DateTime.now(),
       phoneVerifiedAt: DateTime.now(),
-      status: 'approved',
+      status: ValuerStatus.Approved,
     })
     await createdValuer3.related('valuerQualification').create({
-      serviceArea: 'south_australia',
+      region: 'south_australia',
       address: 'full-address',
       abn: '12345678987',
       certificatePath: 'fake/image2.jpg',

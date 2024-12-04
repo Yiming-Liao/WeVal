@@ -5,7 +5,7 @@ import MainFeatureForm from "./MainFeatureForm";
 import Background from "./Background";
 import { Region } from "@/types/region.types";
 
-const MainFeatureSection = () => {
+const MainFeature = () => {
   const [region, setRegion] = useState<Region>(Region.DEFAULT);
 
   return (
@@ -13,9 +13,7 @@ const MainFeatureSection = () => {
       <div className="overflow-hidden relative size-full bg-gradient-to-t from-[#E9EBF1] via-[#FFFFFF] to-[#F7F8FC] rounded-[60px] [box-shadow:0px_-8px_16px_0px_#00000014] flex justify-center">
         <div className="relative z-10 size-full 2xl:px-32 xl:px-16 px-8 py-[60px] flex justify-between">
           {/* Left block */}
-          <div className="">
-            <MainFeatureForm region={region} setRegion={setRegion} />
-          </div>
+          <MainFeatureForm region={region} setRegion={setRegion} />
 
           <p className="text-5xl text-[#A9ADBB]">Australia</p>
         </div>
@@ -28,4 +26,4 @@ const MainFeatureSection = () => {
     </section>
   );
 };
-export default MainFeatureSection;
+export default MainFeature;

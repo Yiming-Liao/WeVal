@@ -1,7 +1,7 @@
 // [r: User]
 
 import { FC } from "react";
-import { Header } from "@/components/ui";
+import AuthHeader from "@/components/common/auth/AuthHeader";
 import { Steps1of2 } from "@/components/svg";
 import EmailVerificationContainer from "@/components/user/auth/register/page-1/EmailVerificationContainer";
 
@@ -9,7 +9,7 @@ import EmailVerificationContainer from "@/components/user/auth/register/page-1/E
 const RegisterPage1: FC = () => {
   return (
     <>
-      <Header title={"Sign up"} />
+      <AuthHeader title={"Sign up"} />
 
       <section className="size-full flex flex-col items-center gap-6">
         {/* <SVG> Steps */}

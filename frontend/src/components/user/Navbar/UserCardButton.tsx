@@ -14,7 +14,7 @@ const UserCardButton: FC = () => {
   const userCardButtonRef = useRef<HTMLButtonElement | null>(null);
   const userCardRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isAnimating, setisAnimating] = useState(false);
+  const [isAnimating, setisAnimating] = useState<boolean>(false);
 
   // Toggle UserCard animation
   useEffect(() => {
@@ -79,15 +79,16 @@ const UserCardButton: FC = () => {
 
   return (
     <div className="relative -mr-2 flex justify-center items-center">
+      {/* Button or Loading... */}
       {!user ? (
         <div className="w-16 flex justify-center items-center">
-          <Loading />
+          <Loading color="#FAFAFA" />
         </div>
       ) : (
         <button
           ref={userCardButtonRef}
           onClick={() => !isAnimating && setIsOpen((prev) => !prev)}
-          className="w-16 flex justify-center items-center p-2"
+          className="w-16 flex justify-center items-center p-2 rounded-md button-interaction"
         >
           <UserCardToggle />
           <div className={`${isOpen ? "-rotate-180" : ""} duration-200`}>

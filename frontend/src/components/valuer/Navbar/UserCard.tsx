@@ -1,7 +1,9 @@
 // [r: Valuer]
 
+import SignOutButton from "@/components/common/auth/SignOutButton";
 import {
   Order,
+  Profile,
   Resume,
   Revenue,
   UserCard as UserCardIcon,
@@ -31,22 +33,38 @@ const UserCard: FC<UserCardProps> = ({ valuer, setIsOpen }) => {
             </div>
           </div>
 
-          {/* Link -> Dashboard */}
+          {/* Link: Dashboard */}
           <Link
             href={"/valuer/dashboard"}
-            className="h-8 rounded border border-black/25 flex justify-center items-center"
+            className="h-8 rounded border border-primary/50 flex justify-center items-center text-primary hover:bg-primary hover:text-snow duration-200"
             onClick={() => setIsOpen(false)}
           >
-            <span className="typography-label-md font-[500] text-primary">
-              Dashboard
-            </span>
+            <span className="typography-label-md font-medium">Dashboard</span>
           </Link>
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-black/25 mt-2"></div>
+        <div className="h-px bg-black/25"></div>
 
-        <div className="flex flex-col gap-1">
+        <nav className="flex flex-col gap-1">
+          {/* Link: Profile */}
+          <Link
+            href={"/valuer/dashboard/profile"}
+            className="flex gap-2 p-2 rounded hover:bg-blue-50 duration-200"
+            onClick={() => setIsOpen(false)}
+          >
+            <Profile />
+            <p className="typography-label-md text-secondary">Profile</p>
+          </Link>
+          {/* Link: orders */}
+          <Link
+            href={"/valuer/dashboard/orders"}
+            className="flex gap-2 p-2 rounded hover:bg-blue-50 duration-200"
+            onClick={() => setIsOpen(false)}
+          >
+            <Order />
+            <p className="typography-label-md text-secondary">Orders</p>
+          </Link>
           {/* Link: resume */}
           <Link
             href={"/valuer/dashboard/resume"}
@@ -65,15 +83,13 @@ const UserCard: FC<UserCardProps> = ({ valuer, setIsOpen }) => {
             <Revenue />
             <p className="typography-label-md text-secondary">Revenue</p>
           </Link>
-          {/* Link: order */}
-          <Link
-            href={"/valuer/dashboard/order"}
-            className="flex gap-2 p-2 rounded hover:bg-blue-50 duration-200"
-            onClick={() => setIsOpen(false)}
-          >
-            <Order />
-            <p className="typography-label-md text-secondary">Order</p>
-          </Link>
+        </nav>
+
+        {/* Sign out */}
+        <div className="flex flex-col items-center gap-2">
+          {/* Divider */}
+          <div className="w-full h-px bg-black/25"></div>
+          <SignOutButton role="valuer" />
         </div>
       </div>
     </div>

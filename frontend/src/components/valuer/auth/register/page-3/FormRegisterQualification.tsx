@@ -4,6 +4,8 @@ import { FC, FormEventHandler, Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRegisterQualify } from "@/hooks/valuer/auth/register/useRegisterQualify";
 import { Agreement, Button, Input, InputFile, Select } from "@/components/ui";
+import { Loading } from "@/components/svg";
+import { Region } from "@/types/region.types";
 
 const FormRegisterQualification: FC = () => {
   const { refresh } = useRouter();
@@ -11,7 +13,7 @@ const FormRegisterQualification: FC = () => {
   const searchParams = useSearchParams();
   const email = searchParams.get("email"); // Get email from URL
 
-  const [serviceArea, setServiceArea] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [abn, setAbn] = useState<string>("");
   const [certificateFile, setCertificateFile] = useState<File | null>(null);
@@ -24,7 +26,7 @@ const FormRegisterQualification: FC = () => {
 
     const isSent = await registerQualify({
       email: email || "",
-      serviceArea,
+      region,
       address,
       abn,
       certificateFile,
@@ -42,22 +44,29 @@ const FormRegisterQualification: FC = () => {
     >
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
-          {/* Select: serviceArea */}
+          {/* Select: region */}
           <Select
             required
-            value={serviceArea}
-            onChange={(e) => setServiceArea(e.target.value)}
+            value={region}
+            onChange={(e) => setRegion(e.target.value as Region)}
           >
-            <option value="" disabled hidden>
-              Service area
+            <option value={Region.DEFAULT} disabled hidden>
+              Service region
             </option>
-            <option value="queensland">Queensland</option>
-            <option value="south_australia">South Australia</option>
+            <option value={Region.WESTERN_AUSTRALIA}>Western Australia</option>
+            <option value={Region.NORTHERN_TERRITORY}>
+              Northern Territory
+            </option>
+            <option value={Region.QUEENSLAND}>Queensland</option>
+            <option value={Region.SOUTH_AUSTRALIA}>South Australia</option>
+            <option value={Region.NEW_SOUTH_WALES}>New South Wales</option>
+            <option value={Region.VICTORIA}>Victoria</option>
+            <option value={Region.TASMANIA}>Tasmania</option>
           </Select>
 
           {/* Input: address */}
           <Input
-            placeholder="Full address"
+            placeholder="Service address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
@@ -110,7 +119,7 @@ const FormRegisterQualification: FC = () => {
 // Wrapper
 const FormRegisterQualificationWrapper: FC = () => {
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <Suspense fallback={<Loading />}>
       <FormRegisterQualification />
     </Suspense>
   );

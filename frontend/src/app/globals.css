@@ -12,54 +12,6 @@ input::placeholder {
   text-decoration-skip-ink: none;
 }
 
-/* Hero section */
-.bg-main-gradient {
-  background: linear-gradient(315deg, #2300e9 0%, #0083d4 60%, #00e5f5 100%);
-}
-.bg-glassmorphism {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.2) 0%,
-    rgba(255, 255, 255, 0.3) 100%
-  );
-  backdrop-filter: blur(8px);
-}
-
-/* Blur fade in */
-.blur-in {
-  animation: blur-in 0.5s;
-}
-
-@keyframes blur-in {
-  0% {
-    filter: blur(4px);
-  }
-  100% {
-    filter: blur(0px);
-  }
-}
-
-/* Skeleton base style */
-.skeleton {
-  background-color: #e0e0e0;
-  width: 100%;
-  min-height: 18px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-  background-size: 200% 100%;
-  animation: loading 2s infinite linear;
-}
-
-/* Animation effect for skeleton */
-@keyframes loading {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
 /* Animation for Earth SVG */
 .rotate-animation-1 {
   transform-origin: center;

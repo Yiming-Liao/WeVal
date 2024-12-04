@@ -16,6 +16,7 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
  * Valuer
  */
 export default class Valuer extends compose(BaseModel, AuthFinder) {
+  // 🆔 Primary Key
   @column({ isPrimary: true, serializeAs: null })
   declare id: number
 
@@ -27,23 +28,12 @@ export default class Valuer extends compose(BaseModel, AuthFinder) {
   @column()
   declare phone: string | null
   @column()
-  declare status:
-    | 'noQualificationCreated'
-    | 'qualificationCreated'
-    | 'qualificationRejected'
-    | 'approved'
-    | 'disabled'
+  declare status: ValuerStatus
   @column()
   declare qualificationRejectionMessage: string | null // Rejection message
 
   @column({ serializeAs: null })
   declare password: string | null
-
-  // Timestamp
-  @column.dateTime({ autoCreate: true, serializeAs: null })
-  declare createdAt: DateTime
-  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
-  declare updatedAt: DateTime | null
 
   // ✉️ Email verification
   @column({ serializeAs: null })
@@ -61,7 +51,7 @@ export default class Valuer extends compose(BaseModel, AuthFinder) {
   @column.dateTime({ serializeAs: null })
   declare phoneVerifyCodeExpiresAt: DateTime | null // expiresAt
 
-  // Password reset
+  // 🔐 Password reset
   @column({ serializeAs: null })
   declare passwordResetToken: string | null
   @column.dateTime({ serializeAs: null })
@@ -73,6 +63,12 @@ export default class Valuer extends compose(BaseModel, AuthFinder) {
   @column.dateTime({ serializeAs: null })
   declare refreshTokenExpiresAt: DateTime | null
 
+  // 🗓️ Timestamps
+  @column.dateTime({ autoCreate: true, serializeAs: null })
+  declare createdAt: DateTime
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
+  declare updatedAt: DateTime | null
+
   // 🔑 OAT Access Token
   static accessTokens = DbAccessTokensProvider.forModel(Valuer, {
     expiresIn: '1h',
@@ -82,4 +78,12 @@ export default class Valuer extends compose(BaseModel, AuthFinder) {
   // 🔗 Valuer qualification
   @hasOne(() => ValuerQualification)
   declare valuerQualification: HasOne<typeof ValuerQualification>
+}
+
+export enum ValuerStatus {
+  NoQualificationCreated = 'noQualificationCreated',
+  QualificationCreated = 'qualificationCreated',
+  QualificationRejected = 'qualificationRejected',
+  Approved = 'approved',
+  Disabled = 'disabled',
 }

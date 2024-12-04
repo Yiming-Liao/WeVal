@@ -1,27 +1,19 @@
-import Button from "./Button";
-import ButtonOutline from "./ButtonOutline";
-import Input from "./Input/Input";
-import Checkbox from "./auth/Checkbox";
-import Title from "./auth/Title";
-import Agreement from "./auth/Agreement";
-import InputPassword from "./Input/InputPassword";
-import Header from "./auth/Header";
+import Input from "./inputs/Input";
+import InputPassword from "./inputs/InputPassword";
+import Button from "@/components/ui/buttons/Button";
+import ButtonOutline from "@/components/ui/buttons/ButtonOutline";
+import Agreement from "./Agreement";
 import Select from "./Select";
-import InputFile from "./Input/InputFile";
+import InputFile from "./inputs/InputFile";
 import Accordion from "./Accordion";
-import TitleAndBreadcrumbs from "./TitleAndBreadcrumbs";
 
 export {
+  Input,
+  InputPassword,
   Button,
   ButtonOutline,
-  Input,
-  Checkbox,
-  Title,
   Agreement,
-  InputPassword,
-  Header,
   Select,
   InputFile,
   Accordion,
-  TitleAndBreadcrumbs,
 };

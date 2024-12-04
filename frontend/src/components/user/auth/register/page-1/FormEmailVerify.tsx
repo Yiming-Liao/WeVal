@@ -1,6 +1,6 @@
 // [r: User]
 
-import { Arrow } from "@/components/svg";
+import { ArrowNext } from "@/components/svg";
 import { Agreement, Button, Input } from "@/components/ui";
 import { useRegisterEmailVerify } from "@/hooks/user/auth/register/useRegisterEmailVerify";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,7 @@ const FormEmailVerify = ({ email, isSent }: FormEmailVerifyProps) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="h-full flex flex-col justify-between"
+      className="h-full flex flex-col justify-between gap-24"
     >
       {/* Input: emailVerifyCode */}
       <Input
@@ -52,7 +52,7 @@ const FormEmailVerify = ({ email, isSent }: FormEmailVerifyProps) => {
         {/* Button: submit */}
         <Button type="submit" isDisabled={!isAgree} isLoading={isLoading}>
           <span className="flex gap-2">
-            Next <Arrow />
+            Next <ArrowNext />
           </span>
         </Button>
       </div>

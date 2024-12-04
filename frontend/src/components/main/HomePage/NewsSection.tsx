@@ -1,5 +1,5 @@
 import LayoutContainer from "@/components/common/LayoutContainer";
-import NewsCard from "@/components/NewsCard";
+import NewsCard from "@/components/main/NewsCard";
 import { ArrowMore } from "@/components/svg";
 import Link from "next/link";
 import HomePageTitle from "./HomePageTitle";

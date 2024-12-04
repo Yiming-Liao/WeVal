@@ -5,18 +5,20 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
+      // 🆔 Primary Key
       table.increments('id').primary()
 
-      table.string('service_area').notNullable()
+      // 📋 Basic Info
+      table.string('region').notNullable()
       table.string('address').notNullable()
       table.string('abn').notNullable()
       table.string('certificate_path').notNullable()
 
-      // Timestamp
+      // 🗓️ Timestamps
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
 
-      // Foreign Key
+      // 🔗 Foreign Key: Valuer
       table.integer('valuer_id').unsigned().references('valuers.id').onDelete('CASCADE')
     })
   }

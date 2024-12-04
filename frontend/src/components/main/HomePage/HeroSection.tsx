@@ -1,10 +1,11 @@
 import LayoutContainer from "@/components/common/LayoutContainer";
-import { Arrow45deg, UserSignUpIcon, ValuerSignUpIcon } from "@/components/svg";
+import { UserSignUpIcon, ValuerSignUpIcon } from "@/components/svg";
+import ArrowCircle from "@/components/svg/main/ArrowCircle";
 import Link from "next/link";
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full h-screen min-h-[600px] max-h-[784px] bg-main-gradient rounded-b-[60px] overflow-hidden">
+    <section className="relative w-full h-screen min-h-[600px] max-h-[784px] bg-secondary-gradient rounded-b-[60px] overflow-hidden">
       <div className="relative size-full flex justify-center">
         {/* Background gif */}
         <div className="absolute size-full bg-hero-section-gif bg-no-repeat bg-center bg-cover opacity-20" />
@@ -31,7 +32,7 @@ const HeroSection = () => {
               {/* Links */}
               <div className="flex gap-5">
                 {/* Find a Valuer */}
-                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden">
+                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden button-interaction">
                   <Link
                     href={"/user/register/page-1"}
                     className="relative size-full py-10 px-8 flex items-center gap-4"
@@ -40,15 +41,13 @@ const HeroSection = () => {
                     <span className="typography-label-xl text-primary">
                       Request a Valuation
                     </span>
-
-                    <div className="absolute top-5 right-5 size-[52px] bg-primary rounded-full flex justify-center items-center">
-                      <Arrow45deg />
-                    </div>
+                    {/* Arrow SVG */}
+                    <ArrowCircle className="absolute top-5 right-5 size-[52px]" />
                   </Link>
                 </div>
 
                 {/* Become a Valuer */}
-                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden">
+                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden ⏳ button-interaction">
                   <Link
                     href={"/valuer/register/page-1"}
                     className="relative size-full py-10 px-8 flex items-center gap-4"
@@ -57,10 +56,8 @@ const HeroSection = () => {
                     <span className="typography-label-xl text-primary">
                       Become a Valuer
                     </span>
-
-                    <div className="absolute top-5 right-5 size-[52px] bg-primary rounded-full flex justify-center items-center">
-                      <Arrow45deg />
-                    </div>
+                    {/* Arrow SVG */}
+                    <ArrowCircle className="absolute top-5 right-5 size-[52px]" />
                   </Link>
                 </div>
               </div>

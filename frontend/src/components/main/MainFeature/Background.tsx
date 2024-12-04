@@ -1,11 +1,20 @@
-import { Earth } from "@/components/svg";
-import MapNewSouthWales from "@/components/svg/MainFeature/MapNewSouthWales";
+import {
+  Earth,
+  MapNewSouthWales,
+  MapNorthTerritory,
+  MapQueensland,
+  MapSouthAustralia,
+  MapTasmania,
+  MapVictoria,
+  MapWesternAustralia,
+} from "@/components/svg/main/MainFeature";
 import { Region } from "@/types/region.types";
 import gsap from "gsap";
 import { FC, useEffect, useRef, useState } from "react";
 
 const Background: FC<{ region: Region }> = ({ region }) => {
   const backgroundRef = useRef<HTMLDivElement | null>(null);
+  const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 
   // Background component
   const [backgroundComponent, setBackgroundComponent] = useState(
@@ -24,14 +33,35 @@ const Background: FC<{ region: Region }> = ({ region }) => {
       { opacity: 1, scale: 1 },
       {
         opacity: 0,
-        scale: region === "default" ? 0.8 : 1.2,
+        scale: isFirstTime ? 1.2 : 1,
         transformOrigin: "center",
         duration: 0.2,
         // Switch background after animation finished.
         onComplete: () => {
+          setIsFirstTime(false); // Disable scale animation after first time selection
+
+          // Background SVGs
           switch (region) {
-            case "new_south_wales":
+            case Region.NEW_SOUTH_WALES:
               setBackgroundComponent(<MapNewSouthWales />);
+              break;
+            case Region.VICTORIA:
+              setBackgroundComponent(<MapVictoria />);
+              break;
+            case Region.TASMANIA:
+              setBackgroundComponent(<MapTasmania />);
+              break;
+            case Region.QUEENSLAND:
+              setBackgroundComponent(<MapQueensland />);
+              break;
+            case Region.NORTHERN_TERRITORY:
+              setBackgroundComponent(<MapNorthTerritory />);
+              break;
+            case Region.SOUTH_AUSTRALIA:
+              setBackgroundComponent(<MapSouthAustralia />);
+              break;
+            case Region.WESTERN_AUSTRALIA:
+              setBackgroundComponent(<MapWesternAustralia />);
               break;
             default:
               setBackgroundComponent(
@@ -44,7 +74,7 @@ const Background: FC<{ region: Region }> = ({ region }) => {
       }
     ).fromTo(
       backgroundRef.current,
-      { scale: region === "default" ? 1.2 : 0.8 },
+      { scale: isFirstTime ? 0.8 : 1 },
       { opacity: 1, scale: 1, transformOrigin: "center", duration: 0.2 },
       "+=.1"
     );

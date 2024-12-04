@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { FC } from "react";
-import { Loading } from "../svg";
+import { Loading } from "@/components/svg";
 
 const TitleAndBreadcrumbs: FC<TitleAndBreadcrumbsProps> = ({
-  links,
+  breadcrumbsLinks,
   currentPage,
   title,
 }) => {
@@ -15,9 +15,11 @@ const TitleAndBreadcrumbs: FC<TitleAndBreadcrumbsProps> = ({
       <div>
         <div className="flex gap-1 typography-label-sm font-light">
           {/* Ancestor pages */}
-          {links.map((link) => (
+          {breadcrumbsLinks.map((link) => (
             <span key={link.href} className="flex items-center gap-1">
-              <Link href={link.href}>{link.page}</Link>
+              <Link href={link.href} className="hover:opacity-80 duration-200">
+                {link.page}
+              </Link>
               <span>{`>`}</span>
             </span>
           ))}
@@ -28,12 +30,22 @@ const TitleAndBreadcrumbs: FC<TitleAndBreadcrumbsProps> = ({
           </span>
         </div>
 
-        <h1 className="typography-title-lg text-secondary">{title}</h1>
+        <h1 className="typography-title-lg text-secondary">
+          {title || <Loading className="w-8 h-[54px]" />}
+        </h1>
       </div>
     </div>
   );
 };
+
 export default TitleAndBreadcrumbs;
+
+// Types
+interface TitleAndBreadcrumbsProps {
+  breadcrumbsLinks: { href: string; page: string }[];
+  currentPage: string;
+  title: string;
+}
 
 // Connect line SVG
 const ConnectLine = () => {
@@ -58,9 +70,3 @@ const ConnectLine = () => {
     </svg>
   );
 };
-
-interface TitleAndBreadcrumbsProps {
-  links: { href: string; page: string }[];
-  currentPage: string;
-  title: string;
-}

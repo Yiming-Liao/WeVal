@@ -41,7 +41,6 @@ export async function index({ request, response }: HttpContext) {
       count: foundStatus ? foundStatus['$extras'].count : '0', // Default to 0 if not found
     }
   })
-  console.log(statusCounts)
 
   return response.ok({ orders, statusCounts })
 }

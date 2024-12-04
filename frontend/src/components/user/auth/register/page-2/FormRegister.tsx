@@ -2,6 +2,7 @@
 
 "use client";
 
+import { Loading } from "@/components/svg";
 import { Agreement, Button, Input, InputPassword } from "@/components/ui";
 import { useRegister } from "@/hooks/user/auth/register/useRegister";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -92,7 +93,7 @@ const FormRegister = () => {
 // When using useSearchParams, we need to wrap the component.
 const FormRegisterWrapper = () => {
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <Suspense fallback={<Loading />}>
       <FormRegister />
     </Suspense>
   );

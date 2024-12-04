@@ -12,7 +12,7 @@ const LayoutContainer: FC<LayoutContainerProps> = ({
 }) => {
   return (
     <div
-      className={`${className} 2xl:w-[80%] xl:w-[90%] w-full max-w-[1380px] px-8`}
+      className={`${className} xl:w-[90%] w-full max-w-[1440px] px-8`}
       {...props}
     >
       {children}

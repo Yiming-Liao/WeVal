@@ -1,4 +1,4 @@
-import { Arrow } from "@/components/svg";
+import { ArrowNext } from "@/components/svg";
 import { Button, Select } from "@/components/ui";
 import { Region } from "@/types/region.types";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ const MainFeatureForm: FC<MainFeatureFormProps> = ({ region, setRegion }) => {
   };
 
   return (
-    <div className="h-auto w-[28vw] max-w-[520px] rounded-[40px] bg-gradient-to-t from-[#9AA7BC] to-[#B9C4D7] pt-12 pb-14 px-5 [box-shadow:0px_-8px_16px_0px_#00000014]">
+    <div className="h-fit w-[28vw] max-w-[520px] rounded-[40px] bg-gradient-to-t from-[#9AA7BC] to-[#B9C4D7] pt-12 pb-14 px-5 [box-shadow:0px_-8px_16px_0px_#00000014]">
       <div className=" flex flex-col justify-between gap-16">
         {/* Title & Description */}
         <div className="flex flex-col gap-4">
@@ -57,9 +57,13 @@ const MainFeatureForm: FC<MainFeatureFormProps> = ({ region, setRegion }) => {
             Let us secure your property purchase.
           </p>
 
-          <Button type="button" onClick={handleNext} className="flex gap-2">
+          <Button
+            type="button"
+            onClick={handleNext}
+            className="flex gap-2 button-interaction"
+          >
             Next
-            <Arrow />
+            <ArrowNext />
           </Button>
         </div>
       </div>

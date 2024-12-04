@@ -26,20 +26,7 @@ const OrdersPage = () => {
           ]}
           currentPage={"Orders"}
           title={"Orders"}
-          tabs={[
-            {
-              text: "Profile",
-              href: "/user/dashboard/profile",
-              isActive: false,
-              icon: <Profile />,
-            },
-            {
-              text: "Orders",
-              href: "/user/dashboard/orders",
-              isActive: true,
-              icon: <Order />,
-            },
-          ]}
+          tabs={"user"}
         />
 
         {/* Main */}

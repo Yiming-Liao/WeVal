@@ -1,4 +1,3 @@
-import { TitleAndBreadcrumbs } from "@/components/ui";
 import PageTitle from "@/components/main/AboutPage/PageTitle";
 import Image from "next/image";
 import { FC } from "react";
@@ -68,7 +67,9 @@ const AboutPage = () => {
             {/* Title & Description */}
             <div className="flex flex-col gap-5">
               <PageTitle title={"Success Stories"} />
-              <Description text="Each feedback clearly demonstrates how our platform successfully matches you with the highest quality appraisers, ensuring that the services you receive meet professional standards and fulfill your needs." />
+              <div className="px-16">
+                <Description text="Each feedback clearly demonstrates how our platform successfully matches you with the highest quality appraisers, ensuring that the services you receive meet professional standards and fulfill your needs." />
+              </div>
             </div>
 
             {/* Reviews */}

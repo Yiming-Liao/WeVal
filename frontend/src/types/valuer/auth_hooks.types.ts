@@ -46,7 +46,7 @@ export interface RegisterPhoneVerifySendProps {
 // useRegisterQualify
 export interface RegisterQualifyProps {
   email: string;
-  serviceArea: string;
+  region: string;
   address: string;
   abn: string;
   certificateFile: File | null;

@@ -1,8 +1,10 @@
 // [r: Valuer]
 
+"use client";
+
 import { FC, useCallback, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { ChevronDown, UserCardToggle } from "@/components/svg";
+import { ChevronDown, Loading, UserCardToggle } from "@/components/svg";
 import UserCard from "./UserCard";
 import { useValuerStore } from "@/stores/valuerStore";
 
@@ -76,22 +78,24 @@ const UserCardButton: FC = () => {
   }, [isOpen, handleClickOutside]);
 
   return (
-    <div
-      className={`relative -mr-2 ${
-        !valuer ? "blur-sm pointer-events-none select-none" : "blur-in"
-      }`}
-    >
-      {/* Toggle Button */}
-      <button
-        ref={userCardButtonRef}
-        onClick={() => !isAnimating && setIsOpen((prev) => !prev)}
-        className="flex justify-center items-center p-2"
-      >
-        <UserCardToggle />
-        <div className={`${isOpen ? "-rotate-180" : ""} duration-200`}>
-          <ChevronDown />
+    <div className="relative -mr-2 flex justify-center items-center">
+      {/* Button or Loading... */}
+      {!valuer ? (
+        <div className="w-16 flex justify-center items-center">
+          <Loading color="#FAFAFA" />
         </div>
-      </button>
+      ) : (
+        <button
+          ref={userCardButtonRef}
+          onClick={() => !isAnimating && setIsOpen((prev) => !prev)}
+          className="w-16 flex justify-center items-center p-2 rounded-md button-interaction"
+        >
+          <UserCardToggle />
+          <div className={`${isOpen ? "-rotate-180" : ""} duration-200`}>
+            <ChevronDown />
+          </div>
+        </button>
+      )}
 
       {/* UserCard */}
       {valuer && (

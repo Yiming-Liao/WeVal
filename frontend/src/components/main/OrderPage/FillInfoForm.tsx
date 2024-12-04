@@ -138,7 +138,7 @@ const FillInfoForm = () => {
         <Link
           href="/order/select-region"
           type="submit"
-          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-gray-400 text-white rounded-lg"
+          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-gray-400 text-white rounded-lg button-interaction"
         >
           <span className="rotate-180">
             <Arrow />
@@ -149,7 +149,7 @@ const FillInfoForm = () => {
         {/* Button: Payment */}
         <button
           type="submit"
-          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-primary text-white rounded-lg"
+          className="w-full max-w-80 h-12 [box-shadow:0px_8px_16px_0px_#00000014] flex justify-center items-center gap-2 bg-primary text-white rounded-lg button-interaction"
         >
           Next <Arrow />
         </button>

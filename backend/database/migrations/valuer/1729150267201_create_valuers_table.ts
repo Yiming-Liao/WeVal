@@ -5,9 +5,10 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
+      // 🆔 Primary Key
       table.increments('id').primary()
 
-      // Basic Info
+      // 📋 Basic Info
       table.string('email', 254).notNullable().unique()
       table.string('username', 48).nullable()
       table.string('phone', 16).nullable().unique()
@@ -24,27 +25,27 @@ export default class extends BaseSchema {
 
       table.string('password', 256).nullable()
 
-      // Timestamp
-      table.timestamp('created_at').notNullable()
-      table.timestamp('updated_at').nullable()
-
-      // Email verification
+      // ✉️ Email verification
       table.string('email_verify_code', 6).nullable()
       table.timestamp('email_verified_at').nullable()
       table.timestamp('email_verify_code_expires_at').nullable()
 
-      // Phone verification
+      // 💬 Phone verification
       table.string('phone_verify_code', 6).nullable()
       table.timestamp('phone_verified_at').nullable()
       table.timestamp('phone_verify_code_expires_at').nullable()
 
-      // Password reset
+      // 🔐 Password reset
       table.string('password_reset_token', 128).nullable()
       table.timestamp('password_reset_token_expires_at').nullable()
 
-      // Refresh Token
+      // 🔑 Refresh Token
       table.string('refresh_token', 128).nullable()
       table.timestamp('refresh_token_expires_at').nullable()
+
+      // 🗓️ Timestamps
+      table.timestamp('created_at').notNullable()
+      table.timestamp('updated_at').nullable()
     })
   }
 

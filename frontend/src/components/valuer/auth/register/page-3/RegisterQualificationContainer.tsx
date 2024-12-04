@@ -7,13 +7,15 @@ import FormRegisterQualificationWrapper from "./FormRegisterQualification";
 import QualificationRejection from "./QualificationRejection";
 import { useValuerStore } from "@/stores/valuerStore";
 import { useValuerInit } from "@/hooks/valuer/useValuerInit";
+import { Loading } from "@/components/svg";
+import { ValuerStatus } from "@/types/models/valuer.types";
 
 const RegisterQualificationContainer: FC = () => {
   const { valuer } = useValuerStore();
   useValuerInit({ role: "valuer" });
-
+  console.log(valuer);
   if (!valuer) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   return (
@@ -31,12 +33,13 @@ const RegisterQualificationContainer: FC = () => {
       ) : (
         // noQualificationCreated || qualificationRejected
         <div className="size-full flex flex-col gap-6">
-          {/* Rejected from admin */}
-          {valuer.status === "qualificationRejected" && (
+          {/* Rejected by admin */}
+          {valuer.status === ValuerStatus.QualificationRejected && (
             <QualificationRejection
               message={valuer.qualificationRejectionMessage}
             />
           )}
+
           {/* Form: FormRegisterQualification */}
           <FormRegisterQualificationWrapper />
         </div>

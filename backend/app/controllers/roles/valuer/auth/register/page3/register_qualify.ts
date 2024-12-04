@@ -8,7 +8,7 @@ import { cuid } from '@adonisjs/core/helpers'
 
 export async function registerQualify({ request, response }: HttpContext) {
   // 📝 Validator (Built-in error handling)
-  const { email, serviceArea, address, abn, certificateFile } =
+  const { email, region, address, abn, certificateFile } =
     await request.validateUsing(registerQualifyValidator)
 
   // 🗄️ Find Valuer
@@ -20,7 +20,7 @@ export async function registerQualify({ request, response }: HttpContext) {
 
   // 🗄️ Created Valuer Qualification
   await foundValuer!.related('valuerQualification').create({
-    serviceArea: serviceArea,
+    region,
     address,
     abn,
     certificatePath: certificatePath,

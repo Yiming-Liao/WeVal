@@ -1,5 +1,6 @@
 // [r: User]
 
+import SignOutButton from "@/components/common/auth/SignOutButton";
 import { Order, Profile, UserCard as UserCardIcon } from "@/components/svg";
 import { User } from "@/types/models/user.types";
 import Link from "next/link";
@@ -8,7 +9,7 @@ import { Dispatch, FC, SetStateAction } from "react";
 const UserCard: FC<UserCardProps> = ({ user, setIsOpen }) => {
   return (
     <div className="w-[296px] rounded-[8px] bg-white backdrop-blur-[14px] [box-shadow:0px_8px_16px_0px_rgba(0,0,0,0.08);]">
-      <div className="py-3 px-6 flex flex-col gap-3">
+      <div className="py-3 px-6 flex flex-col gap-4">
         {/* User Info + Dasboard Link */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-3">
@@ -26,22 +27,20 @@ const UserCard: FC<UserCardProps> = ({ user, setIsOpen }) => {
             </div>
           </div>
 
-          {/* Link -> Dashboard */}
+          {/* Link: Dashboard */}
           <Link
             href={"/user/dashboard"}
-            className="h-8 rounded border border-black/25 flex justify-center items-center"
+            className="h-8 rounded border border-primary/50 flex justify-center items-center text-primary hover:bg-primary hover:text-snow duration-200"
             onClick={() => setIsOpen(false)}
           >
-            <span className="typography-label-md font-[500] text-primary">
-              Dashboard
-            </span>
+            <span className="typography-label-md font-medium">Dashboard</span>
           </Link>
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-black/25 mt-2"></div>
+        <div className="h-px bg-black/25"></div>
 
-        <div className="flex flex-col gap-1">
+        <nav className="flex flex-col gap-1">
           {/* Link: profile */}
           <Link
             href={"/user/dashboard/profile"}
@@ -60,6 +59,13 @@ const UserCard: FC<UserCardProps> = ({ user, setIsOpen }) => {
             <Order />
             <p className="typography-label-md text-secondary">Orders</p>
           </Link>
+        </nav>
+
+        {/* Sign out */}
+        <div className="flex flex-col items-center gap-2">
+          {/* Divider */}
+          <div className="w-full h-px bg-black/25"></div>
+          <SignOutButton role="user" />
         </div>
       </div>
     </div>

@@ -3,12 +3,13 @@
 import { FC } from "react";
 import Link from "next/link";
 import FormLogin from "@/components/user/auth/login/FormLogin";
-import { ButtonOutline, Header } from "@/components/ui";
+import { ButtonOutline } from "@/components/ui";
+import AuthHeader from "@/components/common/auth/AuthHeader";
 
 const UserLoginPage: FC = () => {
   return (
     <>
-      <Header title={"Sign in"} />
+      <AuthHeader title={"Sign in"} />
 
       <div className="h-full flex flex-col gap-44">
         <div className="flex flex-col gap-7">

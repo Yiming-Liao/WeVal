@@ -16,9 +16,10 @@ export interface ValuerQualification {
   certificatePath: string;
 }
 
-export type ValuerStatus =
-  | "noQualificationCreated"
-  | "qualificationCreated"
-  | "qualificationRejected"
-  | "approved"
-  | "disabled";
+export enum ValuerStatus {
+  NoQualificationCreated = "noQualificationCreated",
+  QualificationCreated = "qualificationCreated",
+  QualificationRejected = "qualificationRejected",
+  Approved = "approved",
+  Disabled = "disabled",
+}

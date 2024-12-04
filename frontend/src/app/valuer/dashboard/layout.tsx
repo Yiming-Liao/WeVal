@@ -1,23 +1,23 @@
 // [r: Valuer]
 
-import Navbar from "@/components/valuer/Navbar/Navbar";
-import Link from "next/link";
 import { ReactNode } from "react";
+import Navbar from "@/components/valuer/Navbar";
+import Footer from "@/components/common/Footer";
 
 const ValuerDashboardLayout = ({
   children,
 }: Readonly<{ children: ReactNode }>) => {
   return (
-    <div>
-      <div className="h-24"></div> {/* Spacer for Navbar */}
+    <div className="relative min-h-screen flex flex-col">
+      {/* Navbar & Spacer */}
+      <div className="h-24" />
       <Navbar />
-      <div className="flex gap-4 p-4">
-        <Link href={"/valuer/dashboard/profile"}>Profile</Link>
-        <Link href={"/valuer/dashboard/resume"}>Resume</Link>
-        <Link href={"/valuer/dashboard/revenue"}>Revenue</Link>
-        <Link href={"/valuer/dashboard/order"}>Order</Link>
+
+      {/* Main & footer */}
+      <div className="flex-1 flex flex-col justify-between">
+        <main>{children}</main>
+        <Footer />
       </div>
-      {children}
     </div>
   );
 };

@@ -13,14 +13,14 @@ export const useRegisterQualify = () => {
   // ⚡ Submit qualification information for registration
   const registerQualify = async ({
     email,
-    serviceArea,
+    region,
     address,
     abn,
     certificateFile,
   }: RegisterQualifyProps): Promise<boolean> => {
     const formData = new FormData();
     formData.append("email", email);
-    formData.append("serviceArea", serviceArea);
+    formData.append("region", region);
     formData.append("address", address);
     formData.append("abn", abn);
     if (certificateFile) formData.append("certificateFile", certificateFile);

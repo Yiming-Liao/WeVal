@@ -32,7 +32,7 @@ export default class Order extends BaseModel {
   @column()
   declare ownerPhone: string
   @column()
-  declare region: string
+  declare region: Region
   @column()
   declare address: string
   @column()
@@ -104,7 +104,7 @@ export default class Order extends BaseModel {
   }
 }
 
-// Type
+// Types
 export enum OrderStatus {
   UNPAID = 'unpaid', // PaymentStatus: 'pending', 'unpaid'
   AWAITING_VALUER = 'awaiting-valuer', // PaymentStatus: 'paid'
@@ -121,4 +121,15 @@ export enum PaymentStatus {
   REQUIRES_PAYMENT_METHOD = 'requires_payment_method', // None
   NO_PAYMENT_REQUIRED = 'no_payment_required', // None
   EXPIRED = 'expired',
+}
+
+export enum Region {
+  DEFAULT = '',
+  WESTERN_AUSTRALIA = 'western_australia',
+  NORTHERN_TERRITORY = 'northern_territory',
+  QUEENSLAND = 'queensland',
+  SOUTH_AUSTRALIA = 'south_australia',
+  NEW_SOUTH_WALES = 'new_south_wales',
+  VICTORIA = 'victoria',
+  TASMANIA = 'tasmania',
 }

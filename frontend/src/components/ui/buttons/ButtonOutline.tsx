@@ -1,5 +1,5 @@
 import { FC, ButtonHTMLAttributes, ReactNode } from "react";
-import Loading from "../svg/Loading";
+import { Loading } from "@/components/svg";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
@@ -8,7 +8,7 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   isDisabled?: boolean;
 };
 
-const Button: FC<ButtonProps> = ({
+const ButtonOutline: FC<ButtonProps> = ({
   children,
   className = "",
   isLoading = false,
@@ -19,12 +19,12 @@ const Button: FC<ButtonProps> = ({
     <button
       disabled={isDisabled}
       className={`${className} ${isDisabled ? "opacity-50" : null} duration-200
-      w-full h-[52px] bg-primary text-white rounded-lg flex justify-center items-center`}
+      h-10 p-2 border border-primary text-primary rounded-lg flex justify-center items-center`}
       {...props}
     >
-      {isLoading ? <Loading color={"#fff"} /> : children}
+      {isLoading ? <Loading color={"#213DEB"} /> : children}
     </button>
   );
 };
 
-export default Button;
+export default ButtonOutline;
