@@ -1,6 +1,6 @@
 // [r: Admin]
 
-import { AuthHeader } from "@/components/ui";
+import AuthHeader from "@/components/common/auth/AuthHeader";
 import FormPasswordResetWrapper from "@/components/admin/auth/passwordReset/FormPasswordReset";
 
 const PasswordResetPage = () => {

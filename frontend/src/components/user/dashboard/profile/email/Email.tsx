@@ -1,11 +1,12 @@
+// [r: User]
+
 "use client";
 
 import { Loading } from "@/components/svg";
-import { useUserStore } from "@/stores/userStore";
+import { User } from "@/types/models/user.types";
+import { FC } from "react";
 
-const Email = () => {
-  const { user } = useUserStore();
-
+const Email: FC<{ user: User | null }> = ({ user }) => {
   return (
     <div className="h-[52px] flex items-center">
       {!user ? (

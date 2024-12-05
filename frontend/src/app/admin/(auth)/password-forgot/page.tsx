@@ -1,7 +1,7 @@
 // [r: Admin]
 
 import { FC } from "react";
-import { AuthHeader } from "@/components/ui";
+import AuthHeader from "@/components/common/auth/AuthHeader";
 import FormPasswordForgot from "@/components/admin/auth/passwordForgot/FormPasswordForgot";
 
 const PasswordForgotPage: FC = () => {

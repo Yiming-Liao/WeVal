@@ -1,6 +1,8 @@
 // [r: User]
 
 import { useAxiosStore } from "@/stores/axiosStore";
+import { Region } from "@/types/region.types";
+import { PriceRange } from "@/types/stripe/priceRange.types";
 import { useMutation } from "@tanstack/react-query";
 
 export const useOrderStore = () => {
@@ -39,7 +41,7 @@ export const useOrderStore = () => {
 interface OrderStoreProps {
   ownerName: string;
   ownerPhone: string;
-  region: string;
+  region: Region;
   address: string;
-  priceRange: string;
+  priceRange: PriceRange | "";
 }

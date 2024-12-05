@@ -5,13 +5,10 @@ import { LoginProps } from "@/types/admin/auth_hooks.types";
 import { useAdminStore } from "@/stores/adminStore";
 import { Admin } from "@/types/models/admin.types";
 import { useMutation } from "@tanstack/react-query";
-import LocalStorageService from "@/services/LocalStorageService";
-import { useRoleStore } from "@/stores/roleStore";
 
 export const useLogin = () => {
   const { axios } = useAxiosStore();
-  const { setAdmin, setIsLoading } = useAdminStore();
-  const { setRole } = useRoleStore();
+  const { setAdmin } = useAdminStore();
 
   // ⚡ Login
   const login = async ({ email, password }: LoginProps): Promise<boolean> => {
@@ -22,14 +19,9 @@ export const useLogin = () => {
     if (!response) return false;
 
     const { admin } = response.data;
-    // Set user{...data}
+
+    // Set admin{...data} & role to global store
     setAdmin(admin);
-
-    // Set role & set in local storage
-    setRole("admin");
-    LocalStorageService.setRole({ role: "admin" });
-
-    setIsLoading(false);
 
     return true;
   };

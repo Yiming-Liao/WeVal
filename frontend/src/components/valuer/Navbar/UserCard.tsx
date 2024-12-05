@@ -9,6 +9,7 @@ import {
   UserCard as UserCardIcon,
 } from "@/components/svg";
 import { Valuer } from "@/types/models/valuer.types";
+import { Role } from "@/types/role.types";
 import Link from "next/link";
 import { Dispatch, FC, SetStateAction } from "react";
 
@@ -89,7 +90,7 @@ const UserCard: FC<UserCardProps> = ({ valuer, setIsOpen }) => {
         <div className="flex flex-col items-center gap-2">
           {/* Divider */}
           <div className="w-full h-px bg-black/25"></div>
-          <SignOutButton role="valuer" />
+          <SignOutButton role={Role.VALUER} />
         </div>
       </div>
     </div>

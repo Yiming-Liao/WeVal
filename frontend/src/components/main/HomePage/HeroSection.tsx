@@ -32,7 +32,7 @@ const HeroSection = () => {
               {/* Links */}
               <div className="flex gap-5">
                 {/* Find a Valuer */}
-                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden button-interaction">
+                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden ">
                   <Link
                     href={"/user/register/page-1"}
                     className="relative size-full py-10 px-8 flex items-center gap-4"
@@ -47,7 +47,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Become a Valuer */}
-                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden ⏳ button-interaction">
+                <div className="w-[400px] h-[120px] bg-white rounded-[32px] overflow-hidden ⏳ ">
                   <Link
                     href={"/valuer/register/page-1"}
                     className="relative size-full py-10 px-8 flex items-center gap-4"

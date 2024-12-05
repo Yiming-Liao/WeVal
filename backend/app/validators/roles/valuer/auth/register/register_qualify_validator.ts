@@ -1,6 +1,6 @@
 // [r: Valuer]
 
-import { Region } from '#models/user/order'
+import { Region } from '#models/order'
 import vine from '@vinejs/vine'
 
 const registerQualifyValidator = vine.compile(

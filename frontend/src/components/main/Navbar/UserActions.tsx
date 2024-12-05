@@ -14,7 +14,7 @@ import { Loading } from "@/components/svg";
 
 const UserActions = () => {
   const { role: initialRole } = useRoleStore();
-  const [role, setRole] = useState<Role | null>(null);
+  const [role, setRole] = useState<Role>(Role.DEFAULT);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -23,36 +23,35 @@ const UserActions = () => {
   }, [initialRole]);
 
   // Initialize role
-  useAdminInit({ role });
   useUserInit({ role });
   useValuerInit({ role });
+  useAdminInit({ role });
 
   let UserCardButton = <UserUserCardButton />;
 
   // Define UserCardButton
-  if (role === "admin") {
-    UserCardButton = <AdminUserCardButton />;
-  } else if (role === "user") {
+  if (role === Role.USER) {
     UserCardButton = <UserUserCardButton />;
-  } else if (role === "valuer") {
+  } else if (role === Role.VALUER) {
     UserCardButton = <ValuerUserCardButton />;
+  } else if (role === Role.ADMIN) {
+    UserCardButton = <AdminUserCardButton />;
   }
 
   return (
     <div className="flex items-center gap-4">
       {/* Main feature button */}
       <div className="w-52">
-        {role !== "admin" &&
-          (isLoading ? (
-            <></>
-          ) : (
+        {!isLoading &&
+          initialRole !== Role.VALUER &&
+          initialRole !== Role.ADMIN && (
             <Link
-              href={"/order/select-region"}
+              href="/select-region"
               className="h-12 px-4 rounded-lg bg-light-gradient text-white font-medium flex justify-center items-center button-interaction"
             >
               Request a Valuation
             </Link>
-          ))}
+          )}
       </div>
 
       {/* Sign in button or UserCard */}
@@ -62,7 +61,7 @@ const UserActions = () => {
             <Loading color="#FAFAFA" />
           </div>
         ) : !role ? (
-          <Link href={`/user/login`} className="p-2 button-interaction">
+          <Link href={`/user/login`} className="p-2 ">
             Sign in
           </Link>
         ) : (

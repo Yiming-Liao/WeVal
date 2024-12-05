@@ -10,7 +10,7 @@ import Image from "next/image";
 const ContactPage = () => {
   return (
     <>
-      <section className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center">
         {/* Header */}
         <PageHeader
           breadcrumbsLinks={[{ href: "/", page: "Home" }]}
@@ -20,13 +20,13 @@ const ContactPage = () => {
 
         <LayoutContainer>
           <div className="relative pt-5 pb-[145px] flex flex-col items-center">
-            {/* Description */}
-            <div className="px-16 flex flex-col pb-[100px]">
+            {/* <section> Description */}
+            <section className="px-16 flex flex-col pb-[100px]">
               <Description text="If you have any questions, needs, or require further assistance, please feel free to contact us at any time. Our team is committed to providing you with the fastest and most professional service, ensuring that every inquiry is properly addressed." />
-            </div>
+            </section>
 
-            {/* Main */}
-            <div className="w-full max-w-[1040px] px-16">
+            {/* <section> Form */}
+            <section className="w-full max-w-[1040px] px-16">
               <form className="flex flex-col gap-14">
                 <FullLogoBlue />
 
@@ -94,7 +94,7 @@ const ContactPage = () => {
                   </Button>
                 </div>
               </form>
-            </div>
+            </section>
           </div>
         </LayoutContainer>
 
@@ -112,7 +112,7 @@ const ContactPage = () => {
             <Buildings />
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Layout background */}
       <BackgroundDecoration />

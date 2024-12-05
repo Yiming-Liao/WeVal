@@ -4,6 +4,7 @@ import BackgroundDecoration from "@/components/common/BackgroundDecoration";
 import LayoutContainer from "@/components/common/LayoutContainer";
 import PageHeader from "@/components/common/PageHeader";
 import { ArrowNext, ArrowPrev } from "@/components/svg";
+import { TabsSet } from "@/types/tabsSet.types";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,13 +14,14 @@ const NewsDetailPage = ({ id }: { id: string }) => {
 
   const category = usePathname().split("/")[2];
 
+  // Format URL slug: other-news -> Other news
   const formattedCategory =
     category.charAt(0).toUpperCase() + category.slice(1).split("-").join(" ");
 
   return (
     <>
       <div className="relative flex flex-col items-center">
-        <section className="size-full flex flex-col items-center">
+        <div className="size-full flex flex-col items-center">
           {/* Header */}
           <PageHeader
             breadcrumbsLinks={[
@@ -29,33 +31,12 @@ const NewsDetailPage = ({ id }: { id: string }) => {
             ]}
             currentPage={"News title"}
             title={"News title"}
-            tabs={[
-              {
-                text: "All",
-                href: "/news",
-                isActive: false,
-              },
-              {
-                text: "Announcements",
-                href: "/news/announcements",
-                isActive: category === "announcements",
-              },
-              {
-                text: "Events",
-                href: "/news/events",
-                isActive: category === "events",
-              },
-              {
-                text: "Other news",
-                href: "/news/other-news",
-                isActive: category === "other-news",
-              },
-            ]}
+            tabs={TabsSet.NEWS}
           />
 
-          {/* Main */}
+          {/* <article> */}
           <LayoutContainer>
-            <div className="pt-20 pb-12 flex flex-col items-center gap-[92px]">
+            <article className="pt-20 pb-12 flex flex-col items-center gap-[92px]">
               <div className="lg:px-16 max-w-[680px] flex flex-col items-center gap-10">
                 {/* Category & Title */}
                 <div className="flex flex-col items-center gap-4">
@@ -97,12 +78,12 @@ const NewsDetailPage = ({ id }: { id: string }) => {
               </div>
 
               {/* Nav buttons */}
-              <div className="w-full px-16 flex justify-between">
+              <nav
+                className="w-full px-16 flex justify-between"
+                aria-label="Pagination"
+              >
                 {/* Prev */}
-                <Link
-                  href={""}
-                  className="flex items-center gap-2 py-4 px-8 button-interaction"
-                >
+                <Link href={""} className="flex items-center gap-2 py-4 px-8 ">
                   <ArrowPrev className="text-primary" />
                   <span className="typography-body-md text-deep font-light">
                     Prev
@@ -110,19 +91,16 @@ const NewsDetailPage = ({ id }: { id: string }) => {
                 </Link>
 
                 {/* Next */}
-                <Link
-                  href={""}
-                  className="flex items-center gap-2 py-4 px-8 button-interaction"
-                >
+                <Link href={""} className="flex items-center gap-2 py-4 px-8 ">
                   <span className="typography-body-md text-deep font-light">
                     Next
                   </span>
                   <ArrowNext className="text-primary" />
                 </Link>
-              </div>
-            </div>
+              </nav>
+            </article>
           </LayoutContainer>
-        </section>
+        </div>
       </div>
 
       {/* Layout background */}

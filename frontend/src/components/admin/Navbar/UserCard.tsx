@@ -3,6 +3,7 @@
 import SignOutButton from "@/components/common/auth/SignOutButton";
 import { Order, Profile, UserCard as UserCardIcon } from "@/components/svg";
 import { Admin } from "@/types/models/admin.types";
+import { Role } from "@/types/role.types";
 import Link from "next/link";
 import { Dispatch, FC, SetStateAction } from "react";
 
@@ -65,7 +66,7 @@ const UserCard: FC<UserCardProps> = ({ admin, setIsOpen }) => {
         <div className="flex flex-col items-center gap-2">
           {/* Divider */}
           <div className="w-full h-px bg-black/25"></div>
-          <SignOutButton role="admin" />
+          <SignOutButton role={Role.ADMIN} />
         </div>
       </div>
     </div>

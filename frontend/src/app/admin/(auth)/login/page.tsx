@@ -1,8 +1,8 @@
 // [r: Admin]
 
 import { FC } from "react";
-import { AuthHeader } from "@/components/ui";
 import FormLogin from "@/components/admin/auth/login/FormLogin";
+import AuthHeader from "@/components/common/auth/AuthHeader";
 
 const LoginPage: FC = () => {
   return (

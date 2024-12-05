@@ -6,16 +6,15 @@ import { useEffect } from "react";
 import { Role } from "@/types/role.types";
 
 export const useUserInit = ({ role }: { role: Role | null }) => {
-  const { setUser, setIsLoading } = useUserStore(); // User store
+  const { setUser } = useUserStore(); // User store
   const { userFetch } = useUserFetch(); // API hook
 
   // ⏳
   useEffect(() => {
-    if (role !== "user") return;
+    if (role !== Role.USER) return;
 
     const fetchUser = async () => {
       const user = await userFetch();
-      setIsLoading(false); // Was initialized to be true, set to false here
 
       if (!user) {
         setUser(null);

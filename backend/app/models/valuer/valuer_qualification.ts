@@ -2,7 +2,7 @@ import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Valuer from './valuer.js'
-import { Region } from '#models/user/order'
+import { Region } from '#models/order'
 
 /**
  * ValuerQualification

@@ -1,18 +1,20 @@
+// [r: User]
+
 "use client";
 
-import { FormEventHandler, useEffect, useState } from "react";
-import { useUserStore } from "@/stores/userStore";
+import { FC, FormEventHandler, useEffect, useState } from "react";
 import { Button, Input } from "@/components/ui";
 import { useUsernameChange } from "@/hooks/user/profile/useUsernameChange";
+import { Loading } from "@/components/svg";
+import { User } from "@/types/models/user.types";
 
-const FormUsername = () => {
-  const { user } = useUserStore();
+const FormUsername: FC<{ user: User | null }> = ({ user }) => {
   const { usernameChange } = useUsernameChange();
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
 
-  // Set user
+  // Set username
   useEffect(() => {
     if (!user) return;
     setUsername(user.username);
@@ -28,31 +30,38 @@ const FormUsername = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3">
+    <form onSubmit={handleSubmit} className="flex items-center gap-3">
       {/* Input: username */}
-      <Input
-        placeholder="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        isLoading={!user}
-        disabled={!isEditing}
-        className="max-w-80"
-      />
+      {!isEditing ? (
+        <div className="w-48 h-[52px] flex items-center">
+          {!user ? (
+            <Loading />
+          ) : (
+            <p className="typography-label-md text-deep">{username}</p>
+          )}
+        </div>
+      ) : (
+        <Input
+          placeholder="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="max-w-64"
+        />
+      )}
 
       {!isEditing ? (
         <>
           {/* Button: Edit */}
-          <Button
+          <button
             type="button"
             onClick={() => setIsEditing(true)}
-            className="max-w-32"
-            disabled={!user}
+            className="h-10 typography-label-md text-silver bg-white rounded-lg py-2 px-6 border border-black/25"
           >
             Edit
-          </Button>
+          </button>
         </>
       ) : (
-        <div className="flex gap-2">
+        <div className="w-full flex gap-2">
           {/* Butons: Cancel & Confirm */}
           <Button
             type="button"
@@ -60,11 +69,14 @@ const FormUsername = () => {
               setIsEditing(false);
               setUsername(user!.username);
             }}
-            className="w-32 !bg-gray-400"
+            className="max-w-32 !bg-gray-400"
           >
             Cancel
           </Button>
-          <Button className="w-32">Confirm</Button>
+
+          <Button type="submit" className="max-w-32">
+            Confirm
+          </Button>
         </div>
       )}
     </form>

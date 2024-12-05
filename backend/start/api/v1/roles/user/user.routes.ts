@@ -3,7 +3,7 @@
 import { HttpRouterService } from '@adonisjs/core/types'
 import authRoutes from './auth/auth.routes.js'
 import profileRoutes from './profile/profile.routes.js'
-import orderRoutes from './order/order.routes.js'
+import ordersRoutes from './orders/orders.routes.js'
 
 /**
  * [ User ]
@@ -19,7 +19,7 @@ export default function userRoutes(router: HttpRouterService) {
       profileRoutes(router)
 
       // Order
-      orderRoutes(router)
+      ordersRoutes(router)
     })
     .prefix('user')
 }

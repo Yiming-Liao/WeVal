@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+a,
+button {
+  @apply button-interaction;
+}
+
 input::placeholder {
   font-family: Poppins;
   font-size: 14px;

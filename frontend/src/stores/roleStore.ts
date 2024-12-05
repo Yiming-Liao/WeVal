@@ -1,29 +1,24 @@
+import { Role } from "@/types/role.types";
 import { create } from "zustand";
-import LocalStorageService from "@/services/LocalStorageService";
+import { createJSONStorage, persist } from "zustand/middleware";
 
-// Type guard
-const isValidRole = (
-  role: string
-): role is "" | "user" | "valuer" | "admin" => {
-  return ["", "user", "valuer", "admin"].includes(role);
-};
-
-// Create store
-export const useRoleStore = create<RoleStore>((set) => {
-  const storedRole = LocalStorageService.getRole();
-  const initialRole = isValidRole(storedRole) ? storedRole : "";
-
-  return {
-    role: initialRole,
-    setRole: (role) => {
-      LocalStorageService.setRole({ role });
-      set({ role });
-    },
-  };
-});
+export const useRoleStore = create<RoleStore>()(
+  persist(
+    (set) => ({
+      role: Role.DEFAULT,
+      setRole: (role) => {
+        set({ role });
+      },
+    }),
+    {
+      name: "role", // Key name
+      storage: createJSONStorage(() => localStorage), // Local storage
+    }
+  )
+);
 
 // Store type
 interface RoleStore {
-  role: "" | "user" | "valuer" | "admin";
-  setRole: (role: "" | "user" | "valuer" | "admin") => void;
+  role: Role;
+  setRole: (role: Role) => void;
 }

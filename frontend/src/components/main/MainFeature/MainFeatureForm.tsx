@@ -1,17 +1,22 @@
+"use client";
+
+import { FC } from "react";
 import { ArrowNext } from "@/components/svg";
 import { Button, Select } from "@/components/ui";
+import { OrderDataStore } from "@/stores/orderDataStore";
 import { Region } from "@/types/region.types";
 import { useRouter } from "next/navigation";
-import { Dispatch, FC, SetStateAction } from "react";
 
-const MainFeatureForm: FC<MainFeatureFormProps> = ({ region, setRegion }) => {
+const MainFeatureForm: FC<MainFeatureFormProps> = ({
+  region,
+  setOrderData,
+}) => {
   const { push } = useRouter();
 
   const handleNext = () => {
     if (region === Region.DEFAULT) return;
 
-    sessionStorage.setItem("region", region);
-    push(`/order/fill-info`);
+    push(`/select-region/fill-info`);
   };
 
   return (
@@ -38,7 +43,7 @@ const MainFeatureForm: FC<MainFeatureFormProps> = ({ region, setRegion }) => {
         <Select
           required
           value={region}
-          onChange={(e) => setRegion(e.target.value as Region)}
+          onChange={(e) => setOrderData({ region: e.target.value as Region })}
         >
           <option value={Region.DEFAULT} disabled hidden>
             Select region
@@ -57,11 +62,7 @@ const MainFeatureForm: FC<MainFeatureFormProps> = ({ region, setRegion }) => {
             Let us secure your property purchase.
           </p>
 
-          <Button
-            type="button"
-            onClick={handleNext}
-            className="flex gap-2 button-interaction"
-          >
+          <Button type="button" onClick={handleNext} className="flex gap-2 ">
             Next
             <ArrowNext />
           </Button>
@@ -74,5 +75,5 @@ export default MainFeatureForm;
 
 interface MainFeatureFormProps {
   region: Region;
-  setRegion: Dispatch<SetStateAction<Region>>;
+  setOrderData: (data: Partial<OrderDataStore>) => void;
 }

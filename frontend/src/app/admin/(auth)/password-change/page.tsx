@@ -1,7 +1,7 @@
 // [r: Admin]
 
-import { AuthHeader } from "@/components/ui";
 import FormPassworChanged from "@/components/admin/auth/passwordChange/FormPasswordChange";
+import AuthHeader from "@/components/common/auth/AuthHeader";
 
 const PasswordChangePage = () => {
   return (

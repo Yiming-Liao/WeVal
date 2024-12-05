@@ -1,11 +1,13 @@
 import { DateTime } from 'luxon'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import hash from '@adonisjs/core/services/hash'
 import ValuerQualification from './valuer_qualification.js'
 import type { HasOne } from '@adonisjs/lucid/types/relations'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import Order from '#models/order'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -78,6 +80,10 @@ export default class Valuer extends compose(BaseModel, AuthFinder) {
   // 🔗 Valuer qualification
   @hasOne(() => ValuerQualification)
   declare valuerQualification: HasOne<typeof ValuerQualification>
+
+  // 🔗 hasMany: Order
+  @hasMany(() => Order)
+  declare orders: HasMany<typeof Order>
 }
 
 export enum ValuerStatus {

@@ -9,10 +9,11 @@ import { useValuerStore } from "@/stores/valuerStore";
 import { useValuerInit } from "@/hooks/valuer/useValuerInit";
 import { Loading } from "@/components/svg";
 import { ValuerStatus } from "@/types/models/valuer.types";
+import { Role } from "@/types/role.types";
 
 const RegisterQualificationContainer: FC = () => {
   const { valuer } = useValuerStore();
-  useValuerInit({ role: "valuer" });
+  useValuerInit({ role: Role.VALUER });
   console.log(valuer);
   if (!valuer) {
     return <Loading />;

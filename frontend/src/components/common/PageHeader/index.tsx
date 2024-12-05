@@ -6,6 +6,7 @@ import Link from "next/link";
 import TitleAndBreadcrumbs from "./TitleAndBreadcrumbs";
 import { Order, Profile, Resume, Revenue } from "@/components/svg";
 import { usePathname } from "next/navigation";
+import { TabsSet } from "@/types/tabsSet.types";
 
 const PageHeader: FC<PageHeaderProps> = ({
   breadcrumbsLinks = [],
@@ -15,10 +16,12 @@ const PageHeader: FC<PageHeaderProps> = ({
 }) => {
   if (typeof tabs === "string") {
     tabs =
-      tabs === "user"
+      tabs === TabsSet.USER_DASHBOARD
         ? USER_DASHBOARD_TABS
-        : tabs === "valuer"
+        : tabs === TabsSet.VALUER_DASHBOARD
         ? VALUER_DASHBOARD_TABS
+        : tabs === TabsSet.NEWS
+        ? NEWS_TABS
         : [];
   }
 
@@ -49,7 +52,13 @@ const PageHeader: FC<PageHeaderProps> = ({
                   >
                     <span
                       className={`py-2 flex items-center gap-2 ${
-                        pathname.includes(tab.text.toLowerCase())
+                        tab.text !== "All"
+                          ? pathname.includes(tab.href)
+                            ? "border-b border-secondary"
+                            : "border-b border-black/0"
+                          : pathname.includes(tab.href) &&
+                            pathname.split("/").pop() ===
+                              tab.href.split("/").pop()
                           ? "border-b border-secondary"
                           : "border-b border-black/0"
                       }`}
@@ -75,9 +84,7 @@ interface PageHeaderProps {
   breadcrumbsLinks?: { href: string; page: string }[];
   currentPage?: string;
   title?: string;
-  tabs?:
-    | { text: string; href: string; isActive: boolean; icon?: ReactNode }[]
-    | string;
+  tabs?: { text: string; href: string; icon?: ReactNode }[] | TabsSet;
 }
 
 // User dashboard tabs
@@ -85,13 +92,13 @@ const USER_DASHBOARD_TABS = [
   {
     text: "Profile",
     href: "/user/dashboard/profile",
-    isActive: false,
+
     icon: <Profile />,
   },
   {
     text: "Orders",
     href: "/user/dashboard/orders",
-    isActive: false,
+
     icon: <Order />,
   },
 ];
@@ -101,26 +108,46 @@ const VALUER_DASHBOARD_TABS = [
   {
     text: "Profile",
     href: "/valuer/dashboard/profile",
-    isActive: false,
+
     icon: <Profile />,
   },
   {
     text: "Orders",
     href: "/valuer/dashboard/orders",
-    isActive: false,
+
     icon: <Order />,
   },
   {
     text: "Resume",
     href: "/valuer/dashboard/resume",
-    isActive: false,
+
     icon: <Resume />,
   },
 
   {
     text: "Revenue",
     href: "/valuer/dashboard/revenue",
-    isActive: false,
+
     icon: <Revenue />,
+  },
+];
+
+// News page tabs
+const NEWS_TABS = [
+  {
+    text: "All",
+    href: "/news",
+  },
+  {
+    text: "Announcements",
+    href: "/news/announcements",
+  },
+  {
+    text: "Events",
+    href: "/news/events",
+  },
+  {
+    text: "Other news",
+    href: "/news/other-news",
   },
 ];

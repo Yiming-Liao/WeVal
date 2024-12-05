@@ -11,7 +11,7 @@ import PageHeader from "@/components/common/PageHeader";
 const AboutPage = () => {
   return (
     <>
-      <section className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center">
         {/* Header */}
         <PageHeader
           breadcrumbsLinks={[{ href: "/", page: "Home" }]}
@@ -22,12 +22,12 @@ const AboutPage = () => {
         <LayoutContainer>
           <div className="relative pt-5 pb-[120px]">
             {/* Description */}
-            <div className="px-16 flex flex-col pb-[100px]">
+            <section className="px-16 flex flex-col pb-[100px]">
               <Description text=" WEVAL PTY LTD is a forward-thinking Australian property technology company dedicated to supporting clients through every step of the home-buying process. We address critical considerations such as property pricing, condition, and risk assessment, viewing each transaction from a lender’s perspective to ensure comprehensive evaluations. Our services are delivered exclusively by local licensed valuers, guaranteeing an impartial and professional assessment. As we remain entirely independent of sales transactions, clients can have complete confidence in a conflict-free, transparent service experience." />
-            </div>
+            </section>
 
             {/* Conteiner card */}
-            <div className="bg-white py-[44px] px-[68px] rounded-[60px] flex gap-6 [box-shadow:0px_-8px_16px_0px_#1A259614]">
+            <section className="bg-white py-[44px] px-[68px] rounded-[60px] flex gap-6 [box-shadow:0px_-8px_16px_0px_#1A259614]">
               {/* Left block */}
               <div className="flex-1 flex justify-center items-center rounded-[32px] overflow-hidden">
                 <Image
@@ -59,11 +59,11 @@ const AboutPage = () => {
                   description={`For your property due diligence, we adhere to bank-level risk management standards, assuring you of a thorough and reliable assessment. We also make it clear that we are not involved in sales, eliminating any conflict of interest.`}
                 />
               </div>
-            </div>
+            </section>
           </div>
 
           {/* Success Stories */}
-          <div className="pb-[115px] flex gap-4 pr-24">
+          <section className="pb-[115px] flex gap-4 pr-24">
             {/* Title & Description */}
             <div className="flex flex-col gap-5">
               <PageTitle title={"Success Stories"} />
@@ -119,14 +119,14 @@ const AboutPage = () => {
                 />
               </div>
             </div>
-          </div>
+          </section>
         </LayoutContainer>
 
         {/* Background SVG */}
         <div className="absolute bottom-[69px] left-0 pointer-events-none -z-10">
           <Community />
         </div>
-      </section>
+      </div>
 
       {/* Layout background */}
       <BackgroundDecoration />

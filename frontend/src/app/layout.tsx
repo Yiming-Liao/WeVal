@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import { ReactNode } from "react";
 
 import { Toaster } from "react-hot-toast";
-import "@/app/globals.css";
+import "./globals.css";
 import Provider from "./Provider";
 
 // Font

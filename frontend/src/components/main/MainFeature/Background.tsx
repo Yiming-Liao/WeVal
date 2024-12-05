@@ -78,6 +78,7 @@ const Background: FC<{ region: Region }> = ({ region }) => {
       { opacity: 1, scale: 1, transformOrigin: "center", duration: 0.2 },
       "+=.1"
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [region]);
 
   return (

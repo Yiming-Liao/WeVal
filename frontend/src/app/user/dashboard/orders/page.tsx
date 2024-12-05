@@ -1,6 +1,6 @@
 "use client";
 
-import { Loading, Order, Profile } from "@/components/svg";
+import { Loading } from "@/components/svg";
 import OrderList from "@/components/user/dashboard/orders/OrderList";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -9,6 +9,7 @@ import LayoutContainer from "@/components/common/LayoutContainer";
 import { useOrderIndex } from "@/hooks/user/orders/useOrderIndex";
 import { OrderStatus } from "@/types/models/order.types";
 import PageHeader from "@/components/common/PageHeader";
+import { TabsSet } from "@/types/tabsSet.types";
 
 const OrdersPage = () => {
   const status = useSearchParams().get("status");
@@ -17,7 +18,7 @@ const OrdersPage = () => {
 
   return (
     <div className="relative flex flex-col items-center">
-      <section className="size-full flex flex-col items-center">
+      <div className="size-full flex flex-col items-center">
         {/* Header */}
         <PageHeader
           breadcrumbsLinks={[
@@ -26,30 +27,28 @@ const OrdersPage = () => {
           ]}
           currentPage={"Orders"}
           title={"Orders"}
-          tabs={"user"}
+          tabs={TabsSet.USER_DASHBOARD}
         />
 
-        {/* Main */}
-        <div className="w-full flex justify-center pt-20">
-          <LayoutContainer>
-            <div className="min-h-screen 2xl:pl-52 max-2xl:mx-16 flex flex-col gap-10">
-              {/* Side bar */}
-              <Sidebar
-                status={status as OrderStatus}
-                statusCounts={statusCounts}
-              />
+        {/* <section> Order list */}
+        <LayoutContainer>
+          <section className="min-h-screen pt-20 2xl:pl-52 max-2xl:mx-16  flex flex-col gap-10">
+            {/* Side bar */}
+            <Sidebar
+              status={status as OrderStatus}
+              statusCounts={statusCounts}
+            />
 
-              {/* Search */}
-              <div className="flex justify-end">
-                <input type="text" placeholder="Search" className="border-8" />
-              </div>
-
-              {/* List */}
-              <OrderList orders={orders} isLoading={isLoading} />
+            {/* Search */}
+            <div className="flex justify-end">
+              <input type="text" placeholder="Search" className="border-8" />
             </div>
-          </LayoutContainer>
-        </div>
-      </section>
+
+            {/* List */}
+            <OrderList orders={orders} isLoading={isLoading} />
+          </section>
+        </LayoutContainer>
+      </div>
     </div>
   );
 };

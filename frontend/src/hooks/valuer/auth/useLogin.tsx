@@ -5,13 +5,10 @@ import { LoginProps } from "@/types/valuer/auth_hooks.types";
 import { useValuerStore } from "@/stores/valuerStore";
 import { Valuer } from "@/types/models/valuer.types";
 import { useMutation } from "@tanstack/react-query";
-import LocalStorageService from "@/services/LocalStorageService";
-import { useRoleStore } from "@/stores/roleStore";
 
 export const useLogin = () => {
   const { axios } = useAxiosStore();
-  const { setValuer, setIsLoading } = useValuerStore();
-  const { setRole } = useRoleStore();
+  const { setValuer } = useValuerStore();
 
   // ⚡ Login
   const login = async ({
@@ -25,14 +22,9 @@ export const useLogin = () => {
     if (!response) return false;
 
     const { valuer } = response.data;
-    // Set user{...data}
+
+    // Set valuer{...data} & role to global store
     setValuer(valuer);
-
-    // Set role & set in local storage
-    setRole("valuer");
-    LocalStorageService.setRole({ role: "valuer" });
-
-    setIsLoading(false);
 
     return valuer;
   };

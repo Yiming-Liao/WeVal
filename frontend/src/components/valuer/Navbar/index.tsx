@@ -9,11 +9,12 @@ import { useValuerStore } from "@/stores/valuerStore";
 import { useValuerInit } from "@/hooks/valuer/useValuerInit";
 import { FullLogoWhite } from "@/components/svg";
 import UserCardButton from "./UserCardButton";
+import { Role } from "@/types/role.types";
 
 const Navbar: FC = () => {
   const { push } = useRouter();
   const { valuer } = useValuerStore();
-  useValuerInit({ role: "valuer" });
+  useValuerInit({ role: Role.VALUER });
 
   // Redirect to [Register page-3] if not approved yet.
   useEffect(() => {

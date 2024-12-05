@@ -52,7 +52,7 @@ const OrderList: FC<OrderListProps> = ({ orders, isLoading }) => {
 
               <Link
                 href={`/user/dashboard/orders/${orderId}`}
-                className="min-w-40 h-[52px] bg-primary text-white rounded-lg flex justify-center items-center"
+                className="min-w-40 h-[52px] bg-primary text-white rounded-lg flex justify-center items-center button-interaction"
               >
                 View order
               </Link>

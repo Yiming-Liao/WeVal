@@ -1,27 +1,20 @@
 // [r: User]
 
-import LocalStorageService from "@/services/LocalStorageService";
 import { useAxiosStore } from "@/stores/axiosStore";
-import { useRoleStore } from "@/stores/roleStore";
 import { useUserStore } from "@/stores/userStore";
 import { useMutation } from "@tanstack/react-query";
 
 export const useLogout = () => {
   const { axios } = useAxiosStore();
-  const { setUser } = useUserStore();
-  const { setRole } = useRoleStore();
+  const { clearUser } = useUserStore();
 
   // ⚡ Logout
   const logout = async (): Promise<boolean> => {
     const response = await axios.post<void>("/user/auth/logout");
     if (!response) return false;
 
-    // Clear user{...data}
-    setUser(null);
-
-    // Clear role & remove from local storage
-    setRole("");
-    LocalStorageService.removeRole();
+    // Clear user{...data} & role from global store
+    clearUser();
 
     return true;
   };

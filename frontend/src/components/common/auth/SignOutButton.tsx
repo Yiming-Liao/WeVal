@@ -16,20 +16,20 @@ const SignOutButton: FC<{ role: Role }> = ({ role }) => {
   const { logout: adminLogout, isLoading: isAdminLoading } = useAdminLogout();
 
   const logout =
-    role === "user"
+    role === Role.USER
       ? userLogout
-      : role === "valuer"
+      : role === Role.VALUER
       ? valuerLogout
-      : role === "admin"
+      : role === Role.ADMIN
       ? adminLogout
       : null;
 
   const isLoading =
-    role === "user"
+    role === Role.USER
       ? isUserLoading
-      : role === "valuer"
+      : role === Role.VALUER
       ? isValuerLoading
-      : role === "admin"
+      : role === Role.ADMIN
       ? isAdminLoading
       : null;
 

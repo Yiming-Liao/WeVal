@@ -7,9 +7,10 @@ import Link from "next/link";
 import { useAdminInit } from "@/hooks/admin/useAdminInit";
 import { FullLogoWhite } from "@/components/svg";
 import UserCardButton from "./UserCardButton";
+import { Role } from "@/types/role.types";
 
 const Navbar: FC = () => {
-  useAdminInit({ role: "admin" });
+  useAdminInit({ role: Role.ADMIN });
 
   return (
     <header className="fixed top-0 left-0 w-full h-24 bg-admin-gradient text-white z-[999]">

@@ -4,13 +4,14 @@ import User from '#models/user/user'
 import Valuer, { ValuerStatus } from '#models/valuer/valuer'
 import { DateTime } from 'luxon'
 import { PriceRange } from '#config/stripe'
+import { Region } from '#models/order'
 
 export default class Seeder extends BaseSeeder {
   async run() {
     await Seeder.admin()
     await Seeder.valuer()
     await Seeder.user()
-    await Seeder.order()
+    // await Seeder.order()
   }
 
   /**
@@ -50,7 +51,7 @@ export default class Seeder extends BaseSeeder {
       status: ValuerStatus.QualificationCreated,
     })
     await createdValuer2.related('valuerQualification').create({
-      region: 'south_australia',
+      region: Region.QUEENSLAND,
       address: 'full-address',
       abn: '12345678987',
       certificatePath: 'fake/image0.jpg',
@@ -67,7 +68,7 @@ export default class Seeder extends BaseSeeder {
       status: ValuerStatus.Approved,
     })
     await createdValuer3.related('valuerQualification').create({
-      region: 'south_australia',
+      region: Region.VICTORIA,
       address: 'full-address',
       abn: '12345678987',
       certificatePath: 'fake/image2.jpg',
@@ -96,21 +97,11 @@ export default class Seeder extends BaseSeeder {
     await user!.related('orders').create({
       ownerName: 'Mandy',
       ownerPhone: '+61000222334',
-      region: 'Victoria',
+      region: Region.NEW_SOUTH_WALES,
       address: '500 George Street, Sydney City Center',
       priceRange: PriceRange['0M_to_1M'],
 
       amount: 500,
-    })
-
-    await user!.related('orders').create({
-      ownerName: 'Hemsworth',
-      ownerPhone: '+61000222334',
-      region: 'Queensland',
-      address: '500 Oxford Street, Sydney City Center',
-      priceRange: PriceRange['2.5M_to_3M'],
-
-      amount: 750,
     })
   }
 }

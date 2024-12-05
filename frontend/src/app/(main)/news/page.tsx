@@ -3,53 +3,33 @@ import LayoutContainer from "@/components/common/LayoutContainer";
 import PageHeader from "@/components/common/PageHeader";
 import Description from "@/components/main/Description";
 import NewsCard from "@/components/main/NewsCard";
+import { TabsSet } from "@/types/tabsSet.types";
 
 const NewsAllPage = () => {
   return (
     <>
       <div className="relative flex flex-col items-center">
-        <section className="size-full flex flex-col items-center">
+        <div className="size-full flex flex-col items-center">
           {/* Header */}
           <PageHeader
             breadcrumbsLinks={[{ href: "/", page: "Home" }]}
             currentPage={"News"}
             title={"News"}
-            tabs={[
-              {
-                text: "All",
-                href: "/news",
-                isActive: true,
-              },
-              {
-                text: "Announcements",
-                href: "/news/announcements",
-                isActive: false,
-              },
-              {
-                text: "Events",
-                href: "/news/events",
-                isActive: false,
-              },
-              {
-                text: "Other news",
-                href: "/news/other-news",
-                isActive: false,
-              },
-            ]}
+            tabs={TabsSet.NEWS}
           />
 
           {/* Main */}
           <LayoutContainer>
             <div className="pt-20 pb-[120px] flex flex-col gap-[92px]">
-              {/* Description */}
-              <div className="px-16">
+              {/* <section> Description */}
+              <section className="px-16">
                 <Description
                   text={`Weval Solutions Pty Ltd is a dynamic Australian-based technology firm specializing in innovative solutions for the real estate and appraisal industry. With a focus on leveraging cutting-edge technologies, Weval aims to streamline the connection between clients and certified appraisers, ensuring accurate, transparent, and efficient appraisal processes. The company's platform is designed to match clients with licensed professionals quickly, while also providing a seamless and secure transaction environment. Weval is committed to delivering exceptional customer experiences through personalized services, state-of-the-art tools, and a user-centric approach to solving industry challenges.`}
                 />
-              </div>
+              </section>
 
-              {/* News cards */}
-              <div className="px-9 flex flex-wrap gap-6">
+              {/* <section> News cards */}
+              <section className="px-9 flex flex-wrap gap-6">
                 <NewsCard
                   href="/news/events/impact"
                   category={"Announcements"}
@@ -140,10 +120,10 @@ const NewsAllPage = () => {
                   src={"/images/home-page/NewsSection/news3-fake.jpg"}
                   alt={""}
                 />
-              </div>
+              </section>
             </div>
           </LayoutContainer>
-        </section>
+        </div>
       </div>
 
       {/* Layout background */}
