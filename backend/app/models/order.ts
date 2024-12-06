@@ -70,7 +70,7 @@ export default class Order extends BaseModel {
   declare valuerId: number // Foreign key
 
   /**
-   * 🪝 Set orderId & expiresAt & Clean up expired orders
+   * 🪝 Set orderId & expiresAt
    */
   @beforeCreate()
   public static async beforeCreate(order: Order) {
@@ -100,6 +100,7 @@ export default class Order extends BaseModel {
   public static async afterFind(order: Order) {
     await this.checkAndCancelExpiredOrder(order)
   }
+  // ⚡ Check and Cancel expired order
   private static async checkAndCancelExpiredOrder(order: Order) {
     if (
       order.paymentStatus !== PaymentStatus.PAID &&

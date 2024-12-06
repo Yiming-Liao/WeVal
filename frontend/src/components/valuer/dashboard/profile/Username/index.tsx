@@ -1,15 +1,15 @@
-// [r: User]
+// [r: Valuer]
 
 "use client";
 
 import { FC, FormEventHandler, useEffect, useState } from "react";
 import { Button, Input } from "@/components/ui";
-import { useUsernameChange } from "@/hooks/user/profile/useUsernameChange";
+import { useUsernameChange } from "@/hooks/valuer/profile/useUsernameChange";
 import { Loading } from "@/components/svg";
 import { Valuer } from "@/types/models/valuer.types";
 
 const FormUsername: FC<{ valuer: Valuer | null }> = ({ valuer }) => {
-  const { usernameChange } = useUsernameChange();
+  const { usernameChange, isLoading } = useUsernameChange();
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
@@ -34,7 +34,7 @@ const FormUsername: FC<{ valuer: Valuer | null }> = ({ valuer }) => {
       {/* Input: username */}
       {!isEditing ? (
         <div className="w-48 h-[52px] flex items-center">
-          {!valuer ? (
+          {!valuer || isLoading ? (
             <Loading />
           ) : (
             <p className="typography-label-md text-deep">{username}</p>

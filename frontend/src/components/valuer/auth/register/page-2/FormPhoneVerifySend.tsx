@@ -47,7 +47,6 @@ const FormPhoneVerifySend: FC<Props> = ({
         required
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
-        className="w-auto"
       />
 
       {/* Button: submit */}

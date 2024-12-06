@@ -1,39 +1,42 @@
-// import { envConfig } from "@/config/envConfig";
-import { useUserStore } from "@/stores/userStore";
+// [r: Valuer]
+
 import { useAxiosStore } from "@/stores/axiosStore";
-import { User } from "@/types/models/user.types";
 import { PhoneVerifyProps } from "@/types/user/profile_hooks";
+import { useMutation } from "@tanstack/react-query";
+import { Valuer } from "@/types/models/valuer.types";
+import { useValuerStore } from "@/stores/valuerStore";
 
 export const usePhoneVerify = () => {
   const { axios } = useAxiosStore();
-  const { setUser } = useUserStore();
+  const { setValuer } = useValuerStore();
 
+  // ⚡ Verify phone number
   const phoneVerify = async ({
     phone,
     phoneVerifyCode,
   }: PhoneVerifyProps): Promise<boolean> => {
-    const response = await axios.post<{ user: User }>(
-      "/user/profile/phone-verify",
+    const response = await axios.post<{ valuer: Valuer }>(
+      "/valuer/profile/phone-verify",
       {
         phone,
         phoneVerifyCode,
       }
     );
+    if (!response) return false;
 
-    if (response) {
-      const { user } = response.data;
+    const { valuer } = response.data;
 
-      // set user
-      setUser(user);
+    // Set valuer{...data} & role to global store
+    setValuer(valuer);
 
-      // // set user{} in localStorage
-      // localStorage.setItem(envConfig.USER_DATA_KEY, JSON.stringify(user));
-
-      return true;
-    }
-
-    return false;
+    return true;
   };
 
-  return { phoneVerify };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: phoneVerify });
+
+  return {
+    phoneVerify: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

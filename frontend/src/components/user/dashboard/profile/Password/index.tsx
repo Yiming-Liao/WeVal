@@ -1,3 +1,5 @@
+// [r: User]
+
 "use client";
 
 import { Button, InputPassword } from "@/components/ui";
@@ -12,21 +14,25 @@ const FormPassword = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState<string>("");
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
+  // ⚡ Change password
+  const handleChangePassword: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     const isChanged = await passwordChange({
       password,
       newPassword,
       newPasswordConfirm,
     });
+
     if (isChanged) {
-      console.log("isChanged!");
       setIsEditing(false);
+      setPassword("");
+      setNewPassword("");
+      setNewPasswordConfirm("");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="h-52 flex justify-between">
+    <form onSubmit={handleChangePassword} className="h-52 flex justify-between">
       {/* Left */}
       <div className="w-full max-w-80 flex flex-col gap-14">
         <div className="flex justify-between items-center">

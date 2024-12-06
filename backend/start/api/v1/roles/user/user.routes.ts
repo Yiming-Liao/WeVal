@@ -18,7 +18,7 @@ export default function userRoutes(router: HttpRouterService) {
       // 📋 User profile routes | Prefix: '/api/v1/user/profile'
       profileRoutes(router)
 
-      // Order
+      // 🧾 Order resource routes | Prefix: '/api/v1/user/orders'
       ordersRoutes(router)
     })
     .prefix('user')

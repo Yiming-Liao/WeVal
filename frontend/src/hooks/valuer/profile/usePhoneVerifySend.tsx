@@ -1,9 +1,11 @@
 import { useAxiosStore } from "@/stores/axiosStore";
 import { PhoneVerifySendProps } from "@/types/valuer/profile_hooks";
+import { useMutation } from "@tanstack/react-query";
 
 export const usePhoneVerifySend = () => {
   const { axios } = useAxiosStore();
 
+  // ⚡ Send verification SMS
   const phoneVerifySend = async ({
     phone,
   }: PhoneVerifySendProps): Promise<boolean> => {
@@ -13,13 +15,16 @@ export const usePhoneVerifySend = () => {
         phone,
       }
     );
+    if (!response) return false;
 
-    if (response) {
-      return true;
-    }
-
-    return false;
+    return true;
   };
 
-  return { phoneVerifySend };
+  // 🌀 React query
+  const mutation = useMutation({ mutationFn: phoneVerifySend });
+
+  return {
+    phoneVerifySend: mutation.mutateAsync,
+    isLoading: mutation.isPending,
+  };
 };

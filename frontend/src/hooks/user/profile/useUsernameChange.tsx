@@ -10,13 +10,16 @@ export const useUsernameChange = () => {
   const { axios } = useAxiosStore();
   const { setUser } = useUserStore();
 
-  // ⚡
+  // ⚡ Change username
   const usernameChange = async ({
     username,
   }: UsernameChangeProps): Promise<boolean> => {
-    const response = await axios.put<{ user: User }>("/user/profile/username", {
-      username,
-    });
+    const response = await axios.patch<{ user: User }>(
+      "/user/profile/username",
+      {
+        username,
+      }
+    );
     if (!response) return false;
 
     const { user } = response.data;

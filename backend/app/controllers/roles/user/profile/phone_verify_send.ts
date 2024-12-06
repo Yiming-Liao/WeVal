@@ -1,3 +1,5 @@
+// [r: User]
+
 import { snsClient } from '#config/aws'
 import User from '#models/user/user'
 import i18n from '#services/i18n_service'

@@ -10,11 +10,11 @@ import { middleware } from '#start/kernel'
 export default function profileRoutes(router: HttpRouterService) {
   router
     .group(() => {
-      // [PUT] Username update
-      router.put('/username', [UserProfileController, 'usernameChange'])
+      // [PATCH] Username update
+      router.patch('/username', [UserProfileController, 'usernameChange'])
 
-      // [PUT] Password update
-      router.put('/password', [UserProfileController, 'passwordChange'])
+      // [PATCH] Password update
+      router.patch('/password', [UserProfileController, 'passwordChange'])
 
       // // [POST] Phone verification: send sms [🚧 Built-in limiter]
       // router.post('/phone-verify-send', [UserProfileController, 'phoneVerifySend'])

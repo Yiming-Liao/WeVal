@@ -5,7 +5,7 @@ import vine from '@vinejs/vine'
 const orderStoreValidator = vine.compile(
   vine.object({
     region: vine.enum(Object.values(Region)),
-    address: vine.string().trim().minLength(6).maxLength(256),
+    address: vine.string().trim().maxLength(256), //  removed .minLength(6)
     priceRange: vine.enum(Object.values(PriceRange)),
     ownerName: vine.string().trim().minLength(3).maxLength(256),
     ownerPhone: vine

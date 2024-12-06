@@ -19,7 +19,7 @@ const ButtonOutline: FC<ButtonProps> = ({
     <button
       disabled={isDisabled}
       className={`${className} ${isDisabled ? "opacity-50" : null} duration-200
-      h-10 p-2 border border-primary text-primary rounded-lg flex justify-center items-center`}
+      w-full h-10 p-2 border border-primary text-primary rounded-lg flex justify-center items-center`}
       {...props}
     >
       {isLoading ? <Loading color={"#213DEB"} /> : children}

@@ -1,5 +1,7 @@
+// [r: Valuer]
+
 import type { HttpContext } from '@adonisjs/core/http'
-import phoneVerifyValidator from '#validators/roles/user/profile/phone_verify_validator'
+import phoneVerifyValidator from '#validators/roles/valuer/profile/phone_verify_validator'
 import { DateTime } from 'luxon'
 import i18n from '#services/i18n_service'
 import Valuer from '#models/valuer/valuer'
@@ -27,8 +29,8 @@ export async function phoneVerify({ request, response, auth }: HttpContext) {
     })
   }
 
-  // 🗄️ Update User
-  const updatedUser = await auth
+  // 🗄️ Update Valuer
+  const updatedValuer = await auth
     .user!.merge({
       phone,
       phoneVerifiedAt: DateTime.now().toISO(),
@@ -39,6 +41,6 @@ export async function phoneVerify({ request, response, auth }: HttpContext) {
 
   return response.ok({
     message: i18n.t('messages.user.profile.phone_verify.ok'),
-    user: updatedUser,
+    valuer: updatedValuer,
   })
 }

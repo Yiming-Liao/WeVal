@@ -26,7 +26,7 @@ const InputPassword: FC<InputPasswordProps> = ({
 
       <button
         type="button"
-        className="absolute top-[50%] translate-y-[-50%] right-2 p-2 bg-white"
+        className="absolute top-[50%] translate-y-[-50%] right-2 p-2 bg-white hover:scale-100"
         onClick={() => setIsShow((prev) => !prev)}
       >
         <span>{isShow ? <EyeOpen /> : <EyeClose />}</span>

@@ -3,9 +3,7 @@
 import { HttpRouterService } from '@adonisjs/core/types'
 import authRoutes from './auth/auth.routes.js'
 import profileRoutes from './profile/profile.routes.js'
-import { HttpContext } from '@adonisjs/core/http'
-import Valuer from '#models/valuer/valuer'
-import { middleware } from '#start/kernel'
+import ordersRoutes from './orders/orders.routes.js'
 
 /**
  * [ Valuer ]
@@ -20,13 +18,8 @@ export default function valuerRoutes(router: HttpRouterService) {
       // 📋 Valuer profile routes | Prefix: '/api/v1/valuer/profile'
       profileRoutes(router)
 
-      //*---------------------------▼-----🔎 Get Valuer Model-----▼---------------------------
-      router
-        .get('/', ({ response, auth }: HttpContext) => {
-          return response.ok({ valuer: auth.user as Valuer })
-        })
-        .use(middleware.valuerAuth())
-      //*---------------------------▲-----🔎 Get Valuer Model-----▲---------------------------
+      // 🧾 Order resource routes | Prefix: '/api/v1/valuer/orders'
+      ordersRoutes(router)
     })
     .prefix('valuer')
 }

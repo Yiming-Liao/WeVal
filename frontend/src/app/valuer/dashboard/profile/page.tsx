@@ -15,16 +15,16 @@ const ProfilePage = () => {
           <PageHeader
             breadcrumbsLinks={[
               { href: "/", page: "Home" },
-              { href: "/user/dashboard", page: "Dashboard" },
+              { href: "/valuer/dashboard", page: "Dashboard" },
             ]}
             currentPage={"Profile"}
             title={"Profile"}
-            tabs={TabsSet.USER_DASHBOARD}
+            tabs={TabsSet.VALUER_DASHBOARD}
           />
 
           {/* <section> Profile info */}
           <LayoutContainer>
-            <section className="pt-16 pb-28 lg:px-40 px-8 flex flex-col gap-12">
+            <section className="pt-16 pb-28 lg:px-40 px-8">
               <ProfileFieldsContainer />
             </section>
           </LayoutContainer>

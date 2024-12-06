@@ -1,3 +1,5 @@
+// [r: Valuer]
+
 import type { HttpContext } from '@adonisjs/core/http'
 
 /**
@@ -26,12 +28,5 @@ export default class ValuerProfileController {
   async phoneVerify(context: HttpContext) {
     const { phoneVerify } = await import('#controllers/roles/valuer/profile/phone_verify')
     return phoneVerify(context)
-  }
-
-  //
-  //
-  // Testing
-  async getUserData({ response }: HttpContext) {
-    return response.ok({ message: 'User data!' })
   }
 }

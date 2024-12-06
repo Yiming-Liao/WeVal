@@ -9,7 +9,7 @@ import { Loading } from "@/components/svg";
 import { User } from "@/types/models/user.types";
 
 const FormUsername: FC<{ user: User | null }> = ({ user }) => {
-  const { usernameChange } = useUsernameChange();
+  const { usernameChange, isLoading } = useUsernameChange();
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
@@ -34,7 +34,7 @@ const FormUsername: FC<{ user: User | null }> = ({ user }) => {
       {/* Input: username */}
       {!isEditing ? (
         <div className="w-48 h-[52px] flex items-center">
-          {!user ? (
+          {!user || isLoading ? (
             <Loading />
           ) : (
             <p className="typography-label-md text-deep">{username}</p>

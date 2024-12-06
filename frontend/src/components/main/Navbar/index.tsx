@@ -6,7 +6,7 @@ import { FullLogoWhite } from "@/components/svg";
 
 const Navbar: FC = () => {
   return (
-    <header className="fixed top-0 left-0 w-full h-24 bg-primary-gradient text-white z-[999]">
+    <header className="fixed top-0 left-0 w-full h-24 bg-primary-gradient text-white z-[999] backdrop-blur-sm">
       <div className="w-full h-full px-[104px] flex justify-center items-center gap-3">
         <div className="relative container">
           <div className="flex justify-between items-center">

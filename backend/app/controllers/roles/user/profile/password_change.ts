@@ -1,3 +1,5 @@
+// [r: User]
+
 import type { HttpContext } from '@adonisjs/core/http'
 import passwordChangeValidator from '#validators/roles/user/profile/password_change_validator'
 import User from '#models/user/user'
